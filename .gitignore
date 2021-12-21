@@ -1,0 +1,8 @@
+.vs/
+packages/
+IdentityService/bin/
+IdentityService/obj/
+MoviesService/bin/
+MoviesService/obj/
+Web/bin/
+Web/obj/
