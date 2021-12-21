@@ -165,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +178,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityService\IdentityService.csproj">
+      <Project>{62e6c311-3d35-4482-b064-30bfb0f77eef}</Project>
+      <Name>IdentityService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesService\MoviesService.csproj">
+      <Project>{55727604-78fa-44ec-a6c9-d9321931ccae}</Project>
+      <Name>MoviesService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
