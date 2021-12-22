@@ -162,19 +162,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\MediaDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRepository\IMediaRepository.cs" />
+    <Compile Include="Repositories\Repository\GenreRepository.cs" />
+    <Compile Include="Repositories\Repository\MediaRepository.cs" />
+    <Compile Include="Repositories\Repository\MovieToGenres.cs" />
+    <Compile Include="Repositories\Repository\SeasonRepository.cs" />
+    <Compile Include="Repositories\Repository\TypeRepository.cs" />
+    <Compile Include="Repositories\Repository\UserToMoviesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Context\" />
     <Folder Include="Data\" />
     <Folder Include="Dtos\" />
     <Folder Include="Models\" />
-    <Folder Include="Repositories\IRepository\" />
-    <Folder Include="Repositories\Repository\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
