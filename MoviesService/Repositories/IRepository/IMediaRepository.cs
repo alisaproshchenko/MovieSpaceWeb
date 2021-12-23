@@ -8,7 +8,7 @@ namespace MoviesService.Repositories.IRepository
          IEnumerable<T> Items { get; }
          Task<T> GetItem(int id);
          void AddItem(T item);
-         void DeleteItem(T item);
+         void DeleteItem(int id);
          void EditItem(T item);
      }
 }

@@ -105,6 +105,9 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.5.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -161,9 +164,9 @@
     <Compile Include="Dto\MediaDto.cs" />
     <Compile Include="Dto\SeasonsDto.cs" />
     <Compile Include="Dto\TypesDto.cs" />
-    <Compile Include="Migrations\202112231114313_Init.cs" />
-    <Compile Include="Migrations\202112231114313_Init.designer.cs">
-      <DependentUpon>202112231114313_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202112231328548_Init.cs" />
+    <Compile Include="Migrations\202112231328548_Init.designer.cs">
+      <DependentUpon>202112231328548_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
@@ -188,8 +191,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112231114313_Init.resx">
-      <DependentUpon>202112231114313_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112231328548_Init.resx">
+      <DependentUpon>202112231328548_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

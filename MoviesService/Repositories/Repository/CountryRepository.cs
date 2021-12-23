@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using MoviesService.Context;
 using MoviesService.Models;
@@ -26,9 +28,10 @@ namespace MoviesService.Repositories.Repository
             _context.SaveChanges();
         }
 
-        public void DeleteItem(Country country)
+        public void DeleteItem(int id)
         {
-            _context.CountriesTable.Remove(country);
+            var country = _context.CountriesTable.FirstOrDefault(t => t.Id == id);
+            if (country != null) _context.CountriesTable.Remove(country);
             _context.SaveChanges();
         }
 

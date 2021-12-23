@@ -3,6 +3,7 @@ using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using System.Threading.Tasks;
 using MoviesService.Context;
 
@@ -26,9 +27,10 @@ namespace MoviesService.Repositories.Repository
             _context.SaveChanges();
         }
 
-        public void DeleteItem(Media media)
+        public void DeleteItem(int id)
         {
-            _context.MediaTable.Remove(media);
+            var media = _context.MediaTable.FirstOrDefault(t => t.Id == id);
+            if (media != null) _context.MediaTable.Remove(media);
             _context.SaveChanges();
         }
 

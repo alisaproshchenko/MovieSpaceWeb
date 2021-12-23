@@ -7,6 +7,5 @@
         public int Year { get; set; }
         public double? RatingIMDb { get; set; }
         public double? UserIMDb { get; set; }
-        public int MediaId { get; set; }
     }
 }
