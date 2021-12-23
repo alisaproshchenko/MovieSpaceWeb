@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IdentityService.Models
 {
-    public class User : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
         public string Surname { get; set; }

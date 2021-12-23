@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IdentityService.Dto
 {
-    class UserDto
+    class ApplicationUserDto
     {
         public string Name { get; set; }
         public string Surname { get; set; }

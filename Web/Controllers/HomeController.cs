@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IdentityService.Contexts;
+using IdentityService.Models;
 
 namespace Web.Controllers
 {
@@ -10,6 +13,17 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
+            //var context = new IdentityContext();
+            //context.Users.AddOrUpdate(new ApplicationUser
+            //{
+            //    Name = "name",
+            //    Surname = "surname",
+            //    Banned = false,
+            //    UserName = "username"
+            //});
+            //context.Users.AddOrUpdate(
+            //    u => new {u.Id}, AddInform.);
+            
             return View();
         }
 

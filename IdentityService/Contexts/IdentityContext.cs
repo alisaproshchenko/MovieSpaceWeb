@@ -1,13 +1,16 @@
-﻿using IdentityService.Models;
+﻿using System.Data.Entity;
+using IdentityService.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IdentityService.Contexts
 {
-    public class IdentityContext : IdentityDbContext<User>
+    public class IdentityContext : IdentityDbContext<ApplicationUser>
     {
-        public IdentityContext() : base("IdentityDB")
+        public IdentityContext() : base("IdentityDb") { }
+
+        public static IdentityContext Create()
         {
-            
+            return new IdentityContext();
         }
     }
 }
