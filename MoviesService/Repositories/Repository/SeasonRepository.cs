@@ -1,28 +1,41 @@
 ﻿using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Threading.Tasks;
+using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
     public class SeasonRepository : IMediaRepository<Seasons>
     {
-        public Seasons GetItem { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public IEnumerable<Seasons> Items { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        private readonly MediaDbContext _context;
+        public SeasonRepository(MediaDbContext context) => _context = context;
+        public IEnumerable<Seasons> Items => _context.SeasonsTable;
 
-        public Task AddItem()
+        public async Task<Seasons> GetItem(int id)
         {
-            throw new System.NotImplementedException();
+            var season = await _context.SeasonsTable.FirstOrDefaultAsync(i => i.Id == id);
+            return season;
         }
 
-        public Task DeleteItem(int id)
+        public void AddItem(Seasons season)
         {
-            throw new System.NotImplementedException();
+            _context.SeasonsTable.Add(season);
+            _context.SaveChanges();
         }
 
-        public Task EditItem(Seasons item)
+        public void DeleteItem(Seasons season)
         {
-            throw new System.NotImplementedException();
+            _context.SeasonsTable.Remove(season);
+            _context.SaveChanges();
+        }
+
+        public void EditItem(Seasons season)
+        {
+            _context.SeasonsTable.AddOrUpdate(season);
+            _context.SaveChanges();
         }
     }
 }

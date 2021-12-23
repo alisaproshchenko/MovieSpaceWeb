@@ -1,28 +1,41 @@
 ﻿using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Threading.Tasks;
+using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
     public class MediaRepository : IMediaRepository<Media>
     {
-        public Media GetItem { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public IEnumerable<Media> Items { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        private readonly MediaDbContext _context;
+        public MediaRepository(MediaDbContext context) => _context = context;
+        public IEnumerable<Media> Items => _context.MediaTable;
 
-        public Task AddItem()
+        public async Task<Media> GetItem(int id)
         {
-            throw new System.NotImplementedException();
+            var media = await _context.MediaTable.FirstOrDefaultAsync(i => i.Id == id);
+            return media;
         }
 
-        public Task DeleteItem(int id)
+        public void AddItem(Media media)
         {
-            throw new System.NotImplementedException();
+            _context.MediaTable.Add(media);
+            _context.SaveChanges();
         }
 
-        public Task EditItem(Media item)
+        public void DeleteItem(Media media)
         {
-            throw new System.NotImplementedException();
+            _context.MediaTable.Remove(media);
+            _context.SaveChanges();
+        }
+
+        public void EditItem(Media media)
+        {
+            _context.MediaTable.AddOrUpdate(media);
+            _context.SaveChanges();
         }
     }
 }

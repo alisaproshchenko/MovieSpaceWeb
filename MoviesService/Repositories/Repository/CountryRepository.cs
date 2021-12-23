@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Threading.Tasks;
+using MoviesService.Context;
 using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 
@@ -7,21 +10,32 @@ namespace MoviesService.Repositories.Repository
 {
     public class CountryRepository : IMediaRepository<Country>
     {
-        public Country GetItem { get; set; }
-        public IEnumerable<Country> Items { get; set; }
-        public Task AddItem()
+        private readonly MediaDbContext _context;
+        public CountryRepository(MediaDbContext context) => _context = context;
+        public IEnumerable<Country> Items => _context.CountriesTable;
+
+        public async Task<Country> GetItem(int id)
         {
-            throw new System.NotImplementedException();
+            var country = await _context.CountriesTable.FirstOrDefaultAsync(i => i.Id == id);
+            return country;
         }
 
-        public Task DeleteItem(int id)
+        public void AddItem(Country country)
         {
-            throw new System.NotImplementedException();
+            _context.CountriesTable.Add(country);
+            _context.SaveChanges();
         }
 
-        public Task EditItem(Country item)
+        public void DeleteItem(Country country)
         {
-            throw new System.NotImplementedException();
+            _context.CountriesTable.Remove(country);
+            _context.SaveChanges();
+        }
+
+        public void EditItem(Country country)
+        {
+            _context.CountriesTable.AddOrUpdate(country);
+            _context.SaveChanges();
         }
     }
 }
