@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using IdentityService.Models;
+﻿using IdentityService.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IdentityService.Contexts

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
+using System.IO.MemoryMappedFiles;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
 using IdentityService.Contexts;
+using IdentityService.Utilities;
 
 namespace Web
 {
@@ -15,6 +14,7 @@ namespace Web
         protected void Application_Start()
         {
             Database.SetInitializer(new IdentityDbInit());
+            AutoMap.RegisterMappings();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
