@@ -13,6 +13,5 @@ namespace IdentityService.Dto
         public bool Banned { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-
     }
 }

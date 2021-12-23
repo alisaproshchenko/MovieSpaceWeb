@@ -23,8 +23,8 @@ namespace IdentityService.Contexts
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
             var admin = new ApplicationUser {Email = "somemail@mail.ru", UserName = "somemail@mail.ru" };
-            string password = "ad46D_ewr3";
-            var result = manager.Create(admin, password);
+            var password = "ad46D_ewr3";
+            manager.Create(admin, password);
             
 
         }

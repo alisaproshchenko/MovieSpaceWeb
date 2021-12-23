@@ -21,9 +21,7 @@ namespace Web.Controllers
             //    Banned = false,
             //    UserName = "username"
             //});
-            //context.Users.AddOrUpdate(
-            //    u => new {u.Id}, AddInform.);
-            
+            //context.SaveChanges();
             return View();
         }
 
