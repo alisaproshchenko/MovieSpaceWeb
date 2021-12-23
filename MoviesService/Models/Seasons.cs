@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MoviesService.Models
 {
-    class Seasons
+    public class Seasons
     {
         [Key]
         public int Id { set; get; }
@@ -19,5 +14,7 @@ namespace MoviesService.Models
         public int Year { get; set; }
         public double? RatingIMDb { get; set; }
         public double? UserIMDb { get; set; }
+        public int MediaId { get; set; }
+        public Media? Media { get; set; }
     }
 }

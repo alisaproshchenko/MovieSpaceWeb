@@ -1,6 +1,28 @@
-﻿namespace MoviesService.Repositories.Repository
+﻿using MoviesService.Models;
+using MoviesService.Repositories.IRepository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace MoviesService.Repositories.Repository
 {
-    public class MediaRepository
+    public class MediaRepository : IMediaRepository<Media>
     {
+        public Media GetItem { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public IEnumerable<Media> Items { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+        public Task AddItem()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task DeleteItem(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task EditItem(Media item)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
