@@ -1,17 +1,21 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using MoviesService.Models;
-using MoviesService.Repositories.IRepository;
+using AutoMapper;
+using MoviesService.Dto;
+using MoviesService.Services.IService;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
     public class MovieController : Controller
     {
-        protected readonly IMediaRepository<Genres> repository;
-        public MovieController(IMediaRepository<Genres> repository) => this.repository = repository;
+        private readonly IServices<GenresDto> service;
+        public MovieController(IServices<GenresDto> service) => this.service = service;
+
         public ActionResult Index()
         {
-            return View(repository.Items);
+            var d = Mapper.Map<IEnumerable<GenresDto>, IEnumerable<GenreViewModel>>(service.Items);
+            return View(d);
         }
         // GET: Movie
         public ActionResult AddFood()
@@ -20,44 +24,32 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddFood(Genres food)
+        public ActionResult AddFood(GenresDto food)
         {
-            repository.AddItem(food);
+            service.AddItem(food);
             return RedirectToAction("Index");
-
         }
 
-        public ActionResult EditFood(int id)
+        public ActionResult EditFood(GenresDto food)
         {
-            var genre = repository.Items.FirstOrDefault(i => i.Id == id);
-            return View(genre);
+            return View(food);
         }
         [HttpPost]
-        public ActionResult UpdateFood(Genres food)
+        public ActionResult UpdateFood(GenresDto food)
         {
-            repository.EditItem(food);
+            service.EditItem(food);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(GenresDto food)
         {
-            var b = repository.Items.FirstOrDefault(i => i.Id == id);
-            if (b == null)
-            {
-                return HttpNotFound();
-            }
-            return View(b);
+            return View(food);
         }
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(GenresDto food)
         {
-            var b = repository.Items.FirstOrDefault(i => i.Id == id);
-            if (b == null)
-            {
-                return HttpNotFound();
-            }
-            repository.DeleteItem(b.Id);
+            service.DeleteItem(food);
             return RedirectToAction("Index");
         }
     }

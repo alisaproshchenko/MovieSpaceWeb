@@ -1,10 +1,8 @@
 ﻿using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Threading.Tasks;
 using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
@@ -15,10 +13,10 @@ namespace MoviesService.Repositories.Repository
         public GenreRepository(MediaDbContext context) => _context = context;
         public IEnumerable<Genres> Items => _context.GenresTable;
 
-        public async Task<Genres> GetItem(int id)
+        public Genres GetItem(int id)
         {
-            var season = await _context.GenresTable.FirstOrDefaultAsync(i => i.Id == id);
-            return season;
+            var genres =  _context.GenresTable.FirstOrDefault(i => i.Id == id);
+            return genres;
         }
 
         public void AddItem(Genres genre)
@@ -30,7 +28,7 @@ namespace MoviesService.Repositories.Repository
         public void DeleteItem(int id)
         {
             var genre = _context.GenresTable.FirstOrDefault(t => t.Id == id);
-            if (genre != null) _context.GenresTable.Remove(genre); 
+            if (genre != null) _context.GenresTable.Remove(genre);
             _context.SaveChanges();
         }
 

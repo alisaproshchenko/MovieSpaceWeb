@@ -1,6 +1,6 @@
-﻿namespace MoviesService.Models
+﻿namespace Web.ViewModels
 {
-    public class Country
+    public class GenreViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

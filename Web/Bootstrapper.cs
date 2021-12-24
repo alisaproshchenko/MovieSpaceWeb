@@ -1,8 +1,11 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
-using MoviesService.Models;
+using MoviesService.Dto;
 using MoviesService.Repositories.IRepository;
 using MoviesService.Repositories.Repository;
+using MoviesService.Services;
+using MoviesService.Services.IService;
+using MoviesService.Services.Service;
 using Unity.Mvc3;
 using Web.Controllers;
 
@@ -21,7 +24,7 @@ namespace Web
         {
             var container = new UnityContainer();
 
-            container.RegisterType<IMediaRepository<Genres>, GenreRepository>();
+            container.RegisterType<IServices<GenresDto>, GenreService>();
             container.RegisterType<IController, MovieController>();
 
             return container;

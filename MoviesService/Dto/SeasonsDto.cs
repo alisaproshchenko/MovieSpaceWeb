@@ -2,6 +2,7 @@
 {
     public class SeasonsDto
     {
+        public int Id { get; set; }
         public string SeriesId { get; set; }
         public string IMDbMovieId { get; set; }
         public int Year { get; set; }

@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using MoviesService.Context;
 using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
@@ -16,9 +13,9 @@ namespace MoviesService.Repositories.Repository
         public CountryRepository(MediaDbContext context) => _context = context;
         public IEnumerable<Country> Items => _context.CountriesTable;
 
-        public async Task<Country> GetItem(int id)
+        public Country GetItem(int id)
         {
-            var country = await _context.CountriesTable.FirstOrDefaultAsync(i => i.Id == id);
+            var country = _context.CountriesTable.FirstOrDefault(i => i.Id == id);
             return country;
         }
 

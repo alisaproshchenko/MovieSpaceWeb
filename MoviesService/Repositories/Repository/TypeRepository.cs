@@ -1,11 +1,8 @@
 ﻿using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
@@ -16,9 +13,9 @@ namespace MoviesService.Repositories.Repository
         public TypeRepository(MediaDbContext context) => _context = context;
         public IEnumerable<Types> Items => _context.TypesTable;
 
-        public async Task<Types> GetItem(int id)
+        public Types GetItem(int id)
         {
-            var type = await _context.TypesTable.FirstOrDefaultAsync(i => i.Id == id);
+            var type =  _context.TypesTable.FirstOrDefault(i => i.Id == id);
             return type;
         }
 
