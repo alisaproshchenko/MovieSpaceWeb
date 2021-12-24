@@ -1,7 +1,4 @@
-﻿using System.Data.Entity.Migrations;
-using System.Web.Mvc;
-using IdentityService.Contexts;
-using IdentityService.Models;
+﻿using System.Web.Mvc;
 
 namespace Web.Controllers
 {

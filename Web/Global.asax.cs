@@ -4,6 +4,9 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using IdentityService.Contexts;
 using IdentityService.Utilities;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
 
 namespace Web
 {
@@ -18,6 +21,11 @@ namespace Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
         }
     }
 }
