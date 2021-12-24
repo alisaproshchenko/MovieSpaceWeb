@@ -1,5 +1,4 @@
-﻿@using IdentityService.Models
-@model IEnumerable<ApplicationUser>
+﻿@model IEnumerable<Web.ViewModels.UserViewModel>
 
 @{
     ViewBag.Title = "ASP.NET Identity";
@@ -20,10 +19,9 @@
                 <td colspan="3" class="text-center">Нет ни одной учетной записи</td>
             </tr>
         } else {
-            foreach (ApplicationUser user in Model)
+            foreach (var user in Model)
             {
                 <tr>
-                    <td>@user.Id</td>
                     <td>@user.UserName</td>
                     <td>@user.Email</td>
                 </tr>

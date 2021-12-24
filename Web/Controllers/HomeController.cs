@@ -9,15 +9,15 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
-            var context = new IdentityContext();
-            context.Users.AddOrUpdate(new ApplicationUser
-            {
-                Name = "name",
-                Surname = "surname",
-                Banned = false,
-                UserName = "username1"
-            });
-            context.SaveChanges();
+            //var context = new IdentityContext();
+            //context.Users.AddOrUpdate(new ApplicationUser
+            //{
+            //    Name = "name",
+            //    Surname = "surname",
+            //    Banned = false,
+            //    UserName = "username1"
+            //});
+            //context.SaveChanges();
             return View();
         }
 

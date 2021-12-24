@@ -17,7 +17,8 @@ namespace IdentityService.Repository
 
         public IEnumerable<ApplicationUser> GetUsers()
         {
-            return _db.Users;
+            var t = _db.Users;
+            return t;
         }
 
         public ApplicationUser GetUser(string id)

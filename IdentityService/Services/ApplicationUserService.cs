@@ -1,11 +1,10 @@
 ﻿using System;
-using IdentityService.Contexts;
+using System.Collections.Generic;
 using IdentityService.Dto;
 using IdentityService.Models;
 using IdentityService.Repository;
 using IdentityService.Utilities;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IdentityService.Services
 {
@@ -14,10 +13,18 @@ namespace IdentityService.Services
         private readonly IRepository<ApplicationUser> _applicationUserRepository;
         private readonly ApplicationUserManager _manager;
 
-        protected ApplicationUserService(IRepository<ApplicationUser> applicationUserRepository)
+        public ApplicationUserService(ApplicationUserManager manager)
         {
-            _manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
-            _applicationUserRepository = applicationUserRepository;
+            //_manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
+            _manager = manager;
+            _applicationUserRepository = new ApplicationUserRepository();
+        }
+
+        public IEnumerable<ApplicationUserDto> GetAll()
+        {
+            var users = _applicationUserRepository.GetUsers();
+            var userDtos = AutoMap.Mapper.Map<IEnumerable<ApplicationUserDto>>(users);
+            return userDtos;
         }
 
         public void AddUser(ApplicationUserDto applicationUserDto)
