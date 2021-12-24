@@ -25,9 +25,10 @@ namespace Web.Controllers
         {
             var userDtOs = _userService.GetAll();
             var mapper =
-                new MapperConfiguration(x => x.CreateMap<IEnumerable<ApplicationUserDto>, IEnumerable<UserViewModel>>())
+                new MapperConfiguration(x => x.CreateMap<ApplicationUserDto,UserViewModel>())
                     .CreateMapper();
             var users = mapper.Map<IEnumerable<UserViewModel>>(userDtOs);
+            
             return View(users);
         }
 

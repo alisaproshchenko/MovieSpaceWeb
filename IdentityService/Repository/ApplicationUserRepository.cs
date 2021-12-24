@@ -6,19 +6,20 @@ using IdentityService.Models;
 
 namespace IdentityService.Repository
 {
-    class ApplicationUserRepository : IRepository<ApplicationUser>
+    public class ApplicationUserRepository : IRepository<ApplicationUser>
     {
         private readonly IdentityContext _db;
+        private readonly ApplicationUserManager _manager;
 
-        public ApplicationUserRepository()
+        public ApplicationUserRepository(ApplicationUserManager manager)
         {
+            _manager = manager;
             _db = new IdentityContext();
         }
 
         public IEnumerable<ApplicationUser> GetUsers()
         {
-            var t = _db.Users;
-            return t;
+            return _manager.Users;
         }
 
         public ApplicationUser GetUser(string id)

@@ -14,6 +14,10 @@ namespace Web
     {
         protected void Application_Start()
         {
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
             Database.SetInitializer(new IdentityDbInit());
             AutoMap.RegisterMappings();
 
@@ -22,9 +26,7 @@ namespace Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            NinjectModule registrations = new NinjectRegistrations();
-            var kernel = new StandardKernel(registrations);
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            
 
         }
     }

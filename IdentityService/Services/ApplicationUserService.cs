@@ -15,9 +15,8 @@ namespace IdentityService.Services
 
         public ApplicationUserService(ApplicationUserManager manager)
         {
-            //_manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
             _manager = manager;
-            _applicationUserRepository = new ApplicationUserRepository();
+            _applicationUserRepository = new ApplicationUserRepository(_manager);
         }
 
         public IEnumerable<ApplicationUserDto> GetAll()
@@ -25,6 +24,13 @@ namespace IdentityService.Services
             var users = _applicationUserRepository.GetUsers();
             var userDtos = AutoMap.Mapper.Map<IEnumerable<ApplicationUserDto>>(users);
             return userDtos;
+            
+        }
+
+        public ApplicationUserDto Get(string id)
+        {
+            var user = _applicationUserRepository.GetUser(id);
+            return AutoMap.Mapper.Map<ApplicationUserDto>(user);
         }
 
         public void AddUser(ApplicationUserDto applicationUserDto)

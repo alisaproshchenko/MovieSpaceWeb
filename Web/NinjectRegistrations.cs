@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity;
 using Ninject.Modules;
 using Ninject.Web.Common;
 
-namespace IdentityService.Utilities
+namespace Web
 {
     public class NinjectRegistrations : NinjectModule
     {

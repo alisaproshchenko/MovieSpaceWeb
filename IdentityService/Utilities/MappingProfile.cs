@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using IdentityService.Dto;
 using IdentityService.Models;
 
@@ -10,8 +9,6 @@ namespace IdentityService.Utilities
         public MappingProfile()
         {
             CreateMap<ApplicationUserDto, ApplicationUser>().ReverseMap();
-            CreateMap<IEnumerable<ApplicationUserDto>, IEnumerable<ApplicationUser>>().ReverseMap();
-            
         }
     }
 }
