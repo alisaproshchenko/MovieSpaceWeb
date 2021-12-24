@@ -5,8 +5,8 @@
         void AddUser(T item);
         void ChangeUserData(T item);
         void ChangePassword(T item);
-        void BanUser(T item);
-        void GiveAdminRights(T item);
+        void UserBanToggle(T item);
+        void AdminRightsToggle(T item);
         void DeleteUser(T item);
     }
 }

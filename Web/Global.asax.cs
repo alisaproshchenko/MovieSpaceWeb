@@ -1,9 +1,7 @@
 ﻿using System.Data.Entity;
-using System.IO.MemoryMappedFiles;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using AutoMapper;
 using IdentityService.Contexts;
 using IdentityService.Utilities;
 

@@ -1,20 +1,25 @@
-﻿using AutoMapper;
+﻿using System;
+using IdentityService.Contexts;
 using IdentityService.Dto;
 using IdentityService.Models;
 using IdentityService.Repository;
 using IdentityService.Utilities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IdentityService.Services
 {
     public class ApplicationUserService : IService<ApplicationUserDto>
     {
         private readonly IRepository<ApplicationUser> _applicationUserRepository;
+        private readonly ApplicationUserManager manager;
 
-            protected ApplicationUserService(IRepository<ApplicationUser> applicationUserRepository)
+        protected ApplicationUserService(IRepository<ApplicationUser> applicationUserRepository)
         {
+            manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
             _applicationUserRepository = applicationUserRepository;
         }
-        //AutoMapper requested 
+
         public void AddUser(ApplicationUserDto applicationUserDto)
         {
             var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
@@ -23,33 +28,36 @@ namespace IdentityService.Services
 
         public void ChangeUserData(ApplicationUserDto applicationUserDto)
         {
-            var userInDb = _applicationUserRepository.GetUser(applicationUserDto.Id);
-            userInDb.Name = applicationUserDto.Name;
-            userInDb.Surname = applicationUserDto.Surname;
-            userInDb.Email = applicationUserDto.Email;
-            userInDb.PhoneNumber = applicationUserDto.PhoneNumber;
-            userInDb.UserName = applicationUserDto.UserName;
-            _applicationUserRepository.Update(userInDb);
+            var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
+            _applicationUserRepository.Update(applicationUser);
         }
 
         public void ChangePassword(ApplicationUserDto applicationUserDto)
         {
-            throw new System.NotImplementedException();
+            var userInDb = _applicationUserRepository.GetUser(applicationUserDto.Id);
+            manager.RemovePassword(userInDb.Id);
+            manager.AddPassword(userInDb.Id, applicationUserDto.Password);
         }
 
-        public void BanUser(ApplicationUserDto applicationUserDto)
+        public void UserBanToggle(ApplicationUserDto applicationUserDto)
         {
-            throw new System.NotImplementedException();
+            var userInDb = _applicationUserRepository.GetUser(applicationUserDto.Id);
+            if (userInDb != null)
+            {
+                userInDb.Banned = applicationUserDto.Banned;
+                _applicationUserRepository.Update(userInDb);
+            }
         }
 
-        public void GiveAdminRights(ApplicationUserDto applicationUserDto)
+        public void AdminRightsToggle(ApplicationUserDto applicationUserDto)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void DeleteUser(ApplicationUserDto applicationUserDto)
         {
-            throw new System.NotImplementedException();
+            var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
+            _applicationUserRepository.Delete(applicationUser.Id);
         }
     }
 }
