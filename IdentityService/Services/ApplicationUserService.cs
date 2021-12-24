@@ -12,11 +12,11 @@ namespace IdentityService.Services
     public class ApplicationUserService : IService<ApplicationUserDto>
     {
         private readonly IRepository<ApplicationUser> _applicationUserRepository;
-        private readonly ApplicationUserManager manager;
+        private readonly ApplicationUserManager _manager;
 
         protected ApplicationUserService(IRepository<ApplicationUser> applicationUserRepository)
         {
-            manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
+            _manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
             _applicationUserRepository = applicationUserRepository;
         }
 
@@ -24,29 +24,33 @@ namespace IdentityService.Services
         {
             var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
             _applicationUserRepository.Create(applicationUser);
+            _applicationUserRepository.Save();
         }
 
         public void ChangeUserData(ApplicationUserDto applicationUserDto)
         {
             var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
             _applicationUserRepository.Update(applicationUser);
+            _applicationUserRepository.Save();
         }
 
         public void ChangePassword(ApplicationUserDto applicationUserDto)
         {
             var userInDb = _applicationUserRepository.GetUser(applicationUserDto.Id);
-            manager.RemovePassword(userInDb.Id);
-            manager.AddPassword(userInDb.Id, applicationUserDto.Password);
+            _manager.RemovePassword(userInDb.Id);
+            _manager.AddPassword(userInDb.Id, applicationUserDto.Password);
+            _applicationUserRepository.Save();
         }
 
         public void UserBanToggle(ApplicationUserDto applicationUserDto)
         {
             var userInDb = _applicationUserRepository.GetUser(applicationUserDto.Id);
-            if (userInDb != null)
-            {
-                userInDb.Banned = applicationUserDto.Banned;
-                _applicationUserRepository.Update(userInDb);
-            }
+            if (userInDb == null) 
+                return;
+
+            userInDb.Banned = applicationUserDto.Banned;
+            _applicationUserRepository.Update(userInDb);
+            _applicationUserRepository.Save();
         }
 
         public void AdminRightsToggle(ApplicationUserDto applicationUserDto)
@@ -58,6 +62,7 @@ namespace IdentityService.Services
         {
             var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
             _applicationUserRepository.Delete(applicationUser.Id);
+            _applicationUserRepository.Save();
         }
     }
 }

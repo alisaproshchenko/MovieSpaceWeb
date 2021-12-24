@@ -8,43 +8,43 @@ namespace IdentityService.Repository
 {
     class ApplicationUserRepository : IRepository<ApplicationUser>
     {
-        private readonly IdentityContext identityContext;
+        private readonly IdentityContext _db;
 
         public ApplicationUserRepository()
         {
-            identityContext = new IdentityContext();
+            _db = new IdentityContext();
         }
 
         public IEnumerable<ApplicationUser> GetUsers()
         {
-            return identityContext.Users;
+            return _db.Users;
         }
 
         public ApplicationUser GetUser(string id)
         {
-            return identityContext.Users.FirstOrDefault(u => u.Id.Equals(id));
+            return _db.Users.FirstOrDefault(u => u.Id.Equals(id));
         }
 
         public void Create(ApplicationUser applicationUser)
         {
-            identityContext.Users.Add(applicationUser);
+            _db.Users.Add(applicationUser);
         }
 
         public void Update(ApplicationUser applicationUser)
         {
-            identityContext.Entry(applicationUser).State = System.Data.Entity.EntityState.Modified;
+            _db.Entry(applicationUser).State = System.Data.Entity.EntityState.Modified;
         }
 
         public void Delete(string id)
         {
-            ApplicationUser applicationUser = identityContext.Users.FirstOrDefault(u => u.Id.Equals(id));
+            var applicationUser = _db.Users.FirstOrDefault(u => u.Id.Equals(id));
             if (applicationUser != null)
-                identityContext.Users.Remove(applicationUser);
+                _db.Users.Remove(applicationUser);
         }
 
         public void Save()
         {
-            identityContext.SaveChanges();
+            _db.SaveChanges();
         }
 
         private bool _disposed;
@@ -55,10 +55,10 @@ namespace IdentityService.Repository
             {
                 if (disposing)
                 {
-                    identityContext.Dispose();
+                    _db.Dispose();
                 }
             }
-            this._disposed = true;
+            _disposed = true;
         }
 
         public void Dispose()

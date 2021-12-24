@@ -19,8 +19,6 @@ namespace IdentityService.Contexts
             var admin = new ApplicationUser {Email = "somemail@mail.ru", UserName = "somemail@mail.ru" };
             var password = "ad46D_ewr3";
             manager.Create(admin, password);
-            
-
         }
     }
 }
