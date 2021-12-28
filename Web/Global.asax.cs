@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using IdentityService.Contexts;
-using IdentityService.Utilities;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Mvc;
@@ -22,7 +21,6 @@ namespace Web
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
 
             Database.SetInitializer(new IdentityDbInit());
-            AutoMap.RegisterMappings();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -24,10 +24,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var userDtOs = _userService.GetAll();
-            var mapper =
-                new MapperConfiguration(x => x.CreateMap<ApplicationUserDto,UserViewModel>())
-                    .CreateMapper();
-            var users = mapper.Map<IEnumerable<UserViewModel>>(userDtOs);
+            var users = Mapper.Map<IEnumerable<UserViewModel>>(userDtOs);
             
             return View(users);
         }

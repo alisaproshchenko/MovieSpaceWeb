@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoMapper;
 using IdentityService.Dto;
 using IdentityService.Models;
 using IdentityService.Repository;
-using IdentityService.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace IdentityService.Services
@@ -22,7 +22,7 @@ namespace IdentityService.Services
         public IEnumerable<ApplicationUserDto> GetAll()
         {
             var users = _applicationUserRepository.GetUsers();
-            var userDtos = AutoMap.Mapper.Map<IEnumerable<ApplicationUserDto>>(users);
+            var userDtos = Mapper.Map<IEnumerable<ApplicationUserDto>>(users);
             return userDtos;
             
         }
@@ -30,19 +30,19 @@ namespace IdentityService.Services
         public ApplicationUserDto Get(string id)
         {
             var user = _applicationUserRepository.GetUser(id);
-            return AutoMap.Mapper.Map<ApplicationUserDto>(user);
+            return Mapper.Map<ApplicationUserDto>(user);
         }
 
         public void AddUser(ApplicationUserDto applicationUserDto)
         {
-            var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
+            var applicationUser = Mapper.Map<ApplicationUser>(applicationUserDto);
             _applicationUserRepository.Create(applicationUser);
             _applicationUserRepository.Save();
         }
 
         public void ChangeUserData(ApplicationUserDto applicationUserDto)
         {
-            var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
+            var applicationUser = Mapper.Map<ApplicationUser>(applicationUserDto);
             _applicationUserRepository.Update(applicationUser);
             _applicationUserRepository.Save();
         }
@@ -73,7 +73,7 @@ namespace IdentityService.Services
 
         public void DeleteUser(ApplicationUserDto applicationUserDto)
         {
-            var applicationUser = AutoMap.Mapper.Map<ApplicationUser>(applicationUserDto);
+            var applicationUser = Mapper.Map<ApplicationUser>(applicationUserDto);
             _applicationUserRepository.Delete(applicationUser.Id);
             _applicationUserRepository.Save();
         }
