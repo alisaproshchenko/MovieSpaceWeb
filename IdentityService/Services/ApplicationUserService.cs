@@ -36,7 +36,7 @@ namespace IdentityService.Services
         public void AddUser(ApplicationUserDto applicationUserDto)
         {
             var applicationUser = Mapper.Map<ApplicationUser>(applicationUserDto);
-            _applicationUserRepository.Create(applicationUser);
+            _applicationUserRepository.Create(applicationUser, applicationUserDto.Password);
             _applicationUserRepository.Save();
         }
 

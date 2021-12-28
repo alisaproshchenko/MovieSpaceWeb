@@ -5,6 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
+[assembly: OwinStartup(typeof(Web.IdentityConfig))]
+
 namespace Web
 {
     public class IdentityConfig
