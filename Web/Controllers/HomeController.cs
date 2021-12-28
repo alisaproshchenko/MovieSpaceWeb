@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Web.Controllers
 {
@@ -10,6 +6,15 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
+            //var context = new IdentityContext();
+            //context.Users.AddOrUpdate(new ApplicationUser
+            //{
+            //    Name = "name",
+            //    Surname = "surname",
+            //    Banned = false,
+            //    UserName = "username1"
+            //});
+            //context.SaveChanges();
             return View();
         }
 

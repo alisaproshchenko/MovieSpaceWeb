@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using IdentityService.Contexts;
+using IdentityService.Utilities;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
 
 namespace Web
 {
@@ -12,10 +14,20 @@ namespace Web
     {
         protected void Application_Start()
         {
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
+            Database.SetInitializer(new IdentityDbInit());
+            AutoMap.RegisterMappings();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            
+
         }
     }
 }
