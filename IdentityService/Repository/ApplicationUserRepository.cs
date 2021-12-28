@@ -27,11 +27,14 @@ namespace IdentityService.Repository
         {
             return _db.Users.FirstOrDefault(u => u.Id.Equals(id));
         }
+        public ApplicationUser GetUserByUsername(string username)
+        {
+            return _db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+        }
 
         public void Create(ApplicationUser applicationUser, string password)
         {
-            _db.Users.Add(applicationUser);
-            //_manager.Create(applicationUser, password);
+            _manager.Create(applicationUser, password);
         }
 
         public void Update(ApplicationUser applicationUser)

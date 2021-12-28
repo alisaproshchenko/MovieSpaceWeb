@@ -49,7 +49,7 @@ namespace IdentityService.Services
 
         public void ChangePassword(ApplicationUserDto applicationUserDto)
         {
-            var userInDb = _applicationUserRepository.GetUser(applicationUserDto.Id);
+            var userInDb = _applicationUserRepository.GetUserByUsername(applicationUserDto.UserName);
             _manager.RemovePassword(userInDb.Id);
             _manager.AddPassword(userInDb.Id, applicationUserDto.Password);
             _applicationUserRepository.Save();
@@ -57,8 +57,8 @@ namespace IdentityService.Services
 
         public void UserBanToggle(ApplicationUserDto applicationUserDto)
         {
-            var userInDb = _applicationUserRepository.GetUser(applicationUserDto.Id);
-            if (userInDb == null) 
+            var userInDb = _applicationUserRepository.GetUserByUsername(applicationUserDto.UserName);
+            if (userInDb == null)
                 return;
 
             userInDb.Banned = applicationUserDto.Banned;

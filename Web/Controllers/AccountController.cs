@@ -1,13 +1,10 @@
-﻿using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
 using IdentityService.Contexts;
 using IdentityService.Dto;
 using IdentityService.Models;
 using IdentityService.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 using Web.ViewModels;
 using Web.ViewModels.Identity;
 
@@ -33,7 +30,11 @@ namespace Web.Controllers
         {
             if (!ModelState.IsValid) return View("Error");
 
-            var userViewModel = Mapper.Map<RegistrationViewModel, UserViewModel>(model);
+            var userViewModel = new UserViewModel
+            {
+                Banned = false, Email = model.Email, Name = model.Name, Password = model.Password,
+                Surname = model.Surname, UserName = model.Username
+            };
             var userDto = Mapper.Map<UserViewModel, ApplicationUserDto>(userViewModel);
             _userService.AddUser(userDto);
 
