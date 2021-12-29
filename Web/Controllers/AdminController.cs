@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using AutoMapper;
 using IdentityService.Contexts;
-using IdentityService.Dto;
 using IdentityService.Models;
 using IdentityService.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
