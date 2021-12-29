@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MoviesService.Models
 {
@@ -25,6 +24,7 @@ namespace MoviesService.Models
         public int TypesId { get; set; }
         [Required]
         public Types Types { get; set; }
+        public UsersToMedia UsersToMedia { get; set; }
         [Required]
         public List<Genres> GenresList { get; set; } = new List<Genres>();
         public List<Seasons> SeasonsList { get; set; } = new List<Seasons>();
