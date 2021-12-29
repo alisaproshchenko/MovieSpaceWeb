@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using IdentityService.Contexts;
 using IdentityService.Models;
 using IdentityService.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -18,6 +20,7 @@ namespace Web.Controllers
         public AdminController()
         {
             _manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
+            
             _userService = new ApplicationUserService(_manager);
         }
         public ActionResult Index()
