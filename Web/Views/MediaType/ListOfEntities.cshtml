@@ -3,11 +3,11 @@
 
 <div>@Html.ActionLink("Add", "Add", "MediaType",null,null)</div>
 
-@foreach (var genre in Model)
+@foreach (var entity in Model)
 {
     <div style="border: 1px solid red; width: 100px; height: 100px;">
-        <div>@genre.Name</div>
-        <div>@Html.ActionLink("Delete", "Delete", "MediaType", new {id = genre.Id},null)</div>
-        <div>@Html.ActionLink("Edit", "Edit", "MediaType", new {id = genre.Id},null)</div>
+        <div>@entity.Name</div>
+        <div>@Html.ActionLink("Delete", "Delete", "MediaType", new {id = entity.Id},null)</div>
+        <div>@Html.ActionLink("Edit", "Edit", "MediaType", new {id = entity.Id},null)</div>
     </div>
 }

@@ -261,6 +261,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\MediaTypeController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="NinjectRegistrations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MediaViewModel.cs" />
     <Compile Include="ViewModels\TypeViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
@@ -328,6 +330,11 @@
     <Content Include="Views\MediaType\Add.cshtml" />
     <Content Include="Views\MediaType\Edit.cshtml" />
     <Content Include="Views\MediaType\Delete.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Movie\ListOfEntities.cshtml" />
+    <Content Include="Views\Movie\Add.cshtml" />
+    <Content Include="Views\Movie\Edit.cshtml" />
+    <Content Include="Views\Movie\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

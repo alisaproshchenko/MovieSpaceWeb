@@ -24,9 +24,11 @@ namespace Web
             container.RegisterType<IServices<GenresDto>, GenreService>();
             container.RegisterType<IServices<TypesDto>, TypeService>();
             container.RegisterType<IServices<CountryDto>, CountryService>();
+            container.RegisterType<IServices<MediaDto>, MediaService>();
             container.RegisterType<IController, GenreController>();
             container.RegisterType<IController, MediaTypeController>();
             container.RegisterType<IController, CountryController>();
+            container.RegisterType<IController, MovieController>();
 
             return container;
         }

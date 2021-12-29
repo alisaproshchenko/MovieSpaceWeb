@@ -1,13 +1,13 @@
-﻿using MoviesService.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MoviesService.Models;
 
-namespace MoviesService.Dto
+namespace Web.ViewModels
 {
-    public class MediaDto
+    public class MediaViewModel
     {
-        public int Id { get; set; } 
-        public string IMDbMovieId { get; set; } 
-        public string Name { get; set; } 
+        public int Id { get; set; }
+        public string IMDbMovieId { get; set; }
+        public string Name { get; set; }
         public string Poster { get; set; }
         public int Year { get; set; }
         public string Cast { get; set; }
@@ -17,8 +17,5 @@ namespace MoviesService.Dto
         public double? SiteUsersRatings { get; set; }
         public int TypesId { get; set; }
         public ICollection<Genres> GenresCollection { get; set; }
-        public ICollection<Country> CountryCollection { get; set; }
-
-
     }
 }

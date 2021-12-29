@@ -1,0 +1,17 @@
+﻿@using System.Web.Mvc.Html
+@model IEnumerable<Web.ViewModels.MediaViewModel>
+
+<div>@Html.ActionLink("Add", "Add", "Movie",null,null)</div>
+
+@foreach (var entity in Model)
+{
+    <div style="border: 1px solid red; width: 100px; height: 100px;">
+        <div>@entity.Name</div>
+        @foreach (var e in entity.GenresCollection)
+        {
+            <h2>+ @e.Name</h2>
+        }
+        <div>@Html.ActionLink("Delete", "Delete", "Movie", new { id = entity.Id }, null)</div>
+        <div>@Html.ActionLink("Edit", "Edit", "Movie", new { id = entity.Id }, null)</div>
+    </div>
+}

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MoviesService.Models
 {
@@ -8,5 +9,6 @@ namespace MoviesService.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+        public virtual ICollection<Media> MediaCollection { get; set; } = new List<Media>();
     }
 }

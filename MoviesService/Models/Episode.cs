@@ -8,5 +8,7 @@ namespace MoviesService.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+        public int? SeasonsId { get; set; }
+        public Seasons Seasons { get; set; }
     }
 }

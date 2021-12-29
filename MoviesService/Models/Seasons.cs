@@ -7,6 +7,8 @@ namespace MoviesService.Models
     {
         [Key]
         public int Id { set; get; }
+        public int? MediaId { get; set; }
+        public Media Media { get; set; }
         [Required]
         public string SeriesId { get; set; }
         [Required]
@@ -15,7 +17,6 @@ namespace MoviesService.Models
         public int Year { get; set; }
         public double? RatingIMDb { get; set; }
         public double? UserIMDb { get; set; }
-        public List<Episode> EpisodesList { get; set; } = new List<Episode>();
-
+        public ICollection<Episode> EpisodesList { get; set; } = new List<Episode>();
     }
 }
