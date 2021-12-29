@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MoviesService.Models
 {
@@ -21,6 +22,8 @@ namespace MoviesService.Models
         public int? BudgetAndBoxOffice { get; set; }
         public double? RatingIMDb { get; set; }
         public double? SiteUsersRatings { get; set; }
+        public int TypesId { get; set; }
+        [Required]
         public Types Types { get; set; }
         [Required]
         public List<Genres> GenresList { get; set; } = new List<Genres>();

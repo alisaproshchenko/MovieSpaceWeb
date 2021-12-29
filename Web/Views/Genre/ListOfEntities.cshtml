@@ -1,0 +1,14 @@
+﻿@using System.Web.Mvc.Html
+@model IEnumerable<Web.ViewModels.GenreViewModel>
+
+<div>@Html.ActionLink("Add", "Add", "Genre",null,null)</div>
+
+@foreach (var genre in Model)
+{
+    <div style="border: 1px solid red; width: 100px; height: 100px;">
+        <div>@genre.Name</div>
+        <div>@Html.ActionLink("Delete", "Delete", "Genre",new {id = genre.Id},null)</div>
+        <div>@Html.ActionLink("Edit", "Edit", "Genre",new {id = genre.Id},null)</div>
+    </div>
+}
+

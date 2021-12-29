@@ -17,6 +17,8 @@ namespace Web
             Mapper.CreateMap<Types, TypesDto>().ReverseMap();
             Mapper.CreateMap<Seasons, SeasonsDto>().ReverseMap();
             Mapper.CreateMap<GenresDto, GenreViewModel>().ReverseMap();
+            Mapper.CreateMap<CountryDto, CountryViewModel>().ReverseMap();
+            Mapper.CreateMap<TypesDto, TypeViewModel>().ReverseMap();
             Mapper.CreateMap<ApplicationUserDto, ApplicationUser>().ReverseMap();
             Mapper.CreateMap<ApplicationUserDto, UserViewModel>().ReverseMap();
         }
