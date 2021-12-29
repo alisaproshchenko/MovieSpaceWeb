@@ -168,6 +168,7 @@
     <Compile Include="Dto\SeasonsDto.cs" />
     <Compile Include="Dto\TypesDto.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Episode.cs" />
     <Compile Include="Models\Genres.cs" />
     <Compile Include="Models\Media.cs" />
     <Compile Include="Models\Seasons.cs" />
