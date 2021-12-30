@@ -21,7 +21,7 @@ namespace MoviesService.Repositories.Repository
 
         public void AddItem(Media media)
         {
-            _context.MediaTable.Add(media);
+            _context.MediaTable.AddOrUpdate(media);
             _context.SaveChanges();
         }
 

@@ -7,17 +7,20 @@
             <tr>
                 <th style="width:200px"> @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "authorization-label" })</th>
                 <th> @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "authorization-login" } })</th>
-                <th style="margin-left: 10px;"> @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})</th>
-            </tr>
+                </tr>
             <tr>
                 <th style="width:200px"> @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "authorization-label" })</th>
-                <th> @Html.EditorFor(model => model.Year, new {htmlAttributes = new {@class = "authorization-login" } })</th>
-                <th style="margin-left: 10px;"> @Html.ValidationMessageFor(model => model.Year, "", new {@class = "text-danger"})</th>
-            </tr>
+                <th> @Html.EditorFor(model => model.Year, new {htmlAttributes = new {@class = "authorization-login" } })</th></tr>
             <tr>
                 <th style="width:200px"> @Html.LabelFor(model => model.Plot, htmlAttributes: new { @class = "authorization-label" })</th>
-                <th> @Html.EditorFor(model => model.Plot, new {htmlAttributes = new {@class = "authorization-login" } })</th>
-                <th style="margin-left: 10px;"> @Html.ValidationMessageFor(model => model.Plot, "", new {@class = "text-danger"})</th>
+                <th> @Html.EditorFor(model => model.Plot, new {htmlAttributes = new {@class = "authorization-login" } })</th></tr>
+            <tr>
+                <th>
+                    @foreach (var c in ViewBag.Genres)
+                    {
+                        <input type="checkbox" name="entities" value="@c.Id"/>@c.Name <br />
+                    }
+                </th>
             </tr>
         </table>
 

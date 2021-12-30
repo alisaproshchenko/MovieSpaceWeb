@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using MoviesService.Dto;
-using MoviesService.Resources;
+using MoviesService.Models;
 using MoviesService.Services.IService;
+using MoviesService.Services.Service;
 using Web.ViewModels;
 
 namespace Web.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly IServices<MediaDto> _service;
-        public MovieController(IServices<MediaDto> service) => this._service = service;
+        private readonly MediaService _service;
+        private readonly IServices<TypesDto> _typeServices;
+        private readonly IServices<GenresDto> _genreServices;
+        public MovieController(MediaService service, IServices<TypesDto> typeServices, IServices<GenresDto> genreServices)
+        {
+            this._service = service;
+            this._typeServices = typeServices;
+            this._genreServices = genreServices;
+        }
 
         public ActionResult ListOfEntities()
         {
@@ -23,13 +30,22 @@ namespace Web.Controllers
 
         public ActionResult Add()
         {
+            ViewBag.Genres = _genreServices.Items;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Add(MediaDto entity)
+        public ActionResult Add(MediaDto entity, int [] entities)
         {
-            entity.TypesId = Convert.ToInt32(MediaType.Movie);
+            var typeDto = _typeServices.Items.FirstOrDefault(x => x.Id == 1);
+            entity.Types = new Types(); 
+            entity.GenresCollection = new List<Genres>();
+            entity.Types = Mapper.Map<TypesDto, Types>(typeDto);
+            foreach (var c in _genreServices.Items.Where(co => entities.Contains(co.Id)))
+            {
+                entity.GenresCollection.Add(Mapper.Map<GenresDto,Genres>(c));
+            }
+
             _service.AddItem(entity);
             return RedirectToAction("ListOfEntities");
         }

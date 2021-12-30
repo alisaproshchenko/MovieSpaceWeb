@@ -167,17 +167,9 @@
     <Compile Include="Dto\MediaDto.cs" />
     <Compile Include="Dto\SeasonsDto.cs" />
     <Compile Include="Dto\TypesDto.cs" />
-    <Compile Include="Migrations\202112291258282_init.cs" />
-    <Compile Include="Migrations\202112291258282_init.designer.cs">
-      <DependentUpon>202112291258282_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202112291315313_changeMediaTableandCountryTable.cs" />
-    <Compile Include="Migrations\202112291315313_changeMediaTableandCountryTable.designer.cs">
-      <DependentUpon>202112291315313_changeMediaTableandCountryTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202112291324420_changeTablesSeasonsEpisodeMedia.cs" />
-    <Compile Include="Migrations\202112291324420_changeTablesSeasonsEpisodeMedia.designer.cs">
-      <DependentUpon>202112291324420_changeTablesSeasonsEpisodeMedia.cs</DependentUpon>
+    <Compile Include="Migrations\202112301527254_init.cs" />
+    <Compile Include="Migrations\202112301527254_init.designer.cs">
+      <DependentUpon>202112301527254_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
@@ -194,7 +186,6 @@
     <Compile Include="Repositories\Repository\MediaRepository.cs" />
     <Compile Include="Repositories\Repository\SeasonRepository.cs" />
     <Compile Include="Repositories\Repository\TypeRepository.cs" />
-    <Compile Include="Resources\EnumEntity.cs" />
     <Compile Include="Services\IService\IServices.cs" />
     <Compile Include="Services\Service\CountryService.cs" />
     <Compile Include="Services\Service\GenreService.cs" />
@@ -216,14 +207,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112291258282_init.resx">
-      <DependentUpon>202112291258282_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202112291315313_changeMediaTableandCountryTable.resx">
-      <DependentUpon>202112291315313_changeMediaTableandCountryTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202112291324420_changeTablesSeasonsEpisodeMedia.resx">
-      <DependentUpon>202112291324420_changeTablesSeasonsEpisodeMedia.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112301527254_init.resx">
+      <DependentUpon>202112301527254_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

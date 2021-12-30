@@ -21,7 +21,7 @@ namespace MoviesService.Repositories.Repository
 
         public void AddItem(Genres genre)
         {
-            _context.GenresTable.Add(genre);
+            _context.GenresTable.AddOrUpdate(genre);
             _context.SaveChanges();
         }
 

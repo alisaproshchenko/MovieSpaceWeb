@@ -7,9 +7,10 @@
 {
     <div style="border: 1px solid red; width: 100px; height: 100px;">
         <div>@entity.Name</div>
+        <div>@entity.Id</div>
         @foreach (var e in entity.GenresCollection)
         {
-            <h2>+ @e.Name</h2>
+            <p>+ @e.Name</p>
         }
         <div>@Html.ActionLink("Delete", "Delete", "Movie", new { id = entity.Id }, null)</div>
         <div>@Html.ActionLink("Edit", "Edit", "Movie", new { id = entity.Id }, null)</div>

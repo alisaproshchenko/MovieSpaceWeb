@@ -13,18 +13,6 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Media_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Media", t => t.Media_Id)
-                .Index(t => t.Media_Id);
-            
-            CreateTable(
-                "dbo.Genres",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -49,20 +37,29 @@
                 .Index(t => t.Id);
             
             CreateTable(
+                "dbo.Genres",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Seasons",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        MediaId = c.Int(),
                         SeriesId = c.String(nullable: false),
                         IMDbMovieId = c.String(nullable: false),
                         Year = c.Int(nullable: false),
                         RatingIMDb = c.Double(),
                         UserIMDb = c.Double(),
-                        Media_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Media", t => t.Media_Id)
-                .Index(t => t.Media_Id);
+                .ForeignKey("dbo.Media", t => t.MediaId)
+                .Index(t => t.MediaId);
             
             CreateTable(
                 "dbo.Episodes",
@@ -70,11 +67,11 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
-                        Seasons_Id = c.Int(),
+                        SeasonsId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Seasons", t => t.Seasons_Id)
-                .Index(t => t.Seasons_Id);
+                .ForeignKey("dbo.Seasons", t => t.SeasonsId)
+                .Index(t => t.SeasonsId);
             
             CreateTable(
                 "dbo.Types",
@@ -100,17 +97,30 @@
                 .Index(t => t.Id);
             
             CreateTable(
-                "dbo.MediaGenres",
+                "dbo.MediaCountries",
                 c => new
                     {
-                        MediaId = c.Int(nullable: false),
-                        GenresId = c.Int(nullable: false),
+                        Media_Id = c.Int(nullable: false),
+                        Country_Id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.MediaId, t.GenresId })
-                .ForeignKey("dbo.Media", t => t.MediaId, cascadeDelete: true)
-                .ForeignKey("dbo.Genres", t => t.GenresId, cascadeDelete: true)
-                .Index(t => t.MediaId)
-                .Index(t => t.GenresId);
+                .PrimaryKey(t => new { t.Media_Id, t.Country_Id })
+                .ForeignKey("dbo.Media", t => t.Media_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Countries", t => t.Country_Id, cascadeDelete: true)
+                .Index(t => t.Media_Id)
+                .Index(t => t.Country_Id);
+            
+            CreateTable(
+                "dbo.GenresMedias",
+                c => new
+                    {
+                        Genres_Id = c.Int(nullable: false),
+                        Media_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Genres_Id, t.Media_Id })
+                .ForeignKey("dbo.Genres", t => t.Genres_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Media", t => t.Media_Id, cascadeDelete: true)
+                .Index(t => t.Genres_Id)
+                .Index(t => t.Media_Id);
             
         }
         
@@ -118,25 +128,28 @@
         {
             DropForeignKey("dbo.UsersToMedias", "Id", "dbo.Media");
             DropForeignKey("dbo.Media", "Id", "dbo.Types");
-            DropForeignKey("dbo.Seasons", "Media_Id", "dbo.Media");
-            DropForeignKey("dbo.Episodes", "Seasons_Id", "dbo.Seasons");
-            DropForeignKey("dbo.MediaGenres", "GenresId", "dbo.Genres");
-            DropForeignKey("dbo.MediaGenres", "MediaId", "dbo.Media");
-            DropForeignKey("dbo.Countries", "Media_Id", "dbo.Media");
-            DropIndex("dbo.MediaGenres", new[] { "GenresId" });
-            DropIndex("dbo.MediaGenres", new[] { "MediaId" });
+            DropForeignKey("dbo.Seasons", "MediaId", "dbo.Media");
+            DropForeignKey("dbo.Episodes", "SeasonsId", "dbo.Seasons");
+            DropForeignKey("dbo.GenresMedias", "Media_Id", "dbo.Media");
+            DropForeignKey("dbo.GenresMedias", "Genres_Id", "dbo.Genres");
+            DropForeignKey("dbo.MediaCountries", "Country_Id", "dbo.Countries");
+            DropForeignKey("dbo.MediaCountries", "Media_Id", "dbo.Media");
+            DropIndex("dbo.GenresMedias", new[] { "Media_Id" });
+            DropIndex("dbo.GenresMedias", new[] { "Genres_Id" });
+            DropIndex("dbo.MediaCountries", new[] { "Country_Id" });
+            DropIndex("dbo.MediaCountries", new[] { "Media_Id" });
             DropIndex("dbo.UsersToMedias", new[] { "Id" });
-            DropIndex("dbo.Episodes", new[] { "Seasons_Id" });
-            DropIndex("dbo.Seasons", new[] { "Media_Id" });
+            DropIndex("dbo.Episodes", new[] { "SeasonsId" });
+            DropIndex("dbo.Seasons", new[] { "MediaId" });
             DropIndex("dbo.Media", new[] { "Id" });
-            DropIndex("dbo.Countries", new[] { "Media_Id" });
-            DropTable("dbo.MediaGenres");
+            DropTable("dbo.GenresMedias");
+            DropTable("dbo.MediaCountries");
             DropTable("dbo.UsersToMedias");
             DropTable("dbo.Types");
             DropTable("dbo.Episodes");
             DropTable("dbo.Seasons");
-            DropTable("dbo.Media");
             DropTable("dbo.Genres");
+            DropTable("dbo.Media");
             DropTable("dbo.Countries");
         }
     }

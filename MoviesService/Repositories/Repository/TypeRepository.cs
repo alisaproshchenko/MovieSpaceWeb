@@ -21,7 +21,7 @@ namespace MoviesService.Repositories.Repository
 
         public void AddItem(Types item)
         {
-            _context.TypesTable.Add(item);
+            _context.TypesTable.Add(item); 
             _context.SaveChanges();
         }
 
