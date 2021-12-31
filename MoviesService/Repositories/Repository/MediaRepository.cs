@@ -3,6 +3,7 @@ using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
@@ -23,6 +24,8 @@ namespace MoviesService.Repositories.Repository
         {
             _context.MediaTable.AddOrUpdate(media);
             _context.SaveChanges();
+            var genres = _context.GenresTable.GroupBy(n => n.Name).Where(x => x.Count() > 1).SelectMany(g => g);
+            _context.GenresTable.RemoveRange(genres);
         }
 
         public void DeleteItem(int id)

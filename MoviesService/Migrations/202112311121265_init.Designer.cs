@@ -13,7 +13,7 @@ namespace MoviesService.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202112301527254_init"; }
+            get { return "202112311121265_init"; }
         }
         
         string IMigrationMetadata.Source

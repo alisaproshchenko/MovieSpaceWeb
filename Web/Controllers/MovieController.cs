@@ -38,8 +38,6 @@ namespace Web.Controllers
         public ActionResult Add(MediaDto entity, int [] entities)
         {
             var typeDto = _typeServices.Items.FirstOrDefault(x => x.Id == 1);
-            entity.Types = new Types(); 
-            entity.GenresCollection = new List<Genres>();
             entity.Types = Mapper.Map<TypesDto, Types>(typeDto);
             foreach (var c in _genreServices.Items.Where(co => entities.Contains(co.Id)))
             {

@@ -20,7 +20,7 @@
                 "dbo.Media",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         IMDbMovieId = c.String(),
                         Name = c.String(nullable: false),
                         Poster = c.String(),
@@ -33,8 +33,8 @@
                         TypesId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Types", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Types", t => t.TypesId, cascadeDelete: true)
+                .Index(t => t.TypesId);
             
             CreateTable(
                 "dbo.Genres",
@@ -127,7 +127,7 @@
         public override void Down()
         {
             DropForeignKey("dbo.UsersToMedias", "Id", "dbo.Media");
-            DropForeignKey("dbo.Media", "Id", "dbo.Types");
+            DropForeignKey("dbo.Media", "TypesId", "dbo.Types");
             DropForeignKey("dbo.Seasons", "MediaId", "dbo.Media");
             DropForeignKey("dbo.Episodes", "SeasonsId", "dbo.Seasons");
             DropForeignKey("dbo.GenresMedias", "Media_Id", "dbo.Media");
@@ -141,7 +141,7 @@
             DropIndex("dbo.UsersToMedias", new[] { "Id" });
             DropIndex("dbo.Episodes", new[] { "SeasonsId" });
             DropIndex("dbo.Seasons", new[] { "MediaId" });
-            DropIndex("dbo.Media", new[] { "Id" });
+            DropIndex("dbo.Media", new[] { "TypesId" });
             DropTable("dbo.GenresMedias");
             DropTable("dbo.MediaCountries");
             DropTable("dbo.UsersToMedias");

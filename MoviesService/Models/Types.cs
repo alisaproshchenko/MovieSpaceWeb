@@ -8,6 +8,5 @@ namespace MoviesService.Models
         public int Id { set; get; }
         [Required]
         public string Name { get; set; }
-        public Media Media { get; set; }
     }
 }
