@@ -1,8 +1,11 @@
-﻿namespace Web.ViewModels
+﻿using System.Collections.Generic;
+using MoviesService.Dto;
+
+namespace Web.ViewModels
 {
     public class GenreViewModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+       public IEnumerable<GenresDto> Genres { get; set; }
+       public PaginatedOutput PaginatedOutput { get; set; }
     }
 }

@@ -1,14 +1,88 @@
 ﻿@using System.Web.Mvc.Html
-@model IEnumerable<Web.ViewModels.GenreViewModel>
+@model Web.ViewModels.GenreViewModel
 
 <div>@Html.ActionLink("Add", "Add", "Genre",null,null)</div>
 
-@foreach (var entity in Model)
+@foreach (var entity in Model.Genres)
 {
-    <div style="border: 1px solid red; width: 100px; height: 100px;">
-        <div>@entity.Name</div>
-        <div>@Html.ActionLink("Delete", "Delete", "Genre",new {id = entity.Id},null)</div>
-        <div>@Html.ActionLink("Edit", "Edit", "Genre",new {id = entity.Id},null)</div>
-    </div>
+<div style="border: 1px solid red; width: 100px; height: 100px;">
+    <div>@entity.Name</div>
+    <div>@Html.ActionLink("Delete", "Delete", "Genre",new {id = entity.Id},null)</div>
+    <div>@Html.ActionLink("Edit", "Edit", "Genre",new {id = entity.Id},null)</div>
+</div>
 }
 
+@if (Model.PaginatedOutput.TotalPages >= 1)
+{
+<form id="productPage" method="get" class="form-page">
+    <button class="btn-control" name="productPage" value="@(Model.PaginatedOutput.CurrentPage - 1)" type="submit">Previus</button>
+    @for (int i = 1; i <= 3 && i <= Model.PaginatedOutput.TotalPages; i++)
+        {
+    if (Model.PaginatedOutput.CurrentPage > 4)
+            {
+                if (i > 1)
+                {
+                    break;
+                }
+                if (Model.PaginatedOutput.CurrentPage > Model.PaginatedOutput.TotalPages - 3)
+                {
+                    for (var z = Model.PaginatedOutput.TotalPages - 5; z <= Model.PaginatedOutput.TotalPages - 3; ++z)
+                    {
+    <button class="btn-control" name="productPage" value="@z" type="submit">
+        @if(Model.PaginatedOutput.CurrentPage == 5)
+                                {
+        @(z + 1)
+                                }
+                                else
+                                {
+        @z
+                                }
+    </button>
+                    }
+                }
+                else
+                {
+                        for (var j = 3; j >= 1; --j)
+                        {
+    <button class="btn-control" name="productPage" value="@(Model.PaginatedOutput.CurrentPage + j)" type="submit">
+        @(Model.PaginatedOutput.CurrentPage + j)
+    </button>
+                        }
+                }
+            }
+            else
+            {
+    <button class="btn-control @(Model.PaginatedOutput.CurrentPage == i ? "active" : "")" name="productPage" value="@i" type="submit">
+        @i
+    </button>
+            }
+        }
+    @if (Model.PaginatedOutput.CurrentPage > 3 && Model.PaginatedOutput.TotalPages - Model.PaginatedOutput.CurrentPage >= 3)
+        {
+    @:<span style="color:white;">...</span>
+    <button class="btn-control" name="productPage" value="@Model.PaginatedOutput.CurrentPage" type="submit">@Model.PaginatedOutput.CurrentPage</button>
+        }
+    @if (Model.PaginatedOutput.TotalPages > 3)
+        {
+    @:<span style="color:white;">...</span>
+    if (Model.PaginatedOutput.CurrentPage >= 3 && Model.PaginatedOutput.CurrentPage < Model.PaginatedOutput.TotalPages - 3)
+            {
+    <button class="btn-control" name="productPage" value="@(Model.PaginatedOutput.CurrentPage+1)" type="submit">@(Model.PaginatedOutput.CurrentPage+1)</button>
+            }
+    for (int i = Math.Max(4, Model.PaginatedOutput.TotalPages - 2);
+                         i <= Model.PaginatedOutput.TotalPages; i++)
+            {
+    <button class="btn-control @(Model.PaginatedOutput.CurrentPage == i ? "active" : "")" name="productPage" value="@i" type="submit">
+        @i
+    </button>
+            }
+        }
+    <button class="btn-control" name="productPage" value="@(Model.PaginatedOutput.CurrentPage < Model.PaginatedOutput.TotalPages ? Model.PaginatedOutput.CurrentPage + 1 : Model.PaginatedOutput.CurrentPage)" type="submit">
+        Next
+    </button>
+</form>
+}
+else
+{
+<div style="text-align: center; margin-top: 50px; font-size: 20px;">Be my first friend</div>
+}
