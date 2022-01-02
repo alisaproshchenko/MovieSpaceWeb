@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using MoviesService.Dto;
 using MoviesService.Services.IService;
-using Web.Services;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -13,7 +12,7 @@ namespace Web.Controllers
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {
-            return View(new GenreViewModel(_service.Items, currentPage));
+            return View(new GenreViewModel(_service.Entities, currentPage));
         }
 
         public ActionResult Add()
@@ -24,7 +23,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Add(GenresDto entity)
         {
-            _service.AddItem(entity);
+            _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
 
@@ -35,7 +34,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Update(GenresDto entity)
         {
-            _service.EditItem(entity);
+            _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
 
@@ -47,7 +46,7 @@ namespace Web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(GenresDto entity)
         {
-            _service.DeleteItem(entity);
+            _service.Delete(entity);
             return RedirectToAction("ListOfEntities");
         }
     }

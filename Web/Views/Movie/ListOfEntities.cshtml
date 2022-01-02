@@ -1,9 +1,9 @@
 ﻿@using System.Web.Mvc.Html
-@model IEnumerable<Web.ViewModels.MediaViewModel>
+@model Web.ViewModels.MovieViewModel
 
 <div>@Html.ActionLink("Add", "Add", "Movie",null,null)</div>
 
-@foreach (var entity in Model)
+@foreach (var entity in Model.Media)
 {
     <div style="border: 1px solid red; width: 100px; height: 100px;">
         <div>@entity.Name</div>
@@ -16,3 +16,5 @@
         <div>@Html.ActionLink("Edit", "Edit", "Movie", new { id = entity.Id }, null)</div>
     </div>
 }
+
+@Html.Partial("Partials/PagePartial/MoviePagePartial")

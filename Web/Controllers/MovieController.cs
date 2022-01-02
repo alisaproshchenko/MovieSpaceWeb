@@ -22,29 +22,28 @@ namespace Web.Controllers
             this._genreServices = genreServices;
         }
 
-        public ActionResult ListOfEntities()
+        public ActionResult ListOfEntities(int currentPage = 1)
         {
-            var media = Mapper.Map<IEnumerable<MediaDto>, IEnumerable<MediaViewModel>>(_service.Items);
-            return View(media);
+            return View(new MovieViewModel(_service.Entities, currentPage));
         }
 
         public ActionResult Add()
         {
-            ViewBag.Genres = _genreServices.Items;
+            ViewBag.Genres = _genreServices.Entities;
             return View();
         }
 
         [HttpPost]
         public ActionResult Add(MediaDto entity, int [] entities)
         {
-            var typeDto = _typeServices.Items.FirstOrDefault(x => x.Id == 1);
+            var typeDto = _typeServices.Entities.FirstOrDefault(x => x.Id == 1);
             entity.Types = Mapper.Map<TypesDto, Types>(typeDto);
-            foreach (var c in _genreServices.Items.Where(co => entities.Contains(co.Id)))
+            foreach (var c in _genreServices.Entities.Where(co => entities.Contains(co.Id)))
             {
                 entity.GenresCollection.Add(Mapper.Map<GenresDto,Genres>(c));
             }
 
-            _service.AddItem(entity);
+            _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
 
@@ -55,7 +54,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Update(MediaDto entity)
         {
-            _service.EditItem(entity);
+            _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
 
@@ -67,7 +66,7 @@ namespace Web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(MediaDto entity)
         {
-            _service.DeleteItem(entity);
+            _service.Delete(entity);
             return RedirectToAction("ListOfEntities");
         }
     }

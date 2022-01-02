@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using MoviesService.Dto;
+using MoviesService.Models;
 using Web.Services;
 
 namespace Web.ViewModels
 {
-    public class CountryViewModel
+    public class MovieViewModel
     {
-        public IEnumerable<CountryDto> Countries { get; set; }
+        public IEnumerable<MediaDto> Media { get; set; }
         public PaginatedOutput PaginatedOutput { get; set; } = new PaginatedOutput();
         public PageOption PageOption { get; set; } = new PageOption();
 
-        public CountryViewModel(IEnumerable<CountryDto> entities, int currentPage)
+        public MovieViewModel(IEnumerable<MediaDto> entities, int currentPage)
         {
-            Countries = entities.OrderBy(g => g.Id)
+            Media = entities.OrderBy(g => g.Id)
                 .Skip((currentPage - 1) * PageOption.PageSize)
                 .Take(PageOption.PageSize);
             PaginatedOutput.PageSize = PageOption.PageSize;

@@ -1,9 +1,9 @@
 ﻿@using System.Web.Mvc.Html
-@model IEnumerable<Web.ViewModels.TypeViewModel>
+@model Web.ViewModels.TypeViewModel
 
 <div>@Html.ActionLink("Add", "Add", "MediaType",null,null)</div>
 
-@foreach (var entity in Model)
+@foreach (var entity in Model.Types)
 {
     <div style="border: 1px solid red; width: 100px; height: 100px;">
         <div>@entity.Name</div>
@@ -11,3 +11,5 @@
         <div>@Html.ActionLink("Edit", "Edit", "MediaType", new {id = entity.Id},null)</div>
     </div>
 }
+
+@Html.Partial("Partials/PagePartial/TypePagePartial")

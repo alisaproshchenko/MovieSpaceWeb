@@ -9,32 +9,32 @@ namespace MoviesService.Services.Service
 {
     public class CountryService : IServices<CountryDto>
     {
-        protected readonly CountryRepository repository;
-        public CountryService(CountryRepository repository) => this.repository = repository;
+        protected readonly CountryRepository Repository;
+        public CountryService(CountryRepository repository) => this.Repository = repository;
 
-        public IEnumerable<CountryDto> Items => Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDto>>(repository.Items);
-        public CountryDto GetItem(int id)
+        public IEnumerable<CountryDto> Entities => Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDto>>(Repository.Entities);
+        public CountryDto GetEntity(int id)
         {
-            var country = repository.GetItem(id);
+            var country = Repository.GetEntity(id);
             return Mapper.Map<Country, CountryDto>(country);
         }
 
-        public void AddItem(CountryDto item)
+        public void Add(CountryDto entity)
         {
-            var country = Mapper.Map<CountryDto, Country>(item);
-            repository.AddItem(country);
+            var country = Mapper.Map<CountryDto, Country>(entity);
+            Repository.Add(country);
         }
 
-        public void EditItem(CountryDto item)
+        public void Edit(CountryDto entity)
         {
-            var country = Mapper.Map<CountryDto, Country>(item);
-            repository.EditItem(country);
+            var country = Mapper.Map<CountryDto, Country>(entity);
+            Repository.Edit(country);
         }
 
-        public void DeleteItem(CountryDto item)
+        public void Delete(CountryDto entity)
         {
-            var county = Mapper.Map<CountryDto, Country>(item);
-            repository.DeleteItem(county.Id);
+            var county = Mapper.Map<CountryDto, Country>(entity);
+            Repository.Delete(county.Id);
         }
     }
 }

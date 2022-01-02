@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using System.Web.Mvc;
 using MoviesService.Dto;
 using MoviesService.Services.IService;
 using Web.ViewModels;
@@ -12,10 +10,9 @@ namespace Web.Controllers
         private readonly IServices<TypesDto> _service;
         public MediaTypeController(IServices<TypesDto> service) => this._service = service;
 
-        public ActionResult ListOfEntities()
+        public ActionResult ListOfEntities(int currentPage = 1)
         {
-            var types = Mapper.Map<IEnumerable<TypesDto>, IEnumerable<TypeViewModel>>(_service.Items);
-            return View(types);
+            return View(new TypeViewModel(_service.Entities, currentPage));
         }
 
         public ActionResult Add()
@@ -26,7 +23,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Add(TypesDto entity)
         {
-            _service.AddItem(entity);
+            _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
 
@@ -37,7 +34,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Update(TypesDto entity)
         {
-            _service.EditItem(entity);
+            _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
 
@@ -49,7 +46,7 @@ namespace Web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(TypesDto entity)
         {
-            _service.DeleteItem(entity);
+            _service.Delete(entity);
             return RedirectToAction("ListOfEntities");
         }
     }

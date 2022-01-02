@@ -11,30 +11,30 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public GenreRepository(MediaDbContext context) => _context = context;
-        public IEnumerable<Genres> Items => _context.GenresTable;
+        public IEnumerable<Genres> Entities => _context.GenresTable;
 
-        public Genres GetItem(int id)
+        public Genres GetEntity(int id)
         {
             var genres =  _context.GenresTable.FirstOrDefault(i => i.Id == id);
             return genres;
         }
 
-        public void AddItem(Genres genre)
+        public void Add(Genres entity)
         {
-            _context.GenresTable.AddOrUpdate(genre);
+            _context.GenresTable.AddOrUpdate(entity);
             _context.SaveChanges();
         }
 
-        public void DeleteItem(int id)
+        public void Delete(int id)
         {
             var genre = _context.GenresTable.FirstOrDefault(t => t.Id == id);
             if (genre != null) _context.GenresTable.Remove(genre);
             _context.SaveChanges();
         }
 
-        public void EditItem(Genres genre)
+        public void Edit(Genres entity)
         {
-            _context.GenresTable.AddOrUpdate(genre);
+            _context.GenresTable.AddOrUpdate(entity);
             _context.SaveChanges();
         }
     }
