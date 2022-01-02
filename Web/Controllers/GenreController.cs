@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using System.Web.Mvc;
 using MoviesService.Dto;
 using MoviesService.Services.IService;
+using Web.Services;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -12,26 +9,11 @@ namespace Web.Controllers
     public class GenreController : Controller
     {
         private readonly IServices<GenresDto> _service;
-        public int PageSize = 3;
         public GenreController(IServices<GenresDto> service) => this._service = service;
 
-        public ActionResult ListOfEntities(int productPage = 1)
+        public ActionResult ListOfEntities(int currentPage = 1)
         {
-            var genres = Mapper.Map<IEnumerable<GenresDto>, IEnumerable<GenreViewModel>>(_service.Items);
-            return View(new GenreViewModel
-            {
-                Genres = _service.Items
-                    .OrderBy(g => g.Id)
-                    .Skip((productPage - 1) * PageSize)
-                    .Take(PageSize),
-                PaginatedOutput = new PaginatedOutput
-                {
-                    CurrentPage = productPage,
-                    PageSize = PageSize,
-                    TotalEntities = _service.Items.Count(),
-                    TotalPages = (int)Math.Ceiling((decimal)_service.Items.Count() / PageSize)
-                }
-            });
+            return View(new GenreViewModel(_service.Items, currentPage));
         }
 
         public ActionResult Add()

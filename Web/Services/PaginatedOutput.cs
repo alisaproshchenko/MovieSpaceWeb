@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Web.ViewModels
+﻿namespace Web.Services
 {
     public class PaginatedOutput
     {
@@ -8,6 +6,5 @@ namespace Web.ViewModels
         public int PageSize { get; set; }
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
-
     }
 }
