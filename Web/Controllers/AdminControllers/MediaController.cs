@@ -12,12 +12,19 @@ namespace Web.Controllers.AdminControllers
         private readonly IServices<GenresDto> _genreServices;
         private readonly IServices<CountryDto> _countryServices;
         private readonly IServices<TypesDto> _typesServices;
-        public MediaController(MediaService service, IServices<GenresDto> genreServices, IServices<CountryDto> countryServices, IServices<TypesDto> typesServices)
+
+        public MediaController(MediaService service, IServices<GenresDto> genreServices,
+            IServices<CountryDto> countryServices, IServices<TypesDto> typesServices)
         {
             this._service = service;
             this._genreServices = genreServices;
             this._countryServices = countryServices;
             this._typesServices = typesServices;
+        }
+
+        public ActionResult Details(MediaDto mediaDto)
+        {
+            return View(_service.GetEntity(mediaDto.Id));
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)

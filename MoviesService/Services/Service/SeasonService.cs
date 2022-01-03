@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class SeasonService : IServices<SeasonsDto>
+    public class SeasonService : IServices<SeasonsDto>, IAddSeasonService
     {
         protected readonly SeasonRepository Repository;
         public SeasonService(SeasonRepository repository) => this.Repository = repository;
@@ -35,6 +35,11 @@ namespace MoviesService.Services.Service
         {
             var season = Mapper.Map<SeasonsDto, Seasons>(entity);
             Repository.Delete(season.Id);
+        }
+
+        public void Add(int mediaId)
+        {
+            Repository.AddSeason(mediaId);
         }
     }
 }

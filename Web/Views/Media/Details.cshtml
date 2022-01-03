@@ -1,0 +1,24 @@
+﻿@using Web.Services
+@model MoviesService.Dto.MediaDto
+
+<div style="border: 1px solid red; width: 100px; height: 300px;" />
+<div>@Model.Name</div>
+<div>@Model.Id</div>
+<div>@Model.TypesId</div>
+@foreach (var e in Model.GenresCollection)
+{
+    <p>+ @e.Name</p>
+}
+@foreach (var e in Model.CountryCollection)
+{
+    <p> - @e.Name</p>
+}
+@if (Model.TypesId ==  Convert.ToInt32(Enums.TypeEnum.Serial))
+{
+    <div>@Html.ActionLink("Add season", "Add", "Series", new { mediaId = Model.Id }, null)</div>
+    
+    foreach (var e in Model.SeasonsList)
+    {
+        <p>@e.Name</p>
+    }
+}

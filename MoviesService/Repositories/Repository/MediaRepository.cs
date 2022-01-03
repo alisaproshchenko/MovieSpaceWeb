@@ -11,7 +11,7 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public MediaRepository(MediaDbContext context) => _context = context;
-        public IEnumerable<Media> Entities => _context.MediaTable;
+        public IEnumerable<Media> Entities => _context.MediaTable.Include("SeasonsList");
         public Media GetEntity(int id)
         {
             var media =  _context.MediaTable.FirstOrDefault(i => i.Id == id);
