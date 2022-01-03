@@ -23,10 +23,6 @@
         @if (entity.TypesId ==  Convert.ToInt32(Enums.TypeEnum.Serial))
         {
             <div>Add season</div>
-            foreach (var b in entity.SeasonsList)
-            {
-                <p>@b.Name</p>
-            }
         }
     </div>
 }
