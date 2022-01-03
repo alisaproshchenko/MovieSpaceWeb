@@ -180,12 +180,14 @@
     <Compile Include="Models\Types.cs" />
     <Compile Include="Models\UsersToMedia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRepository\IMediaAddRepository.cs" />
     <Compile Include="Repositories\IRepository\IMediaRepository.cs" />
     <Compile Include="Repositories\Repository\CountryRepository.cs" />
     <Compile Include="Repositories\Repository\GenreRepository.cs" />
     <Compile Include="Repositories\Repository\MediaRepository.cs" />
     <Compile Include="Repositories\Repository\SeasonRepository.cs" />
     <Compile Include="Repositories\Repository\TypeRepository.cs" />
+    <Compile Include="Services\IService\IMediaAddService.cs" />
     <Compile Include="Services\IService\IServices.cs" />
     <Compile Include="Services\Service\CountryService.cs" />
     <Compile Include="Services\Service\GenreService.cs" />

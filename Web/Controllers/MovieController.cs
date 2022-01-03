@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using MoviesService.Dto;
@@ -36,14 +35,15 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Add(MediaDto entity, int [] entities)
         {
-            var typeDto = _typeServices.Entities.FirstOrDefault(x => x.Id == 1);
-            entity.Types = Mapper.Map<TypesDto, Types>(typeDto);
-            foreach (var c in _genreServices.Entities.Where(co => entities.Contains(co.Id)))
-            {
-                entity.GenresCollection.Add(Mapper.Map<GenresDto,Genres>(c));
-            }
+            //var typeDto = _typeServices.Entities.FirstOrDefault(x => x.Id == 1);
+            //entity.TypesId = 1;
+            //entity.Types = Mapper.Map<TypesDto, Types>(typeDto);
+            //foreach (var c in _genreServices.Entities.Where(co => entities.Contains(co.Id)))
+            //{
+            //    entity.GenresCollection.Add(Mapper.Map<GenresDto,Genres>(c));
+            //}
 
-            _service.Add(entity);
+            _service.AddMedia(entity, 1, entities);
             return RedirectToAction("ListOfEntities");
         }
 

@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class MediaService : IServices<MediaDto>
+    public class MediaService : IServices<MediaDto>, IMediaAddService<MediaDto>
     {
         protected readonly MediaRepository repository;
         public MediaService(MediaRepository repository) => this.repository = repository;
@@ -35,6 +35,12 @@ namespace MoviesService.Services.Service
         {
             var media = Mapper.Map<MediaDto, Media>(entity);
             repository.Delete(media.Id);
+        }
+
+        public void AddMedia(MediaDto entity, int typeId, int[] entitiesIds)
+        {
+            var media = Mapper.Map<MediaDto, Media>(entity);
+            repository.AddMedia(media, typeId, entitiesIds);
         }
     }
 }
