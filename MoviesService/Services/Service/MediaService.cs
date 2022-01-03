@@ -37,10 +37,10 @@ namespace MoviesService.Services.Service
             repository.Delete(media.Id);
         }
 
-        public void AddMedia(MediaDto entity, int typeId, int[] selectedGenresIds, int[] selectedCountriesIds)
+        public void AddMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
             var media = Mapper.Map<MediaDto, Media>(entity);
-            repository.AddMedia(media, typeId, selectedGenresIds, selectedCountriesIds);
+            repository.AddMedia(media, selectedType, selectedGenresIds, selectedCountriesIds);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@using System.Web.Mvc.Html
-@model Web.ViewModels.MovieViewModel
+@model Web.ViewModels.MediaViewModel
 
-<div>@Html.ActionLink("Add", "Add", "Movie",null,null)</div>
+<div>@Html.ActionLink("Add", "Add", "Media",null,null)</div>
 
 @foreach (var entity in Model.Media)
 {
@@ -16,8 +16,8 @@
         {
             <p> - @e.Name</p>
         }
-        <div>@Html.ActionLink("Delete", "Delete", "Movie", new { id = entity.Id }, null)</div>
-        <div>@Html.ActionLink("Edit", "Edit", "Movie", new { id = entity.Id }, null)</div>
+        <div>@Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, null)</div>
+        <div>@Html.ActionLink("Edit", "Edit", "Media", new { id = entity.Id }, null)</div>
     </div>
 }
 

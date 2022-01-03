@@ -37,9 +37,9 @@ namespace MoviesService.Repositories.Repository
             _context.SaveChanges();
         }
 
-        public void AddMedia(Media entity, int type, int[] selectedGenresIds, int[] selectedCountriesIds)
+        public void AddMedia(Media entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
-            entity.Types = _context.TypesTable.FirstOrDefault(x => x.Id == type);
+            entity.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
             foreach (var id in selectedGenresIds)
             {
                 entity.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));

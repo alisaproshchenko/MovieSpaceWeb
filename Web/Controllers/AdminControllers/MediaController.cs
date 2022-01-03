@@ -6,34 +6,37 @@ using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
-    public class MovieController : Controller
+    public class MediaController : Controller
     {
         private readonly MediaService _service;
         private readonly IServices<GenresDto> _genreServices;
         private readonly IServices<CountryDto> _countryServices;
-        public MovieController(MediaService service, IServices<GenresDto> genreServices, IServices<CountryDto> countryServices)
+        private readonly IServices<TypesDto> _typesServices;
+        public MediaController(MediaService service, IServices<GenresDto> genreServices, IServices<CountryDto> countryServices, IServices<TypesDto> typesServices)
         {
             this._service = service;
             this._genreServices = genreServices;
             this._countryServices = countryServices;
+            this._typesServices = typesServices;
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {
-            return View(new MovieViewModel(_service.Entities, currentPage));
+            return View(new MediaViewModel(_service.Entities, currentPage));
         }
 
         public ActionResult Add()
         {
             ViewBag.Genres = _genreServices.Entities;
             ViewBag.Country = _countryServices.Entities;
+            ViewBag.Types = _typesServices.Entities;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Add(MediaDto entity, int [] selectedGenres, int[] selectedCountries)
+        public ActionResult Add(MediaDto entity, int selectedType, int [] selectedGenres, int[] selectedCountries)
         {
-            _service.AddMedia(entity, 1, selectedGenres, selectedCountries);
+            _service.AddMedia(entity, selectedType, selectedGenres, selectedCountries);
             return RedirectToAction("ListOfEntities");
         }
 

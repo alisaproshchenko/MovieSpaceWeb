@@ -2,6 +2,6 @@
 {
     public interface IMediaAddRepository<T>
     {
-        void AddMedia(T entity, int type, int[] selectedGenresIds, int[] selectedCountriesIds);
+        void AddMedia(T entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds);
     }
 }

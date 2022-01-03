@@ -19,7 +19,7 @@ namespace Web
             Mapper.CreateMap<GenresDto, GenreViewModel>().ReverseMap();
             Mapper.CreateMap<CountryDto, CountryViewModel>().ReverseMap();
             Mapper.CreateMap<TypesDto, TypeViewModel>().ReverseMap();
-            Mapper.CreateMap<MediaDto, MovieViewModel>().ReverseMap();
+            Mapper.CreateMap<MediaDto, MediaViewModel>().ReverseMap();
             Mapper.CreateMap<ApplicationUserDto, ApplicationUser>().ReverseMap();
             Mapper.CreateMap<ApplicationUserDto, UserViewModel>().ReverseMap();
         }

@@ -29,7 +29,7 @@ namespace Web
             container.RegisterType<IController, GenreController>();
             container.RegisterType<IController, MediaTypeController>();
             container.RegisterType<IController, CountryController>();
-            container.RegisterType<IController, MovieController>();
+            container.RegisterType<IController, MediaController>();
 
             return container;
         }

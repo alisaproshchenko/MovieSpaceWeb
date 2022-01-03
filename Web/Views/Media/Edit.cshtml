@@ -2,7 +2,7 @@
 
 <h2>Edit genre</h2>
 
-@using (Html.BeginForm("Update", "Movie", FormMethod.Post))
+@using (Html.BeginForm("Update", "Media", FormMethod.Post))
 {
     <fieldset>
         @Html.HiddenFor(m => m.Id)
@@ -24,3 +24,4 @@
         <p><input type="submit" value="Send" /></p>
     </fieldset>
 }
+
