@@ -1,4 +1,5 @@
 ﻿using IdentityService.Contexts;
+using IdentityService.Managers;
 using IdentityService.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;

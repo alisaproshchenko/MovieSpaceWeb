@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using IdentityService.Managers;
 using IdentityService.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

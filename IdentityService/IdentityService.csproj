@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -221,14 +223,16 @@
     <Compile Include="Contexts\IdentityDbInit.cs" />
     <Compile Include="Dto\ApplicationUserDto.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
-    <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\ApplicationUserManager.cs" />
+    <Compile Include="Managers\ApplicationUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ApplicationRoleRepository.cs" />
     <Compile Include="Repository\ApplicationUserRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="UOW\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

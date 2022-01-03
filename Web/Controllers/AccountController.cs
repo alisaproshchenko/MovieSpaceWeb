@@ -1,10 +1,7 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
-using IdentityService.Contexts;
 using IdentityService.Dto;
-using IdentityService.Models;
 using IdentityService.Services;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Web.ViewModels;
 using Web.ViewModels.Identity;
 
@@ -12,15 +9,12 @@ namespace Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ApplicationUserManager _manager;
         private readonly ApplicationUserService _userService;
 
         public AccountController()
         {
-            _manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
-            _userService = new ApplicationUserService(_manager);
+            _userService = new ApplicationUserService();
         }
-        // GET: Account
         public ActionResult Register()
         {
             return View();
