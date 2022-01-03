@@ -2,7 +2,7 @@
 
 namespace IdentityService.Services
 {
-    public interface IService<T> where T : class
+    public interface IService<T>
     {
         IEnumerable<T> GetAll();
         T Get(string id);

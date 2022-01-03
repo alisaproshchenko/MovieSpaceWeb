@@ -1,4 +1,10 @@
 using System.Web.Mvc;
+using IdentityService.Dto;
+using IdentityService.Managers;
+using IdentityService.Models;
+using IdentityService.Repository;
+using IdentityService.Services;
+using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using MoviesService.Dto;
 using MoviesService.Repositories.IRepository;
@@ -26,6 +32,10 @@ namespace Web
 
             container.RegisterType<IServices<GenresDto>, GenreService>();
             container.RegisterType<IController, MovieController>();
+
+            container.RegisterType<IRepository<ApplicationUser>, ApplicationUserRepository>();
+            container.RegisterType<IService<ApplicationUserDto>, ApplicationUserService>();
+            container.RegisterType<UserManager<ApplicationUser>, ApplicationUserManager>();
 
             return container;
         }

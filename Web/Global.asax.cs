@@ -14,11 +14,7 @@ namespace Web
     {
         protected void Application_Start()
         {
-
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
-            NinjectModule registrations = new NinjectRegistrations();
-            var kernel = new StandardKernel(registrations);
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
 
             Database.SetInitializer(new IdentityDbInit());
 

@@ -9,11 +9,11 @@ namespace Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ApplicationUserService _userService;
+        private readonly IService<ApplicationUserDto> _userService;
 
-        public AccountController()
+        public AccountController(IService<ApplicationUserDto> userService)
         {
-            _userService = new ApplicationUserService();
+            _userService = userService;
         }
         public ActionResult Register()
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
+using IdentityService.Dto;
 using IdentityService.Services;
 using Web.ViewModels;
 
@@ -8,11 +9,11 @@ namespace Web.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly ApplicationUserService _userService;
+        private readonly IService<ApplicationUserDto> _userService;
 
-        public AdminController()
+        public AdminController(IService<ApplicationUserDto> userService)
         {
-            _userService = new ApplicationUserService();
+            _userService = userService;
         }
         public ActionResult Index()
         {
