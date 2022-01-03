@@ -344,10 +344,10 @@
     <Content Include="Views\Media\Edit.cshtml" />
     <Content Include="Views\Media\Delete.cshtml" />
     <Content Include="Views\Media\Details.cshtml" />
+    <Content Include="Views\Series\GetSeason.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Series\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

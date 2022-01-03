@@ -12,7 +12,7 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public SeasonRepository(MediaDbContext context) => _context = context;
-        public IEnumerable<Seasons> Entities => _context.SeasonsTable;
+        public IEnumerable<Seasons> Entities => _context.SeasonsTable.Include("EpisodesList");
 
         public Seasons GetEntity(int id)
         {

@@ -19,6 +19,6 @@
     
     foreach (var e in Model.SeasonsList)
     {
-        <p>@e.Name</p>
+        <div>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</div>
     }
 }
