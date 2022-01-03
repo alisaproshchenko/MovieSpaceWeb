@@ -7,7 +7,7 @@ using IdentityService.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Web.ViewModels;
 
-namespace Web.Controllers
+namespace Web.Controllers.AdminControllers
 {
     public class AdminController : Controller
     {

@@ -3,7 +3,7 @@ using MoviesService.Dto;
 using MoviesService.Services.IService;
 using Web.ViewModels;
 
-namespace Web.Controllers
+namespace Web.Controllers.AdminControllers
 {
     public class GenreController : Controller
     {

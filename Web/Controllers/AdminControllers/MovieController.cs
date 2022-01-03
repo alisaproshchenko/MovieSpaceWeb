@@ -4,7 +4,7 @@ using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Web.ViewModels;
 
-namespace Web.Controllers
+namespace Web.Controllers.AdminControllers
 {
     public class MovieController : Controller
     {

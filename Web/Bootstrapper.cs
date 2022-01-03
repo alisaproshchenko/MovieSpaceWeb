@@ -5,6 +5,7 @@ using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Unity.Mvc3;
 using Web.Controllers;
+using Web.Controllers.AdminControllers;
 
 namespace Web
 {

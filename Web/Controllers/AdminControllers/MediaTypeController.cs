@@ -3,48 +3,48 @@ using MoviesService.Dto;
 using MoviesService.Services.IService;
 using Web.ViewModels;
 
-namespace Web.Controllers
+namespace Web.Controllers.AdminControllers
 {
-    public class CountryController : Controller
+    public class MediaTypeController : Controller
     {
-        private readonly IServices<CountryDto> _service;
-        public CountryController(IServices<CountryDto> service) => this._service = service;
+        private readonly IServices<TypesDto> _service;
+        public MediaTypeController(IServices<TypesDto> service) => this._service = service;
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {
-            return View(new CountryViewModel(_service.Entities, currentPage));
+            return View(new TypeViewModel(_service.Entities, currentPage));
         }
-        // GET: Movie
+
         public ActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Add(CountryDto entity)
+        public ActionResult Add(TypesDto entity)
         {
             _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
 
-        public ActionResult Edit(CountryDto entity)
+        public ActionResult Edit(TypesDto entity)
         {
             return View(entity);
         }
         [HttpPost]
-        public ActionResult Update(CountryDto entity)
+        public ActionResult Update(TypesDto entity)
         {
             _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
 
         [HttpGet]
-        public ActionResult Delete(CountryDto entity)
+        public ActionResult Delete(TypesDto entity)
         {
             return View(entity);
         }
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(CountryDto entity)
+        public ActionResult DeleteConfirmed(TypesDto entity)
         {
             _service.Delete(entity);
             return RedirectToAction("ListOfEntities");
