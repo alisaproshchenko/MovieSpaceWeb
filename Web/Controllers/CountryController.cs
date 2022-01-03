@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using System.Web.Mvc;
 using MoviesService.Dto;
 using MoviesService.Services.IService;
 using Web.ViewModels;

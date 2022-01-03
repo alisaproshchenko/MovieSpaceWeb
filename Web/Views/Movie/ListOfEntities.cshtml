@@ -5,12 +5,16 @@
 
 @foreach (var entity in Model.Media)
 {
-    <div style="border: 1px solid red; width: 100px; height: 100px;">
+    <div style="border: 1px solid red; width: 100px; height: 300px;">
         <div>@entity.Name</div>
         <div>@entity.Id</div>
         @foreach (var e in entity.GenresCollection)
         {
             <p>+ @e.Name</p>
+        }
+        @foreach (var e in entity.CountryCollection)
+        {
+            <p> - @e.Name</p>
         }
         <div>@Html.ActionLink("Delete", "Delete", "Movie", new { id = entity.Id }, null)</div>
         <div>@Html.ActionLink("Edit", "Edit", "Movie", new { id = entity.Id }, null)</div>

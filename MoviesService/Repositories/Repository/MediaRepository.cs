@@ -20,14 +20,8 @@ namespace MoviesService.Repositories.Repository
 
         public void Add(Media media)
         {
-            //var genre1 = _context.GenresTable.FirstOrDefault(x => x.Id == 1);
-            //var genre2 = _context.GenresTable.FirstOrDefault(x => x.Id == 2);
-            //media.GenresCollection.Add(genre1);
-            //media.GenresCollection.Add(genre2);
             _context.MediaTable.AddOrUpdate(media);
             _context.SaveChanges();
-            //var genres = _context.GenresTable.GroupBy(n => n.Name).Where(x => x.Count() > 1).SelectMany(g => g);
-            //_context.GenresTable.RemoveRange(genres);
         }
 
         public void Delete(int id)
@@ -43,12 +37,16 @@ namespace MoviesService.Repositories.Repository
             _context.SaveChanges();
         }
 
-        public void AddMedia(Media entity, int type, int[] entitiesIds)
+        public void AddMedia(Media entity, int type, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
             entity.Types = _context.TypesTable.FirstOrDefault(x => x.Id == type);
-            foreach (var id in entitiesIds )
+            foreach (var id in selectedGenresIds)
             {
                 entity.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));
+            }
+            foreach (var id in selectedCountriesIds)
+            {
+                entity.CountryCollection.Add(_context.CountriesTable.FirstOrDefault(x => x.Id == id));
             }
             _context.MediaTable.AddOrUpdate(entity);
             _context.SaveChanges();

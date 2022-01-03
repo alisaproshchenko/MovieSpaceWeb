@@ -2,6 +2,6 @@
 {
     public class PageOption
     {
-        public int PageSize { get; } = 1;
+        public int PageSize { get; } = 10;
     }
 }

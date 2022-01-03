@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using System.Web.Mvc;
 using MoviesService.Dto;
-using MoviesService.Models;
 using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Web.ViewModels;
@@ -12,13 +9,13 @@ namespace Web.Controllers
     public class MovieController : Controller
     {
         private readonly MediaService _service;
-        private readonly IServices<TypesDto> _typeServices;
         private readonly IServices<GenresDto> _genreServices;
-        public MovieController(MediaService service, IServices<TypesDto> typeServices, IServices<GenresDto> genreServices)
+        private readonly IServices<CountryDto> _countryServices;
+        public MovieController(MediaService service, IServices<GenresDto> genreServices, IServices<CountryDto> countryServices)
         {
             this._service = service;
-            this._typeServices = typeServices;
             this._genreServices = genreServices;
+            this._countryServices = countryServices;
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)
@@ -29,21 +26,14 @@ namespace Web.Controllers
         public ActionResult Add()
         {
             ViewBag.Genres = _genreServices.Entities;
+            ViewBag.Country = _countryServices.Entities;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Add(MediaDto entity, int [] entities)
+        public ActionResult Add(MediaDto entity, int [] selectedGenres, int[] selectedCountries)
         {
-            //var typeDto = _typeServices.Entities.FirstOrDefault(x => x.Id == 1);
-            //entity.TypesId = 1;
-            //entity.Types = Mapper.Map<TypesDto, Types>(typeDto);
-            //foreach (var c in _genreServices.Entities.Where(co => entities.Contains(co.Id)))
-            //{
-            //    entity.GenresCollection.Add(Mapper.Map<GenresDto,Genres>(c));
-            //}
-
-            _service.AddMedia(entity, 1, entities);
+            _service.AddMedia(entity, 1, selectedGenres, selectedCountries);
             return RedirectToAction("ListOfEntities");
         }
 
