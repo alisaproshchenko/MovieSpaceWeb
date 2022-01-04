@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IdentityService.Contexts;
 using IdentityService.Models;
+using Microsoft.AspNet.Identity;
 
 namespace IdentityService.Repository
 {
@@ -26,10 +27,14 @@ namespace IdentityService.Repository
         {
             return _db.Users.FirstOrDefault(u => u.Id.Equals(id));
         }
-
-        public void Create(ApplicationUser applicationUser)
+        public ApplicationUser GetUserByUsername(string username)
         {
-            _db.Users.Add(applicationUser);
+            return _db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+        }
+
+        public void Create(ApplicationUser applicationUser, string password)
+        {
+            _manager.Create(applicationUser, password);
         }
 
         public void Update(ApplicationUser applicationUser)

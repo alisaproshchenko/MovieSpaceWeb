@@ -4,6 +4,7 @@ using IdentityService.Models;
 using MoviesService.Dto;
 using MoviesService.Models;
 using Web.ViewModels;
+using Web.ViewModels.Identity;
 
 namespace Web
 {
@@ -18,6 +19,7 @@ namespace Web
             Mapper.CreateMap<Seasons, SeasonsDto>().ReverseMap();
             Mapper.CreateMap<ApplicationUserDto, ApplicationUser>().ReverseMap();
             Mapper.CreateMap<ApplicationUserDto, UserViewModel>().ReverseMap();
+            Mapper.CreateMap<RegistrationViewModel, UserViewModel>();
         }
     }
 }
