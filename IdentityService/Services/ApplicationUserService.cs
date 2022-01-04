@@ -70,7 +70,7 @@ namespace IdentityService.Services
             if (userInDb == null)
                 return;
 
-            userInDb.Banned = applicationUserDto.Banned;
+            userInDb.Banned = !userInDb.Banned;
             _uow.UserRepository.Update(userInDb);
             _uow.UserRepository.Save();
         }
