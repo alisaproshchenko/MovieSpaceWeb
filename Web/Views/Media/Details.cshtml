@@ -1,7 +1,7 @@
 ﻿@using Web.Services
 @model MoviesService.Models.Media
 
-<div style="border: 1px solid red; width: 100px; height: 300px;" />
+<div style="border: 1px solid red; width: 120px; height: 300px;" />
 <div>@Model.Name</div>
 <div>@Model.Id</div>
 <div>@Model.TypesId</div>
@@ -19,6 +19,10 @@
     
     foreach (var e in Model.SeasonsList)
     {
-        <div>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</div>
+        <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
+        //if (e.Id == Model.SeasonCount)
+        //{
+            <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new {seasonId = e.Id},null)</span>
+            //}
+        }
     }
-}

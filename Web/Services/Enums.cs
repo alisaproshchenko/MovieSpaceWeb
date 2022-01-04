@@ -4,7 +4,7 @@
     {
         public enum TypeEnum
         {
-            Movie = 11, Serial, Cartoon
+            Movie = 1, Serial, Cartoon
         }
     }
 }

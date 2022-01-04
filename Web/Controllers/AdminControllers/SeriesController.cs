@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using MoviesService.Dto;
 using MoviesService.Services.Service;
 
 namespace Web.Controllers.AdminControllers
@@ -22,6 +23,19 @@ namespace Web.Controllers.AdminControllers
         {
             _service.AddEpisode(id);
             return RedirectToAction("GetSeason", new {seasonId = id});
+        }
+
+        [HttpGet]
+        public ActionResult DeleteSeason(SeasonsDto entity)
+        {
+            return View(entity);
+        }
+        [HttpPost, ActionName("DeleteSeason")]
+        public ActionResult DeleteConfirmedSeason(int seasonId)
+        {
+            var season = _service.Entities.FirstOrDefault(x => x.Id == seasonId);
+            _service.Delete(season);
+            return RedirectToAction("Details", "Media", new {id = season.MediaId});
         }
     }
 }

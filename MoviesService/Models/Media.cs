@@ -22,11 +22,10 @@ namespace MoviesService.Models
         public double? RatingIMDb { get; set; }
         public double? SiteUsersRatings { get; set; }
         public int SeasonCount { get; set; } = 0;
-        public int TypesId { get; set; }
         [Required]
+        public int TypesId { get; set; }
         public Types Types { get; set; }
         public UsersToMedia UsersToMedia { get; set; }
-        [Required]
         public virtual ICollection<Genres> GenresCollection { get; set; } = new List<Genres>();
         public ICollection<Seasons> SeasonsList { get; set; } = new List<Seasons>();
         public virtual ICollection<Country> CountryCollection { get; set; } = new List<Country>();

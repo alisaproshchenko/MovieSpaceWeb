@@ -167,25 +167,9 @@
     <Compile Include="Dto\MediaDto.cs" />
     <Compile Include="Dto\SeasonsDto.cs" />
     <Compile Include="Dto\TypesDto.cs" />
-    <Compile Include="Migrations\202112311121265_init.cs" />
-    <Compile Include="Migrations\202112311121265_init.designer.cs">
-      <DependentUpon>202112311121265_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202201031737388_SeasonChange.cs" />
-    <Compile Include="Migrations\202201031737388_SeasonChange.designer.cs">
-      <DependentUpon>202201031737388_SeasonChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202201031825061_MediaUpdate.cs" />
-    <Compile Include="Migrations\202201031825061_MediaUpdate.designer.cs">
-      <DependentUpon>202201031825061_MediaUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202201031838028_MediaUpdate1.cs" />
-    <Compile Include="Migrations\202201031838028_MediaUpdate1.designer.cs">
-      <DependentUpon>202201031838028_MediaUpdate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202201040845597_Seasons.cs" />
-    <Compile Include="Migrations\202201040845597_Seasons.designer.cs">
-      <DependentUpon>202201040845597_Seasons.cs</DependentUpon>
+    <Compile Include="Migrations\202201041025315_init.cs" />
+    <Compile Include="Migrations\202201041025315_init.designer.cs">
+      <DependentUpon>202201041025315_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
@@ -227,20 +211,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112311121265_init.resx">
-      <DependentUpon>202112311121265_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202201031737388_SeasonChange.resx">
-      <DependentUpon>202201031737388_SeasonChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202201031825061_MediaUpdate.resx">
-      <DependentUpon>202201031825061_MediaUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202201031838028_MediaUpdate1.resx">
-      <DependentUpon>202201031838028_MediaUpdate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202201040845597_Seasons.resx">
-      <DependentUpon>202201040845597_Seasons.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201041025315_init.resx">
+      <DependentUpon>202201041025315_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

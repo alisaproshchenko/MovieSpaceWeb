@@ -1,7 +1,6 @@
 ﻿using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using MoviesService.Context;
@@ -29,7 +28,9 @@ namespace MoviesService.Repositories.Repository
         public void Delete(int id)
         {
             var season = _context.SeasonsTable.FirstOrDefault(t => t.Id == id);
-            if (season != null) _context.SeasonsTable.Remove(season); 
+            var media = _context.MediaTable.FirstOrDefault(x => x.Id == season.MediaId);
+            --media.SeasonCount;
+            if (season != null) _context.SeasonsTable.Remove(season);
             _context.SaveChanges();
         }
 
@@ -48,10 +49,8 @@ namespace MoviesService.Repositories.Repository
                 Name = "Season" + media.SeasonCount.ToString(),
                 Media = media
             };
-            media.Types = _context.TypesTable.FirstOrDefault(x => x.Id == 12);
-            media.SeasonsList.Add(_context.SeasonsTable.FirstOrDefault(x => x.Name == "Season" + media.SeasonCount));
-            _context.MediaTable.AddOrUpdate(media);
-            _context.SeasonsTable.AddOrUpdate(season);
+            _context.SeasonsTable.Add(season);
+            media.SeasonsList.Add(_context.SeasonsTable.FirstOrDefault(x => x.Name == "Season" + media.SeasonCount.ToString()));
             _context.SaveChanges();
         }
 
@@ -65,7 +64,7 @@ namespace MoviesService.Repositories.Repository
                 Seasons = season
             };
             season.EpisodesList.Add(
-                _context.EpisodeTable.FirstOrDefault(x => x.Name == "Episode" + season.EpisodeCount));
+                _context.EpisodeTable.FirstOrDefault(x => x.Name == "Episode" + season.EpisodeCount.ToString()));
             _context.SeasonsTable.AddOrUpdate(season);
             _context.EpisodeTable.AddOrUpdate(episode);
             _context.SaveChanges();

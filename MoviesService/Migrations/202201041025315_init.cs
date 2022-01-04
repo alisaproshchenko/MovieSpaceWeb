@@ -30,6 +30,7 @@
                         BudgetAndBoxOffice = c.Int(),
                         RatingIMDb = c.Double(),
                         SiteUsersRatings = c.Double(),
+                        SeasonCount = c.Int(nullable: false),
                         TypesId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -50,12 +51,13 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
                         MediaId = c.Int(),
-                        SeriesId = c.String(nullable: false),
-                        IMDbMovieId = c.String(nullable: false),
+                        IMDbMovieId = c.String(),
                         Year = c.Int(nullable: false),
                         RatingIMDb = c.Double(),
                         UserIMDb = c.Double(),
+                        EpisodeCount = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Media", t => t.MediaId)
