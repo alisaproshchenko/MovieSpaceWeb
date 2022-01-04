@@ -5,7 +5,7 @@ using IdentityService.Services;
 using Web.ViewModels;
 using Web.ViewModels.Identity;
 
-namespace Web.Controllers
+namespace Web.Controllers.IdentityControllers
 {
     public class AccountController : Controller
     {
