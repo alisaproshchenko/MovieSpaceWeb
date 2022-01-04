@@ -167,9 +167,9 @@
     <Compile Include="Dto\MediaDto.cs" />
     <Compile Include="Dto\SeasonsDto.cs" />
     <Compile Include="Dto\TypesDto.cs" />
-    <Compile Include="Migrations\202201041025315_init.cs" />
-    <Compile Include="Migrations\202201041025315_init.designer.cs">
-      <DependentUpon>202201041025315_init.cs</DependentUpon>
+    <Compile Include="Migrations\202201041159483_init.cs" />
+    <Compile Include="Migrations\202201041159483_init.designer.cs">
+      <DependentUpon>202201041159483_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
@@ -211,8 +211,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202201041025315_init.resx">
-      <DependentUpon>202201041025315_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201041159483_init.resx">
+      <DependentUpon>202201041159483_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

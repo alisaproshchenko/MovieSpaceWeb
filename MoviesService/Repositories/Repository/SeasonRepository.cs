@@ -50,7 +50,7 @@ namespace MoviesService.Repositories.Repository
                 Media = media
             };
             _context.SeasonsTable.Add(season);
-            media.SeasonsList.Add(_context.SeasonsTable.FirstOrDefault(x => x.Name == "Season" + media.SeasonCount.ToString()));
+            media.SeasonsList.Add(_context.SeasonsTable.FirstOrDefault(x => x.Id == season.Id));
             _context.SaveChanges();
         }
 
@@ -64,9 +64,8 @@ namespace MoviesService.Repositories.Repository
                 Seasons = season
             };
             season.EpisodesList.Add(
-                _context.EpisodeTable.FirstOrDefault(x => x.Name == "Episode" + season.EpisodeCount.ToString()));
-            _context.SeasonsTable.AddOrUpdate(season);
-            _context.EpisodeTable.AddOrUpdate(episode);
+                _context.EpisodeTable.FirstOrDefault(x => x.Id == episode.Id));
+            _context.EpisodeTable.Add(episode);
             _context.SaveChanges();
         }
     }

@@ -20,9 +20,9 @@
     foreach (var e in Model.SeasonsList)
     {
         <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
-        //if (e.Id == Model.SeasonCount)
-        //{
+        if (e.Name.AsInt() == Model.SeasonCount)
+        {
             <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new {seasonId = e.Id},null)</span>
-            //}
         }
     }
+ }
