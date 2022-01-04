@@ -10,6 +10,7 @@ namespace MoviesService.Context
         public DbSet<Types> TypesTable { get; set; }
         public DbSet<Seasons> SeasonsTable { get; set; }
         public DbSet<Genres> GenresTable { get; set; }
+        public DbSet<Episode> EpisodeTable { get; set; }
         public DbSet<UsersToMedia> UsersToMediaTable { get; set; }
         public MediaDbContext() : base("MediaDbContext") {}
     }

@@ -54,5 +54,21 @@ namespace MoviesService.Repositories.Repository
             _context.SeasonsTable.AddOrUpdate(season);
             _context.SaveChanges();
         }
+
+        public void AddEpisode(int seasonId)
+        {
+            var season = _context.SeasonsTable.FirstOrDefault(x => x.Id == seasonId);
+            ++season.EpisodeCount;
+            var episode = new Episode()
+            {
+                Name = "Episode" + season.EpisodeCount.ToString(),
+                Seasons = season
+            };
+            season.EpisodesList.Add(
+                _context.EpisodeTable.FirstOrDefault(x => x.Name == "Episode" + season.EpisodeCount));
+            _context.SeasonsTable.AddOrUpdate(season);
+            _context.EpisodeTable.AddOrUpdate(episode);
+            _context.SaveChanges();
+        }
     }
 }

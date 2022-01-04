@@ -183,6 +183,10 @@
     <Compile Include="Migrations\202201031838028_MediaUpdate1.designer.cs">
       <DependentUpon>202201031838028_MediaUpdate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201040845597_Seasons.cs" />
+    <Compile Include="Migrations\202201040845597_Seasons.designer.cs">
+      <DependentUpon>202201040845597_Seasons.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
@@ -234,6 +238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201031838028_MediaUpdate1.resx">
       <DependentUpon>202201031838028_MediaUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201040845597_Seasons.resx">
+      <DependentUpon>202201040845597_Seasons.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

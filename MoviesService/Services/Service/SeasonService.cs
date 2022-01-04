@@ -41,5 +41,10 @@ namespace MoviesService.Services.Service
         {
             Repository.AddSeason(mediaId);
         }
+
+        public void AddEpisode(int seasonId)
+        {
+            Repository.AddEpisode(seasonId);
+        }
     }
 }

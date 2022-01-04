@@ -14,6 +14,7 @@ namespace MoviesService.Models
         public int Year { get; set; }
         public double? RatingIMDb { get; set; }
         public double? UserIMDb { get; set; }
+        public int EpisodeCount { get; set; } = 0;
         public ICollection<Episode> EpisodesList { get; set; } = new List<Episode>();
     }
 }
