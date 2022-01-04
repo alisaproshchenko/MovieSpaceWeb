@@ -8,58 +8,55 @@ using Microsoft.AspNet.Identity;
 
 namespace IdentityService.Repository
 {
-    public class ApplicationUserRepository : IRepository<ApplicationUser>
+    public class ApplicationRoleRepository : IRepository<ApplicationRole>
     {
         private readonly IdentityContext _db;
-        private readonly ApplicationUserManager _manager;
+        private readonly ApplicationRoleManager _manager;
 
-        public ApplicationUserRepository(ApplicationUserManager manager)
+        public ApplicationRoleRepository(ApplicationRoleManager manager)
         {
             _manager = manager;
             _db = new IdentityContext();
         }
-
-        public IEnumerable<ApplicationUser> GetAll()
+        public IEnumerable<ApplicationRole> GetAll()
         {
-            return _manager.Users;
+            return _manager.Roles;
         }
 
-        public ApplicationUser GetById(string id)
+        public ApplicationRole GetById(string id)
         {
-            return _db.Users.FirstOrDefault(u => u.Id.Equals(id));
-        }
-        public ApplicationUser GetByUsername(string username)
-        {
-            return _db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+            return _manager.Roles.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Create(ApplicationUser applicationUser, string password)
+        public ApplicationRole GetByUsername(string name) // by name of role
         {
-            _manager.Create(applicationUser, password);
+            return _manager.Roles.FirstOrDefault(x => x.Name == name);
         }
 
-        public void Create(ApplicationUser item) //user without password
+        public void Create(ApplicationRole item, string password) //useless for creating roles
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Create(ApplicationRole item)
         {
             _manager.Create(item);
         }
 
-        public void Update(ApplicationUser applicationUser)
+        public void Update(ApplicationRole item)
         {
-            _db.Entry(applicationUser).State = System.Data.Entity.EntityState.Modified;
+            _db.Entry(item).State = System.Data.Entity.EntityState.Modified;
         }
 
         public void Delete(string id)
         {
-            var applicationUser = _db.Users.FirstOrDefault(u => u.Id.Equals(id));
-            if (applicationUser != null)
-                _db.Users.Remove(applicationUser);
+            _manager.Delete(GetById(id));
         }
 
         public void Save()
         {
             _db.SaveChanges();
         }
-
         private bool _disposed;
 
         public virtual void Dispose(bool disposing)

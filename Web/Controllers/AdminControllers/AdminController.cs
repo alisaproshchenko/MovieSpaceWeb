@@ -1,30 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
-using IdentityService.Contexts;
-using IdentityService.Models;
+using IdentityService.Dto;
 using IdentityService.Services;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
-        private readonly ApplicationUserService _userService;
-        private readonly ApplicationUserManager _manager;
+        private readonly IService<ApplicationUserDto> _userService;
 
-        public AdminController()
+        public AdminController(IService<ApplicationUserDto> userService)
         {
-            _manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new IdentityContext()));
-            _userService = new ApplicationUserService(_manager);
+            _userService = userService;
         }
         public ActionResult Index()
         {
+            //var userDTO = _userService.GetByUsername("your username");
+            //_userService.AdminRightsToggle(userDTO);
+
             var userDtOs = _userService.GetAll();
             var users = Mapper.Map<IEnumerable<UserViewModel>>(userDtOs);
-            
+            foreach (var user in users)
+            {
+                user.Roles = _userService.GetRoles(user.UserName);
+            }
+
             return View(users);
         }
         public ActionResult AdminPanel()

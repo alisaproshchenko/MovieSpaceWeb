@@ -1,11 +1,12 @@
 ﻿using System;
 using IdentityService.Contexts;
+using IdentityService.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace IdentityService.Models
+namespace IdentityService.Managers
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
