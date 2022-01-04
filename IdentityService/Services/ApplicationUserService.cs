@@ -10,6 +10,7 @@ namespace IdentityService.Services
     public class ApplicationUserService : IService<ApplicationUserDto>
     {
         private readonly UnitOfWork _uow;
+        public UnitOfWork UnitOfWork => _uow;
 
         public ApplicationUserService()
         {
