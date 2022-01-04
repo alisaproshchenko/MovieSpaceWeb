@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -245,19 +245,31 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MappingProfile.cs" />
+    <Compile Include="Controllers\AdminControllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminControllers\CountryController.cs" />
+    <Compile Include="Controllers\AdminControllers\MediaTypeController.cs" />
+    <Compile Include="Controllers\AdminControllers\MediaController.cs" />
+    <Compile Include="Controllers\AdminControllers\SeriesController.cs" />
+    <Compile Include="IdentityConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\AdminControllers\GenreController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Services\Enums.cs" />
+    <Compile Include="Services\PageOption.cs" />
+    <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Identity\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\MediaViewModel.cs" />
+    <Compile Include="Services\PaginatedOutput.cs" />
+    <Compile Include="ViewModels\TypeViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,7 +280,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -282,6 +293,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Style\Style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -296,15 +308,35 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Movie\Index.cshtml" />
-    <Content Include="Views\Movie\AddFood.cshtml" />
-    <Content Include="Views\Movie\EditFood.cshtml" />
-    <Content Include="Views\Movie\Delete.cshtml" />
+    <Content Include="Views\Genre\ListOfEntities.cshtml" />
+    <Content Include="Views\Genre\Add.cshtml" />
+    <Content Include="Views\Genre\Edit.cshtml" />
+    <Content Include="Views\Genre\Delete.cshtml" />
     <Content Include="Views\Shared\Partials\MetaPartial.cshtml" />
     <Content Include="Views\Shared\Partials\CssPartial.cshtml" />
     <Content Include="Views\Shared\Partials\ScriptsPartial.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Country\ListOfEntities.cshtml" />
+    <Content Include="Views\Country\Add.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Country\Delete.cshtml" />
+    <Content Include="Views\MediaType\ListOfEntities.cshtml" />
+    <Content Include="Views\MediaType\Add.cshtml" />
+    <Content Include="Views\MediaType\Edit.cshtml" />
+    <Content Include="Views\MediaType\Delete.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Shared\Partials\PagePartial\GenrePagePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\PagePartial\TypePagePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\PagePartial\MoviePagePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\PagePartial\CountryPagePartial.cshtml" />
+    <Content Include="Views\Media\ListOfEntities.cshtml" />
+    <Content Include="Views\Media\Add.cshtml" />
+    <Content Include="Views\Media\Edit.cshtml" />
+    <Content Include="Views\Media\Delete.cshtml" />
+    <Content Include="Views\Media\Details.cshtml" />
+    <Content Include="Views\Series\GetSeason.cshtml" />
+    <Content Include="Views\Series\DeleteSeason.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

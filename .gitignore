@@ -6,3 +6,4 @@ MoviesService/bin/
 MoviesService/obj/
 Web/bin/
 Web/obj/
+*.orig

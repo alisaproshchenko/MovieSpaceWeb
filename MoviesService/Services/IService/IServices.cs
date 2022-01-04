@@ -4,10 +4,10 @@ namespace MoviesService.Services.IService
 {
     public interface IServices<T>
     {
-        T GetItem(int id);
-        IEnumerable<T> Items { get; }
-        void AddItem(T item);
-        void EditItem(T item);
-        void DeleteItem(T item);
+        T GetEntity(int id);
+        IEnumerable<T> Entities { get; }
+        void Add(T entity);
+        void Edit(T entity);
+        void Delete(T entity);
     }
 }

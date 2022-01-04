@@ -5,7 +5,7 @@ using IdentityService.Dto;
 using IdentityService.Services;
 using Web.ViewModels;
 
-namespace Web.Controllers
+namespace Web.Controllers.AdminControllers
 {
     public class AdminController : Controller
     {
@@ -29,6 +29,9 @@ namespace Web.Controllers
 
             return View(users);
         }
-
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
     }
 }

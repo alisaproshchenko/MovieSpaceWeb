@@ -1,0 +1,27 @@
+﻿@model MoviesService.Dto.MediaDto
+
+<h2>Edit genre</h2>
+
+@using (Html.BeginForm("Update", "Media", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Name, "Name")
+            <br />
+            @Html.EditorFor(m => m.Name)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Year, "Name")
+            <br />
+            @Html.EditorFor(m => m.Year)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Plot, "Name")
+            <br />
+            @Html.EditorFor(m => m.Plot)
+        </p>
+        <p><input type="submit" value="Send" /></p>
+    </fieldset>
+}
+

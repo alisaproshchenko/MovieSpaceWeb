@@ -11,30 +11,30 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public CountryRepository(MediaDbContext context) => _context = context;
-        public IEnumerable<Country> Items => _context.CountriesTable;
+        public IEnumerable<Country> Entities => _context.CountriesTable;
 
-        public Country GetItem(int id)
+        public Country GetEntity(int id)
         {
             var country = _context.CountriesTable.FirstOrDefault(i => i.Id == id);
             return country;
         }
 
-        public void AddItem(Country country)
+        public void Add(Country entity)
         {
-            _context.CountriesTable.Add(country);
+            _context.CountriesTable.Add(entity);
             _context.SaveChanges();
         }
 
-        public void DeleteItem(int id)
+        public void Delete(int id)
         {
             var country = _context.CountriesTable.FirstOrDefault(t => t.Id == id);
             if (country != null) _context.CountriesTable.Remove(country);
             _context.SaveChanges();
         }
 
-        public void EditItem(Country country)
+        public void Edit(Country entity)
         {
-            _context.CountriesTable.AddOrUpdate(country);
+            _context.CountriesTable.AddOrUpdate(entity);
             _context.SaveChanges();
         }
     }

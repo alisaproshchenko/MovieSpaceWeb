@@ -7,13 +7,10 @@ using IdentityService.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using MoviesService.Dto;
-using MoviesService.Repositories.IRepository;
-using MoviesService.Repositories.Repository;
-using MoviesService.Services;
 using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Unity.Mvc3;
-using Web.Controllers;
+using Web.Controllers.AdminControllers;
 
 namespace Web
 {
@@ -31,7 +28,13 @@ namespace Web
             var container = new UnityContainer();
 
             container.RegisterType<IServices<GenresDto>, GenreService>();
-            container.RegisterType<IController, MovieController>();
+            container.RegisterType<IServices<TypesDto>, TypeService>();
+            container.RegisterType<IServices<CountryDto>, CountryService>();
+            container.RegisterType<IServices<MediaDto>, MediaService>();
+            container.RegisterType<IController, GenreController>();
+            container.RegisterType<IController, MediaTypeController>();
+            container.RegisterType<IController, CountryController>();
+            container.RegisterType<IController, MediaController>();
 
             container.RegisterType<IRepository<ApplicationUser>, ApplicationUserRepository>();
             container.RegisterType<IService<ApplicationUserDto>, ApplicationUserService>();
