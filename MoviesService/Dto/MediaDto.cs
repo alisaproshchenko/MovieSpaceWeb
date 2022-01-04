@@ -5,9 +5,9 @@ namespace MoviesService.Dto
 {
     public class MediaDto
     {
-        public int Id { get; set; }
-        public string IMDbMovieId { get; set; }
-        public string Name { get; set; }
+        public int Id { get; set; } 
+        public string IMDbMovieId { get; set; } 
+        public string Name { get; set; } 
         public string Poster { get; set; }
         public int Year { get; set; }
         public string Cast { get; set; }
@@ -15,8 +15,11 @@ namespace MoviesService.Dto
         public int? BudgetAndBoxOffice { get; set; }
         public double? RatingIMDb { get; set; }
         public double? SiteUsersRatings { get; set; }
-        public List<Genres> GenresList { get; set; } = new List<Genres>();
-        public List<Seasons> SeasonsList { get; set; } = new List<Seasons>();
-        public List<Country> CountriesList { get; set; } = new List<Country>();
+        public int TypesId { get; set; }
+        public Types Types { get; set; }
+        public ICollection<Genres> GenresCollection { get; set; } = new List<Genres>();
+        public ICollection<Country> CountryCollection { get; set; } = new List<Country>();
+        public ICollection<Seasons> SeasonsList { get; set; } = new List<Seasons>();
+
     }
 }

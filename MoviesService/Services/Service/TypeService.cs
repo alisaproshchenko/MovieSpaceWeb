@@ -9,32 +9,33 @@ namespace MoviesService.Services.Service
 {
     public class TypeService : IServices<TypesDto>
     {
-        protected readonly TypeRepository repository;
-        public TypeService(TypeRepository repository) => this.repository = repository;
+        protected readonly TypeRepository Repository;
+        public TypeService(TypeRepository repository) => this.Repository = repository;
 
-        public IEnumerable<TypesDto> Items => Mapper.Map<IEnumerable<Types>, IEnumerable<TypesDto>>(repository.Items);
-        public TypesDto GetItem(int id)
+        public IEnumerable<TypesDto> Entities =>
+            Mapper.Map<IEnumerable<Types>, IEnumerable<TypesDto>>(Repository.Entities);
+        public TypesDto GetEntity(int id)
         {
-            var type = repository.GetItem(id);
+            var type = Repository.GetEntity(id);
             return Mapper.Map<Types, TypesDto>(type);
         }
 
-        public void AddItem(TypesDto item)
+        public void Add(TypesDto entity)
         {
-            var type = Mapper.Map<TypesDto, Types>(item);
-            repository.AddItem(type);
+            var type = Mapper.Map<TypesDto, Types>(entity);
+            Repository.Add(type);
         }
 
-        public void EditItem(TypesDto item)
+        public void Edit(TypesDto entity)
         {
-            var type = Mapper.Map<TypesDto, Types>(item);
-            repository.EditItem(type);
+            var type = Mapper.Map<TypesDto, Types>(entity);
+            Repository.Edit(type);
         }
 
-        public void DeleteItem(TypesDto item)
+        public void Delete(TypesDto entity)
         {
-            var type = Mapper.Map<TypesDto, Types>(item);
-            repository.DeleteItem(type.Id);
+            var type = Mapper.Map<TypesDto, Types>(entity);
+            Repository.Delete(type.Id);
         }
     }
 }

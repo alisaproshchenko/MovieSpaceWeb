@@ -9,32 +9,32 @@ namespace MoviesService.Services.Service
 {
     public class GenreService : IServices<GenresDto>
     {
-        protected readonly GenreRepository repository;
-        public GenreService(GenreRepository repository) => this.repository = repository;
+        protected readonly GenreRepository Repository;
+        public GenreService(GenreRepository repository) => this.Repository = repository;
 
-        public IEnumerable<GenresDto> Items => Mapper.Map<IEnumerable<Genres>, IEnumerable<GenresDto>>(repository.Items);
-        public GenresDto GetItem(int id)
+        public IEnumerable<GenresDto> Entities => Mapper.Map<IEnumerable<Genres>, IEnumerable<GenresDto>>(Repository.Entities);
+        public GenresDto GetEntity(int id)
         {
-            var genre = repository.GetItem(id);
+            var genre = Repository.GetEntity(id);
             return Mapper.Map<Genres,GenresDto>(genre);
         }
 
-        public void AddItem(GenresDto item)
+        public void Add(GenresDto entity)
         {
-            var genre = Mapper.Map<GenresDto, Genres>(item);
-            repository.AddItem(genre);
+            var genre = Mapper.Map<GenresDto, Genres>(entity);
+            Repository.Add(genre);
         }
 
-        public void EditItem(GenresDto item)
+        public void Edit(GenresDto entity)
         {
-            var genre = Mapper.Map<GenresDto, Genres>(item);
-            repository.EditItem(genre);
+            var genre = Mapper.Map<GenresDto, Genres>(entity);
+            Repository.Edit(genre);
         }
 
-        public void DeleteItem(GenresDto item)
+        public void Delete(GenresDto entity)
         {
-            var genre = Mapper.Map<GenresDto, Genres>(item);
-            repository.DeleteItem(genre.Id);
+            var genre = Mapper.Map<GenresDto, Genres>(entity);
+            Repository.Delete(genre.Id);
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿@using Web.Services
+@model MoviesService.Models.Media
+
+<div style="border: 1px solid red; width: 120px; height: 300px;" />
+<div>@Model.Name</div>
+<div>@Model.Id</div>
+<div>@Model.TypesId</div>
+@foreach (var e in Model.GenresCollection)
+{
+    <p>+ @e.Name</p>
+}
+@foreach (var e in Model.CountryCollection)
+{
+    <p> - @e.Name</p>
+}
+@if (Model.TypesId ==  Convert.ToInt32(Enums.TypeEnum.Serial))
+{
+    <div>@Html.ActionLink("Add season", "Add", "Series", new { mediaId = Model.Id }, null)</div>
+    
+    foreach (var e in Model.SeasonsList)
+    {
+        <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
+        //if (e.Id == Model.SeasonCount)
+        //{
+            <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new {seasonId = e.Id},null)</span>
+            //}
+        }
+    }

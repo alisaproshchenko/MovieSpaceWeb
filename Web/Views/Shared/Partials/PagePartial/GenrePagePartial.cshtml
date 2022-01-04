@@ -1,0 +1,80 @@
+﻿@model Web.ViewModels.GenreViewModel
+
+@if (Model.PaginatedOutput.TotalPages >= 1)
+{
+    <form id="currentPage" method="get">
+        
+        @if (Model.PaginatedOutput.CurrentPage == 1)
+        {
+            <button name="currentPage" style="background-color: gray;">Previous</button> }
+        else
+        {
+            <button name="currentPage" value="@(Model.PaginatedOutput.CurrentPage - 1)" type="submit">Previous</button>
+        }
+
+        @for (var i = 1; i <= 3 && i <= Model.PaginatedOutput.TotalPages; i++)
+        {
+            if (Model.PaginatedOutput.CurrentPage > 4)
+            {
+                if (i > 1)
+                {
+                    break;
+                }
+
+                if (Model.PaginatedOutput.CurrentPage > Model.PaginatedOutput.TotalPages - 3)
+                {
+                    for (var z = Model.PaginatedOutput.TotalPages - 5; z <= Model.PaginatedOutput.TotalPages - 3; ++z)
+                    {
+                        <button name="currentPage" value="@z" type="submit">
+                            @if (Model.PaginatedOutput.CurrentPage == 5)
+                            {
+                                @(z + 1)
+                            }
+                            else
+                            {
+                                @z
+                            }
+                        </button>
+                    }
+                }
+                else
+                {
+                    for (var j = 3; j >= 1; --j)
+                    {
+                        <button name="currentPage" value="@(Model.PaginatedOutput.CurrentPage - j)" type="submit">@(Model.PaginatedOutput.CurrentPage - j)</button>
+                    }
+                }
+            }
+            else
+            {
+                <button class="btn-control @(Model.PaginatedOutput.CurrentPage == i ? "Active" : string.Empty)" name="currentPage" value="@i" type="submit">@i</button>
+            }
+         }
+
+        @if (Model.PaginatedOutput.CurrentPage > 3 && Model.PaginatedOutput.TotalPages - Model.PaginatedOutput.CurrentPage >= 3)
+         {
+             @:<span style="color: black;">...</span>
+             <button class="Active" name="currentPage" value="@Model.PaginatedOutput.CurrentPage" type="submit">@Model.PaginatedOutput.CurrentPage</button>
+         }
+        
+        @if (Model.PaginatedOutput.TotalPages > 3)
+         {
+             @:<span style="color: black;">...</span>
+             
+             if (Model.PaginatedOutput.CurrentPage >= 3 && Model.PaginatedOutput.CurrentPage < Model.PaginatedOutput.TotalPages - 3)
+             {
+                <button name="currentPage" value="@(Model.PaginatedOutput.CurrentPage + 1)" type="submit">@(Model.PaginatedOutput.CurrentPage + 1)</button>
+             }
+             
+             for (var i = Math.Max(4, Model.PaginatedOutput.TotalPages - 2); i <= Model.PaginatedOutput.TotalPages; i++)
+             {
+                <button class="btn-control @(Model.PaginatedOutput.CurrentPage == i ? "Active" : string.Empty)" name="currentPage" value="@i" type="submit">@i</button>
+             }
+        }
+        <button name="currentPage" value="@(Model.PaginatedOutput.CurrentPage < Model.PaginatedOutput.TotalPages ? Model.PaginatedOutput.CurrentPage + 1 : Model.PaginatedOutput.CurrentPage)" type="submit">Next</button>
+    </form>
+}
+else
+{
+    <div style="text-align: center; margin-top: 50px; font-size: 20px;">Empty</div>
+}

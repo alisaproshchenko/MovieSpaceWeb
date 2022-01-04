@@ -11,30 +11,30 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public TypeRepository(MediaDbContext context) => _context = context;
-        public IEnumerable<Types> Items => _context.TypesTable;
+        public IEnumerable<Types> Entities => _context.TypesTable;
 
-        public Types GetItem(int id)
+        public Types GetEntity(int id)
         {
             var type =  _context.TypesTable.FirstOrDefault(i => i.Id == id);
             return type;
         }
 
-        public void AddItem(Types item)
+        public void Add(Types entity)
         {
-            _context.TypesTable.Add(item);
+            _context.TypesTable.Add(entity); 
             _context.SaveChanges();
         }
 
-        public void DeleteItem(int id)
+        public void Delete(int id)
         {
             var type = _context.TypesTable.FirstOrDefault(t => t.Id == id);
             if (type != null) _context.TypesTable.Remove(type);
             _context.SaveChanges();
         }
 
-        public void EditItem(Types item)
+        public void Edit(Types entity)
         {
-            _context.TypesTable.AddOrUpdate(item);
+            _context.TypesTable.AddOrUpdate(entity);
             _context.SaveChanges();
         }
     }

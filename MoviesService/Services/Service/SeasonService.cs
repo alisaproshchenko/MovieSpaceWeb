@@ -7,34 +7,44 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class SeasonService : IServices<SeasonsDto>
+    public class SeasonService : IServices<SeasonsDto>, IAddSeasonService
     {
-        protected readonly SeasonRepository repository;
-        public SeasonService(SeasonRepository repository) => this.repository = repository;
+        protected readonly SeasonRepository Repository;
+        public SeasonService(SeasonRepository repository) => this.Repository = repository;
 
-        public IEnumerable<SeasonsDto> Items => Mapper.Map<IEnumerable<Seasons>, IEnumerable<SeasonsDto>>(repository.Items);
-        public SeasonsDto GetItem(int id)
+        public IEnumerable<SeasonsDto> Entities => Mapper.Map<IEnumerable<Seasons>, IEnumerable<SeasonsDto>>(Repository.Entities);
+        public SeasonsDto GetEntity(int id)
         {
-            var season = repository.GetItem(id);
+            var season = Repository.GetEntity(id);
             return Mapper.Map<Seasons, SeasonsDto>(season);
         }
 
-        public void AddItem(SeasonsDto item)
+        public void Add(SeasonsDto entity)
         {
-            var season = Mapper.Map<SeasonsDto, Seasons>(item);
-            repository.AddItem(season);
+            var season = Mapper.Map<SeasonsDto, Seasons>(entity);
+            Repository.Add(season);
         }
 
-        public void EditItem(SeasonsDto item)
+        public void Edit(SeasonsDto entity)
         {
-            var season = Mapper.Map<SeasonsDto, Seasons>(item);
-            repository.EditItem(season);
+            var season = Mapper.Map<SeasonsDto, Seasons>(entity);
+            Repository.Edit(season);
         }
 
-        public void DeleteItem(SeasonsDto item)
+        public void Delete(SeasonsDto entity)
         {
-            var season = Mapper.Map<SeasonsDto, Seasons>(item);
-            repository.DeleteItem(season.Id);
+            var season = Mapper.Map<SeasonsDto, Seasons>(entity);
+            Repository.Delete(season.Id);
+        }
+
+        public void Add(int mediaId)
+        {
+            Repository.AddSeason(mediaId);
+        }
+
+        public void AddEpisode(int seasonId)
+        {
+            Repository.AddEpisode(seasonId);
         }
     }
 }

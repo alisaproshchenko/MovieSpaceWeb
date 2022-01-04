@@ -7,34 +7,40 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class MediaService : IServices<MediaDto>
+    public class MediaService : IServices<MediaDto>, IMediaAddService<MediaDto>
     {
         protected readonly MediaRepository repository;
         public MediaService(MediaRepository repository) => this.repository = repository;
 
-        public IEnumerable<MediaDto> Items => Mapper.Map<IEnumerable<Media>, IEnumerable<MediaDto>>(repository.Items);
-        public MediaDto GetItem(int id)
+        public IEnumerable<MediaDto> Entities => Mapper.Map<IEnumerable<Media>, IEnumerable<MediaDto>>(repository.Entities);
+        public MediaDto GetEntity(int id)
         {
-            var media = repository.GetItem(id);
+            var media = repository.GetEntity(id);
             return Mapper.Map<Media, MediaDto>(media);
         }
 
-        public void AddItem(MediaDto item)
+        public void Add(MediaDto entity)
         {
-            var media = Mapper.Map<MediaDto, Media>(item);
-            repository.AddItem(media);
+            var media = Mapper.Map<MediaDto, Media>(entity);
+            repository.Add(media);
         }
 
-        public void EditItem(MediaDto item)
+        public void Edit(MediaDto entity)
         {
-            var media = Mapper.Map<MediaDto, Media>(item);
-            repository.EditItem(media);
+            var media = Mapper.Map<MediaDto, Media>(entity);
+            repository.Edit(media);
         }
 
-        public void DeleteItem(MediaDto item)
+        public void Delete(MediaDto entity)
         {
-            var media = Mapper.Map<MediaDto, Media>(item);
-            repository.DeleteItem(media.Id);
+            var media = Mapper.Map<MediaDto, Media>(entity);
+            repository.Delete(media.Id);
+        }
+
+        public void AddMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        {
+            var media = Mapper.Map<MediaDto, Media>(entity);
+            repository.AddMedia(media, selectedType, selectedGenresIds, selectedCountriesIds);
         }
     }
 }

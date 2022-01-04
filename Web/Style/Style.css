@@ -1,6 +1,4 @@
-﻿@import url('Site.css');
-@import url('Site.css');
-body {
+﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -26,4 +24,8 @@ textarea {
     width: 50%;
     height: 300px;
     color: white;
+}
+.Active {
+    color: white;
+    background-color: black;
 }

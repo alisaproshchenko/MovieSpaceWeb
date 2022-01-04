@@ -7,11 +7,11 @@ namespace MoviesService.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        //[Required]
         public string IMDbMovieId { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
+        //[Required]
         public string Poster { get; set; }
         [Required]
         public int Year { get; set; }
@@ -21,10 +21,13 @@ namespace MoviesService.Models
         public int? BudgetAndBoxOffice { get; set; }
         public double? RatingIMDb { get; set; }
         public double? SiteUsersRatings { get; set; }
-        public Types Types { get; set; }
+        public int SeasonCount { get; set; } = 0;
         [Required]
-        public List<Genres> GenresList { get; set; } = new List<Genres>();
-        public List<Seasons> SeasonsList { get; set; } = new List<Seasons>();
-        public List<Country> CountriesList { get; set; } = new List<Country>();
+        public int TypesId { get; set; }
+        public Types Types { get; set; }
+        public UsersToMedia UsersToMedia { get; set; }
+        public virtual ICollection<Genres> GenresCollection { get; set; } = new List<Genres>();
+        public ICollection<Seasons> SeasonsList { get; set; } = new List<Seasons>();
+        public virtual ICollection<Country> CountryCollection { get; set; } = new List<Country>();
     }
 }

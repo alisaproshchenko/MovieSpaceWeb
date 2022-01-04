@@ -1,0 +1,15 @@
+﻿@using System.Web.Mvc.Html
+@model Web.ViewModels.CountryViewModel
+
+<div>@Html.ActionLink("Add", "Add", "Country",null,null)</div>
+
+@foreach (var entity in Model.Countries)
+{
+    <div style="border: 1px solid red; width: 100px; height: 100px;">
+        <div>@entity.Name</div>
+        <div>@Html.ActionLink("Delete", "Delete", "Country",new {id = entity.Id},null)</div>
+        <div>@Html.ActionLink("Edit", "Edit", "Country",new {id = entity.Id},null)</div>
+    </div>
+}
+
+@Html.Partial("Partials/PagePartial/CountryPagePartial")

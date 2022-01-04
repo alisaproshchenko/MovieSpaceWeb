@@ -1,0 +1,12 @@
+﻿@model MoviesService.Dto.SeasonsDto
+
+<div style="border: 1px solid red; width: 100px; height: 300px;" />
+<div>@Model.Name</div>
+<div>@Model.Id</div>
+<div>
+    @foreach (var e in Model.EpisodesList)
+    {
+        <p>@e.Name</p>
+    }
+</div>
+<div>@Html.ActionLink("Add episode", "AddEpisode", "Series", new { id = Model.Id }, null)</div>

@@ -7,34 +7,48 @@ using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class MediaRepository : IMediaRepository<Media>
+    public class MediaRepository : IMediaRepository<Media>, IMediaAddRepository<Media>
     {
         private readonly MediaDbContext _context;
         public MediaRepository(MediaDbContext context) => _context = context;
-        public IEnumerable<Media> Items => _context.MediaTable;
-
-        public Media GetItem(int id)
+        public IEnumerable<Media> Entities => _context.MediaTable.Include("SeasonsList");
+        public Media GetEntity(int id)
         {
             var media =  _context.MediaTable.FirstOrDefault(i => i.Id == id);
             return media;
         }
 
-        public void AddItem(Media media)
+        public void Add(Media media)
         {
-            _context.MediaTable.Add(media);
+            _context.MediaTable.AddOrUpdate(media);
             _context.SaveChanges();
         }
 
-        public void DeleteItem(int id)
+        public void Delete(int id)
         {
             var media = _context.MediaTable.FirstOrDefault(t => t.Id == id);
             if (media != null) _context.MediaTable.Remove(media);
             _context.SaveChanges();
         }
 
-        public void EditItem(Media media)
+        public void Edit(Media media)
         {
             _context.MediaTable.AddOrUpdate(media);
+            _context.SaveChanges();
+        }
+
+        public void AddMedia(Media entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        {
+            entity.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
+            foreach (var id in selectedGenresIds)
+            {
+                entity.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));
+            }
+            foreach (var id in selectedCountriesIds)
+            {
+                entity.CountryCollection.Add(_context.CountriesTable.FirstOrDefault(x => x.Id == id));
+            }
+            _context.MediaTable.AddOrUpdate(entity);
             _context.SaveChanges();
         }
     }
