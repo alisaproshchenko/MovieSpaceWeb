@@ -7,7 +7,7 @@ using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class TypeRepository : IMediaRepository<Types>
+    public class TypeRepository : IMediaRepository<Types>, IAddSingleRepository<Types>
     {
         private readonly MediaDbContext _context;
         public TypeRepository(MediaDbContext context) => _context = context;

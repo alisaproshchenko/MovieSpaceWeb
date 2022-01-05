@@ -6,7 +6,6 @@ namespace MoviesService.Repositories.IRepository
      {
          IEnumerable<T> Entities { get; }
          T GetEntity(int id);
-         void Add(T entity);
          void Delete(int id);
          void Edit(T entity);
      }

@@ -7,7 +7,7 @@ using MoviesService.Repositories.IRepository;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class CountryRepository : IMediaRepository<Country>
+    public class CountryRepository : IMediaRepository<Country>, IAddSingleRepository<Country>
     {
         private readonly MediaDbContext _context;
         public CountryRepository(MediaDbContext context) => _context = context;
