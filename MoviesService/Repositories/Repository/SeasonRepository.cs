@@ -7,7 +7,7 @@ using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class SeasonRepository : IMediaRepository<Seasons>, IAddSeasonRepository
+    public class SeasonRepository : IMediaRepository<Seasons>, IManageSeasonsAndEpisodes
     {
         private readonly MediaDbContext _context;
         public SeasonRepository(MediaDbContext context) => _context = context;
@@ -18,25 +18,30 @@ namespace MoviesService.Repositories.Repository
             var season =  _context.SeasonsTable.FirstOrDefault(i => i.Id == id);
             return season;
         }
-
-        public void Add(Seasons season)
+        public void Delete(int id)
         {
-            _context.SeasonsTable.Add(season);
+            throw new System.NotImplementedException();
+        }
+        public void Edit(Seasons season)
+        {
+            _context.SeasonsTable.AddOrUpdate(season);
             _context.SaveChanges();
         }
-
-        public void Delete(int id)
+        public void DeleteSeason(int id)
         {
             var season = _context.SeasonsTable.FirstOrDefault(t => t.Id == id);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == season.MediaId);
             --media.SeasonCount;
-            if (season != null) _context.SeasonsTable.Remove(season);
+            _context.SeasonsTable.Remove(season);
             _context.SaveChanges();
         }
 
-        public void Edit(Seasons season)
+        public void DeleteEpisode(int id)
         {
-            _context.SeasonsTable.AddOrUpdate(season);
+            var episode = _context.EpisodeTable.FirstOrDefault(e => e.Id == id);
+            var season = _context.SeasonsTable.FirstOrDefault(s => s.Id == episode.SeasonsId); 
+            --season.EpisodeCount;
+            _context.EpisodeTable.Remove(episode);
             _context.SaveChanges();
         }
 

@@ -19,6 +19,11 @@ namespace Web.Controllers.AdminControllers
             return View(_service.Entities.FirstOrDefault(x => x.Id == seasonId));
         }
 
+        public ActionResult GetEpisode(int episodeId)
+        {
+            return View();
+        }
+
         public ActionResult AddEpisode(int id)
         {
             _service.AddEpisode(id);
