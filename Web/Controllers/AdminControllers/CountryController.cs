@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 using MoviesService.Dto;
-using MoviesService.Services.IService;
+using MoviesService.Services.Service;
 using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
     public class CountryController : Controller
     {
-        private readonly IServices<CountryDto> _service;
-        public CountryController(IServices<CountryDto> service) => this._service = service;
+        private readonly CountryService _service;
+        public CountryController(CountryService service) => this._service = service;
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {

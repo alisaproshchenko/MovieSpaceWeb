@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 using MoviesService.Dto;
-using MoviesService.Services.IService;
+using MoviesService.Services.Service;
 using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
     public class GenreController : Controller
     {
-        private readonly IServices<GenresDto> _service;
-        public GenreController(IServices<GenresDto> service) => this._service = service;
+        private readonly GenreService _service;
+        public GenreController(GenreService service) => this._service = service;
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {

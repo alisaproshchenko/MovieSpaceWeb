@@ -9,9 +9,9 @@ namespace Web.Controllers.AdminControllers
     {
         private readonly SeasonService _service;
         public SeriesController(SeasonService service) => _service = service;
-        public ActionResult Add(int mediaId)
+        public ActionResult AddSeason(int mediaId)
         {
-            _service.Add(mediaId);
+            _service.AddSeason(mediaId);
             return RedirectToAction("Details", "Media", new {id = mediaId});
         }
         public ActionResult GetSeason(int seasonId)

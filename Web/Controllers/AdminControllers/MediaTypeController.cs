@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 using MoviesService.Dto;
-using MoviesService.Services.IService;
+using MoviesService.Services.Service;
 using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
     public class MediaTypeController : Controller
     {
-        private readonly IServices<TypesDto> _service;
-        public MediaTypeController(IServices<TypesDto> service) => this._service = service;
+        private readonly TypeService _service;
+        public MediaTypeController(TypeService service) => this._service = service;
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {
