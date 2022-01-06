@@ -162,7 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\MediaDbContext.cs" />
-    <Compile Include="Data\SedTop250IMDb.cs" />
+    <Compile Include="Data\SeedTop250IMDb.cs" />
     <Compile Include="Dto\CountryDto.cs" />
     <Compile Include="Dto\EpisodeDto.cs" />
     <Compile Include="Dto\GenresDto.cs" />

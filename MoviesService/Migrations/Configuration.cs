@@ -24,9 +24,9 @@ namespace MoviesService.Migrations
             //  to avoid creating duplicate seed data.
 
             context.MediaTable.AddOrUpdate(
-                a => new { a.IMDbMovieId}, SedTop250IMDb.TestList.ToArray());
+                a => new { a.IMDbMovieId}, SeedTop250IMDb.TestList.ToArray());
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }
