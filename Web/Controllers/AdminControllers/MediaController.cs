@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using MoviesService.Dto;
-using MoviesService.Repositories.Repository;
 using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Web.ViewModels;
@@ -14,16 +13,14 @@ namespace Web.Controllers.AdminControllers
         private readonly IServices<GenresDto> _genreServices;
         private readonly IServices<CountryDto> _countryServices;
         private readonly IServices<TypesDto> _typesServices;
-        private readonly MediaRepository _mediaRepository;
 
         public MediaController(MediaService service, IServices<GenresDto> genreServices,
-            IServices<CountryDto> countryServices, IServices<TypesDto> typesServices, MediaRepository mediaRepository)
+            IServices<CountryDto> countryServices, IServices<TypesDto> typesServices)
         {
             this._service = service;
             this._genreServices = genreServices;
             this._countryServices = countryServices;
             this._typesServices = typesServices;
-            this._mediaRepository = mediaRepository;
         }
 
         public ActionResult Details(MediaDto mediaDto)
