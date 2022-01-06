@@ -28,7 +28,7 @@ namespace Web.Controllers.IdentityControllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(RegistrationViewModel model)
+        public async Task<ActionResult> Register(RegistrationViewModel model)
         {
             if (!ModelState.IsValid) return View("Error");
 
@@ -40,7 +40,9 @@ namespace Web.Controllers.IdentityControllers
             var userDto = Mapper.Map<UserViewModel, ApplicationUserDto>(userViewModel);
             _userService.AddUser(userDto);
 
-            return RedirectToAction("Index", "Home");
+            var loginModel = new LoginModel {UserName = model.Username, Password = model.Password};
+
+            return await Login(loginModel, null);
         }
 
         public ActionResult Login(string returnUrl)
@@ -67,7 +69,8 @@ namespace Web.Controllers.IdentityControllers
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
-                        IsPersistent = true
+                        IsPersistent = true,
+                        ExpiresUtc = DateTimeOffset.Now.AddMinutes(30)
                     }, claim);
                     if (string.IsNullOrEmpty(returnUrl))
                         return RedirectToAction("Index", _userService.IsAdministrator(user.Id) ? "Admin" : "Home");
@@ -77,6 +80,7 @@ namespace Web.Controllers.IdentityControllers
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
+
         [Authorize]
         public ActionResult Logout()
         {
