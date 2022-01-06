@@ -1,11 +1,6 @@
 ﻿using IMDbApiLib;
 using MoviesService.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using IMDbApiLib.Models;
 using MoviesService.Models;
 
 namespace MoviesService.IMDbApi
@@ -41,7 +36,8 @@ namespace MoviesService.IMDbApi
                 Year = _convertor.StrToInt(movieData.Year),
                 Cast = _convertor.Actors(movieData.ActorList),
                 Plot = movieData.Plot,
-                BudgetAndBoxOffice = _convertor.StrToInt(movieData.BoxOffice.Budget),
+                Budget = movieData.BoxOffice.Budget,
+                BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
                 Types = new Types { Name = movieData.Type },
                 RatingIMDb = _convertor.StrToDouble(movieData.IMDbRating),
                 CountryCollection = _convertor.Countries(movieData.Countries),

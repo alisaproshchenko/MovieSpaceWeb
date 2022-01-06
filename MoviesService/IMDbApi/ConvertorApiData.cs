@@ -18,10 +18,10 @@ namespace MoviesService.IMDbApi
         public string Actors(List<ActorShort> actors)
         {
             var actorsStr = "";
-
+            
             foreach (var actor in actors)
             {
-                actorsStr += actor.Name;
+                actorsStr += actor.Name + ", ";
             }
 
             return actorsStr;
@@ -30,7 +30,7 @@ namespace MoviesService.IMDbApi
         public List<Country> Countries(string countriesStr)
         {
             var countriesList = new List<Country>();
-            var countries = countriesStr.Split(' ');
+            var countries = countriesStr.Split(',');
 
             foreach (var country in countries)
             {

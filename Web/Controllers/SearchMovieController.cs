@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using MoviesService.IMDbApi;
 
@@ -10,13 +6,14 @@ namespace Web.Controllers
 {
     public class SearchMovieController : Controller
     {
-        public ActionResult Search()
+        // GET: SearchMovie
+        public ActionResult SearchMainPage()
         {
-            return View("SearchMainPage");
+            return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Search(string searchData)
+        public async Task<ActionResult> SearchMainPage(string searchData)
         {
             var searchMovie = new SearchMovieInIMDbApi();
 

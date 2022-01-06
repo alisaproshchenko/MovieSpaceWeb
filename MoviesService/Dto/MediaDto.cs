@@ -12,7 +12,8 @@ namespace MoviesService.Dto
         public int Year { get; set; }
         public string Cast { get; set; }
         public string Plot { get; set; }
-        public int? BudgetAndBoxOffice { get; set; }
+        public string Budget { get; set; }
+        public string BoxOffice { get; set; }
         public double? RatingIMDb { get; set; }
         public double? SiteUsersRatings { get; set; }
         public int TypesId { get; set; }

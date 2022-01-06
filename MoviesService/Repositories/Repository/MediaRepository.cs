@@ -26,14 +26,33 @@ namespace MoviesService.Repositories.Repository
 
         public void Delete(int id)
         {
-            var media = _context.MediaTable.FirstOrDefault(t => t.Id == id);
+            var media = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == id);
+            if (media.SeasonsList != null)
+            {
+                foreach (var season in media.SeasonsList )
+                {
+                    if (season.EpisodesList != null)
+                    {
+                        foreach (var episode in season.EpisodesList)
+                        {
+                            _context.EpisodeTable.Remove(episode);
+                        }
+                    }
+
+                    _context.SeasonsTable.Remove(season);
+                }
+            }
             if (media != null) _context.MediaTable.Remove(media);
             _context.SaveChanges();
         }
 
         public void Edit(Media media)
         {
-            _context.MediaTable.AddOrUpdate(media);
+            var m = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == media.Id);
+            m.Name = media.Name;
+            m.Plot = media.Plot;
+            m.Year = media.Year;
+            _context.MediaTable.AddOrUpdate(m);
             _context.SaveChanges();
         }
 
