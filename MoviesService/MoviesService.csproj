@@ -167,6 +167,8 @@
     <Compile Include="Dto\MediaDto.cs" />
     <Compile Include="Dto\SeasonsDto.cs" />
     <Compile Include="Dto\TypesDto.cs" />
+    <Compile Include="IMDbApi\ConvertorApiData.cs" />
+    <Compile Include="IMDbApi\SearchMovieInIMDbApi.cs" />
     <Compile Include="Migrations\202201041159483_init.cs" />
     <Compile Include="Migrations\202201041159483_init.designer.cs">
       <DependentUpon>202201041159483_init.cs</DependentUpon>
