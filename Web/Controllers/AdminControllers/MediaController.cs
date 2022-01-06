@@ -32,7 +32,7 @@ namespace Web.Controllers.AdminControllers
         {
             return View(new MediaViewModel(_service.Entities, currentPage));
         }
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Add()
         {
             ViewBag.Genres = _genreServices.Entities;
@@ -40,30 +40,32 @@ namespace Web.Controllers.AdminControllers
             ViewBag.Types = _typesServices.Entities;
             return View();
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult Add(MediaDto entity, int selectedType, int [] selectedGenres, int[] selectedCountries)
         {
             _service.AddMedia(entity, selectedType, selectedGenres, selectedCountries);
             return RedirectToAction("ListOfEntities");
         }
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(MediaDto entity)
         {
             return View(new GenericEntitiesViewModel<MediaDto>(entity));
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult Update(MediaDto entity)
         {
             _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult Delete(MediaDto entity)
         {
             return View(new GenericEntitiesViewModel<MediaDto>(entity));
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(MediaDto entity)
         {

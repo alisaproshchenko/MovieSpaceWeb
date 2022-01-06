@@ -10,7 +10,6 @@ namespace Web.Controllers
 {
     public class SearchMovieController : Controller
     {
-        // GET: SearchMovie
         public ActionResult Search()
         {
             return View("SearchMainPage");

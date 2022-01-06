@@ -16,5 +16,6 @@ namespace IdentityService.Services
         void AdminRightsToggle(T item);
         void DeleteUser(T item);
         IEnumerable<string> GetRoles(string username);
+        public bool IsAdministrator(string userId);
     }
 }

@@ -40,7 +40,7 @@ namespace Web.Controllers.IdentityControllers
             var userDto = Mapper.Map<UserViewModel, ApplicationUserDto>(userViewModel);
             _userService.AddUser(userDto);
 
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Login(string returnUrl)
@@ -53,16 +53,16 @@ namespace Web.Controllers.IdentityControllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
+            ApplicationUser user = await _userService.UnitOfWork.UserManager.FindAsync(model.UserName, model.Password);
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await _userService.UnitOfWork.UserManager.FindAsync(model.UserName, model.Password);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                    ModelState.AddModelError("", "Incorrect login or password");
                 }
                 else
                 {
-                    ClaimsIdentity claim = await _userService.UnitOfWork.UserManager.CreateIdentityAsync(user,
+                    var claim = await _userService.UnitOfWork.UserManager.CreateIdentityAsync(user,
                         DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
@@ -70,13 +70,14 @@ namespace Web.Controllers.IdentityControllers
                         IsPersistent = true
                     }, claim);
                     if (string.IsNullOrEmpty(returnUrl))
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", _userService.IsAdministrator(user.Id) ? "Admin" : "Home");
                     return Redirect(returnUrl);
                 }
             }
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
+        [Authorize]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
