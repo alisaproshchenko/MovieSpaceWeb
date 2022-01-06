@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class TypeService : IServices<TypesDto>
+    public class TypeService : IServices<TypesDto>, IAddSingleService<TypesDto>
     {
         protected readonly TypeRepository Repository;
         public TypeService(TypeRepository repository) => this.Repository = repository;

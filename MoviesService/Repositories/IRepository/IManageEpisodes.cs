@@ -1,8 +1,7 @@
 ﻿namespace MoviesService.Repositories.IRepository
 {
-    public interface IAddSeasonRepository
+    public interface IManageEpisodes
     {
-        void AddSeason(int seriesId);
         void AddEpisode(int seasonId);
     }
 }

@@ -1,26 +1,26 @@
 ﻿@using Web.Services
-@model MoviesService.Models.Media
+@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.MediaDto>
 
 <div style="border: 1px solid red; width: 120px; height: 300px;" />
-<div>@Model.Name</div>
-<div>@Model.Id</div>
-<div>@Model.TypesId</div>
-@foreach (var e in Model.GenresCollection)
+<div>@Model.Entity.Name</div>
+<div>@Model.Entity.Id</div>
+<div>@Model.Entity.TypesId</div>
+@foreach (var e in Model.Entity.GenresCollection)
 {
     <p>+ @e.Name</p>
 }
-@foreach (var e in Model.CountryCollection)
+@foreach (var e in Model.Entity.CountryCollection)
 {
     <p> - @e.Name</p>
 }
-@if (Model.TypesId ==  Convert.ToInt32(Enums.TypeEnum.Serial))
+@if (Model.Entity.TypesId ==  Convert.ToInt32(Enums.TypeEnum.Serial))
 {
-    <div>@Html.ActionLink("Add season", "Add", "Series", new { mediaId = Model.Id }, null)</div>
+    <div>@Html.ActionLink("Add season", "AddSeason", "Series", new { mediaId = Model.Entity.Id }, null)</div>
     
-    foreach (var e in Model.SeasonsList)
+    foreach (var e in Model.Entity.SeasonsList)
     {
         <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
-        if (e.Name.AsInt() == Model.SeasonCount)
+        if (Service.ReturnIdForDelete(e.Name) == Model.Entity.SeasonCount)
         {
             <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new {seasonId = e.Id},null)</span>
         }

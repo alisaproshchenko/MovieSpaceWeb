@@ -2,33 +2,44 @@
 using System.Web.Mvc;
 using MoviesService.Dto;
 using MoviesService.Services.Service;
+using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
     public class SeriesController : Controller
     {
         private readonly SeasonService _service;
-        public SeriesController(SeasonService service) => _service = service;
-        public ActionResult Add(int mediaId)
+        private readonly EpisodeService _episodeService;
+        public SeriesController(SeasonService service, EpisodeService episodeService)
         {
-            _service.Add(mediaId);
+            _service = service;
+            _episodeService = episodeService;
+        }
+
+        public ActionResult AddSeason(int mediaId)
+        {
+            _service.AddSeason(mediaId);
             return RedirectToAction("Details", "Media", new {id = mediaId});
+        }
+        public ActionResult AddEpisode(int id)
+        {
+            _episodeService.AddEpisode(id);
+            return RedirectToAction("GetSeason", new { seasonId = id });
         }
         public ActionResult GetSeason(int seasonId)
         {
-            return View(_service.Entities.FirstOrDefault(x => x.Id == seasonId));
+            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.Entities.FirstOrDefault(x => x.Id == seasonId)));
         }
 
-        public ActionResult AddEpisode(int id)
+        public ActionResult GetEpisode(int episodeId)
         {
-            _service.AddEpisode(id);
-            return RedirectToAction("GetSeason", new {seasonId = id});
+            return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.Entities.FirstOrDefault(x => x.Id == episodeId)));
         }
 
         [HttpGet]
         public ActionResult DeleteSeason(SeasonsDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<SeasonsDto>(entity));
         }
         [HttpPost, ActionName("DeleteSeason")]
         public ActionResult DeleteConfirmedSeason(int seasonId)
@@ -36,6 +47,18 @@ namespace Web.Controllers.AdminControllers
             var season = _service.Entities.FirstOrDefault(x => x.Id == seasonId);
             _service.Delete(season);
             return RedirectToAction("Details", "Media", new {id = season.MediaId});
+        }
+        [HttpGet]
+        public ActionResult DeleteEpisode(EpisodeDto entity)
+        {
+            return View(new GenericEntitiesViewModel<EpisodeDto>(entity));
+        }
+        [HttpPost, ActionName("DeleteEpisode")]
+        public ActionResult DeleteConfirmedEpisode(int episodeId)
+        {
+            var episode = _episodeService.Entities.FirstOrDefault(x => x.Id == episodeId);
+            _episodeService.Delete(episode);
+            return RedirectToAction("GetSeason", "Series", new { seasonId = episode.SeasonsId });
         }
     }
 }

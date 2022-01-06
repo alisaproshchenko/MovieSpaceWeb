@@ -1,25 +1,25 @@
-﻿@model MoviesService.Dto.MediaDto
+﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.MediaDto>
 
 <h2>Edit genre</h2>
 
 @using (Html.BeginForm("Update", "Media", FormMethod.Post))
 {
     <fieldset>
-        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Entity.Id)
         <p>
-            @Html.LabelFor(m => m.Name, "Name")
+            @Html.LabelFor(m => m.Entity.Name, "Name")
             <br />
-            @Html.EditorFor(m => m.Name)
+            @Html.EditorFor(m => m.Entity.Name)
         </p>
         <p>
-            @Html.LabelFor(m => m.Year, "Name")
+            @Html.LabelFor(m => m.Entity.Year, "Name")
             <br />
-            @Html.EditorFor(m => m.Year)
+            @Html.EditorFor(m => m.Entity.Year)
         </p>
         <p>
-            @Html.LabelFor(m => m.Plot, "Name")
+            @Html.LabelFor(m => m.Entity.Plot, "Name")
             <br />
-            @Html.EditorFor(m => m.Plot)
+            @Html.EditorFor(m => m.Entity.Plot)
         </p>
         <p><input type="submit" value="Send" /></p>
     </fieldset>

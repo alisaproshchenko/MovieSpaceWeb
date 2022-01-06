@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 using MoviesService.Dto;
-using MoviesService.Services.IService;
+using MoviesService.Services.Service;
 using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
     public class MediaTypeController : Controller
     {
-        private readonly IServices<TypesDto> _service;
-        public MediaTypeController(IServices<TypesDto> service) => this._service = service;
+        private readonly TypeService _service;
+        public MediaTypeController(TypeService service) => this._service = service;
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {
@@ -29,7 +29,7 @@ namespace Web.Controllers.AdminControllers
 
         public ActionResult Edit(TypesDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<TypesDto>(entity));
         }
         [HttpPost]
         public ActionResult Update(TypesDto entity)
@@ -41,7 +41,7 @@ namespace Web.Controllers.AdminControllers
         [HttpGet]
         public ActionResult Delete(TypesDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<TypesDto>(entity));
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(TypesDto entity)

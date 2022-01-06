@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class CountryService : IServices<CountryDto>
+    public class CountryService : IServices<CountryDto>, IAddSingleService<CountryDto>
     {
         protected readonly CountryRepository Repository;
         public CountryService(CountryRepository repository) => this.Repository = repository;

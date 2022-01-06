@@ -1,13 +1,13 @@
-﻿@model MoviesService.Dto.CountryDto
+﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.CountryDto>
 
 @using (Html.BeginForm())
 {
     <div class="authorization-position">
         <table>
             <tr>
-                <th style="width:200px"> @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "authorization-label" })</th>
-                <th> @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "authorization-login" } })</th>
-                <th style="margin-left: 10px;"> @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})</th>
+                <th style="width:200px"> @Html.LabelFor(model => model.Entity.Name, htmlAttributes: new { @class = "authorization-label" })</th>
+                <th> @Html.EditorFor(model => model.Entity.Name, new {htmlAttributes = new {@class = "authorization-login" } })</th>
+                <th style="margin-left: 10px;"> @Html.ValidationMessageFor(model => model.Entity.Name, "", new {@class = "text-danger"})</th>
             </tr>
         </table>
 
