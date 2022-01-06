@@ -1,7 +1,6 @@
-﻿@using MoviesService.Dto
-@model MoviesService.Dto.MediaDto
+﻿@model MoviesService.Dto.MediaDto
 
-@using (Html.BeginForm("Search", "SearchMovie", FormMethod.Post))
+@using (Html.BeginForm("SearchMainPage", "SearchMovie", FormMethod.Post))
 {
     <h3 style="color: gold">Input name</h3>
     <input name="searchData" type="text"/>
