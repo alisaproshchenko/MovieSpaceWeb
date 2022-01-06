@@ -8,26 +8,31 @@ namespace Web.Controllers.AdminControllers
     public class SeriesController : Controller
     {
         private readonly SeasonService _service;
-        public SeriesController(SeasonService service) => _service = service;
+        private readonly EpisodeService _episodeService;
+        public SeriesController(SeasonService service, EpisodeService episodeService)
+        {
+            _service = service;
+            _episodeService = episodeService;
+        }
+
         public ActionResult AddSeason(int mediaId)
         {
             _service.AddSeason(mediaId);
             return RedirectToAction("Details", "Media", new {id = mediaId});
+        }
+        public ActionResult AddEpisode(int id)
+        {
+            _episodeService.AddEpisode(id);
+            return RedirectToAction("GetSeason", new { seasonId = id });
         }
         public ActionResult GetSeason(int seasonId)
         {
             return View(_service.Entities.FirstOrDefault(x => x.Id == seasonId));
         }
 
-        public ActionResult GetEpisode(int episodeId, int seasonId)
+        public ActionResult GetEpisode(int episodeId)
         {
-            return View(_service.Entities.FirstOrDefault(x => x.Id == seasonId)?.EpisodesList.FirstOrDefault(x => x.Id == episodeId));
-        }
-
-        public ActionResult AddEpisode(int id)
-        {
-            _service.AddEpisode(id);
-            return RedirectToAction("GetSeason", new {seasonId = id});
+            return View(_episodeService.Entities.FirstOrDefault(x => x.Id == episodeId));
         }
 
         [HttpGet]
@@ -39,20 +44,20 @@ namespace Web.Controllers.AdminControllers
         public ActionResult DeleteConfirmedSeason(int seasonId)
         {
             var season = _service.Entities.FirstOrDefault(x => x.Id == seasonId);
-            _service.DeleteSeason(season.Id);
+            _service.Delete(season);
             return RedirectToAction("Details", "Media", new {id = season.MediaId});
         }
         [HttpGet]
-        public ActionResult DeleteEpisode(SeasonsDto entity)
+        public ActionResult DeleteEpisode(EpisodeDto entity)
         {
             return View(entity);
         }
-        [HttpPost, ActionName("DeleteSeason")]
+        [HttpPost, ActionName("DeleteEpisode")]
         public ActionResult DeleteConfirmedEpisode(int episodeId)
         {
-            var episode = _service.Entities.FirstOrDefault(x => x.Id == episodeId);
-            _service.DeleteEpisode(episode.Id);
-            return RedirectToAction("Details", "Media", new { id = episode.MediaId });
+            var episode = _episodeService.Entities.FirstOrDefault(x => x.Id == episodeId);
+            _episodeService.Delete(episode);
+            return RedirectToAction("GetSeason", "Series", new { seasonId = episode.SeasonsId });
         }
     }
 }

@@ -337,6 +337,7 @@
     <Content Include="Views\Series\GetSeason.cshtml" />
     <Content Include="Views\Series\DeleteSeason.cshtml" />
     <Content Include="Views\Series\GetEpisode.cshtml" />
+    <Content Include="Views\Series\DeleteEpisode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

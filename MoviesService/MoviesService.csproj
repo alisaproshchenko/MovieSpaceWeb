@@ -193,10 +193,12 @@
     <Compile Include="Repositories\Repository\SeasonRepository.cs" />
     <Compile Include="Repositories\Repository\TypeRepository.cs" />
     <Compile Include="Services\IService\IAddSingleService.cs" />
+    <Compile Include="Services\IService\IManageEpisodeService.cs" />
     <Compile Include="Services\IService\IMediaAddService.cs" />
-    <Compile Include="Services\IService\IManageSeasonAndEpisodeService.cs" />
+    <Compile Include="Services\IService\IManageSeasonService.cs" />
     <Compile Include="Services\IService\IServices.cs" />
     <Compile Include="Services\Service\CountryService.cs" />
+    <Compile Include="Services\Service\EpisodeService.cs" />
     <Compile Include="Services\Service\GenreService.cs" />
     <Compile Include="Services\Service\MediaService.cs" />
     <Compile Include="Services\Service\SeasonService.cs" />

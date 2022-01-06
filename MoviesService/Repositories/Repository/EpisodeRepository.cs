@@ -32,6 +32,7 @@ namespace MoviesService.Repositories.Repository
             _context.SaveChanges();
         }
 
+
         public void AddEpisode(int seasonId)
         {
             var season = _context.SeasonsTable.FirstOrDefault(x => x.Id == seasonId);
