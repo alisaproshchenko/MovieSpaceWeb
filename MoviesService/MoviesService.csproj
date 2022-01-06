@@ -170,14 +170,6 @@
     <Compile Include="Dto\TypesDto.cs" />
     <Compile Include="IMDbApi\ConvertorApiData.cs" />
     <Compile Include="IMDbApi\SearchMovieInIMDbApi.cs" />
-    <Compile Include="Migrations\202201041159483_init.cs" />
-    <Compile Include="Migrations\202201041159483_init.designer.cs">
-      <DependentUpon>202201041159483_init.cs</DependentUpon>
-    <Compile Include="Migrations\202201051822576_init.cs" />
-    <Compile Include="Migrations\202201051822576_init.designer.cs">
-      <DependentUpon>202201051822576_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
     <Compile Include="Models\Genres.cs" />
@@ -221,11 +213,6 @@
       <Project>{62e6c311-3d35-4482-b064-30bfb0f77eef}</Project>
       <Name>IdentityService</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202201051822576_init.resx">
-      <DependentUpon>202201051822576_init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
