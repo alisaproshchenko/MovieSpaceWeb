@@ -226,6 +226,7 @@
     <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Managers\ApplicationUserManager.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationRoleRepository.cs" />
     <Compile Include="Repository\ApplicationUserRepository.cs" />

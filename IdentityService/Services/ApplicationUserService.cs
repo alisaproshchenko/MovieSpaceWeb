@@ -10,6 +10,7 @@ namespace IdentityService.Services
     public class ApplicationUserService : IService<ApplicationUserDto>
     {
         private readonly UnitOfWork _uow;
+        public UnitOfWork UnitOfWork => _uow;
 
         public ApplicationUserService()
         {
@@ -69,7 +70,7 @@ namespace IdentityService.Services
             if (userInDb == null)
                 return;
 
-            userInDb.Banned = applicationUserDto.Banned;
+            userInDb.Banned = !userInDb.Banned;
             _uow.UserRepository.Update(userInDb);
             _uow.UserRepository.Save();
         }
