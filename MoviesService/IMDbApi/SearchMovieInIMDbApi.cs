@@ -38,12 +38,12 @@ namespace MoviesService.IMDbApi
                 IMDbMovieId = movieData.Id,
                 Name = movieData.Title,
                 Poster = movieData.Image,
-                Year = Convert.ToInt32(movieData.Year),
+                Year = _convertor.StrToInt(movieData.Year),
                 Cast = _convertor.Actors(movieData.ActorList),
                 Plot = movieData.Plot,
-                BudgetAndBoxOffice = _convertor.Budget(movieData.BoxOffice.Budget),
+                BudgetAndBoxOffice = _convertor.StrToInt(movieData.BoxOffice.Budget),
                 Types = new Types { Name = movieData.Type },
-                RatingIMDb = Convert.ToDouble(movieData.IMDbRating),
+                RatingIMDb = _convertor.StrToDouble(movieData.IMDbRating),
                 CountryCollection = _convertor.Countries(movieData.Countries),
                 GenresCollection = _convertor.Genres(movieData.GenreList)
             };

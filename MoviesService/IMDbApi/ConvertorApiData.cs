@@ -60,11 +60,21 @@ namespace MoviesService.IMDbApi
             return genresList;
         }
 
-        public int Budget(string str)
+        public int StrToInt(string str)
         {
             int value;
 
             if (!int.TryParse(str, out value))
+                return 0;
+
+            return value;
+        }
+
+        public double StrToDouble(string str)
+        {
+            double value;
+
+            if (!double.TryParse(str, out value))
                 return 0;
 
             return value;
