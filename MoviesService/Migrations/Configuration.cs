@@ -1,4 +1,6 @@
-﻿using MoviesService.Data;
+﻿using System.Collections.Generic;
+using MoviesService.Data;
+using MoviesService.Models;
 
 namespace MoviesService.Migrations
 {
@@ -21,12 +23,8 @@ namespace MoviesService.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            var seedData = new SedTop250IMDb();
-
-            var test = await seedData.GetSearchAsynTask();
-
             context.MediaTable.AddOrUpdate(
-                a => new { a.Id}, test.ToArray());
+                a => new { a.IMDbMovieId}, SedTop250IMDb.TestList.ToArray());
 
             context.SaveChanges();
         }
