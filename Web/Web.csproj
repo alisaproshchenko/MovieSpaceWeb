@@ -265,7 +265,9 @@
     </Compile>
     <Compile Include="Services\Enums.cs" />
     <Compile Include="Services\PageOption.cs" />
+    <Compile Include="Services\Service.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\GenericEntitiesViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Identity\RegistrationViewModel.cs" />
@@ -342,6 +344,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\SearchMovie\SearchMainPage.cshtml" />
     <Content Include="Views\SearchMovie\SearchResult.cshtml" />
+    <Content Include="Views\Series\GetEpisode.cshtml" />
+    <Content Include="Views\Series\DeleteEpisode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
