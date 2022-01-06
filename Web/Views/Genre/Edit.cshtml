@@ -1,15 +1,15 @@
-﻿@model MoviesService.Dto.GenresDto
+﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.GenresDto>
 
 <h2>Edit genre</h2>
 
 @using (Html.BeginForm("Update", "Genre", FormMethod.Post))
 {
     <fieldset>
-        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Entity.Id)
         <p>
-            @Html.LabelFor(m => m.Name, "Name")
+            @Html.LabelFor(m => m.Entity.Name, "Name")
             <br />
-            @Html.EditorFor(m => m.Name)
+            @Html.EditorFor(m => m.Entity.Name)
         </p>
         <p><input type="submit" value="Send" /></p>
     </fieldset>

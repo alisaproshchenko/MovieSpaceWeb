@@ -29,7 +29,7 @@ namespace Web.Controllers.AdminControllers
 
         public ActionResult Edit(TypesDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<TypesDto>(entity));
         }
         [HttpPost]
         public ActionResult Update(TypesDto entity)
@@ -41,7 +41,7 @@ namespace Web.Controllers.AdminControllers
         [HttpGet]
         public ActionResult Delete(TypesDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<TypesDto>(entity));
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(TypesDto entity)

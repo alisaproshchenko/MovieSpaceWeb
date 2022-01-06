@@ -29,7 +29,7 @@ namespace Web.Controllers.AdminControllers
 
         public ActionResult Edit(CountryDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<CountryDto>(entity));
         }
         [HttpPost]
         public ActionResult Update(CountryDto entity)
@@ -41,7 +41,7 @@ namespace Web.Controllers.AdminControllers
         [HttpGet]
         public ActionResult Delete(CountryDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<CountryDto>(entity));
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(CountryDto entity)

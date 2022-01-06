@@ -25,7 +25,7 @@ namespace Web.Controllers.AdminControllers
 
         public ActionResult Details(MediaDto mediaDto)
         {
-            return View(_service.Entities.FirstOrDefault(x => x.Id == mediaDto.Id));
+            return View(new GenericEntitiesViewModel<MediaDto>(_service.Entities.FirstOrDefault(x => x.Id == mediaDto.Id)));
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)
@@ -50,7 +50,7 @@ namespace Web.Controllers.AdminControllers
 
         public ActionResult Edit(MediaDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<MediaDto>(entity));
         }
         [HttpPost]
         public ActionResult Update(MediaDto entity)
@@ -62,7 +62,7 @@ namespace Web.Controllers.AdminControllers
         [HttpGet]
         public ActionResult Delete(MediaDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<MediaDto>(entity));
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(MediaDto entity)

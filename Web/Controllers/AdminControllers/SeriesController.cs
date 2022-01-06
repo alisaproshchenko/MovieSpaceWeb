@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using MoviesService.Dto;
 using MoviesService.Services.Service;
+using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
@@ -27,18 +28,18 @@ namespace Web.Controllers.AdminControllers
         }
         public ActionResult GetSeason(int seasonId)
         {
-            return View(_service.Entities.FirstOrDefault(x => x.Id == seasonId));
+            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.Entities.FirstOrDefault(x => x.Id == seasonId)));
         }
 
         public ActionResult GetEpisode(int episodeId)
         {
-            return View(_episodeService.Entities.FirstOrDefault(x => x.Id == episodeId));
+            return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.Entities.FirstOrDefault(x => x.Id == episodeId)));
         }
 
         [HttpGet]
         public ActionResult DeleteSeason(SeasonsDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<SeasonsDto>(entity));
         }
         [HttpPost, ActionName("DeleteSeason")]
         public ActionResult DeleteConfirmedSeason(int seasonId)
@@ -50,7 +51,7 @@ namespace Web.Controllers.AdminControllers
         [HttpGet]
         public ActionResult DeleteEpisode(EpisodeDto entity)
         {
-            return View(entity);
+            return View(new GenericEntitiesViewModel<EpisodeDto>(entity));
         }
         [HttpPost, ActionName("DeleteEpisode")]
         public ActionResult DeleteConfirmedEpisode(int episodeId)

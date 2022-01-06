@@ -1,19 +1,19 @@
 ﻿@using Web.Services
-@model MoviesService.Dto.SeasonsDto
+@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.SeasonsDto>
 
 <div style="border: 1px solid red; width: 100px; height: 300px;" />
-<div>@Model.Name</div>
-<div>@Model.Id</div>
+<div>@Model.Entity.Name</div>
+<div>@Model.Entity.Id</div>
 <div>
-    @foreach (var e in Model.EpisodesList)
+    @foreach (var e in Model.Entity.EpisodesList)
     {
         <div>
-            @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id, seasonId = Model.Id}, null)
+            @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id, seasonId = Model.Entity.Id}, null)
         </div>
-        if (Service.ReturnIdForDelete(e.Name) == Model.EpisodeCount)
+        if (Service.ReturnIdForDelete(e.Name) == Model.Entity.EpisodeCount)
         {
             <span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new {episodeId = e.Id},null)</span>
         }
     }
 </div>
-<div>@Html.ActionLink("Add episode", "AddEpisode", "Series", new { id = Model.Id }, null)</div>
+<div>@Html.ActionLink("Add episode", "AddEpisode", "Series", new { id = Model.Entity.Id }, null)</div>
