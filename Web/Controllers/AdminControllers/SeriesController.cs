@@ -16,11 +16,13 @@ namespace Web.Controllers.AdminControllers
             _episodeService = episodeService;
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddSeason(int mediaId)
         {
             _service.AddSeason(mediaId);
             return RedirectToAction("Details", "Media", new {id = mediaId});
         }
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddEpisode(int id)
         {
             _episodeService.AddEpisode(id);
@@ -35,12 +37,13 @@ namespace Web.Controllers.AdminControllers
         {
             return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.Entities.FirstOrDefault(x => x.Id == episodeId)));
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult DeleteSeason(SeasonsDto entity)
         {
             return View(new GenericEntitiesViewModel<SeasonsDto>(entity));
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("DeleteSeason")]
         public ActionResult DeleteConfirmedSeason(int seasonId)
         {
@@ -48,11 +51,13 @@ namespace Web.Controllers.AdminControllers
             _service.Delete(season);
             return RedirectToAction("Details", "Media", new {id = season.MediaId});
         }
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult DeleteEpisode(EpisodeDto entity)
         {
             return View(new GenericEntitiesViewModel<EpisodeDto>(entity));
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("DeleteEpisode")]
         public ActionResult DeleteConfirmedEpisode(int episodeId)
         {

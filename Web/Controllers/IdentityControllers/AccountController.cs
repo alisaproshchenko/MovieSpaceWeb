@@ -28,7 +28,7 @@ namespace Web.Controllers.IdentityControllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(RegistrationViewModel model)
+        public async Task<ActionResult> Register(RegistrationViewModel model)
         {
             if (!ModelState.IsValid) return View("Error");
 
@@ -40,7 +40,9 @@ namespace Web.Controllers.IdentityControllers
             var userDto = Mapper.Map<UserViewModel, ApplicationUserDto>(userViewModel);
             _userService.AddUser(userDto);
 
-            return RedirectToAction("Index", "Admin");
+            var loginModel = new LoginModel {UserName = model.Username, Password = model.Password};
+
+            return await Login(loginModel, null);
         }
 
         public ActionResult Login(string returnUrl)
@@ -53,30 +55,33 @@ namespace Web.Controllers.IdentityControllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
+            ApplicationUser user = await _userService.UnitOfWork.UserManager.FindAsync(model.UserName, model.Password);
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await _userService.UnitOfWork.UserManager.FindAsync(model.UserName, model.Password);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                    ModelState.AddModelError("", "Incorrect login or password");
                 }
                 else
                 {
-                    ClaimsIdentity claim = await _userService.UnitOfWork.UserManager.CreateIdentityAsync(user,
+                    var claim = await _userService.UnitOfWork.UserManager.CreateIdentityAsync(user,
                         DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
-                        IsPersistent = true
+                        IsPersistent = true,
+                        ExpiresUtc = DateTimeOffset.Now.AddMinutes(30)
                     }, claim);
                     if (string.IsNullOrEmpty(returnUrl))
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", _userService.IsAdministrator(user.Id) ? "Admin" : "Home");
                     return Redirect(returnUrl);
                 }
             }
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
+
+        [Authorize]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();

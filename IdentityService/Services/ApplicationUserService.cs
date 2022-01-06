@@ -100,7 +100,7 @@ namespace IdentityService.Services
             return _uow.UserManager.GetRoles(userId);
         }
 
-        private bool IsAdministrator(string userId)
+        public bool IsAdministrator(string userId)
         {
             return _uow.UserManager.GetRoles(userId).Contains("Administrator");
         }
