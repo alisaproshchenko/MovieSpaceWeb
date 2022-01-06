@@ -18,10 +18,10 @@ namespace MoviesService.IMDbApi
         public string Actors(List<ActorShort> actors)
         {
             var actorsStr = "";
-
+            
             foreach (var actor in actors)
             {
-                actorsStr += actor.Name;
+                actorsStr += actor.Name + ", ";
             }
 
             return actorsStr;
