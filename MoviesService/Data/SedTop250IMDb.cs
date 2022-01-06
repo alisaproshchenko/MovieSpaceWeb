@@ -12,14 +12,16 @@ namespace MoviesService.Data
 {
     public class SedTop250IMDb
     {
+        public static List<Media> TestList = GetSearchAsynTask().Result.ToList();
         public SedTop250IMDb()
         {
-            
+            //List<Media> medias = GetSearchAsynTask().Result.ToList();
+            //TestList = medias;
         }
 
-        public async Task<List<Media>> GetSearchAsynTask()
+        public static async Task<List<Media>> GetSearchAsynTask()
         {
-            var apiLib = new ApiLib("k_d99sty8t");
+            var apiLib = new ApiLib("k_ag12ki7h");
             var convertor = new ConvertorApiData();
             var dataApi = await apiLib.Top250MoviesAsync();
 
@@ -27,7 +29,7 @@ namespace MoviesService.Data
             
             var modeList = new List<Media>();
 
-            for (var i = 0; i < 10; i++)
+            for (var i = 4; i < 20; i++)
             {
                 var movieData = await apiLib.TitleAsync(searchResults[i].Id);
 

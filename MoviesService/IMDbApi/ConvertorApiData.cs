@@ -30,7 +30,7 @@ namespace MoviesService.IMDbApi
         public List<Country> Countries(string countriesStr)
         {
             var countriesList = new List<Country>();
-            var countries = countriesStr.Split(' ');
+            var countries = countriesStr.Split(',');
 
             foreach (var country in countries)
             {
