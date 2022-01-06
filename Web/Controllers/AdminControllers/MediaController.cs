@@ -28,7 +28,7 @@ namespace Web.Controllers.AdminControllers
 
         public ActionResult Details(MediaDto mediaDto)
         {
-            return View(_mediaRepository.Entities.FirstOrDefault(x => x.Id == mediaDto.Id));
+            return View(_service.Entities.FirstOrDefault(x => x.Id == mediaDto.Id));
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)
