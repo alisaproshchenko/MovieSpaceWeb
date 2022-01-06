@@ -19,9 +19,9 @@ namespace Web.Controllers.AdminControllers
             return View(_service.Entities.FirstOrDefault(x => x.Id == seasonId));
         }
 
-        public ActionResult GetEpisode(int episodeId)
+        public ActionResult GetEpisode(int episodeId, int seasonId)
         {
-            return View();
+            return View(_service.Entities.FirstOrDefault(x => x.Id == seasonId)?.EpisodesList.FirstOrDefault(x => x.Id == episodeId));
         }
 
         public ActionResult AddEpisode(int id)
@@ -39,8 +39,20 @@ namespace Web.Controllers.AdminControllers
         public ActionResult DeleteConfirmedSeason(int seasonId)
         {
             var season = _service.Entities.FirstOrDefault(x => x.Id == seasonId);
-            _service.Delete(season);
+            _service.DeleteSeason(season.Id);
             return RedirectToAction("Details", "Media", new {id = season.MediaId});
+        }
+        [HttpGet]
+        public ActionResult DeleteEpisode(SeasonsDto entity)
+        {
+            return View(entity);
+        }
+        [HttpPost, ActionName("DeleteSeason")]
+        public ActionResult DeleteConfirmedEpisode(int episodeId)
+        {
+            var episode = _service.Entities.FirstOrDefault(x => x.Id == episodeId);
+            _service.DeleteEpisode(episode.Id);
+            return RedirectToAction("Details", "Media", new { id = episode.MediaId });
         }
     }
 }

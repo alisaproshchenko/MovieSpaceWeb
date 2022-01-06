@@ -16,7 +16,7 @@ namespace MoviesService.Dto
         public double? RatingIMDb { get; set; }
         public double? SiteUsersRatings { get; set; }
         public int TypesId { get; set; }
-        public Types Types { get; set; }
+        public Types Types { get; set; } 
         public ICollection<Genres> GenresCollection { get; set; } = new List<Genres>();
         public ICollection<Country> CountryCollection { get; set; } = new List<Country>();
         public ICollection<Seasons> SeasonsList { get; set; } = new List<Seasons>();

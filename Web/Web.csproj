@@ -261,6 +261,7 @@
     </Compile>
     <Compile Include="Services\Enums.cs" />
     <Compile Include="Services\PageOption.cs" />
+    <Compile Include="Services\Service.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -335,6 +336,7 @@
     <Content Include="Views\Media\Details.cshtml" />
     <Content Include="Views\Series\GetSeason.cshtml" />
     <Content Include="Views\Series\DeleteSeason.cshtml" />
+    <Content Include="Views\Series\GetEpisode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

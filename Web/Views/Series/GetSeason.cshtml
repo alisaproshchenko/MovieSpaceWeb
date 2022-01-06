@@ -1,4 +1,5 @@
-﻿@model MoviesService.Dto.SeasonsDto
+﻿@using Web.Services
+@model MoviesService.Dto.SeasonsDto
 
 <div style="border: 1px solid red; width: 100px; height: 300px;" />
 <div>@Model.Name</div>
@@ -6,7 +7,13 @@
 <div>
     @foreach (var e in Model.EpisodesList)
     {
-        <p>@e.Name</p>
+        <div>
+            @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id, seasonId = Model.Id}, null)
+        </div>
+        if (Service.ReturnIdForDelete(e.Name) == Model.EpisodeCount)
+        {
+            <span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new {episodeId = e.Id},null)</span>
+        }
     }
 </div>
 <div>@Html.ActionLink("Add episode", "AddEpisode", "Series", new { id = Model.Id }, null)</div>
