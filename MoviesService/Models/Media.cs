@@ -18,7 +18,8 @@ namespace MoviesService.Models
         public string Cast { get; set; }
         [Required]
         public string Plot { get; set; }
-        public int? BudgetAndBoxOffice { get; set; }
+        public string Budget { get; set; }
+        public string BoxOffice { get; set; }
         public double? RatingIMDb { get; set; }
         public double? SiteUsersRatings { get; set; }
         public int SeasonCount { get; set; } = 0;
