@@ -179,6 +179,10 @@
     <Compile Include="Migrations\202201061412167_SeedDataV2.designer.cs">
       <DependentUpon>202201061412167_SeedDataV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201071307301_add-trailerLink.cs" />
+    <Compile Include="Migrations\202201071307301_add-trailerLink.designer.cs">
+      <DependentUpon>202201071307301_add-trailerLink.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
@@ -221,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201061412167_SeedDataV2.resx">
       <DependentUpon>202201061412167_SeedDataV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201071307301_add-trailerLink.resx">
+      <DependentUpon>202201071307301_add-trailerLink.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

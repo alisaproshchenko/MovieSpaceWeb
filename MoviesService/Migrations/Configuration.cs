@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using IMDbApiLib;
 using MoviesService.IMDbApi;
 using MoviesService.Models;
@@ -14,19 +17,17 @@ namespace MoviesService.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override async void Seed(MoviesService.Context.MediaDbContext context)
+        protected override void Seed(MoviesService.Context.MediaDbContext context)
         {
-            var apiLib = new ApiLib("k_ag12ki7h");
+            var apiLib = new ApiLib("k_q2sbygme");
             var convertor = new ConvertorApiData();
-            var dataApi = await apiLib.Top250MoviesAsync();
+            var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
 
             var searchResults = dataApi.Items;
 
-            var modeList = new List<Media>();
-
             for (var i = 1; i < 4; i++)
             {
-                var movieData = await apiLib.TitleAsync(searchResults[i].Id);
+                var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[i].Id)).Result;
 
                 var model = new Media
                 {
@@ -39,17 +40,26 @@ namespace MoviesService.Migrations
                     Plot = movieData.Plot,
                     Budget = movieData.BoxOffice.Budget,
                     BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
-                    Types = new Types { Name = movieData.Type },
                     RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
-                    CountryCollection = convertor.Countries(movieData.Countries),
-                    GenresCollection = convertor.Genres(movieData.GenreList)
+                    LinkEmbed = movieData.Trailer.LinkEmbed,
+                    Types = context.TypesTable.FirstOrDefault(x => x.Name == movieData.Type),
                 };
 
-                modeList.Add(model);
+                var genresList = convertor.Genres(movieData.GenreList);
+                var countriesList = convertor.Countries(movieData.Countries);
+                foreach (var genre in genresList)
+                {
+                    model.GenresCollection.Add(context.GenresTable.FirstOrDefault(x => x.Name == genre.Name));
+                }
+
+                foreach (var country in countriesList)
+                {
+                    model.CountryCollection.Add(context.CountriesTable.FirstOrDefault(x => x.Name == country.Name));
+                }
+
+                context.MediaTable.AddOrUpdate(
+                    a => new { a.IMDbMovieId }, model);
             }
-
-
-            context.MediaTable.AddOrUpdate(modeList.ToArray());
             context.SaveChanges();
         }
     }
