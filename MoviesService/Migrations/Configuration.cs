@@ -44,7 +44,6 @@ namespace MoviesService.Migrations
                     Types = context.TypesTable.FirstOrDefault(x => x.Name == movieData.Type),
                     LinkEmbed = movieData?.Trailer?.LinkEmbed
                 };
-
                 var genresList = convertor.Genres(movieData.GenreList);
                 var countriesList = convertor.Countries(movieData.Countries);
                 foreach (var genre in genresList)
