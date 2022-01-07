@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using MoviesService.Data;
-using MoviesService.Models;
+﻿using MoviesService.Data;
 
 namespace MoviesService.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MoviesService.Context.MediaDbContext>
     {
@@ -23,8 +18,7 @@ namespace MoviesService.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            context.MediaTable.AddOrUpdate(
-                a => new { a.IMDbMovieId}, SeedTop250IMDb.TestList.ToArray());
+            context.MediaTable.AddRange(SeedTop250IMDb.TestList.ToArray());
 
             await context.SaveChangesAsync();
         }
