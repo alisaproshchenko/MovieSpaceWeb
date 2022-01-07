@@ -19,13 +19,13 @@ namespace MoviesService.Migrations
 
         protected override void Seed(MoviesService.Context.MediaDbContext context)
         {
-            var apiLib = new ApiLib("k_q2sbygme");
+            var apiLib = new ApiLib("k_tr3w2t7j");
             var convertor = new ConvertorApiData();
             var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
 
             var searchResults = dataApi.Items;
 
-            for (var i = 1; i < 4; i++)
+            for (var i = 40; i < 50; i++)
             {
                 var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[i].Id)).Result;
 
@@ -41,8 +41,8 @@ namespace MoviesService.Migrations
                     Budget = movieData.BoxOffice.Budget,
                     BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
                     RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
-                    LinkEmbed = movieData.Trailer.LinkEmbed,
                     Types = context.TypesTable.FirstOrDefault(x => x.Name == movieData.Type),
+                    LinkEmbed = movieData?.Trailer?.LinkEmbed
                 };
 
                 var genresList = convertor.Genres(movieData.GenreList);
