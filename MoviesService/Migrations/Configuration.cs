@@ -1,4 +1,7 @@
-﻿using MoviesService.Data;
+﻿using System.Collections.Generic;
+using IMDbApiLib;
+using MoviesService.IMDbApi;
+using MoviesService.Models;
 
 namespace MoviesService.Migrations
 {
@@ -13,14 +16,47 @@ namespace MoviesService.Migrations
 
         protected override async void Seed(MoviesService.Context.MediaDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var apiLib = new ApiLib("k_ag12ki7h");
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            var convertor = new ConvertorApiData();
 
-            context.MediaTable.AddRange(SeedTop250IMDb.TestList.ToArray());
+            var dataApi = await apiLib.Top250MoviesAsync();
 
-            await context.SaveChangesAsync();
+            var searchResults = dataApi.Items;
+
+            for (var i = 1; i < 4; i++)
+            {
+                var movieData = await apiLib.TitleAsync(searchResults[i].Id);
+
+                var model = new Media
+                {
+                    Id = i,
+                    IMDbMovieId = movieData.Id,
+                    Name = movieData.Title,
+                    Poster = movieData.Image,
+                    Year = convertor.StrToInt(movieData.Year),
+                    Cast = convertor.Actors(movieData.ActorList),
+                    Plot = movieData.Plot,
+                    Budget = movieData.BoxOffice.Budget,
+                    BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
+                    RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
+                };
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
         }
     }
 }
