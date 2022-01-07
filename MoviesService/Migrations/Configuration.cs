@@ -17,12 +17,12 @@ namespace MoviesService.Migrations
         protected override async void Seed(MoviesService.Context.MediaDbContext context)
         {
             var apiLib = new ApiLib("k_ag12ki7h");
-
             var convertor = new ConvertorApiData();
-
             var dataApi = await apiLib.Top250MoviesAsync();
 
             var searchResults = dataApi.Items;
+
+            var modeList = new List<Media>();
 
             for (var i = 1; i < 4; i++)
             {
@@ -39,24 +39,18 @@ namespace MoviesService.Migrations
                     Plot = movieData.Plot,
                     Budget = movieData.BoxOffice.Budget,
                     BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
+                    Types = new Types { Name = movieData.Type },
                     RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
+                    CountryCollection = convertor.Countries(movieData.Countries),
+                    GenresCollection = convertor.Genres(movieData.GenreList)
                 };
 
-
-
-
-
-
-
+                modeList.Add(model);
             }
 
 
-
-
-
-
-
-
+            context.MediaTable.AddOrUpdate(modeList.ToArray());
+            context.SaveChanges();
         }
     }
 }
