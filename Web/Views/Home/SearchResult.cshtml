@@ -1,28 +1,41 @@
-﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Models.Media>
+﻿@model List<MoviesService.Models.Media>
 
 @if (Model != null)
 {
-    <h5>@Model.Entity.IMDbMovieId </h5>
-    <h5>@Model.Entity.Name </h5>
-    <img src="@Model.Entity.Poster" width="200px" />
-    <h5>@Model.Entity.Year </h5>
-    <h5>@Model.Entity.Cast </h5>
-    <h5>@Model.Entity.Plot </h5>
-    <h5>@Model.Entity.Budget </h5>
-    <h5>@Model.Entity.BoxOffice</h5>
+    foreach (var rezult in Model)
+    {
+        //<h5>@rezult.IMDbMovieId </h5>
+        @*<ul>
+            <p>@rezult.Name </p>
+            <img src="@rezult.Poster" width="100px"/>
+            <p>@rezult.Year </p>
+            <p>@rezult.Types.Name </p>
+            <p>@rezult.RatingIMDb </p>
+        </ul>*@
 
-    <h5>@Model.Entity.Types.Name </h5>
-    <h5>@Model.Entity.RatingIMDb </h5>
-    <h5>Countries</h5>
-foreach (var genre in Model.Entity.CountryCollection)
-{
-    <p> @genre.Name </p>
-}
-    <h5>Genres</h5>
-foreach (var genre in Model.Entity.GenresCollection)
-{
-    <p> @genre.Name </p>
-}
+        <div style="border: 1px solid red; width:initial; height: 300px;">
+            <img src="@rezult.Poster" height="300" width="200"/>
+            <div style="width: 300px">@rezult.Name </div>
+            <div style="width: 300px">@rezult.Year </div>
+            <div style="width: 300px">@rezult.Types.Name </div>
+            <div style="width: 300px">@rezult.RatingIMDb </div>
+        </div>
+
+        //<h5>@rezult.Cast </h5>
+        //<h5>@rezult.Plot </h5>
+        //<h5>@rezult.Budget </h5>
+        //<h5>@rezult.BoxOffice</h5>
+        //<h5>Countries</h5>
+        //foreach (var country in rezult.CountryCollection)
+        //{
+        //    <p> @country.Name </p>
+        //}
+        //<h5>Genres</h5>
+        //foreach (var genre in rezult.GenresCollection)
+        //{
+        //    <p> @genre.Name </p>
+        //}
+    }
 }
 else
 {

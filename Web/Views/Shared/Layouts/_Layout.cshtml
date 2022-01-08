@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
     @Html.Partial("Partials/MetaPartial")
     <title>@ViewBag.Title - Movie Space</title>
@@ -21,16 +20,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-                    {
-                        <h3 style="color: gold">Input name</h3>
-                        <input name="searchData" type="text"/>
-                        <button name="action" value="search">Search</button>
-
-                    <li>@Html.ActionLink("Search", "SearchMainPage", "SearchMovie")</li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>Hello, @User.Identity.Name</li>
+                    <li style="top:13px">
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                        {
+                            <input name="searchData" type="text" placeholder="print name for search"/>
+                            <button name="action" value="search">Search</button>
+                        }</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+<li>Hello, @User.Identity.Name</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else

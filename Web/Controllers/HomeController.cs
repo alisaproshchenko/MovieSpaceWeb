@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using MoviesService.Context;
 using MoviesService.IMDbApi;
@@ -19,15 +20,15 @@ namespace Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(string searchData)
+        public ActionResult Search(string searchData)
         {
-            var model = context.MediaTable.Include("Types").Include("GenresCollection").Include("CountryCollection").Include("SeasonsList").FirstOrDefault(x => x.Name == searchData);
-            if (model == null)
-            {
-                var searchApi = new SearchMovieInIMDbApi();
-                model = searchApi.SearchMedia(searchData);
-            }
-            return View("SearchResult", new GenericEntitiesViewModel<Media>(model));
+            //var model = context.MediaTable.Include("Types").Include("GenresCollection").Include("CountryCollection").Include("SeasonsList").FirstOrDefault(x => x.Name == searchData);
+            //if (model == null)
+            //{
+                var searchApi = new SearchMovieInIMDbApi("k_jsvg94yx");
+                var model = searchApi.SearchMedia(searchData);
+            //}
+            return View("SearchResult", model);
         }
 
         public ActionResult About()
