@@ -5,6 +5,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CountryController : Controller
     {
         private readonly CountryService _service;
@@ -14,38 +15,32 @@ namespace Web.Controllers.AdminControllers
         {
             return View(new CountryViewModel(_service.Entities, currentPage));
         }
-        [Authorize(Roles = "Administrator")]
         public ActionResult Add()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult Add(CountryDto entity)
         {
             _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
-        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(CountryDto entity)
         {
             return View(new GenericEntitiesViewModel<CountryDto>(entity));
         }
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult Update(CountryDto entity)
         {
             _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
-        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult Delete(CountryDto entity)
         {
             return View(new GenericEntitiesViewModel<CountryDto>(entity));
         }
-        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(CountryDto entity)
         {

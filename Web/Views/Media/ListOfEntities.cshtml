@@ -18,8 +18,11 @@
         {
             <p> - @e.Name</p>
         }
-        <div>@Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, null)</div>
-        <div>@Html.ActionLink("Edit", "Edit", "Media", new { id = entity.Id }, null)</div>
+        @if (User.IsInRole("Administrator"))
+        {
+            <div>@Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, null)</div>
+            <div>@Html.ActionLink("Edit", "Edit", "Media", new { id = entity.Id }, null)</div>
+        }
     </div>
 }
 

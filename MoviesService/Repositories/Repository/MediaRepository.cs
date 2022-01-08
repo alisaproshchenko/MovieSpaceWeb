@@ -70,5 +70,11 @@ namespace MoviesService.Repositories.Repository
             _context.MediaTable.AddOrUpdate(entity);
             _context.SaveChanges();
         }
+
+        public Media SearchMedia(string searchData)
+        {
+            var model = _context.MediaTable.Include("Types").Include("GenresCollection").Include("CountryCollection").Include("SeasonsList").FirstOrDefault(x => x.Name == searchData);
+            return model;
+        }
     }
 }

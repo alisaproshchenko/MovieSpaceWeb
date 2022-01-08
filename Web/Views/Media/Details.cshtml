@@ -20,12 +20,24 @@
 }
 
 
-@if (Model.Entity.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))
+
+
+
+
+@if (User.IsInRole("Administrator"))
 {
-<div>@Html.ActionLink("Add season", "AddSeason", "Series", new { mediaId = Model.Entity.Id }, null)</div> foreach (var e in Model.Entity.SeasonsList)
-                {
-<span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span> if (Service.ReturnIdForDelete(e.Name) == Model.Entity.SeasonCount)
-                    {
-<span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new { seasonId = e.Id }, null)</span>}
-                }
+    if (Model.Entity.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))
+    {
+        <div>
+            @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Entity.Id}, null)
+        </div>
+        foreach (var e in Model.Entity.SeasonsList)
+        {
+            <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
+            if (Service.ReturnIdForDelete(e.Name) == Model.Entity.SeasonCount)
+            {
+                <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new { seasonId = e.Id }, null)</span>
             }
+        }
+    }
+}

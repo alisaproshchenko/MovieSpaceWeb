@@ -4,7 +4,7 @@
 {
     <h5>@Model.Entity.IMDbMovieId </h5>
     <h5>@Model.Entity.Name </h5>
-    <img src="@Model.Entity.Poster" width="200px" />
+    <img src="@Model.Entity.Poster" width="200" alt=""/>
     <h5>@Model.Entity.Year </h5>
     <h5>@Model.Entity.Cast </h5>
     <h5>@Model.Entity.Plot </h5>
@@ -29,3 +29,4 @@ else
     <div>Unknown movie</div>
 }
 
+<div>@Html.ActionLink(Model.Entity.Name, "Details", "Media",new {id = Model.Entity.Id},null)</div>
