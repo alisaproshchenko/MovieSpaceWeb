@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using IMDbApiLib;
 using MoviesService.IMDbApi;
@@ -57,13 +58,13 @@ namespace MoviesService.Migrations
             //}
             //context.SaveChanges();
 
-            var apiLib = new ApiLib("k_q2sbygme");
+            var apiLib = new ApiLib("k_jsvg94yx");
             var convertor = new ConvertorApiData();
             var dataApi = Task.Run(() => apiLib.Top250TVsAsync()).Result;
 
             var searchResults = dataApi.Items;
 
-            for (var i = 0; i < 1; i++)
+            for (var i = 60; i < 61; i++)
             {
                 var id = i;
                 var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
@@ -79,7 +80,7 @@ namespace MoviesService.Migrations
                     Budget = movieData.BoxOffice.Budget,
                     BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
                     RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
-                    Types = context.TypesTable.FirstOrDefault(x => x.Name == movieData.Type)
+                    Types = context.TypesTable.FirstOrDefault(x => x.Name == "Series")
                 };
 
                 var genresList = convertor.Genres(movieData.GenreList);
@@ -98,20 +99,27 @@ namespace MoviesService.Migrations
                 for (var j = 0; j < movieData.TvSeriesInfo.Seasons.Count; ++j)
                 {
                     ++model.SeasonCount;
+                    var seasonNumber = model.SeasonCount;
+                    var seasonInfo = Task.Run(() => apiLib.SeasonEpisodesAsync(model.IMDbMovieId, seasonNumber)).Result;
                     var season = new Seasons()
                     {
                         Name = "Season" + model.SeasonCount.ToString(),
-                        Media = model
+                        Media = model,
+                        Year = Convert.ToInt32(seasonInfo.Year)
                     };
                     context.SeasonsTable.Add(season);
                     model.SeasonsList.Add(context.SeasonsTable.FirstOrDefault(x => x.Id == season.Id));
-                    for (var z = 0; z < 10; ++z)
+                    foreach (var z in seasonInfo.Episodes)
                     {
                         ++season.EpisodeCount;
                         var episode = new Episode()
                         {
                             Name = "Episode" + season.EpisodeCount.ToString(),
-                            Seasons = season
+                            Seasons = season,
+                            Plot = z.Plot,
+                            Image = z.Image,
+                            Year = z.Year,
+                            RatingValue = z.RatingValue
                         };
                         context.EpisodeTable.Add(episode);
                         season.EpisodesList.Add(context.EpisodeTable.FirstOrDefault(x => x.Id == episode.Id));

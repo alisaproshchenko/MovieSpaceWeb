@@ -182,6 +182,10 @@
     <Compile Include="Migrations\202201071307301_add-trailerLink.designer.cs">
       <DependentUpon>202201071307301_add-trailerLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201081153269_change-episode-model.cs" />
+    <Compile Include="Migrations\202201081153269_change-episode-model.designer.cs">
+      <DependentUpon>202201081153269_change-episode-model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
@@ -227,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201071307301_add-trailerLink.resx">
       <DependentUpon>202201071307301_add-trailerLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201081153269_change-episode-model.resx">
+      <DependentUpon>202201081153269_change-episode-model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
