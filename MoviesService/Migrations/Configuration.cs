@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using IMDbApiLib;
 using MoviesService.IMDbApi;
 using MoviesService.Models;
@@ -14,21 +15,61 @@ namespace MoviesService.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override async void Seed(MoviesService.Context.MediaDbContext context)
+        protected override void Seed(MoviesService.Context.MediaDbContext context)
         {
-            var apiLib = new ApiLib("k_d99sty8t");
+            //var apiLib = new ApiLib("k_q2sbygme");
+            //var convertor = new ConvertorApiData();
+            //var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
+            //var searchResults = dataApi.Items;
+
+            //for (var i = 240; i < 250; ++i)
+            //{
+            //    var id = i;
+            //    var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
+            //    var model = new Media
+            //    {
+            //        Id = i,
+            //        IMDbMovieId = movieData.Id,
+            //        Name = movieData.Title,
+            //        Poster = movieData.Image,
+            //        Year = convertor.StrToInt(movieData.Year),
+            //        Cast = convertor.Actors(movieData.ActorList),
+            //        Plot = movieData.Plot,
+            //        Budget = movieData.BoxOffice.Budget,
+            //        BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
+            //        RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
+            //        Types = context.TypesTable.FirstOrDefault(x => x.Name == movieData.Type)
+            //    };
+            //    var genresList = convertor.Genres(movieData.GenreList);
+            //    var countriesList = convertor.Countries(movieData.Countries);
+            //    foreach (var genre in genresList)
+            //    {
+            //        model.GenresCollection.Add(context.GenresTable.FirstOrDefault(x => x.Name == genre.Name));
+            //    }
+
+            //    foreach (var country in countriesList)
+            //    {
+            //        model.CountryCollection.Add(context.CountriesTable.FirstOrDefault(x => x.Name == country.Name));
+            //    }
+
+            //    context.MediaTable.AddOrUpdate(
+            //        a => new { a.IMDbMovieId }, model);
+            //}
+            //context.SaveChanges();
+
+            var apiLib = new ApiLib("k_q2sbygme");
             var convertor = new ConvertorApiData();
-            var dataApi = await apiLib.Top250MoviesAsync();
+            var dataApi = Task.Run(() => apiLib.Top250TVsAsync()).Result;
 
             var searchResults = dataApi.Items;
 
-            for (var i = 40; i < 50; i++)
+            for (var i = 0; i < 1; i++)
             {
-                var movieData = await apiLib.TitleAsync(searchResults[i].Id);
+                var id = i;
+                var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
 
                 var model = new Media
                 {
-                    Id = i,
                     IMDbMovieId = movieData.Id,
                     Name = movieData.Title,
                     Poster = movieData.Image,
@@ -38,9 +79,9 @@ namespace MoviesService.Migrations
                     Budget = movieData.BoxOffice.Budget,
                     BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
                     RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
-                    Types = context.TypesTable.FirstOrDefault(x => x.Name == movieData.Type),
-                    LinkEmbed = movieData?.Trailer?.LinkEmbed
+                    Types = context.TypesTable.FirstOrDefault(x => x.Name == movieData.Type)
                 };
+
                 var genresList = convertor.Genres(movieData.GenreList);
                 var countriesList = convertor.Countries(movieData.Countries);
                 foreach (var genre in genresList)
@@ -53,10 +94,34 @@ namespace MoviesService.Migrations
                     model.CountryCollection.Add(context.CountriesTable.FirstOrDefault(x => x.Name == country.Name));
                 }
 
+
+                for (var j = 0; j < movieData.TvSeriesInfo.Seasons.Count; ++j)
+                {
+                    ++model.SeasonCount;
+                    var season = new Seasons()
+                    {
+                        Name = "Season" + model.SeasonCount.ToString(),
+                        Media = model
+                    };
+                    context.SeasonsTable.Add(season);
+                    model.SeasonsList.Add(context.SeasonsTable.FirstOrDefault(x => x.Id == season.Id));
+                    for (var z = 0; z < 10; ++z)
+                    {
+                        ++season.EpisodeCount;
+                        var episode = new Episode()
+                        {
+                            Name = "Episode" + season.EpisodeCount.ToString(),
+                            Seasons = season
+                        };
+                        context.EpisodeTable.Add(episode);
+                        season.EpisodesList.Add(context.EpisodeTable.FirstOrDefault(x => x.Id == episode.Id));
+                    }
+                }
+
                 context.MediaTable.AddOrUpdate(
                     a => new { a.IMDbMovieId }, model);
             }
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
     }
 }
