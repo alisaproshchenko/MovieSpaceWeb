@@ -7,6 +7,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers.AdminControllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private readonly IService<ApplicationUserDto> _userService;

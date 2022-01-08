@@ -1,9 +1,11 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+using System;
+using System.Linq;
 using MoviesService.Context;
 using MoviesService.IMDbApi;
 using MoviesService.Models;
 using Web.ViewModels;
+using System.Web.Mvc;
+
 
 namespace Web.Controllers
 {

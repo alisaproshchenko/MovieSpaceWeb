@@ -1,12 +1,10 @@
-﻿
-@model IdentityService.Models.LoginModel
+﻿@model Web.ViewModels.Identity.LoginModel
 
 @{
     ViewBag.Title = "Login";
 }
 
-<h2>Вход на сайт</h2>
-
+<h2>Welcome!</h2>
 
 @using (Html.BeginForm())
 {
@@ -16,13 +14,15 @@
         @Html.ValidationSummary()
         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
         <p>
-            <label>UserName</label><br />
+            <label>Username</label><br />
             @Html.EditorFor(x => x.UserName)
         </p>
         <p>
             <label>Password</label><br />
             @Html.EditorFor(x => x.Password)
         </p>
-        <p><button type="submit">Войти</button></p>
+        <p><button type="submit">Submit</button></p>
     </div>
 }
+<p>You don`t have an account yet? 
+    You should @Html.ActionLink("Register", "Register", "Account") then!</p> 
