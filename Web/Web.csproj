@@ -259,7 +259,6 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdminControllers\GenreController.cs" />
-    <Compile Include="Controllers\SearchMovieController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -342,8 +341,7 @@
     <Content Include="Views\Series\GetSeason.cshtml" />
     <Content Include="Views\Series\DeleteSeason.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\SearchMovie\SearchMainPage.cshtml" />
-    <Content Include="Views\SearchMovie\SearchResult.cshtml" />
+    <Content Include="Views\Home\SearchResult.cshtml" />
     <Content Include="Views\Series\GetEpisode.cshtml" />
     <Content Include="Views\Series\DeleteEpisode.cshtml" />
   </ItemGroup>

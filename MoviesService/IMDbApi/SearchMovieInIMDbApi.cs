@@ -1,4 +1,6 @@
-﻿using IMDbApiLib;
+﻿using System.Collections.Generic;
+using System.Linq;
+using IMDbApiLib;
 using MoviesService.Dto;
 using System.Threading.Tasks;
 using MoviesService.Models;
@@ -12,7 +14,7 @@ namespace MoviesService.IMDbApi
 
         public SearchMovieInIMDbApi()
         {
-            _apiLib = new ApiLib("k_d99sty8t");
+            _apiLib = new ApiLib("k_sq5f8w2a");
         }
 
         public SearchMovieInIMDbApi(string key)
@@ -20,15 +22,15 @@ namespace MoviesService.IMDbApi
             _apiLib = new ApiLib(key);
         }
 
-        public async Task<MediaDto> SearchAsynTask(string name)
+        public Media SearchMedia(string name)
         {
-            var dataApi = await _apiLib.SearchAsync(name);
+            var dataApi = Task.Run(() =>  _apiLib.SearchAsync(name)).Result;
 
             var searchResults = dataApi.Results;
 
-            var movieData = await _apiLib.TitleAsync(searchResults[0].Id);
+            var movieData = Task.Run(() =>  _apiLib.TitleAsync(searchResults[0].Id)).Result;
 
-            var model = new MediaDto
+            var model = new Media
             {
                 IMDbMovieId = movieData.Id,
                 Name = movieData.Title,

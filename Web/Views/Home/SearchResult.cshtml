@@ -1,0 +1,31 @@
+﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Models.Media>
+
+@if (Model != null)
+{
+    <h5>@Model.Entity.IMDbMovieId </h5>
+    <h5>@Model.Entity.Name </h5>
+    <img src="@Model.Entity.Poster" width="200px" />
+    <h5>@Model.Entity.Year </h5>
+    <h5>@Model.Entity.Cast </h5>
+    <h5>@Model.Entity.Plot </h5>
+    <h5>@Model.Entity.Budget </h5>
+    <h5>@Model.Entity.BoxOffice</h5>
+
+    <h5>@Model.Entity.Types.Name </h5>
+    <h5>@Model.Entity.RatingIMDb </h5>
+    <h5>Countries</h5>
+foreach (var genre in Model.Entity.CountryCollection)
+{
+    <p> @genre.Name </p>
+}
+    <h5>Genres</h5>
+foreach (var genre in Model.Entity.GenresCollection)
+{
+    <p> @genre.Name </p>
+}
+}
+else
+{
+    <div>Unknown movie</div>
+}
+
