@@ -23,6 +23,10 @@ namespace MoviesService.Repositories.Repository
             var season = _context.SeasonsTable.FirstOrDefault(t => t.Id == id);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == season.MediaId);
             --media.SeasonCount;
+            foreach (var episode in season.EpisodesList)
+            {
+                _context.EpisodeTable.Remove(episode);
+            }
             _context.SeasonsTable.Remove(season);
             _context.SaveChanges();
         }

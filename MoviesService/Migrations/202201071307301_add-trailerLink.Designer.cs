@@ -7,13 +7,13 @@ namespace MoviesService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class SeedDataV2 : IMigrationMetadata
+    public sealed partial class addtrailerLink : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedDataV2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addtrailerLink));
         
         string IMigrationMetadata.Id
         {
-            get { return "202201061412167_SeedDataV2"; }
+            get { return "202201071307301_add-trailerLink"; }
         }
         
         string IMigrationMetadata.Source

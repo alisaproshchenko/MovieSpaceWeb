@@ -162,7 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\MediaDbContext.cs" />
-    <Compile Include="Data\SedTop250IMDb.cs" />
     <Compile Include="Dto\CountryDto.cs" />
     <Compile Include="Dto\EpisodeDto.cs" />
     <Compile Include="Dto\GenresDto.cs" />
@@ -175,9 +174,13 @@
     <Compile Include="Migrations\202201061403594_SeedData.designer.cs">
       <DependentUpon>202201061403594_SeedData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202201061412167_SeedDataV2.cs" />
-    <Compile Include="Migrations\202201061412167_SeedDataV2.designer.cs">
-      <DependentUpon>202201061412167_SeedDataV2.cs</DependentUpon>
+    <Compile Include="Migrations\202201071307301_add-trailerLink.cs" />
+    <Compile Include="Migrations\202201071307301_add-trailerLink.designer.cs">
+      <DependentUpon>202201071307301_add-trailerLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201081153269_change-episode-model.cs" />
+    <Compile Include="Migrations\202201081153269_change-episode-model.designer.cs">
+      <DependentUpon>202201081153269_change-episode-model.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
@@ -219,8 +222,11 @@
     <EmbeddedResource Include="Migrations\202201061403594_SeedData.resx">
       <DependentUpon>202201061403594_SeedData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202201061412167_SeedDataV2.resx">
-      <DependentUpon>202201061412167_SeedDataV2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201071307301_add-trailerLink.resx">
+      <DependentUpon>202201071307301_add-trailerLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201081153269_change-episode-model.resx">
+      <DependentUpon>202201081153269_change-episode-model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +234,9 @@
       <Project>{62e6c311-3d35-4482-b064-30bfb0f77eef}</Project>
       <Name>IdentityService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />

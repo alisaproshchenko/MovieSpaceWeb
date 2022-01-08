@@ -21,6 +21,12 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                        <h3 style="color: gold">Input name</h3>
+                        <input name="searchData" type="text"/>
+                        <button name="action" value="search">Search</button>
+
                     <li>@Html.ActionLink("Search", "SearchMainPage", "SearchMovie")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -30,6 +36,7 @@
                     else
                     {
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
+
                     }
                 </ul>
             </div>

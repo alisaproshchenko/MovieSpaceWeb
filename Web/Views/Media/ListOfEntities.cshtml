@@ -9,6 +9,7 @@
         <div>@Html.ActionLink(@entity.Name, "Details", "Media", new { id = entity.Id }, null)</div>
         <div>@entity.Id</div>
         <div>@entity.TypesId</div>
+        <img width="200" height="200" src="@entity.Poster"/>
         @foreach (var e in entity.GenresCollection)
         {
             <p>+ @e.Name</p>

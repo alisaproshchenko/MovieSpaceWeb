@@ -21,6 +21,11 @@
             <br />
             @Html.EditorFor(m => m.Entity.Plot)
         </p>
+        <p>
+            @Html.LabelFor(m => m.Entity.LinkEmbed, "Trailer link")
+            <br />
+            @Html.EditorFor(m => m.Entity.LinkEmbed)
+        </p>
         <p><input type="submit" value="Send" /></p>
     </fieldset>
 }
