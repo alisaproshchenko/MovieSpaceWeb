@@ -162,7 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\MediaDbContext.cs" />
-    <Compile Include="Data\SeedTop250IMDb.cs" />
     <Compile Include="Dto\CountryDto.cs" />
     <Compile Include="Dto\EpisodeDto.cs" />
     <Compile Include="Dto\GenresDto.cs" />
@@ -235,6 +234,9 @@
       <Project>{62e6c311-3d35-4482-b064-30bfb0f77eef}</Project>
       <Name>IdentityService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
