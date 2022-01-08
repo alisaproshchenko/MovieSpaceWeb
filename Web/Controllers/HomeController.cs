@@ -25,7 +25,7 @@ namespace Web.Controllers
             //var model = context.MediaTable.Include("Types").Include("GenresCollection").Include("CountryCollection").Include("SeasonsList").FirstOrDefault(x => x.Name == searchData);
             //if (model == null)
             //{
-                var searchApi = new SearchMovieInIMDbApi("k_jsvg94yx");
+                var searchApi = new SearchMovieInIMDbApi("k_zx5739ek");
                 var model = searchApi.SearchMedia(searchData);
             //}
             return View("SearchResult", model);

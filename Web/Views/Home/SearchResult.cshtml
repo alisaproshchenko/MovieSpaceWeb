@@ -6,21 +6,28 @@
     {
         //<h5>@rezult.IMDbMovieId </h5>
         @*<ul>
+                <p>@rezult.Name </p>
+                <img src="@rezult.Poster" width="100px"/>
+                <p>@rezult.Year </p>
+                <p>@rezult.Types.Name </p>
+                <p>@rezult.RatingIMDb </p>
+            </ul>*@
+
+        @*<div style="border: 1px solid red; width:initial; height: 300px;">
+                <img src="@rezult.Poster" height="300" width="200"/>
+                <div style="width: 300px">@rezult.Name </div>
+                <div style="width: 300px">@rezult.Year </div>
+                <div style="width: 300px">@rezult.Types.Name </div>
+                <div style="width: 300px">@rezult.RatingIMDb </div>
+            </div>*@
+
+        <div class="test-div-c">
+            <img src="@rezult.Poster" height="300" width="200"/>
             <p>@rezult.Name </p>
-            <img src="@rezult.Poster" width="100px"/>
             <p>@rezult.Year </p>
             <p>@rezult.Types.Name </p>
             <p>@rezult.RatingIMDb </p>
-        </ul>*@
-
-        <div style="border: 1px solid red; width:initial; height: 300px;">
-            <img src="@rezult.Poster" height="300" width="200"/>
-            <div style="width: 300px">@rezult.Name </div>
-            <div style="width: 300px">@rezult.Year </div>
-            <div style="width: 300px">@rezult.Types.Name </div>
-            <div style="width: 300px">@rezult.RatingIMDb </div>
         </div>
-
         //<h5>@rezult.Cast </h5>
         //<h5>@rezult.Plot </h5>
         //<h5>@rezult.Budget </h5>
@@ -42,3 +49,11 @@ else
     <div>Unknown movie</div>
 }
 
+<style>
+    .test-div-c {
+        background: red;
+        display: inline-grid;
+        white-space: normal;
+        width: min-content;
+    }
+</style>
