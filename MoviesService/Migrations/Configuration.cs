@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using IMDbApiLib;
 using MoviesService.IMDbApi;
 using MoviesService.Models;
@@ -17,17 +14,17 @@ namespace MoviesService.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MoviesService.Context.MediaDbContext context)
+        protected override async void Seed(MoviesService.Context.MediaDbContext context)
         {
-            var apiLib = new ApiLib("k_tr3w2t7j");
+            var apiLib = new ApiLib("k_d99sty8t");
             var convertor = new ConvertorApiData();
-            var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
+            var dataApi = await apiLib.Top250MoviesAsync();
 
             var searchResults = dataApi.Items;
 
             for (var i = 40; i < 50; i++)
             {
-                var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[i].Id)).Result;
+                var movieData = await apiLib.TitleAsync(searchResults[i].Id);
 
                 var model = new Media
                 {
@@ -59,7 +56,7 @@ namespace MoviesService.Migrations
                 context.MediaTable.AddOrUpdate(
                     a => new { a.IMDbMovieId }, model);
             }
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }
