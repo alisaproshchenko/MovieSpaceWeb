@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MoviesService.Dto;
+using MoviesService.Repositories.Repository;
 using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Web.ViewModels;
@@ -13,18 +15,21 @@ namespace Web.Controllers.AdminControllers
         private readonly IServices<GenresDto> _genreServices;
         private readonly IServices<CountryDto> _countryServices;
         private readonly IServices<TypesDto> _typesServices;
+        private readonly LikeWatchedRepository _likeWatchedRepository;
 
         public MediaController(MediaService service, IServices<GenresDto> genreServices,
-            IServices<CountryDto> countryServices, IServices<TypesDto> typesServices)
+            IServices<CountryDto> countryServices, IServices<TypesDto> typesServices, LikeWatchedRepository likeWatchedRepository)
         {
             this._service = service;
             this._genreServices = genreServices;
             this._countryServices = countryServices;
             this._typesServices = typesServices;
+            this._likeWatchedRepository = likeWatchedRepository;
         }
 
         public ActionResult Details(MediaDto mediaDto)
         {
+            _likeWatchedRepository.Watch(User.Identity.GetUserId(), mediaDto.Id);
             return View(new GenericEntitiesViewModel<MediaDto>(_service.Entities.FirstOrDefault(x => x.Id == mediaDto.Id)));
         }
 

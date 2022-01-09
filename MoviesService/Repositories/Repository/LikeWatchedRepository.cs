@@ -9,50 +9,46 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
-        public void Like(string userId, int mediaId)
+        public void Like(int mediaId)
         {
-            var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.ApplicationUserId == userId);
+            var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
-            if (userToMedia == null)
-            {
-                userToMedia = new UsersToMedia();
-                userToMedia.ApplicationUserId = userId;
-                userToMedia.Liked = true;
-                userToMedia.Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
-                media.SiteUsersRatings ??= 0;
+            userToMedia.Liked = !userToMedia.Liked;
 
+            if (userToMedia.Liked)
                 ++media.SiteUsersRatings;
-            }
             else
-            {
-                userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
-                if (userToMedia != null)
-                {
-                    userToMedia.Liked = !userToMedia.Liked;
+                --media.SiteUsersRatings;
 
-                    if (userToMedia.Liked)
-                        ++media.SiteUsersRatings;
-                    else
-                        --media.SiteUsersRatings;
-                }
-                else
-                {
-                    userToMedia = new UsersToMedia();
-                    userToMedia.ApplicationUserId = userId;
-                    userToMedia.Liked = true;
-                    userToMedia.Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
-
-                    media.SiteUsersRatings ??= 0;
-
-                    ++media.SiteUsersRatings;
-                }
-            }
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
-            
-            _context.SaveChanges();
 
-   
+            _context.SaveChanges();
+        }
+
+        public void Watch(string userId, int mediaId)
+        {
+            var check = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
+            
+            if (check != null)
+            {
+                return;
+            }
+
+            var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
+
+            media.SiteUsersRatings ??= 0;
+
+            var userToMedia = new UsersToMedia
+            {
+                ApplicationUserId = userId,
+                Liked = false,
+                Watched = true,
+                Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
+            };
+            _context.UsersToMediaTable.AddOrUpdate(userToMedia);
+
+            _context.SaveChanges();
         }
     }
 }

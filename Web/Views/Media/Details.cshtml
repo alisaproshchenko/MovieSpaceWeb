@@ -24,7 +24,7 @@
 {
     
     <span style="font-size: 30px;">@Model.Entity.SiteUsersRatings</span>
-    <span>@Html.ActionLink("Like", "Like", "LikeWatched", new { userId = User.Identity.GetUserId(), movieId = Model.Entity.Id }, null)</span>
+    <span>@Html.ActionLink("Like", "Like", "LikeWatched", new { movieId = Model.Entity.Id }, null)</span>
     
     
     if (Model.Entity.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))

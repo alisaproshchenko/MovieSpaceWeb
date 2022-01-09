@@ -18,7 +18,7 @@ namespace Web.Controllers
         // GET: LikeWatched
         public ActionResult Like(string userId, int movieId)
         {
-            _repository.Like(userId, movieId);
+            _repository.Like(movieId);
             return RedirectToAction("Details", "Media", new {id = movieId });
         }
     }
