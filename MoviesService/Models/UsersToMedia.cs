@@ -9,7 +9,7 @@ namespace MoviesService.Models
         public int MediaId { get; set; }
         [Required]
         public Media Media { get; set; }
-        public bool Liked { get; set; } 
+        public bool Liked { get; set; }
         public bool Watched { get; set; }
     }
 }

@@ -58,78 +58,78 @@ namespace MoviesService.Migrations
             //}
             //context.SaveChanges();
 
-            var apiLib = new ApiLib("k_jsvg94yx");
-            var convertor = new ConvertorApiData();
-            var dataApi = Task.Run(() => apiLib.Top250TVsAsync()).Result;
+            //var apiLib = new ApiLib("k_jsvg94yx");
+            //var convertor = new ConvertorApiData();
+            //var dataApi = Task.Run(() => apiLib.Top250TVsAsync()).Result;
 
-            var searchResults = dataApi.Items;
+            //var searchResults = dataApi.Items;
 
-            for (var i = 60; i < 61; i++)
-            {
-                var id = i;
-                var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
+            //for (var i = 60; i < 61; i++)
+            //{
+            //    var id = i;
+            //    var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
 
-                var model = new Media
-                {
-                    IMDbMovieId = movieData.Id,
-                    Name = movieData.Title,
-                    Poster = movieData.Image,
-                    Year = convertor.StrToInt(movieData.Year),
-                    Cast = convertor.Actors(movieData.ActorList),
-                    Plot = movieData.Plot,
-                    Budget = movieData.BoxOffice.Budget,
-                    BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
-                    RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
-                    Types = context.TypesTable.FirstOrDefault(x => x.Name == "Series")
-                };
+            //    var model = new Media
+            //    {
+            //        IMDbMovieId = movieData.Id,
+            //        Name = movieData.Title,
+            //        Poster = movieData.Image,
+            //        Year = convertor.StrToInt(movieData.Year),
+            //        Cast = convertor.Actors(movieData.ActorList),
+            //        Plot = movieData.Plot,
+            //        Budget = movieData.BoxOffice.Budget,
+            //        BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
+            //        RatingIMDb = convertor.StrToDouble(movieData.IMDbRating),
+            //        Types = context.TypesTable.FirstOrDefault(x => x.Name == "Series")
+            //    };
 
-                var genresList = convertor.Genres(movieData.GenreList);
-                var countriesList = convertor.Countries(movieData.Countries);
-                foreach (var genre in genresList)
-                {
-                    model.GenresCollection.Add(context.GenresTable.FirstOrDefault(x => x.Name == genre.Name));
-                }
+            //    var genresList = convertor.Genres(movieData.GenreList);
+            //    var countriesList = convertor.Countries(movieData.Countries);
+            //    foreach (var genre in genresList)
+            //    {
+            //        model.GenresCollection.Add(context.GenresTable.FirstOrDefault(x => x.Name == genre.Name));
+            //    }
 
-                foreach (var country in countriesList)
-                {
-                    model.CountryCollection.Add(context.CountriesTable.FirstOrDefault(x => x.Name == country.Name));
-                }
+            //    foreach (var country in countriesList)
+            //    {
+            //        model.CountryCollection.Add(context.CountriesTable.FirstOrDefault(x => x.Name == country.Name));
+            //    }
 
 
-                for (var j = 0; j < movieData.TvSeriesInfo.Seasons.Count; ++j)
-                {
-                    ++model.SeasonCount;
-                    var seasonNumber = model.SeasonCount;
-                    var seasonInfo = Task.Run(() => apiLib.SeasonEpisodesAsync(model.IMDbMovieId, seasonNumber)).Result;
-                    var season = new Seasons()
-                    {
-                        Name = "Season" + model.SeasonCount.ToString(),
-                        Media = model,
-                        Year = Convert.ToInt32(seasonInfo.Year)
-                    };
-                    context.SeasonsTable.Add(season);
-                    model.SeasonsList.Add(context.SeasonsTable.FirstOrDefault(x => x.Id == season.Id));
-                    foreach (var z in seasonInfo.Episodes)
-                    {
-                        ++season.EpisodeCount;
-                        var episode = new Episode()
-                        {
-                            Name = "Episode" + season.EpisodeCount.ToString(),
-                            Seasons = season,
-                            Plot = z.Plot,
-                            Image = z.Image,
-                            Year = z.Year,
-                            RatingValue = z.RatingValue
-                        };
-                        context.EpisodeTable.Add(episode);
-                        season.EpisodesList.Add(context.EpisodeTable.FirstOrDefault(x => x.Id == episode.Id));
-                    }
-                }
+            //    for (var j = 0; j < movieData.TvSeriesInfo.Seasons.Count; ++j)
+            //    {
+            //        ++model.SeasonCount;
+            //        var seasonNumber = model.SeasonCount;
+            //        var seasonInfo = Task.Run(() => apiLib.SeasonEpisodesAsync(model.IMDbMovieId, seasonNumber)).Result;
+            //        var season = new Seasons()
+            //        {
+            //            Name = "Season" + model.SeasonCount.ToString(),
+            //            Media = model,
+            //            Year = Convert.ToInt32(seasonInfo.Year)
+            //        };
+            //        context.SeasonsTable.Add(season);
+            //        model.SeasonsList.Add(context.SeasonsTable.FirstOrDefault(x => x.Id == season.Id));
+            //        foreach (var z in seasonInfo.Episodes)
+            //        {
+            //            ++season.EpisodeCount;
+            //            var episode = new Episode()
+            //            {
+            //                Name = "Episode" + season.EpisodeCount.ToString(),
+            //                Seasons = season,
+            //                Plot = z.Plot,
+            //                Image = z.Image,
+            //                Year = z.Year,
+            //                RatingValue = z.RatingValue
+            //            };
+            //            context.EpisodeTable.Add(episode);
+            //            season.EpisodesList.Add(context.EpisodeTable.FirstOrDefault(x => x.Id == episode.Id));
+            //        }
+            //    }
 
-                context.MediaTable.AddOrUpdate(
-                    a => new { a.IMDbMovieId }, model);
-            }
-            context.SaveChanges();
+            //    context.MediaTable.AddOrUpdate(
+            //        a => new { a.IMDbMovieId }, model);
+            //}
+            //context.SaveChanges();
         }
     }
 }

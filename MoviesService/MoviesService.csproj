@@ -182,6 +182,10 @@
     <Compile Include="Migrations\202201081153269_change-episode-model.designer.cs">
       <DependentUpon>202201081153269_change-episode-model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201082013539_media-table-change.cs" />
+    <Compile Include="Migrations\202201082013539_media-table-change.designer.cs">
+      <DependentUpon>202201082013539_media-table-change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
@@ -199,6 +203,7 @@
     <Compile Include="Repositories\Repository\CountryRepository.cs" />
     <Compile Include="Repositories\Repository\EpisodeRepository.cs" />
     <Compile Include="Repositories\Repository\GenreRepository.cs" />
+    <Compile Include="Repositories\Repository\LikeWatchedRepository.cs" />
     <Compile Include="Repositories\Repository\MediaRepository.cs" />
     <Compile Include="Repositories\Repository\SeasonRepository.cs" />
     <Compile Include="Repositories\Repository\TypeRepository.cs" />
@@ -227,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201081153269_change-episode-model.resx">
       <DependentUpon>202201081153269_change-episode-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201082013539_media-table-change.resx">
+      <DependentUpon>202201082013539_media-table-change.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

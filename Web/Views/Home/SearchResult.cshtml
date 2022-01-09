@@ -2,6 +2,7 @@
 
 @if (Model != null)
 {
+
     foreach (var rezult in Model)
     {
         //<h5>@rezult.IMDbMovieId </h5>
@@ -12,7 +13,7 @@
                 <p>@rezult.Types.Name </p>
                 <p>@rezult.RatingIMDb </p>
             </ul>*@
-
+   
         @*<div style="border: 1px solid red; width:initial; height: 300px;">
                 <img src="@rezult.Poster" height="300" width="200"/>
                 <div style="width: 300px">@rezult.Name </div>
@@ -57,3 +58,5 @@ else
         width: min-content;
     }
 </style>
+<div>@Html.ActionLink(Model.Entity.Name, "Details", "Media",new {id = Model.Entity.Id},null)</div>
+
