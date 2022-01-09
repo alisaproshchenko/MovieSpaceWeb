@@ -1,8 +1,6 @@
 ﻿@using System.Web.Mvc.Html
 @model Web.ViewModels.MediaViewModel
 
-<div>@Html.ActionLink("Add", "Add", "Media",null,null)</div>
-
 @foreach (var entity in Model.Media)
 {
     <div style="border: 1px solid red; width: 300px; height: 300px;">
@@ -20,6 +18,7 @@
         }
         @if (User.IsInRole("Administrator"))
         {
+            <div>@Html.ActionLink("Add", "Add", "Media",null,null)</div>
             <div>@Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, null)</div>
             <div>@Html.ActionLink("Edit", "Edit", "Media", new { id = entity.Id }, null)</div>
         }

@@ -18,6 +18,8 @@ namespace MoviesService.Migrations
 
         protected override void Seed(MoviesService.Context.MediaDbContext context)
         {
+            //movie
+
             //var apiLib = new ApiLib("k_q2sbygme");
             //var convertor = new ConvertorApiData();
             //var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
@@ -57,6 +59,9 @@ namespace MoviesService.Migrations
             //        a => new { a.IMDbMovieId }, model);
             //}
             //context.SaveChanges();
+
+
+            //series
 
             //var apiLib = new ApiLib("k_jsvg94yx");
             //var convertor = new ConvertorApiData();
@@ -130,6 +135,24 @@ namespace MoviesService.Migrations
             //        a => new { a.IMDbMovieId }, model);
             //}
             //context.SaveChanges();
+
+            var apiLib = new ApiLib("k_d99sty8t");
+            var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
+            var searchResults = dataApi.Items;
+
+            for (var i = 30; i < 50; ++i)
+            {
+                var id = i;
+                var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
+
+                var model = context.MediaTable.FirstOrDefault(x => x.Name == movieData.Title);
+                var trailer = Task.Run(() => apiLib.TrailerAsync(model.IMDbMovieId)).Result;
+                model.LinkEmbed = trailer.LinkEmbed;
+
+                context.MediaTable.AddOrUpdate(
+                    a => new { a.IMDbMovieId }, model);
+            }
+            context.SaveChanges();
         }
     }
 }
