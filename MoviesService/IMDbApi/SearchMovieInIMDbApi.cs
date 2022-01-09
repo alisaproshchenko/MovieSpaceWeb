@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IMDbApiLib;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 using MoviesService.Models;
 
 namespace MoviesService.IMDbApi
@@ -28,28 +29,28 @@ namespace MoviesService.IMDbApi
 
             var listMedia = new List<Media>();
 
-            if (searchResults != null)
+            if (searchResults.IsNullOrEmpty())
+                return null;
+
+            foreach (var result in searchResults)
             {
-                foreach (var result in searchResults)
+                var movieData = Task.Run(() => _apiLib.TitleAsync(result.Id)).Result;
+                var model = new Media
                 {
-                    var movieData = Task.Run(() => _apiLib.TitleAsync(result.Id)).Result;
-                    var model = new Media
-                    {
-                        IMDbMovieId = movieData.Id,
-                        Name = movieData.Title,
-                        Poster = movieData.Image,
-                        Year = _convertor.StrToInt(movieData.Year),
-                        Cast = _convertor.Actors(movieData.ActorList),
-                        Plot = movieData.Plot,
-                        Budget = movieData.BoxOffice.Budget,
-                        BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
-                        Types = new Types {Name = movieData.Type},
-                        RatingIMDb = _convertor.StrToDouble(movieData.IMDbRating),
-                        CountryCollection = _convertor.Countries(movieData.Countries),
-                        GenresCollection = _convertor.Genres(movieData.GenreList)
-                    };
-                    listMedia.Add(model);
-                }
+                    IMDbMovieId = movieData.Id,
+                    Name = movieData.Title,
+                    Poster = movieData.Image,
+                    Year = _convertor.StrToInt(movieData.Year),
+                    Cast = _convertor.Actors(movieData.ActorList),
+                    Plot = movieData.Plot,
+                    Budget = movieData.BoxOffice.Budget,
+                    BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
+                    Types = new Types {Name = movieData.Type},
+                    RatingIMDb = _convertor.StrToDouble(movieData.IMDbRating),
+                    CountryCollection = _convertor.Countries(movieData.Countries),
+                    GenresCollection = _convertor.Genres(movieData.GenreList)
+                };
+                listMedia.Add(model);
             }
 
             return listMedia;

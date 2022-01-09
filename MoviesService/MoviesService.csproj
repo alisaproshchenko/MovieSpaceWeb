@@ -207,6 +207,7 @@
     <Compile Include="Repositories\Repository\MediaRepository.cs" />
     <Compile Include="Repositories\Repository\SeasonRepository.cs" />
     <Compile Include="Repositories\Repository\TypeRepository.cs" />
+    <Compile Include="Search\SearchInDataBase.cs" />
     <Compile Include="Services\IService\IAddSingleService.cs" />
     <Compile Include="Services\IService\IManageEpisodeService.cs" />
     <Compile Include="Services\IService\IMediaAddService.cs" />

@@ -2,52 +2,26 @@
 
 @if (Model != null)
 {
-
+    <div>
+        <h3>Search results:</h3>
+    </div>
     foreach (var rezult in Model)
     {
-        //<h5>@rezult.IMDbMovieId </h5>
-        @*<ul>
-                <p>@rezult.Name </p>
-                <img src="@rezult.Poster" width="100px"/>
-                <p>@rezult.Year </p>
-                <p>@rezult.Types.Name </p>
-                <p>@rezult.RatingIMDb </p>
-            </ul>*@
-   
-        @*<div style="border: 1px solid red; width:initial; height: 300px;">
+        <a href="@Url.Action("Details", "Media", new {id = rezult.Id}, null)">
+            <div class="test-div-c">
                 <img src="@rezult.Poster" height="300" width="200"/>
-                <div style="width: 300px">@rezult.Name </div>
-                <div style="width: 300px">@rezult.Year </div>
-                <div style="width: 300px">@rezult.Types.Name </div>
-                <div style="width: 300px">@rezult.RatingIMDb </div>
-            </div>*@
-
-        <div class="test-div-c">
-            <img src="@rezult.Poster" height="300" width="200"/>
-            <p>@rezult.Name </p>
-            <p>@rezult.Year </p>
-            <p>@rezult.Types.Name </p>
-            <p>@rezult.RatingIMDb </p>
-        </div>
-        //<h5>@rezult.Cast </h5>
-        //<h5>@rezult.Plot </h5>
-        //<h5>@rezult.Budget </h5>
-        //<h5>@rezult.BoxOffice</h5>
-        //<h5>Countries</h5>
-        //foreach (var country in rezult.CountryCollection)
-        //{
-        //    <p> @country.Name </p>
-        //}
-        //<h5>Genres</h5>
-        //foreach (var genre in rezult.GenresCollection)
-        //{
-        //    <p> @genre.Name </p>
-        //}
+                <p>@rezult.Name </p>
+                <p>Year: @rezult.Year </p>
+                <p>IMDb rating: @rezult.RatingIMDb </p>
+            </div>
+        </a>
     }
 }
 else
 {
-    <div>Unknown movie</div>
+    <div>
+        <h3>Sorry but we don't find any, try to search by another name</h3>
+    </div>
 }
 
 <style>
