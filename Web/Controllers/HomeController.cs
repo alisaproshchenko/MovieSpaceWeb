@@ -45,17 +45,17 @@ namespace Web.Controllers
 
             return View();
 
-            var model = _repository.SearchMedia(searchData);
-            if (model == null)
-            {
-                var searchApi = new SearchMovieInIMDbApi();
-                model = searchApi.SearchMedia(searchData);
-                return View("SearchResult", new GenericEntitiesViewModel<Media>(model));
-            }
-            else
-            {
-                return View("SearchResult", new GenericEntitiesViewModel<Media>(_repository.GetEntity(model.Id)));
-            }
+            //var model = _repository.SearchMedia(searchData);
+            //if (model == null)
+            //{
+            //    var searchApi = new SearchMovieInIMDbApi();
+            //    model = searchApi.SearchMedia(searchData);
+            //    return View("SearchResult", new GenericEntitiesViewModel<Media>(model));
+            //}
+            //else
+            //{
+            //    return View("SearchResult", new GenericEntitiesViewModel<Media>(_repository.GetEntity(model.Id)));
+            //}
         }
     }
 }
