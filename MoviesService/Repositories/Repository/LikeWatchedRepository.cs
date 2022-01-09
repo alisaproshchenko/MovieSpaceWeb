@@ -12,36 +12,47 @@ namespace MoviesService.Repositories.Repository
         public void Like(string userId, int mediaId)
         {
             var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.ApplicationUserId == userId);
-
-            if (userToMedia != null)
-            {
-        
-            }
-            else
-            {
-
-            }
-
-            userToMedia = new UsersToMedia
-            {
-                ApplicationUserId = userId,
-                Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
-            };
-
-            userToMedia.Liked = !userToMedia.Liked;
-            
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
-            
-            media.SiteUsersRatings ??= 0;
+            if (userToMedia == null)
+            {
+                userToMedia = new UsersToMedia();
+                userToMedia.ApplicationUserId = userId;
+                userToMedia.Liked = true;
+                userToMedia.Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
-            if(userToMedia.Liked)
+                media.SiteUsersRatings ??= 0;
+
                 ++media.SiteUsersRatings;
+            }
             else
-                --media.SiteUsersRatings;
-            
+            {
+                userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
+                if (userToMedia != null)
+                {
+                    userToMedia.Liked = !userToMedia.Liked;
+
+                    if (userToMedia.Liked)
+                        ++media.SiteUsersRatings;
+                    else
+                        --media.SiteUsersRatings;
+                }
+                else
+                {
+                    userToMedia = new UsersToMedia();
+                    userToMedia.ApplicationUserId = userId;
+                    userToMedia.Liked = true;
+                    userToMedia.Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
+
+                    media.SiteUsersRatings ??= 0;
+
+                    ++media.SiteUsersRatings;
+                }
+            }
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
             
             _context.SaveChanges();
+
+   
         }
     }
 }

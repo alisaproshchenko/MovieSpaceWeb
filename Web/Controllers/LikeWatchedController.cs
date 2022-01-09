@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using MoviesService.Dto;
 using MoviesService.Repositories.Repository;
 using MoviesService.Services.Service;
@@ -21,7 +22,7 @@ namespace Web.Controllers
         public ActionResult Like(string userId, int movieId)
         {
             _repository.Like(userId, movieId);
-            return RedirectToAction("Details", "Media", new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(movieId)));
+            return RedirectToAction("Details", "Media", new {id = movieId });
         }
     }
 }
