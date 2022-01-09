@@ -1,4 +1,5 @@
-﻿using IMDbApiLib;
+﻿using System.Collections.Generic;
+using IMDbApiLib;
 using System.Threading.Tasks;
 using MoviesService.Models;
 
