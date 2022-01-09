@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using MoviesService.Dto;
+﻿using System.Web.Mvc;
 using MoviesService.Repositories.Repository;
 using MoviesService.Services.Service;
-using Web.ViewModels;
 
 namespace Web.Controllers
 {
