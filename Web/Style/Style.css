@@ -19,13 +19,38 @@ textarea {
     max-width: 280px;
 }
 
-.class1 {
-    margin-top: 50px;
-    border: 1px solid black;
-    width: 50%;
-    height: 300px;
+/*Layout*/
+
+.authorization-login-logout {
+    float: right;
+}
+
+.user-name-position {
+    margin-top: 15px;
     color: white;
 }
+
+.search {
+    top: 7px;
+    margin-right: 200px;
+}
+
+.search-input {
+    width: 400px;
+    height: 35px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.seach-button {
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
 .Active {
     color: white;
     background-color: black;
