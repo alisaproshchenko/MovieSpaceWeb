@@ -14,11 +14,40 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ConvertorApiData _convertor = new ConvertorApiData();
+
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Filters(string genre, string year)
+        {
+            var search = new SearchInDataBase();
+            var model = search.MediaList();
+
+            if (genre != null && _convertor.StrToInt(genre) != 0)
+                model = search.SearchByGenre(genre, model);
+
+            if (year != null || _convertor.StrToInt(year) != 0)
+                model = search.SearchByYear(year, model);
+            
+
+            var genreModel = search.GenreList();
+            var years = search.YearList();
+
+            var model2 = new FilterViewModel
+            {
+                Media = model,
+                Year = new SelectList(years),
+                Genre = new SelectList(genreModel, "Id", "Name")
+            };
+            
+            return View("Filters",model2);
+        }
+
         [HttpPost]
         public ActionResult Search(string searchData)
         {

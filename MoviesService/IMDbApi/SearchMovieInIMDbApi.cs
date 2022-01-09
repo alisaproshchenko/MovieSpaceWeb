@@ -9,16 +9,18 @@ namespace MoviesService.IMDbApi
     public class SearchMovieInIMDbApi
     {
         private static ApiLib _apiLib;
-        private  ConvertorApiData _convertor = new ConvertorApiData();
+        private ConvertorApiData _convertor;
 
         public SearchMovieInIMDbApi()
         {
             _apiLib = new ApiLib("k_sq5f8w2a");
+            _convertor = new ConvertorApiData();
         }
 
         public SearchMovieInIMDbApi(string key)
         {
             _apiLib = new ApiLib(key);
+            _convertor = new ConvertorApiData();
         }
 
         public List<Media> SearchMedia(string name)

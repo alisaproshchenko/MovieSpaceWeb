@@ -9,7 +9,7 @@ using MoviesService.Models;
 
 namespace MoviesService.IMDbApi
 {
-    class ConvertorApiData
+    public class ConvertorApiData
     {
         public ConvertorApiData()
         {
