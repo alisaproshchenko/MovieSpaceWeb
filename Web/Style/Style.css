@@ -18,9 +18,7 @@ select,
 textarea {
     max-width: 280px;
 }
-
 /*Layout*/
-
 .authorization-login-logout {
     float: right;
 }
@@ -32,7 +30,7 @@ textarea {
 
 .search {
     top: 7px;
-    margin-right: 200px;
+    margin-right: 300px;
 }
 
 .search-input {
@@ -57,6 +55,11 @@ textarea {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+
+
+
+
 
 .Active {
     color: white;

@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202201082013539_media-table-change.designer.cs">
       <DependentUpon>202201082013539_media-table-change.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201100730108_usersToMedia.cs" />
+    <Compile Include="Migrations\202201100730108_usersToMedia.designer.cs">
+      <DependentUpon>202201100730108_usersToMedia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
@@ -235,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201082013539_media-table-change.resx">
       <DependentUpon>202201082013539_media-table-change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201100730108_usersToMedia.resx">
+      <DependentUpon>202201100730108_usersToMedia.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

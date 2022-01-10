@@ -1,5 +1,7 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Windows.Forms;
 using MoviesService.Context;
 using MoviesService.Models;
 
@@ -32,6 +34,8 @@ namespace MoviesService.Repositories.Repository
             
             if (check != null)
             {
+                check.Date = DateTime.UtcNow; 
+                _context.SaveChanges();
                 return;
             }
 
@@ -44,6 +48,8 @@ namespace MoviesService.Repositories.Repository
                 ApplicationUserId = userId,
                 Liked = false,
                 Watched = true,
+                AddToWatch = false,
+                Date = DateTime.UtcNow,
                 Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
             };
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MoviesService.Models
 {
@@ -11,5 +12,7 @@ namespace MoviesService.Models
         public Media Media { get; set; }
         public bool Liked { get; set; }
         public bool Watched { get; set; }
+        public bool AddToWatch { get; set; }
+        public DateTime Date { get; set; }
     }
 }
