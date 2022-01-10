@@ -56,6 +56,19 @@ textarea {
     padding-right: 15px;
 }
 
+/*ListOfEntitiesMedia*/
+
+.basic-block {
+    display: inline-grid;
+    margin-top: 20px;
+    width: min-content;
+    height: 350px;
+    margin: 0 22px;
+    margin-bottom: 30px;
+}
+
+/*Pagination*/
+
 
 
 
