@@ -25,7 +25,7 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin", null, new {@class="admin-panel"})</li>
+                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin", null, new {@class = "admin-panel"})</li>
                     }
                 </ul>
             </div>
@@ -55,6 +55,12 @@
         </div>
     </div>
 </div>
+<div id="mySidenav"> 
+    <a href="#" id="alisa">Alisa</a> 
+    <a href="#" id="misha">Misha</a> 
+    <a href="#" id="pasha">Pasha</a> 
+    <a href="#" id="vlad">Vlad</a> 
+</div>
 <div class="container main-sector">
     @RenderBody()
     <footer class="footer">
@@ -67,3 +73,6 @@
 </body>
 </html>
 
+
+
+      

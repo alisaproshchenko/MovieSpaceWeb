@@ -300,6 +300,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Style\background.jpg" />
+    <Content Include="Style\Dracula.mp4" />
     <Content Include="Style\header.jpg" />
     <Content Include="Style\Style.css" />
     <Content Include="Web.config" />
@@ -349,6 +350,7 @@
     <Content Include="Views\Series\DeleteEpisode.cshtml" />
     <Content Include="Views\Home\Filters.cshtml" />
     <Content Include="Views\Shared\Partials\PagePartial\FilterPagePartial.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
