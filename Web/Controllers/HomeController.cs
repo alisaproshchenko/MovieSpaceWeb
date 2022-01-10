@@ -24,7 +24,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Filters(string genre, string year, string type)
+        public ActionResult Filters(string genre, string year, string type, int currentPage = 1)
         {
             var search = new SearchInDataBase();
             var model = search.MediaList();
@@ -42,15 +42,9 @@ namespace Web.Controllers
             var years = search.YearList();
             var types = search.TypesList();
 
-            var model2 = new FilterViewModel
-            {
-                Media = model,
-                Year = new SelectList(years),
-                Type = new SelectList(types),
-                Genre = new SelectList(genreModel, "Id", "Name")
-            };
-            
-            return View("Filters",model2);
+            var model2 = new FilterViewModel(model, years,genreModel,types,currentPage);
+
+            return View("Filters", model2);
         }
 
         [HttpPost]

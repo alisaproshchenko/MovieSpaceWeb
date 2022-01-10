@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using MoviesService.Dto;
 using MoviesService.Repositories.Repository;
+using MoviesService.Search;
 using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Web.ViewModels;
@@ -34,7 +35,9 @@ namespace Web.Controllers.AdminControllers
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {
-            return View(new MediaViewModel(_service.Entities, currentPage));
+            var search = new SearchInDataBase();
+            var model = search.MediaList();
+            return View(new MediaViewModel(model, currentPage));
         }
         [Authorize(Roles = "Administrator")]
         public ActionResult Add()
