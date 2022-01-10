@@ -5,25 +5,14 @@
 
 @foreach (var entity in Model.Media)
 {
-    <div style="border: 1px solid red; width: 300px; height: 300px;">
-        <div>@Html.ActionLink(@entity.Name, "Details", "Media", new { id = entity.Id }, null)</div>
-        <div>@entity.Id</div>
-        <div>@entity.TypesId</div>
-        <img width="200" height="200" src="@entity.Poster"/>
-        @foreach (var e in entity.GenresCollection)
-        {
-            <p>+ @e.Name</p>
-        }
-        @foreach (var e in entity.CountryCollection)
-        {
-            <p> - @e.Name</p>
-        }
-        @if (User.IsInRole("Administrator"))
-        {
-            <div>@Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, null)</div>
-            <div>@Html.ActionLink("Edit", "Edit", "Media", new { id = entity.Id }, null)</div>
-        }
-    </div>
+    <a href="@Url.Action("Details", "Media", entity)">
+        <div class="test-div-c">
+            <img src="@entity.Poster" height="300" width="200"/>
+            <p>@entity.Name </p>
+            <p>Year: @entity.Year </p>
+            <p>IMDb rating: @entity.RatingIMDb </p>
+        </div>
+    </a>
 }
 
 @Html.Partial("Partials/PagePartial/MoviePagePartial") 

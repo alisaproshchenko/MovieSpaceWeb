@@ -1,6 +1,8 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using MoviesService.Context;
+using MoviesService.Dto;
 using MoviesService.Models;
 
 namespace MoviesService.Repositories.Repository
@@ -9,38 +11,51 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
-        public void Like(string userId, int mediaId)
+        public Media Like(int mediaId)
         {
-            var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.ApplicationUserId == userId);
-
-            if (userToMedia != null)
-            {
-        
-            }
-            else
-            {
-
-            }
-
-            userToMedia = new UsersToMedia
-            {
-                ApplicationUserId = userId,
-                Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
-            };
+            var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
+            var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
             userToMedia.Liked = !userToMedia.Liked;
-            
-            var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
-            
-            media.SiteUsersRatings ??= 0;
 
-            if(userToMedia.Liked)
+            if (userToMedia.Liked)
                 ++media.SiteUsersRatings;
             else
                 --media.SiteUsersRatings;
-            
+
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
+
+            _context.SaveChanges();
+
+            return media;
+        }
+
+        public void Watch(string userId, int mediaId)
+        {
+            var check = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
             
+            if (check != null)
+            {
+                check.Date = DateTime.Now; 
+                _context.SaveChanges();
+                return;
+            }
+
+            var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
+
+            media.SiteUsersRatings ??= 0;
+
+            var userToMedia = new UsersToMedia
+            {
+                ApplicationUserId = userId,
+                Liked = false,
+                Watched = true,
+                AddToWatch = false,
+                Date = DateTime.Now,
+                Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
+            };
+            _context.UsersToMediaTable.AddOrUpdate(userToMedia);
+
             _context.SaveChanges();
         }
     }
