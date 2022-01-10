@@ -25,7 +25,7 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin")</li>
+                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin", null, new {@class="admin-panel"})</li>
                     }
                 </ul>
             </div>
@@ -57,8 +57,7 @@
 </div>
 <div class="container main-sector">
     @RenderBody()
-    <hr/>
-    <footer>
+    <footer class="footer">
         <p>&copy; @DateTime.Now.Year - Movie space</p>
     </footer>
 </div>

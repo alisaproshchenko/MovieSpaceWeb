@@ -9,7 +9,7 @@
 <button name="currentPage" style="background-color: gray;">Previous</button> }
 else
 {
-<button name="currentPage" value="@(Model.PaginatedOutput.CurrentPage - 1)" type="submit">Previous</button>}
+<button name="currentPage" value="@(Model.PaginatedOutput.CurrentPage - 1)" type="submit"><i class="fas fa-arrow-left"></i></button>}
 
     @for (var i = 1; i <= 3 && i <= Model.PaginatedOutput.TotalPages; i++)
     {
