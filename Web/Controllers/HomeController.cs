@@ -6,29 +6,64 @@ using MoviesService.IMDbApi;
 using MoviesService.Models;
 using Web.ViewModels;
 using System.Web.Mvc;
+using MoviesService.Dto;
 using MoviesService.Repositories.Repository;
+using MoviesService.Search;
 
 
 namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MediaRepository _repository;
-        public HomeController(MediaRepository repository) => _repository = repository;
+        private readonly ConvertorApiData _convertor = new ConvertorApiData();
+
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Filters(string genre, string year, string type)
+        {
+            var search = new SearchInDataBase();
+            var model = search.MediaList();
+
+            if (genre != null && _convertor.StrToInt(genre) != 0)
+                model = search.SearchByGenre(genre, model);
+
+            if ((year != null || _convertor.StrToInt(year) != 0) && year != "All")
+                model = search.SearchByYear(year, model);
+
+            if ((type != null || _convertor.StrToInt(type) != 0) && type != "All")
+                model = search.SearchByType(type, model);
+
+            var genreModel = search.GenreList();
+            var years = search.YearList();
+            var types = search.TypesList();
+
+            var model2 = new FilterViewModel
+            {
+                Media = model,
+                Year = new SelectList(years),
+                Type = new SelectList(types),
+                Genre = new SelectList(genreModel, "Id", "Name")
+            };
+            
+            return View("Filters",model2);
+        }
+
         [HttpPost]
         public ActionResult Search(string searchData)
         {
-            //var model = context.MediaTable.Include("Types").Include("GenresCollection").Include("CountryCollection").Include("SeasonsList").FirstOrDefault(x => x.Name == searchData);
-            //if (model == null)
-            //{
-                var searchApi = new SearchMovieInIMDbApi("k_zx5739ek");
-                var model = searchApi.SearchMedia(searchData);
-            //}
+            var model = new SearchInDataBase().SearchByName(searchData);
+
+            if (model == null)
+            {
+                var searchApi = new SearchMovieInIMDbApi("k_ag12ki7h");
+                model = searchApi.SearchMedia(searchData);
+            }
+
             return View("SearchResult", model);
         }
 
@@ -44,18 +79,6 @@ namespace Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-
-            //var model = _repository.SearchMedia(searchData);
-            //if (model == null)
-            //{
-            //    var searchApi = new SearchMovieInIMDbApi();
-            //    model = searchApi.SearchMedia(searchData);
-            //    return View("SearchResult", new GenericEntitiesViewModel<Media>(model));
-            //}
-            //else
-            //{
-            //    return View("SearchResult", new GenericEntitiesViewModel<Media>(_repository.GetEntity(model.Id)));
-            //}
         }
     }
 }
