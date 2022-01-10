@@ -18,14 +18,73 @@ select,
 textarea {
     max-width: 280px;
 }
+/*Layout*/
+.authorization-login-logout {
+    float: right;
+}
 
-.class1 {
-    margin-top: 50px;
-    border: 1px solid black;
-    width: 50%;
-    height: 300px;
+.user-name-position {
+    margin-top: 15px;
     color: white;
 }
+
+.search {
+    top: 7px;
+    margin-right: 300px;
+}
+
+.search-input {
+    width: 400px;
+    height: 35px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.seach-button {
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.main-sector {
+    width: 80%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/*ListOfEntitiesMedia*/
+
+.basic-block {
+    display: inline-grid;
+    margin-top: 20px;
+    width: min-content;
+    height: 350px;
+    margin: 0 22px;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Pagination*/
 .Active {
     color: white;
     background-color: black;
