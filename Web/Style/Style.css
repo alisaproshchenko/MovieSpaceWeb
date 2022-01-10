@@ -24,7 +24,7 @@ textarea {
     background-image: url(/Style/background.jpg);
     background-position: center;
     background-attachment: fixed;
-    background-size: 1500px;
+    background-size: 1700px;
 }
 
 .basic-header {
@@ -327,7 +327,7 @@ textarea {
 }
 
 #mySidenav a {
-    position: absolute;
+    position: fixed;
     left: -80px;
     transition: 0.3s;
     padding: 15px;

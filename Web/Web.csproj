@@ -350,7 +350,6 @@
     <Content Include="Views\Series\DeleteEpisode.cshtml" />
     <Content Include="Views\Home\Filters.cshtml" />
     <Content Include="Views\Shared\Partials\PagePartial\FilterPagePartial.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
