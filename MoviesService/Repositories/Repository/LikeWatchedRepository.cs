@@ -34,7 +34,7 @@ namespace MoviesService.Repositories.Repository
             
             if (check != null)
             {
-                check.Date = DateTime.UtcNow; 
+                check.Date = DateTime.Now; 
                 _context.SaveChanges();
                 return;
             }
@@ -49,7 +49,7 @@ namespace MoviesService.Repositories.Repository
                 Liked = false,
                 Watched = true,
                 AddToWatch = false,
-                Date = DateTime.UtcNow,
+                Date = DateTime.Now,
                 Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
             };
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
