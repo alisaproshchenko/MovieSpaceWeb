@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoviesService.Context;
+using MoviesService.Dto;
 using MoviesService.IMDbApi;
 using MoviesService.Models;
 
@@ -27,38 +28,38 @@ namespace MoviesService.Search
                 .Include("SeasonsList");
         }
 
-        public List<Media> MediaList()
+        public List<Media> MediaList() => _listMedia.OrderByDescending(m => m.RatingIMDb).ToList();
+        
+        public LinkedList<Genres> GenreList()
         {
-            var mediaList = new List<Media>();
+            var genresList = new LinkedList<Genres>(); 
+            genresList.AddFirst(new Genres { Id = 0, Name = "All" });
 
-            foreach (var model in _listMedia)
+            foreach (var genre in _context.GenresTable)
             {
-                mediaList.Add(model);
-            }
-
-            mediaList.OrderByDescending(m => m.RatingIMDb);
-            return mediaList;
-        }
-
-        public List<Genres> GenreList()
-        {
-            var genresList = new List<Genres>();
-
-            var genres = _context.GenresTable;
-
-            genresList.Add(new Genres { Id = 0, Name = "All" });
-
-            foreach (var genre in genres)
-            {
-                genresList.Add(genre);
+                genresList.AddLast(genre);
             }
 
             return genresList;
         }
 
+        public List<string> TypesList()
+        {
+            var typesList = new List<string>();
+            typesList.Add("All");
+
+            foreach (var type in _context.TypesTable)
+            {
+                typesList.Add(type.Name);
+            }
+
+            return typesList;
+        }
+
         public List<string> YearList()
         {
             var yearList = new List<string>();
+            yearList.Add("All");
 
             foreach (var model in _listMedia)
             {
@@ -66,53 +67,48 @@ namespace MoviesService.Search
                     yearList.Add(model.Year.ToString());
             }
 
-            yearList = yearList.Distinct().ToList();
+            yearList = yearList.Distinct().OrderByDescending(x => x).ToList();
             return yearList;
         }
 
         public List<Media> SearchByName(string name)
         {
-            var mediaList = new List<Media>();
+            var mediaList = _listMedia
+                .Where(m => m.Name.ToLower().Contains(name.ToLower()))
+                .OrderByDescending(m => m.RatingIMDb)
+                .ToList();
 
-            foreach (var model in _listMedia)
-            {
-                if (model.Name.ToLower().Contains(name.ToLower()))
-                    mediaList.Add(model);
-            }
-
-            mediaList.OrderByDescending(m => m.RatingIMDb);
             return mediaList;
         }
 
         public List<Media> SearchByGenre(string genre, List<Media> listSearch)
         {
-            var mediaList = new List<Media>();
+            listSearch = listSearch
+                .Where(m => m.GenresCollection.Any(g =>g.Id == _convertor.StrToInt(genre)))
+                .OrderByDescending(r => r.RatingIMDb)
+                .ToList();
 
-            foreach (var model in listSearch)
-            {
-                foreach (var genres in model.GenresCollection)
-                {
-                    if (genres.Id == _convertor.StrToInt(genre))
-                        mediaList.Add(model);
-                }
-            }
-
-            mediaList.OrderByDescending(m => m.RatingIMDb);
-            return mediaList;
+            return listSearch;
         }
 
         public List<Media> SearchByYear(string year, List<Media> listSearch)
         {
-            var mediaList = new List<Media>();
+            listSearch = listSearch
+                .Where(m => m.Year == _convertor.StrToInt(year))
+                .OrderByDescending(r => r.RatingIMDb)
+                .ToList();
 
-            foreach (var model in listSearch)
-            {
-                if (model.Year == _convertor.StrToInt(year))
-                        mediaList.Add(model);
-            }
+            return listSearch;
+        }
 
-            mediaList.OrderByDescending(m => m.RatingIMDb);
-            return mediaList;
+        public List<Media> SearchByType(string type, List<Media> listSearch)
+        {
+            listSearch = listSearch
+                .Where(m => m.Types.Name == type)
+                .OrderByDescending(m=>m.RatingIMDb)
+                .ToList();
+
+            return listSearch;
         }
     }
 }

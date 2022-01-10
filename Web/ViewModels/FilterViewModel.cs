@@ -13,5 +13,6 @@ namespace Web.ViewModels
         public IEnumerable<Media> Media { get; set; }
         public SelectList Genre { get; set; }
         public SelectList Year { get; set; }
+        public SelectList Type { get; set; }
     }
 }

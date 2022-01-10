@@ -6,6 +6,7 @@ using MoviesService.IMDbApi;
 using MoviesService.Models;
 using Web.ViewModels;
 using System.Web.Mvc;
+using MoviesService.Dto;
 using MoviesService.Repositories.Repository;
 using MoviesService.Search;
 
@@ -23,7 +24,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Filters(string genre, string year)
+        public ActionResult Filters(string genre, string year, string type)
         {
             var search = new SearchInDataBase();
             var model = search.MediaList();
@@ -31,17 +32,21 @@ namespace Web.Controllers
             if (genre != null && _convertor.StrToInt(genre) != 0)
                 model = search.SearchByGenre(genre, model);
 
-            if (year != null || _convertor.StrToInt(year) != 0)
+            if ((year != null || _convertor.StrToInt(year) != 0) && year != "All")
                 model = search.SearchByYear(year, model);
-            
+
+            if ((type != null || _convertor.StrToInt(type) != 0) && type != "All")
+                model = search.SearchByType(type, model);
 
             var genreModel = search.GenreList();
             var years = search.YearList();
+            var types = search.TypesList();
 
             var model2 = new FilterViewModel
             {
                 Media = model,
                 Year = new SelectList(years),
+                Type = new SelectList(types),
                 Genre = new SelectList(genreModel, "Id", "Name")
             };
             
