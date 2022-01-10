@@ -1,11 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using IMDbApiLib;
-using MoviesService.IMDbApi;
-using MoviesService.Models;
-
-namespace MoviesService.Migrations
+﻿namespace MoviesService.Migrations
 {
     using System.Data.Entity.Migrations;
 

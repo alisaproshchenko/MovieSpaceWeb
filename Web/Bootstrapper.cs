@@ -38,6 +38,7 @@ namespace Web
 
             container.RegisterType<IRepository<ApplicationUser>, ApplicationUserRepository>();
             container.RegisterType<IService<ApplicationUserDto>, ApplicationUserService>();
+            container.RegisterType<IAboutUsService<AboutUsDto>, AboutUsService>();
             container.RegisterType<UserManager<ApplicationUser>, ApplicationUserManager>();
 
             return container;

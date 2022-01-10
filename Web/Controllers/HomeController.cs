@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using MoviesService.Context;
 using MoviesService.IMDbApi;
-using MoviesService.Models;
-using Web.ViewModels;
 using System.Web.Mvc;
-using MoviesService.Repositories.Repository;
 using MoviesService.Search;
 
 
