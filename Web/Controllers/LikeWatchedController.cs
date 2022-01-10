@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using MoviesService.Dto;
+using MoviesService.Models;
 using MoviesService.Repositories.Repository;
 using MoviesService.Services.Service;
 
@@ -16,10 +18,10 @@ namespace Web.Controllers
         }
 
         // GET: LikeWatched
-        public ActionResult Like(string userId, int movieId)
+        public ActionResult Like(Media mediaDto)
         {
-            _repository.Like(movieId);
-            return RedirectToAction("Details", "Media", new {id = movieId });
+            mediaDto = _repository.Like(mediaDto.Id);
+            return RedirectToAction("Details", "Media", mediaDto);
         }
     }
 }

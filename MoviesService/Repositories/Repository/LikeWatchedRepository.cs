@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Windows.Forms;
 using MoviesService.Context;
+using MoviesService.Dto;
 using MoviesService.Models;
 
 namespace MoviesService.Repositories.Repository
@@ -11,7 +11,7 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
-        public void Like(int mediaId)
+        public Media Like(int mediaId)
         {
             var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
@@ -26,6 +26,8 @@ namespace MoviesService.Repositories.Repository
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
 
             _context.SaveChanges();
+
+            return media;
         }
 
         public void Watch(string userId, int mediaId)

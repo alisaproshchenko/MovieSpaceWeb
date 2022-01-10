@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using MoviesService.Dto;
 using MoviesService.Repositories.Repository;
+using MoviesService.Search;
 using MoviesService.Services.IService;
 using MoviesService.Services.Service;
 using Web.ViewModels;
@@ -30,12 +30,14 @@ namespace Web.Controllers.AdminControllers
         public ActionResult Details(MediaDto mediaDto)
         {
             _likeWatchedRepository.Watch(User.Identity.GetUserId(), mediaDto.Id);
-            return View(new GenericEntitiesViewModel<MediaDto>(_service.Entities.FirstOrDefault(x => x.Id == mediaDto.Id)));
+            return View(mediaDto);
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)
         {
-            return View(new MediaViewModel(_service.Entities, currentPage));
+            var search = new SearchInDataBase();
+            var model = search.MediaList();
+            return View(new MediaViewModel(model, currentPage));
         }
         [Authorize(Roles = "Administrator")]
         public ActionResult Add()
