@@ -267,6 +267,7 @@
     <Compile Include="Services\PageOption.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\GenericEntitiesViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -344,6 +345,7 @@
     <Content Include="Views\Home\SearchResult.cshtml" />
     <Content Include="Views\Series\GetEpisode.cshtml" />
     <Content Include="Views\Series\DeleteEpisode.cshtml" />
+    <Content Include="Views\Home\Filters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
