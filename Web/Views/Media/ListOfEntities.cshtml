@@ -1,21 +1,18 @@
 ﻿@using System.Web.Mvc.Html
 @model Web.ViewModels.MediaViewModel
 
-@if (User.IsInRole("Administrator"))
-{
-    @Html.ActionLink("Add", "Add", "Media", null, new {@class="add-style"})
-}
+<div>@Html.ActionLink("Add", "Add", "Media",null,null)</div>
 
 @foreach (var entity in Model.Media)
-    {
-        <div class="basic-block">
-            <img width="200" height="300" src="@entity.Poster"/>
-            <div>@Html.ActionLink(@entity.Name, "Details", "Media", new {id = entity.Id}, null)</div>
-            @if (User.IsInRole("Administrator"))
-            {
-                <div>@Html.ActionLink("Delete", "Delete", "Media", new {id = entity.Id}, null)</div>
-                <div>@Html.ActionLink("Edit", "Edit", "Media", new {id = entity.Id}, null)</div>
-            }
+{
+    <a href="@Url.Action("Details", "Media", entity)">
+        <div class="test-div-c">
+            <img src="@entity.Poster" height="300" width="200"/>
+            <p>@entity.Name </p>
+            <p>Year: @entity.Year </p>
+            <p>IMDb rating: @entity.RatingIMDb </p>
         </div>
-    }
-@Html.Partial("Partials/PagePartial/MoviePagePartial")
+    </a>
+}
+
+@Html.Partial("Partials/PagePartial/MoviePagePartial") 

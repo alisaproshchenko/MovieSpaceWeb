@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using MoviesService.Dto;
 using MoviesService.Repositories.Repository;
@@ -30,7 +29,7 @@ namespace Web.Controllers.AdminControllers
         public ActionResult Details(MediaDto mediaDto)
         {
             _likeWatchedRepository.Watch(User.Identity.GetUserId(), mediaDto.Id);
-            return View(new GenericEntitiesViewModel<MediaDto>(_service.Entities.FirstOrDefault(x => x.Id == mediaDto.Id)));
+            return View(mediaDto);
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)

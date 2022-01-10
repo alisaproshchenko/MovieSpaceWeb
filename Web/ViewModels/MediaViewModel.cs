@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MoviesService.Dto;
+using MoviesService.Models;
 using Web.Services;
 
 namespace Web.ViewModels
