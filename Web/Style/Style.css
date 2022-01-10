@@ -51,7 +51,6 @@ textarea {
 
 .main-sector {
     width: 80%;
-    background-color: rgba(0, 0, 0, .5);
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -67,13 +66,25 @@ textarea {
     margin-bottom: 30px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*Pagination*/
-
-
-
-
-
-
 .Active {
     color: white;
     background-color: black;
