@@ -1,8 +1,7 @@
 ﻿namespace MoviesService.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class addtrailerLink : DbMigration
     {
         public override void Up()

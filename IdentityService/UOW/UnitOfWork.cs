@@ -14,15 +14,20 @@ namespace IdentityService.UOW
 
         private IRepository<ApplicationRole> _roleRepository;
         private IRepository<ApplicationUser> _userRepository;
+        private IRepository<AboutUs> _aboutUsRepository;
 
         public UnitOfWork()
         {
             _db = new IdentityContext();
         }
+
         public IRepository<ApplicationUser> UserRepository => 
             _userRepository ??= new ApplicationUserRepository(UserManager);
         public IRepository<ApplicationRole> RoleRepository =>
             _roleRepository ??= new ApplicationRoleRepository(RoleManager);
+        public IRepository<AboutUs> AboutUsRepository =>
+            _aboutUsRepository ??= new AboutUsRepository(_db);
+
         public ApplicationRoleManager RoleManager =>
             _roleManager ??= new ApplicationRoleManager(new RoleStore<ApplicationRole>(_db));
         public ApplicationUserManager UserManager =>

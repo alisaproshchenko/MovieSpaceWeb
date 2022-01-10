@@ -18,8 +18,12 @@ namespace Web
             Mapper.CreateMap<Types, TypesDto>().ReverseMap();
             Mapper.CreateMap<Seasons, SeasonsDto>().ReverseMap();
             Mapper.CreateMap<Episode, EpisodeDto>().ReverseMap();
-            Mapper.CreateMap<ApplicationUserDto, ApplicationUser>().ReverseMap();
-            Mapper.CreateMap<ApplicationUserDto, UserViewModel>().ReverseMap();
+
+            Mapper.CreateMap<AboutUs, AboutUsDto>().ReverseMap();
+            Mapper.CreateMap<AboutUsViewModel, AboutUsDto>().ReverseMap();
+
+            Mapper.CreateMap<ApplicationUser, ApplicationUserDto>().ReverseMap();
+            Mapper.CreateMap<UserViewModel, ApplicationUserDto>().ReverseMap();
             Mapper.CreateMap<RegistrationViewModel, UserViewModel>();
         }
     }

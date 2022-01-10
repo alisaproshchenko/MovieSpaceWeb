@@ -28,7 +28,7 @@ namespace IdentityService.Repository
         {
             return _db.Users.FirstOrDefault(u => u.Id.Equals(id));
         }
-        public ApplicationUser GetByUsername(string username)
+        public ApplicationUser GetByName(string username)
         {
             return _db.Users.FirstOrDefault(u => u.UserName.Equals(username));
         }

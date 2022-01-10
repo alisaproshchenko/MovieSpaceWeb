@@ -1,0 +1,35 @@
+﻿@model IEnumerable<IdentityService.Dto.AboutUsDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        All users
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>PhotoLink</th>
+            <th>ProjectRole</th>
+        </tr>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="3" class="text-center">The database is empty</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var aboutUs in Model)
+            {
+                <tr>
+                    <td>@aboutUs.Name</td>
+                    <td>@aboutUs.PhotoLink</td>
+                    <td>@aboutUs.ProjectRole</td>
+                </tr>
+        }
+    }
+    </table>
+</div>

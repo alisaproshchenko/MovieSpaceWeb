@@ -32,7 +32,7 @@ namespace IdentityService.Services
 
         public ApplicationUserDto GetByUsername(string username)
         {
-            var user = _uow.UserRepository.GetByUsername(username);
+            var user = _uow.UserRepository.GetByName(username);
             return Mapper.Map<ApplicationUserDto>(user);
         }
 
@@ -43,7 +43,7 @@ namespace IdentityService.Services
             _uow.UserRepository.Save();
 
             const string userRole = "User";
-            var newUserId = _uow.UserRepository.GetByUsername(applicationUser.UserName).Id;
+            var newUserId = _uow.UserRepository.GetByName(applicationUser.UserName).Id;
             _uow.UserManager.AddToRole(newUserId, userRole);
 
             _uow.UserRepository.Save();
@@ -58,7 +58,7 @@ namespace IdentityService.Services
 
         public void ChangePassword(ApplicationUserDto applicationUserDto)
         {
-            var userInDb = _uow.UserRepository.GetByUsername(applicationUserDto.UserName);
+            var userInDb = _uow.UserRepository.GetByName(applicationUserDto.UserName);
             _uow.UserManager.RemovePassword(userInDb.Id);
             _uow.UserManager.AddPassword(userInDb.Id, applicationUserDto.Password);
             _uow.UserRepository.Save();
@@ -66,7 +66,7 @@ namespace IdentityService.Services
 
         public void UserBanToggle(ApplicationUserDto applicationUserDto)
         {
-            var userInDb = _uow.UserRepository.GetByUsername(applicationUserDto.UserName);
+            var userInDb = _uow.UserRepository.GetByName(applicationUserDto.UserName);
             if (userInDb == null)
                 return;
 
@@ -77,7 +77,7 @@ namespace IdentityService.Services
 
         public void AdminRightsToggle(ApplicationUserDto applicationUserDto)
         {
-            var userId = _uow.UserRepository.GetByUsername(applicationUserDto.UserName).Id;
+            var userId = _uow.UserRepository.GetByName(applicationUserDto.UserName).Id;
 
             if (IsAdministrator(userId))
                 _uow.UserManager.RemoveFromRole(userId, "Administrator");
@@ -96,7 +96,7 @@ namespace IdentityService.Services
 
         public IEnumerable<string> GetRoles(string username)
         {
-            var userId = _uow.UserRepository.GetByUsername(username).Id;
+            var userId = _uow.UserRepository.GetByName(username).Id;
             return _uow.UserManager.GetRoles(userId);
         }
 
