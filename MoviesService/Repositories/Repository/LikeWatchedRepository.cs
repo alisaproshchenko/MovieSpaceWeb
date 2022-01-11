@@ -2,7 +2,6 @@
 using System.Data.Entity.Migrations;
 using System.Linq;
 using MoviesService.Context;
-using MoviesService.Dto;
 using MoviesService.Models;
 
 namespace MoviesService.Repositories.Repository

@@ -1,7 +1,5 @@
 using MoviesService.IMDbApi;
 using System.Web.Mvc;
-using MoviesService.Dto;
-using MoviesService.Repositories.Repository;
 using MoviesService.Search;
 using Web.ViewModels;
 
