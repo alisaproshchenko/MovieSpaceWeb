@@ -7,3 +7,4 @@ MoviesService/obj/
 Web/bin/
 Web/obj/
 *.orig
+.htm

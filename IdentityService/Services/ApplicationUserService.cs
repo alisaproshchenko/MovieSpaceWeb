@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using IdentityService.Dto;
 using IdentityService.Models;
@@ -103,6 +105,39 @@ namespace IdentityService.Services
         public bool IsAdministrator(string userId)
         {
             return _uow.UserManager.GetRoles(userId).Contains("Administrator");
+        }
+
+        public IEnumerable<string> Validate(string password)
+        {
+            var errors = new List<string>();
+            if(password.Length < _uow.PasswordValidation.RequiredLength)
+                errors.Add($"The minimum length of password is {_uow.PasswordValidation.RequiredLength} characters");
+
+            if (_uow.PasswordValidation.RequireDigit)
+            {
+                if (!password.ToCharArray().Any(char.IsDigit))
+                    errors.Add("At least one digit is needed in password");
+            }
+
+            if (_uow.PasswordValidation.RequireUppercase)
+            {
+                if (!password.ToCharArray().Any(char.IsUpper))
+                    errors.Add("At least one character in upper case is needed in password");
+            }
+
+            if (_uow.PasswordValidation.RequireLowercase)
+            {
+                if (!password.ToCharArray().Any(char.IsLower))
+                    errors.Add("At least one character in lower case is needed in password");
+            }
+
+            if (_uow.PasswordValidation.RequireNonLetterOrDigit)
+            {
+                if (password.ToCharArray().All(char.IsLetterOrDigit))
+                    errors.Add("At least one non-digit and non-letter character is needed in password");
+            }
+
+            return errors;
         }
     }
 }
