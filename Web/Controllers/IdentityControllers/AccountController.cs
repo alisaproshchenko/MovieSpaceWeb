@@ -78,6 +78,12 @@ namespace Web.Controllers.IdentityControllers
                 }
                 else
                 {
+                    if (user.Banned)
+                    {
+                        ModelState.AddModelError("", "Unfortunately, this user is banned");
+                        return View(model);
+                    }
+
                     var claim = await _userService.UnitOfWork.UserManager.CreateIdentityAsync(user,
                         DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignOut();

@@ -18,9 +18,6 @@ namespace Web.Controllers.AdminControllers
         }
         public ActionResult Index()
         {
-            //var userDTO = _userService.GetByUsername("your username");
-            //_userService.AdminRightsToggle(userDTO);
-
             var userDtOs = _userService.GetAll();
             var users = Mapper.Map<IEnumerable<UserViewModel>>(userDtOs);
             foreach (var user in users)
@@ -33,6 +30,19 @@ namespace Web.Controllers.AdminControllers
         public ActionResult AdminPanel()
         {
             return View();
+        }
+
+        public ActionResult BanToggle(string id)
+        {
+            var userDTO = _userService.GetByUsername(id);
+            _userService.UserBanToggle(userDTO);
+            return RedirectToAction("Index");
+        }
+        public ActionResult AdminRightsToggle(string username)
+        {
+            var userDTO = _userService.GetByUsername(username);
+            _userService.AdminRightsToggle(userDTO);
+            return RedirectToAction("Index");
         }
     }
 }
