@@ -1,16 +1,17 @@
 ﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.CountryDto>
 
-<h2>Edit country</h2>
+<div class="background-cover">
+    <h2>Edit country</h2>
 
-@using (Html.BeginForm("Update", "Country", FormMethod.Post))
-{
-    <fieldset>
-        @Html.HiddenFor(m => m.Entity.Id)
-        <p>
-            @Html.LabelFor(m => m.Entity.Name, "Name")
-            <br />
-            @Html.EditorFor(m => m.Entity.Name)
-        </p>
-        <p><input type="submit" value="Send" /></p>
-    </fieldset>
-}
+    @using (Html.BeginForm("Update", "Country", FormMethod.Post))
+    {
+<fieldset>
+    @Html.HiddenFor(m => m.Entity.Id)
+    <p>
+        @Html.LabelFor(m => m.Entity.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Entity.Name)
+    </p>
+    <p><input type="submit" value="Send" /></p>
+</fieldset>}
+</div>

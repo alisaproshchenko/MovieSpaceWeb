@@ -1,32 +1,32 @@
 ﻿@model Web.ViewModels.FilterViewModel
 
+<div class="background-cover">
+    <form method="get">
+        <div class="form-inline">
+            <label class="control-label">Genre: </label>
+            @Html.DropDownList("genre", Model.Genre as SelectList,
+                               htmlAttributes: new { @class = "form-control" })
 
-<form method="get">
-    <div class="form-inline">
-        <label class="control-label">Genre: </label>
-        @Html.DropDownList("genre", Model.Genre as SelectList,
-                      htmlAttributes: new { @class = "form-control" })
+            <label class="control-label">Year: </label>
+            @Html.DropDownList("year", Model.Year as SelectList,
+                               htmlAttributes: new { @class = "form-control" })
 
-        <label class="control-label">Year: </label>
-        @Html.DropDownList("year", Model.Year as SelectList,
-                      htmlAttributes: new { @class = "form-control" })
+            <label class="control-label">Type: </label>
+            @Html.DropDownList("type", Model.Type as SelectList,
+                               htmlAttributes: new { @class = "form-control" })
 
-        <label class="control-label">Type: </label>
-        @Html.DropDownList("type", Model.Type as SelectList,
-                      htmlAttributes: new { @class = "form-control" })
+            <input type="submit" value="Фильтр" class="btn btn-default" />
+        </div>
+    </form>
 
-        <input type="submit" value="Фильтр" class="btn btn-default" />
-    </div>
-</form>
-
-@if (User.IsInRole("Administrator"))
-{
+    @if (User.IsInRole("Administrator"))
+    {
 <div class="add-button">
     @Html.ActionLink("Add media", "Add", "Media", null, new { @class = "add-button-link" })
 </div>}
 
-@foreach (var entity in Model.Media)
-{
+    @foreach (var entity in Model.Media)
+    {
 <div class="basic-block">
     <a href="@Url.Action("Details", "Media", entity)">
         <img class="img" src="@entity.Poster" height="300" width="200" alt="" />
@@ -40,4 +40,5 @@
 </div>}
 </div>}
 
-@Html.Partial("Partials/PagePartial/FilterPagePartial") 
+    @Html.Partial("Partials/PagePartial/FilterPagePartial")
+</div>

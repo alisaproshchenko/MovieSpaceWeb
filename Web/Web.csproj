@@ -300,7 +300,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Style\background.jpg" />
-    <Content Include="Style\Dracula.mp4" />
     <Content Include="Style\header.jpg" />
     <Content Include="Style\Style.css" />
     <Content Include="Web.config" />

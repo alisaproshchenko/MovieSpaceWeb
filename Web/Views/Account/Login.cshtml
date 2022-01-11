@@ -1,17 +1,20 @@
 ﻿@model Web.ViewModels.Identity.LoginModel
 <div class="background-cover login">
-    <h2>Welcome!</h2>
-    
-    <button style="margin-bottom: 10px; width: 150px; background-color: #a49777; color: black; border: none;" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+    <div style="text-align: center;">  
+        <h2>Welcome!</h2>
 
-    <p>
-        You don`t have an account yet?
-        You should @Html.ActionLink("Register", "Register", "Account") then!
-    </p>
+        <button style="margin-bottom: 10px; width: 150px; background-color: #a49777; color: black; border: none;" onclick="document.getElementById('id01').style.display = 'block'" style="width: auto;">Login</button>
+
+        <p>
+            You don`t have an account yet?
+            You should @Html.ActionLink("Register", "Register", "Account") then!
+        </p>
+    </div>
+  
 
     <div id="id01" class="modal">
         <div style="background-color: rgba(0, 0, 0, 0.6); height: 100%;">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+            <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">×</span>
 
             <div class="container">
                 @using (Html.BeginForm())
@@ -20,21 +23,21 @@
 
                     <div>
                         @Html.ValidationSummary()
-                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
                         <p>
-                            <label>Username</label><br />
-                            @Html.EditorFor(x => x.UserName, new { htmlAttributes = new { @class = "inputArea" } })
+                            <label>Username</label><br/>
+                            @Html.EditorFor(x => x.UserName, new {htmlAttributes = new {@class = "inputArea"}})
                         </p>
                         <p>
-                            <label>Password</label><br />
-                            @Html.EditorFor(x => x.Password, new { htmlAttributes = new { @class = "inputArea" } })
+                            <label>Password</label><br/>
+                            @Html.EditorFor(x => x.Password, new {htmlAttributes = new {@class = "inputArea"}})
                         </p>
                         <p><button class="button" type="submit">Submit</button></p>
                     </div>}
             </div>
 
             <div class="container">
-                <button class="button-red" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button class="button-red" type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
             </div>
         </div>
     </div>

@@ -1,14 +1,16 @@
 ﻿@model  Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.GenresDto>
-<h2>Delete</h2>
-<dl>
-    <dt>Name</dt>
-    <dd>
-        @Model.Entity.Name
-    </dd>
-</dl>
- 
-@using (Html.BeginForm())
-{
-    <input type="submit" value="Удалить"  />
-}
+<div class="background-cover">
+    <h2>Delete</h2>
+    <dl>
+        <dt>Name</dt>
+        <dd>
+            @Model.Entity.Name
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+<input type="submit" value="Удалить" />}
+</div>
+
 
