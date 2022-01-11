@@ -1,11 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using IMDbApiLib;
-using MoviesService.IMDbApi;
-using MoviesService.Models;
-
-namespace MoviesService.Migrations
+﻿namespace MoviesService.Migrations
 {
     using System.Data.Entity.Migrations;
 
@@ -18,8 +11,6 @@ namespace MoviesService.Migrations
 
         protected override void Seed(MoviesService.Context.MediaDbContext context)
         {
-            //movie
-
             //var apiLib = new ApiLib("k_q2sbygme");
             //var convertor = new ConvertorApiData();
             //var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
@@ -59,9 +50,6 @@ namespace MoviesService.Migrations
             //        a => new { a.IMDbMovieId }, model);
             //}
             //context.SaveChanges();
-
-
-            //series
 
             //var apiLib = new ApiLib("k_jsvg94yx");
             //var convertor = new ConvertorApiData();
@@ -135,7 +123,7 @@ namespace MoviesService.Migrations
             //        a => new { a.IMDbMovieId }, model);
             //}
             //context.SaveChanges();
-
+            
             //upload
 
             //var apiLib = new ApiLib("5zfN3eE59H");

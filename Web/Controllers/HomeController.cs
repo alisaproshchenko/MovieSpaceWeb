@@ -2,6 +2,7 @@ using MoviesService.IMDbApi;
 using Web.ViewModels;
 using System.Web.Mvc;
 using MoviesService.Search;
+using Web.ViewModels;
 
 
 namespace Web.Controllers

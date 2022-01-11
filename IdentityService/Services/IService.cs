@@ -3,7 +3,7 @@ using IdentityService.UOW;
 
 namespace IdentityService.Services
 {
-    public interface IService<T>
+    public interface IService<T> : IPasswordValidator
     {
         public UnitOfWork UnitOfWork { get; }
         IEnumerable<T> GetAll();

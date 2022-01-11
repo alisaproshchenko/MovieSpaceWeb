@@ -28,7 +28,7 @@ namespace IdentityService.Repository
             return _manager.Roles.FirstOrDefault(x => x.Id == id);
         }
 
-        public ApplicationRole GetByUsername(string name) // by name of role
+        public ApplicationRole GetByName(string name) // by name of role
         {
             return _manager.Roles.FirstOrDefault(x => x.Name == name);
         }

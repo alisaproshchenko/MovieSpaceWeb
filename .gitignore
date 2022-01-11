@@ -6,4 +6,7 @@ MoviesService/bin/
 MoviesService/obj/
 Web/bin/
 Web/obj/
+IdentityService.Tests/bin/
+IdentityService.Tests/obj/
 *.orig
+.htm

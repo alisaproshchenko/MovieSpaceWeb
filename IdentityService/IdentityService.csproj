@@ -224,22 +224,34 @@
   <ItemGroup>
     <Compile Include="Contexts\IdentityContext.cs" />
     <Compile Include="Contexts\IdentityDbInit.cs" />
+    <Compile Include="Dto\AboutUsDto.cs" />
     <Compile Include="Dto\ApplicationUserDto.cs" />
     <Compile Include="Migrations\202201051159389_FirstAzureMigration.cs" />
     <Compile Include="Migrations\202201051159389_FirstAzureMigration.designer.cs">
       <DependentUpon>202201051159389_FirstAzureMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201101024488_AboutUs.cs" />
+    <Compile Include="Migrations\202201101024488_AboutUs.designer.cs">
+      <DependentUpon>202201101024488_AboutUs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AboutUs.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Managers\ApplicationUserManager.cs" />
+    <Compile Include="Models\PasswordValidationRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AboutUsRepository.cs" />
     <Compile Include="Repository\ApplicationRoleRepository.cs" />
     <Compile Include="Repository\ApplicationUserRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Services\AboutUsService.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
+    <Compile Include="Services\IAboutUsService.cs" />
+    <Compile Include="Services\IPasswordValidator.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="UOW\IUnitOfWork.cs" />
     <Compile Include="UOW\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +261,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202201051159389_FirstAzureMigration.resx">
       <DependentUpon>202201051159389_FirstAzureMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201101024488_AboutUs.resx">
+      <DependentUpon>202201101024488_AboutUs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

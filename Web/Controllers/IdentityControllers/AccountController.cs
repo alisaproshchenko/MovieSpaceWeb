@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Security.Claims;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -30,17 +30,31 @@ namespace Web.Controllers.IdentityControllers
         [HttpPost]
         public async Task<ActionResult> Register(RegistrationViewModel model)
         {
-            if (!ModelState.IsValid) return View("Error");
+            if (!ModelState.IsValid) return View(model);
+
+            var errors = _userService.Validate(model.Password);
+            if (errors.Any())
+            {
+                foreach (var error in errors)
+                {
+                    ModelState.AddModelError("", error);
+                }
+                return View(model);
+            }
 
             var userViewModel = new UserViewModel
             {
-                Banned = false, Email = model.Email, Name = model.Name, Password = model.Password,
-                Surname = model.Surname, UserName = model.Username
+                Banned = false,
+                Email = model.Email,
+                Name = model.Name,
+                Password = model.Password,
+                Surname = model.Surname,
+                UserName = model.Username
             };
             var userDto = Mapper.Map<UserViewModel, ApplicationUserDto>(userViewModel);
             _userService.AddUser(userDto);
 
-            var loginModel = new LoginModel {UserName = model.Username, Password = model.Password};
+            var loginModel = new LoginModel { UserName = model.Username, Password = model.Password };
 
             return await Login(loginModel, null);
         }

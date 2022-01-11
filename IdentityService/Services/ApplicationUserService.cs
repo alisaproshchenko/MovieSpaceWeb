@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using IdentityService.Dto;
 using IdentityService.Models;
@@ -32,18 +33,18 @@ namespace IdentityService.Services
 
         public ApplicationUserDto GetByUsername(string username)
         {
-            var user = _uow.UserRepository.GetByUsername(username);
+            var user = _uow.UserRepository.GetByName(username);
             return Mapper.Map<ApplicationUserDto>(user);
         }
 
-        public void AddUser(ApplicationUserDto applicationUserDto) //with a "User" role
+        public void AddUser(ApplicationUserDto applicationUserDto)
         {
             var applicationUser = Mapper.Map<ApplicationUser>(applicationUserDto);
             _uow.UserRepository.Create(applicationUser, applicationUserDto.Password);
             _uow.UserRepository.Save();
 
             const string userRole = "User";
-            var newUserId = _uow.UserRepository.GetByUsername(applicationUser.UserName).Id;
+            var newUserId = _uow.UserRepository.GetByName(applicationUser.UserName).Id;
             _uow.UserManager.AddToRole(newUserId, userRole);
 
             _uow.UserRepository.Save();
@@ -58,7 +59,7 @@ namespace IdentityService.Services
 
         public void ChangePassword(ApplicationUserDto applicationUserDto)
         {
-            var userInDb = _uow.UserRepository.GetByUsername(applicationUserDto.UserName);
+            var userInDb = _uow.UserRepository.GetByName(applicationUserDto.UserName);
             _uow.UserManager.RemovePassword(userInDb.Id);
             _uow.UserManager.AddPassword(userInDb.Id, applicationUserDto.Password);
             _uow.UserRepository.Save();
@@ -66,7 +67,7 @@ namespace IdentityService.Services
 
         public void UserBanToggle(ApplicationUserDto applicationUserDto)
         {
-            var userInDb = _uow.UserRepository.GetByUsername(applicationUserDto.UserName);
+            var userInDb = _uow.UserRepository.GetByName(applicationUserDto.UserName);
             if (userInDb == null)
                 return;
 
@@ -77,7 +78,7 @@ namespace IdentityService.Services
 
         public void AdminRightsToggle(ApplicationUserDto applicationUserDto)
         {
-            var userId = _uow.UserRepository.GetByUsername(applicationUserDto.UserName).Id;
+            var userId = _uow.UserRepository.GetByName(applicationUserDto.UserName).Id;
 
             if (IsAdministrator(userId))
                 _uow.UserManager.RemoveFromRole(userId, "Administrator");
@@ -96,13 +97,46 @@ namespace IdentityService.Services
 
         public IEnumerable<string> GetRoles(string username)
         {
-            var userId = _uow.UserRepository.GetByUsername(username).Id;
+            var userId = _uow.UserRepository.GetByName(username).Id;
             return _uow.UserManager.GetRoles(userId);
         }
 
         public bool IsAdministrator(string userId)
         {
             return _uow.UserManager.GetRoles(userId).Contains("Administrator");
+        }
+
+        public IEnumerable<string> Validate(string password)
+        {
+            var errors = new List<string>();
+            if(password.Length < _uow.PasswordValidation.RequiredLength)
+                errors.Add($"The minimum length of password is {_uow.PasswordValidation.RequiredLength} characters");
+
+            if (_uow.PasswordValidation.RequireDigit)
+            {
+                if (!password.ToCharArray().Any(char.IsDigit))
+                    errors.Add("At least one digit is needed in password");
+            }
+
+            if (_uow.PasswordValidation.RequireUppercase)
+            {
+                if (!password.ToCharArray().Any(char.IsUpper))
+                    errors.Add("At least one character in upper case is needed in password");
+            }
+
+            if (_uow.PasswordValidation.RequireLowercase)
+            {
+                if (!password.ToCharArray().Any(char.IsLower))
+                    errors.Add("At least one character in lower case is needed in password");
+            }
+
+            if (_uow.PasswordValidation.RequireNonLetterOrDigit)
+            {
+                if (password.ToCharArray().All(char.IsLetterOrDigit))
+                    errors.Add("At least one non-digit and non-letter character is needed in password");
+            }
+
+            return errors;
         }
     }
 }

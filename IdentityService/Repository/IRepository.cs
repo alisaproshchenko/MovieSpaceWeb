@@ -7,7 +7,7 @@ namespace IdentityService.Repository
     {
         IEnumerable<T> GetAll(); 
         T GetById(string id);
-        T GetByUsername(string username);
+        T GetByName(string username);
         void Create(T item, string password);
         void Create(T item);
         void Update(T item); 
