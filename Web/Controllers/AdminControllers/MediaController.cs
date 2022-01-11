@@ -57,6 +57,9 @@ namespace Web.Controllers.AdminControllers
         [HttpPost]
         public ActionResult Add(MediaDto entity, int selectedType, int [] selectedGenres, int[] selectedCountries)
         {
+            var search = new SearchInDataBase();
+            if (search.CheckByName(entity.Name))
+                return View("ErrorAdd");
             _service.AddMedia(entity, selectedType, selectedGenres, selectedCountries);
             return RedirectToAction("ListOfEntities");
         }

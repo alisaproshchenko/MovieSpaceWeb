@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using IdentityService.Dto;
 using IdentityService.Services;
 
@@ -41,17 +42,22 @@ namespace Web.Controllers
             }
         }
 
-        [HttpPost]
         public ActionResult Update(AboutUsDto item)
         {
-            _aboutUsService.Change(item);
-            return View();
+            return View(item);
         }
 
         [HttpPost]
-        public ActionResult Delete(AboutUsDto item)
+        public ActionResult Change(AboutUsDto item)
         {
-            _aboutUsService.Delete(item);
+            _aboutUsService.Change(item);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            _aboutUsService.Delete(id);
             return RedirectToAction("Index");
         }
     }

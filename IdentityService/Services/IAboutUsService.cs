@@ -10,6 +10,6 @@ namespace IdentityService.Services
         T Get(string id);
         void Add(T item);
         void Change(T item);
-        void Delete(T item);
+        void Delete(string id);
     }
 }

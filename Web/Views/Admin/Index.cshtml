@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Web.ViewModels.UserViewModel>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<Web.ViewModels.UserViewModel>
 
 @{
     ViewBag.Title = "ASP.NET Identity";
@@ -16,6 +17,9 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Roles</th>
+                <th>Banned</th>
+                <th></th>
+                <th></th>
             </tr>
             @if (!Model.Any())
             {
@@ -27,18 +31,39 @@
             {
                 foreach (var user in Model)
                 {
-                    <tr>
-                        <td>@user.Name</td>
-                        <td>@user.Surname</td>
-                        <td>@user.UserName</td>
-                        <td>@user.Email</td>
-                        <td>
-                            @foreach (var role in user.Roles)
-                            {
-                                <p> @role </p>
-                            }
-                        </td>
-                    </tr>
+        <tr>
+            <td>@user.Name</td>
+            <td>@user.Surname</td>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>
+                @foreach (var role in user.Roles)
+                {
+                    <p> @role </p>
+                }
+            </td>
+            <td>@user.Banned</td>
+            <td>
+                @if (user.Banned)
+                {
+                    @Html.ActionLink("Pardon", "BanToggle", "Admin", new { id = user.UserName }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Ban", "BanToggle", "Admin", new { id = user.UserName }, null)
+                }
+            </td>
+            <td>
+                @if (user.Roles.Count() > 1)
+                {
+                    @Html.ActionLink("Remove administrator", "AdminRightsToggle", "Admin", new { username = user.UserName }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Set administrator", "AdminRightsToggle", "Admin", new { username = user.UserName }, null)
+                }
+            </td>
+        </tr>
                 }
             }
         </table>

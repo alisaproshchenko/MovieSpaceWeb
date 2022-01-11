@@ -266,7 +266,6 @@
     <Compile Include="Services\Enums.cs" />
     <Compile Include="Services\PageOption.cs" />
     <Compile Include="Services\Service.cs" />
-    <Compile Include="ViewModels\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\GenericEntitiesViewModel.cs" />
@@ -354,6 +353,10 @@
     <Content Include="Views\AboutUs\Update.cshtml" />
     <Content Include="Views\Home\Filters.cshtml" />
     <Content Include="Views\Shared\Partials\PagePartial\FilterPagePartial.cshtml" />
+    <Content Include="Views\Home\Top250ByIMDb.cshtml" />
+    <Content Include="Views\Home\MostLiked.cshtml" />
+    <Content Include="Views\Media\ErrorAdd.cshtml" />
+    <Content Include="Views\Home\MostWatched.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
