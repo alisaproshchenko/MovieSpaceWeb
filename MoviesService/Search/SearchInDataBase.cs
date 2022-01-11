@@ -32,6 +32,27 @@ namespace MoviesService.Search
             .OrderByDescending(m => m.AmountOfLikes)
             .ToList();
 
+        //public List<Media> MostWatched()
+        //{
+        //    var watchedDictionary = new Dictionary<int, int>();
+        //    var mostW = new List<Media>();
+
+        //    foreach (var val in _context.UsersToMediaTable.Local)
+        //    {
+        //        if (watchedDictionary.ContainsKey(val.MediaId))
+        //            watchedDictionary[val.MediaId]++;
+        //        else
+        //            watchedDictionary.Add(val.MediaId,1);
+        //    }
+
+        //    foreach (var watched in watchedDictionary)
+        //    {
+        //        mostW.Add(_listMedia.FirstOrDefault(m => m.Id == watched.Key));
+        //    }
+
+        //    return mostW;
+        //}
+
         public LinkedList<Genres> GenreList()
         {
             var genresList = new LinkedList<Genres>(); 
@@ -135,5 +156,7 @@ namespace MoviesService.Search
 
             return listSearch;
         }
+
+        public bool CheckByName(string name) => _listMedia.Any(m => m.Name.ToLower() == name.ToLower());
     }
 }
