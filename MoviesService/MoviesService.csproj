@@ -198,6 +198,18 @@
     <Compile Include="Migrations\202201110832556_change-media2.designer.cs">
       <DependentUpon>202201110832556_change-media2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201111606354_changeusertomedia.cs" />
+    <Compile Include="Migrations\202201111606354_changeusertomedia.designer.cs">
+      <DependentUpon>202201111606354_changeusertomedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201111621229_change.cs" />
+    <Compile Include="Migrations\202201111621229_change.designer.cs">
+      <DependentUpon>202201111621229_change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201111634465_change4323.cs" />
+    <Compile Include="Migrations\202201111634465_change4323.designer.cs">
+      <DependentUpon>202201111634465_change4323.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
@@ -257,6 +269,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201110832556_change-media2.resx">
       <DependentUpon>202201110832556_change-media2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201111606354_changeusertomedia.resx">
+      <DependentUpon>202201111606354_changeusertomedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201111621229_change.resx">
+      <DependentUpon>202201111621229_change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201111634465_change4323.resx">
+      <DependentUpon>202201111634465_change4323.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

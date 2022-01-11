@@ -32,7 +32,10 @@ namespace Web.Controllers.AdminControllers
         {
             var search = new SearchInDataBase();
             var model = search.MediaList().FirstOrDefault(x => x.Id == id);
-            _likeWatchedRepository.Watch(User.Identity.GetUserId(), id);
+            if (User.Identity.IsAuthenticated)
+            {
+                _likeWatchedRepository.Watch(User.Identity.GetUserId(), id);
+            }
             return View(model);
         }
 

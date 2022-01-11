@@ -12,7 +12,7 @@ namespace MoviesService.Repositories.Repository
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
         public Media Like(int mediaId, int usersAmount, string userId)
         {
-            var userToMedia = _context.UsersToMediaTable.Where((x) => x.Media.Id == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+            var userToMedia = _context.UsersToMediaTable.Where((x) => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
             userToMedia.Liked = !userToMedia.Liked;
@@ -24,14 +24,12 @@ namespace MoviesService.Repositories.Repository
 
             if (media.AmountOfLikes != 0)
             {
-                media.SiteUsersRatings = 11 - (usersAmount / media.AmountOfLikes);
+                media.SiteUsersRatings = 11 - (usersAmount / media.AmountOfLikes) < 0 ? 0 : 11 - (usersAmount / media.AmountOfLikes);
             }
             else
             {
                 media.SiteUsersRatings = 0;
             }
-
-            _context.UsersToMediaTable.AddOrUpdate(userToMedia);
 
             _context.SaveChanges();
 
@@ -40,7 +38,7 @@ namespace MoviesService.Repositories.Repository
 
         public void Watch(string userId, int mediaId)
         {
-            var check = _context.UsersToMediaTable.Where((x) => x.Media.Id == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+            var check = _context.UsersToMediaTable.Where(x => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
 
             if (check != null)
             {
@@ -60,8 +58,9 @@ namespace MoviesService.Repositories.Repository
                 Watched = true,
                 AddToWatch = false,
                 Date = DateTime.Now,
-                Media = media
+                MediaId = mediaId
             };
+
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
 
             _context.SaveChanges();
