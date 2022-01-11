@@ -33,12 +33,12 @@ namespace Web.Controllers
             return View("Top250ByIMDb", new MediaViewModel(model, currentPage));
         }
 
-        //[HttpGet]
-        //public ActionResult MostWatchedResult(int currentPage = 1)
-        //{
-        //    var model = _search.MostWatched();
-        //    return View("MostWatched", new MediaViewModel(model, currentPage));
-        //}
+        [HttpGet]
+        public ActionResult MostWatchedResult(int currentPage = 1)
+        {
+            var model = _search.MostWatched();
+            return View("MostWatched", new MediaViewModel(model, currentPage));
+        }
 
         [HttpGet]
         public ActionResult Filters(string genre, string country, string year, string type, int currentPage = 1)

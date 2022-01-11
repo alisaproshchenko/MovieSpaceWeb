@@ -22,8 +22,8 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Top 250 IMDb", "Top250IMDb", "Home")</li>
-                    <li>@Html.ActionLink("Most liked", "MostLikedResult", "Home")</li>
-                  @*  <li>@Html.ActionLink("Most watched", "MostWatchedResult", "Home")</li>*@
+                    <li>@Html.ActionLink("Top liked", "MostLikedResult", "Home")</li>
+                    <li>@Html.ActionLink("Top Watched", "MostWatchedResult", "Home")</li>
 
                     @if (User.IsInRole("Administrator"))
                     {

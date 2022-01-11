@@ -28,30 +28,30 @@ namespace MoviesService.Search
         public List<Media> MediaTop250List() => _listMedia.OrderByDescending(m => m.RatingIMDb).Take(250).ToList();
 
         public List<Media> MostLikeMovies() =>_listMedia
-            .Where(m=>m.AmountOfLikes != null)
+            .Where(m=>m.AmountOfLikes != null && m.AmountOfLikes != 0)
             .OrderByDescending(m => m.AmountOfLikes)
             .ToList();
 
-        //public List<Media> MostWatched()
-        //{
-        //    var watchedDictionary = new Dictionary<int, int>();
-        //    var mostW = new List<Media>();
+        public List<Media> MostWatched()
+        {
+            var watchedDictionary = new Dictionary<int, int>();
+            var mostW = new List<Media>();
+            
+            foreach (var val in _context.UsersToMediaTable)
+            {
+                if (!watchedDictionary.ContainsKey(val.MediaId))
+                    watchedDictionary.Add(val.MediaId, 1);
+                else
+                    watchedDictionary[val.MediaId]++;
+            }
 
-        //    foreach (var val in _context.UsersToMediaTable.Local)
-        //    {
-        //        if (watchedDictionary.ContainsKey(val.MediaId))
-        //            watchedDictionary[val.MediaId]++;
-        //        else
-        //            watchedDictionary.Add(val.MediaId,1);
-        //    }
+            foreach (var watched in watchedDictionary)
+            {
+                mostW.Add(_listMedia.First(m => m.Id == watched.Key));
+            }
 
-        //    foreach (var watched in watchedDictionary)
-        //    {
-        //        mostW.Add(_listMedia.FirstOrDefault(m => m.Id == watched.Key));
-        //    }
-
-        //    return mostW;
-        //}
+            return mostW;
+        }
 
         public LinkedList<Genres> GenreList()
         {
