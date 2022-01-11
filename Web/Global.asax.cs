@@ -13,8 +13,6 @@ namespace Web
         {
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
 
-            Database.SetInitializer(new IdentityDbInit());
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
