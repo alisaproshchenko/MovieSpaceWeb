@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using IdentityService.Dto;
 using IdentityService.Services;
 using Microsoft.AspNet.Identity;
-using System.Web.Mvc;
 using MoviesService.Models;
 using MoviesService.Repositories.Repository;
 

@@ -24,7 +24,35 @@ namespace MoviesService.Search
         }
 
         public List<Media> MediaList() => _listMedia.OrderByDescending(m => m.RatingIMDb).ToList();
-        
+
+        public List<Media> MediaTop250List() => _listMedia.OrderByDescending(m => m.RatingIMDb).Take(250).ToList();
+
+        public List<Media> MostLikeMovies() =>_listMedia
+            .Where(m=>m.AmountOfLikes != null && m.AmountOfLikes != 0)
+            .OrderByDescending(m => m.AmountOfLikes)
+            .ToList();
+
+        public List<Media> MostWatched()
+        {
+            var watchedDictionary = new Dictionary<int, int>();
+            var mostW = new List<Media>();
+            
+            foreach (var val in _context.UsersToMediaTable)
+            {
+                if (!watchedDictionary.ContainsKey(val.MediaId))
+                    watchedDictionary.Add(val.MediaId, 1);
+                else
+                    watchedDictionary[val.MediaId]++;
+            }
+
+            foreach (var watched in watchedDictionary)
+            {
+                mostW.Add(_listMedia.First(m => m.Id == watched.Key));
+            }
+
+            return mostW;
+        }
+
         public LinkedList<Genres> GenreList()
         {
             var genresList = new LinkedList<Genres>(); 
@@ -33,6 +61,19 @@ namespace MoviesService.Search
             foreach (var genre in _context.GenresTable)
             {
                 genresList.AddLast(genre);
+            }
+
+            return genresList;
+        }
+
+        public LinkedList<Country> CountryList()
+        {
+            var genresList = new LinkedList<Country>();
+            genresList.AddFirst(new Country { Id = 0, Name = "All" });
+
+            foreach (var country in _context.CountriesTable)
+            {
+                genresList.AddLast(country);
             }
 
             return genresList;
@@ -86,6 +127,16 @@ namespace MoviesService.Search
             return listSearch;
         }
 
+        public List<Media> SearchByCountry(string country, List<Media> listSearch)
+        {
+            listSearch = listSearch
+                .Where(m => m.CountryCollection.Any(g => g.Id == _convertor.StrToInt(country)))
+                .OrderByDescending(r => r.RatingIMDb)
+                .ToList();
+
+            return listSearch;
+        }
+
         public List<Media> SearchByYear(string year, List<Media> listSearch)
         {
             listSearch = listSearch
@@ -105,5 +156,7 @@ namespace MoviesService.Search
 
             return listSearch;
         }
+
+        public bool CheckByName(string name) => _listMedia.Any(m => m.Name.ToLower() == name.ToLower());
     }
 }
