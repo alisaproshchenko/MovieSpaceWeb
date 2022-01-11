@@ -20,9 +20,16 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult MostLikedResult(int currentPage = 1)
+        {
+            var model = _search.MostLikeMovies();
+            return View("MostLiked", new MediaViewModel(model, currentPage));
+        }
+
+        [HttpGet]
         public ActionResult Top250IMDb(int currentPage = 1)
         {
-            var model = _search.MediaList().Take(250).ToList();
+            var model = _search.MediaTop250List();
             return View("Top250ByIMDb", new MediaViewModel(model, currentPage));
         }
 

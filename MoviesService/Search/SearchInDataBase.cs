@@ -24,7 +24,14 @@ namespace MoviesService.Search
         }
 
         public List<Media> MediaList() => _listMedia.OrderByDescending(m => m.RatingIMDb).ToList();
-        
+
+        public List<Media> MediaTop250List() => _listMedia.OrderByDescending(m => m.RatingIMDb).Take(250).ToList();
+
+        public List<Media> MostLikeMovies() =>_listMedia
+            .Where(m=>m.AmountOfLikes != null)
+            .OrderByDescending(m => m.AmountOfLikes)
+            .ToList();
+
         public LinkedList<Genres> GenreList()
         {
             var genresList = new LinkedList<Genres>(); 

@@ -22,10 +22,11 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Top 250 IMDb", "Top250IMDb", "Home")</li>
+                    <li>@Html.ActionLink("Most liked", "MostLikedResult", "Home")</li>
 
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin", null, new {@class = "admin-panel"})</li>
+                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin", null, new { @class = "admin-panel" })</li>
                     }
                 </ul>
             </div>
