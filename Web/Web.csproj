@@ -266,7 +266,6 @@
     <Compile Include="Services\Enums.cs" />
     <Compile Include="Services\PageOption.cs" />
     <Compile Include="Services\Service.cs" />
-    <Compile Include="ViewModels\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\GenericEntitiesViewModel.cs" />

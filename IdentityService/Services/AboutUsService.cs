@@ -18,6 +18,7 @@ namespace IdentityService.Services
         public void Add(AboutUsDto item)
         {
             var aboutUs = Mapper.Map<AboutUs>(item);
+            aboutUs.Id = aboutUs.Name;
             _uow.AboutUsRepository.Create(aboutUs);
             _uow.AboutUsRepository.Save();
         }
@@ -29,9 +30,9 @@ namespace IdentityService.Services
             _uow.AboutUsRepository.Save();
         }
 
-        public void Delete(AboutUsDto item)
+        public void Delete(string id)
         {
-            var aboutUs = Mapper.Map<AboutUs>(item);
+            var aboutUs = _uow.AboutUsRepository.GetById(id);
             _uow.AboutUsRepository.Delete(aboutUs.Id);
             _uow.AboutUsRepository.Save();
         }
