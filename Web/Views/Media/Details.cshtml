@@ -1,4 +1,5 @@
-﻿@using Web.Services
+﻿@using Microsoft.AspNet.Identity
+@using Web.Services
 @model MoviesService.Models.Media
 
 <div class="background-cover">
@@ -14,7 +15,7 @@
                 <div class="row">
 
                     <div class="col-xs-1 col-sm-4 col-md-12 col-lg-6">
-                        <img class="img" src="@Model.Poster" height="500" width="300" alt=""/>
+                        <img src="@Model.Poster" height="500" width="300" alt=""/>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
@@ -39,9 +40,10 @@
 
                         <h3>@Model.BoxOffice</h3>
 
-                        <div class="like">               
+                        <div class="like">   
+                            <div>@Html.ActionLink("Add to your list", "AddToMyList", "LikeWatched", new {userId = User.Identity.GetUserId(),mediaId = Model.Id}, new {@class="add-to-my-list"})</div>
                             <span>@Model.AmountOfLikes</span>
-                            <span><a href="@Url.Action("Like", "LikeWatched",  @Model)"><i style="color: white;" class="fas fa-thumbs-up"></i></a></span>
+                            <span><a href="@Url.Action("Like", "LikeWatched",  new {id = @Model.Id})"><i style="color: white;" class="fas fa-thumbs-up"></i></a></span>
                             <span style="margin-left: 20px;">IMDb Rating: @Model.RatingIMDb</span>
                             <span style="margin-left: 20px;">Site Rating: @Model.SiteUsersRatings</span>
                         </div>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using MoviesService.Context;
@@ -10,6 +11,7 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
+        public IEnumerable<UsersToMedia> Entities => _context.UsersToMediaTable;
         public Media Like(int mediaId, int usersAmount, string userId)
         {
             var userToMedia = _context.UsersToMediaTable.Where((x) => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
@@ -62,6 +64,27 @@ namespace MoviesService.Repositories.Repository
             };
 
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
+
+            _context.SaveChanges();
+        }
+
+        public void AddMyList(string userId, int mediaId)
+        {
+            var userToMedia = _context.UsersToMediaTable.Where(x => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+
+            if (userToMedia.AddToWatch)
+                return;
+
+            userToMedia.AddToWatch = true;
+
+            _context.SaveChanges();
+        }
+
+        public void DeleteFromMyList(string userId, int mediaId)
+        {
+            var userToMedia = _context.UsersToMediaTable.Where(x => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+
+            userToMedia.AddToWatch = false;
 
             _context.SaveChanges();
         }

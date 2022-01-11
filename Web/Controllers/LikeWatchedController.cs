@@ -23,7 +23,21 @@ namespace Web.Controllers
         {
             var userAmount = _userService.GetAll().Count();
             mediaDto = _repository.Like(mediaDto.Id, userAmount, User.Identity.GetUserId());
-            return RedirectToAction("Details", "Media", mediaDto);
+            return RedirectToAction("Details", "Media", new {id = mediaDto.Id});
+        }
+
+        [Authorize]
+        public ActionResult AddToMyList(string userId, int mediaId)
+        {
+            _repository.AddMyList(userId, mediaId);
+            return RedirectToAction("Details", "Media", new { id = mediaId });
+        }
+
+        [Authorize]
+        public ActionResult DeleteFromMyList(string userId, int mediaId)
+        {
+            _repository.DeleteFromMyList(userId, mediaId);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

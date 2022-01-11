@@ -1,10 +1,77 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-xs-1 col-sm-4 col-md-12">
+﻿@using Microsoft.AspNet.Identity
+@model Web.ViewModels.HomePageViewModel
+<div class="background-cover">
+    @if (@Model.AllMedia.Count(x => @Model.MyList.Contains(x.Id)) != 0)
+    {
+        <div style="font-size: 25px;">MyList</div>
+        foreach (var myList in @Model.AllMedia.Where(x => @Model.MyList.Contains(x.Id)).Take(8))
+        {
+            <div style="display: inline-grid;">
+                <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
+                    <img src="@myList.Poster" height="230" width="150" alt=""/>
+                </a>
+                @Html.ActionLink("Delete", "DeleteFromMyList", "LikeWatched", new {userId = User.Identity.GetUserId(), mediaId = @myList.Id}, null)
+            </div>
+        }
+    }
 
+    <div style="font-size: 25px;">Horror</div>
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Horror")).Take(7))
+    {
+        <div style="display: inline-grid;">
+            <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
+                <img src="@myList.Poster" height="230" width="150" alt=""/>
+            </a>       
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-
+    }
+    
+    <div style="font-size: 25px;">Action</div>
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Action")).Take(7))
+    {
+        <div style="display: inline-grid;">
+            <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
+                <img src="@myList.Poster" height="230" width="150" alt=""/>
+            </a>
         </div>
-    </div>
+    }
+    
+    <div style="font-size: 25px;">Drama</div>
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Drama")).Take(7))
+    {
+        <div style="display: inline-grid;">
+            <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
+                <img src="@myList.Poster" height="230" width="150" alt=""/>
+            </a>
+        </div>
+    }
+    
+<div style="font-size: 25px;">Comedy</div>
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Comedy")).Take(7))
+    {
+        <div style="display: inline-grid;">
+            <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
+                <img src="@myList.Poster" height="230" width="150" alt=""/>
+            </a>
+        </div>
+    }
+    
+<div style="font-size: 25px;">Adventure</div>
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Adventure")).Take(7))
+    {
+        <div style="display: inline-grid;">
+            <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
+                <img src="@myList.Poster" height="230" width="150" alt=""/>
+            </a>
+        </div>
+    }
+    
+<div style="font-size: 25px;">Western</div>
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Western")).Take(7))
+    {
+        <div style="display: inline-grid;">
+            <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
+                <img src="@myList.Poster" height="230" width="150" alt=""/>
+            </a>
+        </div>
+    }
 </div>

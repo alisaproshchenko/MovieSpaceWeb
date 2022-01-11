@@ -271,6 +271,7 @@
     <Compile Include="ViewModels\GenericEntitiesViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\Identity\LoginModel.cs" />
     <Compile Include="ViewModels\Identity\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\MediaViewModel.cs" />

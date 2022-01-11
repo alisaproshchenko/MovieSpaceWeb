@@ -2,6 +2,8 @@ using System.Linq;
 using MoviesService.IMDbApi;
 using Web.ViewModels;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using MoviesService.Repositories.Repository;
 using MoviesService.Search;
 
 
@@ -9,14 +11,24 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ConvertorApiData _convertor = new ConvertorApiData();
-        private static readonly SearchInDataBase _search = new SearchInDataBase();
+        private readonly ConvertorApiData _convertor = new ConvertorApiData();        
+        private readonly LikeWatchedRepository _repository;
+        private readonly MediaRepository _repositoryMedia;
 
+        public HomeController(LikeWatchedRepository repository, MediaRepository repositoryMedia)
+        {
+            _repository = repository;
+            _repositoryMedia = repositoryMedia;
+        }
+        private static readonly SearchInDataBase _search = new SearchInDataBase();
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var search = new SearchInDataBase();
+            var model = search.MediaList();
+            var usersTo = search.UsersToMedia();
+            return View(new HomePageViewModel(usersTo, model,User.Identity.GetUserId()));
         }
 
         [HttpGet]

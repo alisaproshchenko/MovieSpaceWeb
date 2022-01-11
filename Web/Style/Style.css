@@ -205,8 +205,21 @@ textarea {
 
 .like {
     position: relative;
-    top: 120px;
+    top: 100px;
     font-size: 30px;
+}
+
+.add-to-my-list {
+    text-decoration: none;
+    color: inherit;
+    font-size: 25px;
+    background-color: #008000;
+    border-radius: 8px;
+}
+
+.add-to-my-list:hover {
+    color: white;
+    text-decoration: none;
 }
 
 /*Pagination*/
