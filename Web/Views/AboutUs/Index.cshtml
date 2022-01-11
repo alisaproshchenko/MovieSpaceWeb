@@ -1,8 +1,8 @@
 ﻿@using System.Web.Mvc.Html
 @model IEnumerable<IdentityService.Dto.AboutUsDto>
 
-<div class="background-cover">
-    <div style="margin-top: -8px;">
+<div class="background-cover" style="height: 100%;">
+    <div style="margin-top: 20px;">
         @if (User.IsInRole("Administrator"))
         {
             <div class="add-button">
@@ -12,18 +12,67 @@
 
         @foreach (var entity in Model)
         {
-    <div class="basic-block">
+            <div class="slideshow-container">
+                <div class="mySlides1">
+                    <div>
+                        @entity.Name
+                    </div>
+                    <div>
+                        <img src="~/Style/@entity.PhotoLink" style="width: 50%; height: 70%;">
+                    </div>
+                </div>
 
-        <img src="@entity.PhotoLink" height="300" width="200" alt="" />
-        <p class="text" style="color: bisque">@entity.Name</p>
+                <div class="mySlides1">
+                    <img src="@entity.PhotoLink" style="width:100%">
+                </div>
 
-        @if (User.IsInRole("Administrator"))
-        {
-    <div class="admin-button">
-        <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "AboutUs", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
-        <div class="admin-button-position">@Html.ActionLink("Update", "Update", "AboutUs", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
-    </div>      }
-    </div>
+                <div class="mySlides1">
+                    <img src="@entity.PhotoLink" style="width:100%">
+                </div>
+                
+                <div class="mySlides1">
+                    <img src="@entity.PhotoLink" style="width:100%">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1, 0)">❮</a>
+                <a class="next" onclick="plusSlides(1, 0)">❯</a>
+            </div>
+
+            if (User.IsInRole("Administrator"))
+            {
+                <div class="admin-button">
+                    <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
+                    <div class="admin-button-position">@Html.ActionLink("Update", "Update", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
+                </div>
+            }
         }
     </div>
 </div>
+
+
+
+
+    
+
+<script>
+    var slideIndex = [1,1];
+var slideId = ["mySlides1", "mySlides2"]
+showSlides(1, 0);
+showSlides(1, 1);
+
+function plusSlides(n, no) {
+  showSlides(slideIndex[no] += n, no);
+}
+
+function showSlides(n, no) {
+  var i;
+  var x = document.getElementsByClassName(slideId[no]);
+  if (n > x.length) {slideIndex[no] = 1}
+  if (n < 1) {slideIndex[no] = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex[no]-1].style.display = "block";
+}
+    </script>
+
