@@ -27,9 +27,12 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Filters(string genre, string year, string type, int currentPage = 1)
+        public ActionResult Filters(string genre, string country, string year, string type, int currentPage = 1)
         {
             var model = _search.MediaList();
+
+            if (country != null && _convertor.StrToInt(country) != 0)
+                model = _search.SearchByCountry(country, model);
 
             if (genre != null && _convertor.StrToInt(genre) != 0)
                 model = _search.SearchByGenre(genre, model);
@@ -43,8 +46,9 @@ namespace Web.Controllers
             var genreModel = _search.GenreList();
             var years = _search.YearList();
             var types = _search.TypesList();
+            var countries = _search.CountryList();
 
-            var model2 = new FilterViewModel(model, years,genreModel,types,currentPage);
+            var model2 = new FilterViewModel(model, years,genreModel,countries, types, currentPage);
 
             return View("Filters", model2);
         }

@@ -38,6 +38,19 @@ namespace MoviesService.Search
             return genresList;
         }
 
+        public LinkedList<Country> CountryList()
+        {
+            var genresList = new LinkedList<Country>();
+            genresList.AddFirst(new Country { Id = 0, Name = "All" });
+
+            foreach (var country in _context.CountriesTable)
+            {
+                genresList.AddLast(country);
+            }
+
+            return genresList;
+        }
+
         public List<string> TypesList()
         {
             var typesList = new List<string>();
@@ -80,6 +93,16 @@ namespace MoviesService.Search
         {
             listSearch = listSearch
                 .Where(m => m.GenresCollection.Any(g =>g.Id == _convertor.StrToInt(genre)))
+                .OrderByDescending(r => r.RatingIMDb)
+                .ToList();
+
+            return listSearch;
+        }
+
+        public List<Media> SearchByCountry(string country, List<Media> listSearch)
+        {
+            listSearch = listSearch
+                .Where(m => m.CountryCollection.Any(g => g.Id == _convertor.StrToInt(country)))
                 .OrderByDescending(r => r.RatingIMDb)
                 .ToList();
 
