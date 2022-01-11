@@ -6,7 +6,7 @@
 
     @foreach (var entity in Model.Types)
     {
-<div style="border: 1px solid red; width: 100px; height: 100px;">
+<div style="border: 1px solid red; width: 100px; height: 100px; display: inline-grid;">
     <div>@entity.Name</div>
     <div>@Html.ActionLink("Delete", "Delete", "MediaType", new { id = entity.Id }, null)</div>
     <div>@Html.ActionLink("Edit", "Edit", "MediaType", new { id = entity.Id }, null)</div>

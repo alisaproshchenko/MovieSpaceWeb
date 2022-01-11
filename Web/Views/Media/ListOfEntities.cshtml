@@ -13,7 +13,7 @@
         @foreach (var entity in Model.Media)
         {
             <div class="basic-block">
-                <a href="@Url.Action("Details", "Media", entity)">
+                <a href="@Url.Action("Details", "Media", new {id = entity.Id})">
                     <img src="@entity.Poster" height="300" width="200" alt=""/>
                     <p class="text">@entity.Name</p>
                 </a>

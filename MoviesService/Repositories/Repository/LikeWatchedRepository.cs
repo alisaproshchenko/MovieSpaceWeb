@@ -10,9 +10,9 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
-        public Media Like(int mediaId, int usersAmount)
+        public Media Like(int mediaId, int usersAmount, string userId)
         {
-            var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
+            var userToMedia = _context.UsersToMediaTable.Where((x) => x.Media.Id == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
             userToMedia.Liked = !userToMedia.Liked;
@@ -40,8 +40,8 @@ namespace MoviesService.Repositories.Repository
 
         public void Watch(string userId, int mediaId)
         {
-            var check = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
-            
+            var check = _context.UsersToMediaTable.Where((x) => x.Media.Id == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+
             if (check != null)
             {
                 check.Date = DateTime.Now; 
@@ -60,7 +60,7 @@ namespace MoviesService.Repositories.Repository
                 Watched = true,
                 AddToWatch = false,
                 Date = DateTime.Now,
-                Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
+                Media = media
             };
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
 

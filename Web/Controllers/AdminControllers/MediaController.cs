@@ -28,11 +28,11 @@ namespace Web.Controllers.AdminControllers
             this._likeWatchedRepository = likeWatchedRepository;
         }
 
-        public ActionResult Details(MediaDto mediaDto)
+        public ActionResult Details(int id)
         {
             var search = new SearchInDataBase();
-            var model = search.MediaList().FirstOrDefault(x => x.Id == mediaDto.Id);
-            _likeWatchedRepository.Watch(User.Identity.GetUserId(), mediaDto.Id);
+            var model = search.MediaList().FirstOrDefault(x => x.Id == id);
+            _likeWatchedRepository.Watch(User.Identity.GetUserId(), id);
             return View(model);
         }
 
@@ -46,7 +46,7 @@ namespace Web.Controllers.AdminControllers
         public ActionResult Add()
         {
             ViewBag.Genres = _genreServices.Entities;
-            ViewBag.Country = _countryServices.Entities;
+            ViewBag.Country = _countryServices.Entities.Take(20);
             ViewBag.Types = _typesServices.Entities;
             return View();
         }

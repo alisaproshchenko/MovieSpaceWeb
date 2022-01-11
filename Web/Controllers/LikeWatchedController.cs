@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using IdentityService.Dto;
 using IdentityService.Services;
+using Microsoft.AspNet.Identity;
 using MoviesService.Models;
 using MoviesService.Repositories.Repository;
 
@@ -21,7 +22,7 @@ namespace Web.Controllers
         public ActionResult Like(Media mediaDto)
         {
             var userAmount = _userService.GetAll().Count();
-            mediaDto = _repository.Like(mediaDto.Id, userAmount);
+            mediaDto = _repository.Like(mediaDto.Id, userAmount, User.Identity.GetUserId());
             return RedirectToAction("Details", "Media", mediaDto);
         }
     }
