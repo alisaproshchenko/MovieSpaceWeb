@@ -1,35 +1,29 @@
-﻿@model IEnumerable<IdentityService.Dto.AboutUsDto>
+﻿@using System.Web.Mvc.Html
+@model IEnumerable<IdentityService.Dto.AboutUsDto>
 
-@{
-    ViewBag.Title = "Index";
-}
+<div class="background-cover">
+    <div style="margin-top: -8px;">
+        @if (User.IsInRole("Administrator"))
+        {
+            <div class="add-button">
+                @Html.ActionLink("Add", "Create", "AboutUs", null, new {@class = "add-button-link"})
+            </div>
+        }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        All users
+        @foreach (var entity in Model)
+        {
+    <div class="basic-block">
+
+        <img src="@entity.PhotoLink" height="300" width="200" alt="" />
+        <p class="text" style="color: bisque">@entity.Name</p>
+
+        @if (User.IsInRole("Administrator"))
+        {
+    <div class="admin-button">
+        <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "AboutUs", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
+        <div class="admin-button-position">@Html.ActionLink("Update", "Update", "AboutUs", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
+    </div>      }
     </div>
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>PhotoLink</th>
-            <th>ProjectRole</th>
-        </tr>
-        @if (!Model.Any())
-        {
-            <tr>
-                <td colspan="3" class="text-center">The database is empty</td>
-            </tr>
         }
-        else
-        {
-            foreach (var aboutUs in Model)
-            {
-                <tr>
-                    <td>@aboutUs.Name</td>
-                    <td>@aboutUs.PhotoLink</td>
-                    <td>@aboutUs.ProjectRole</td>
-                </tr>
-        }
-    }
-    </table>
+    </div>
 </div>
