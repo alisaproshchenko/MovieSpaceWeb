@@ -353,6 +353,7 @@
     <Content Include="Views\AboutUs\Update.cshtml" />
     <Content Include="Views\Home\Filters.cshtml" />
     <Content Include="Views\Shared\Partials\PagePartial\FilterPagePartial.cshtml" />
+    <Content Include="Views\Home\Top250ByIMDb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
