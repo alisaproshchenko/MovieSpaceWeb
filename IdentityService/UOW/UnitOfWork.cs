@@ -16,6 +16,8 @@ namespace IdentityService.UOW
         private IRepository<ApplicationUser> _userRepository;
         private IRepository<AboutUs> _aboutUsRepository;
 
+        private PasswordValidationRules _passwordValidation;
+
         public UnitOfWork()
         {
             _db = new IdentityContext();
@@ -32,5 +34,8 @@ namespace IdentityService.UOW
             _roleManager ??= new ApplicationRoleManager(new RoleStore<ApplicationRole>(_db));
         public ApplicationUserManager UserManager =>
             _userManager ??= new ApplicationUserManager(new UserStore<ApplicationUser>(_db));
+
+        public PasswordValidationRules PasswordValidation =>
+            _passwordValidation ??= new PasswordValidationRules();
     }
 }
