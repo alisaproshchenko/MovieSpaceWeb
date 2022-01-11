@@ -72,7 +72,19 @@ namespace MoviesService.Repositories.Repository
         {
             var userToMedia = _context.UsersToMediaTable.Where(x => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
 
+            if (userToMedia.AddToWatch)
+                return;
+
             userToMedia.AddToWatch = true;
+
+            _context.SaveChanges();
+        }
+
+        public void DeleteFromMyList(string userId, int mediaId)
+        {
+            var userToMedia = _context.UsersToMediaTable.Where(x => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+
+            userToMedia.AddToWatch = false;
 
             _context.SaveChanges();
         }

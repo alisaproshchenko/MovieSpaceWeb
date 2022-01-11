@@ -1,17 +1,12 @@
-﻿@model Web.ViewModels.HomePageViewModel
-@foreach (var myList in @Model.AllMedia.Where(x => @Model.MyList.Contains(x.Id)))
-{
-    <div>@myList.Name</div>
-}
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-1 col-sm-4 col-md-12">
-
+﻿@using Microsoft.AspNet.Identity
+@model Web.ViewModels.HomePageViewModel
+<div class="background-cover">
+    <div style="font-size: 25px;">MyList</div>
+    @foreach (var myList in @Model.AllMedia.Where(x => @Model.MyList.Contains(x.Id)).Take(8))
+    {
+        <div style="display: inline-grid;">
+            <img src="@myList.Poster" height="230" width="150" alt=""/>
+            @Html.ActionLink("Delete", "DeleteFromMyList", "LikeWatched", new {userId = User.Identity.GetUserId(), mediaId = @myList.Id}, null)
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-
-        </div>
-    </div>
+    }
 </div>

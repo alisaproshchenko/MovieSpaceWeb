@@ -39,12 +39,9 @@
                         <h3>@Model.Budget</h3>
 
                         <h3>@Model.BoxOffice</h3>
-                        
-                        <div>
-                            @Html.ActionLink("Add to your list", "AddToMyList", "LikeWatched", new {userId = User.Identity.GetUserId(),mediaId = Model.Id}, null)
-                        </div>
 
-                        <div class="like">               
+                        <div class="like">   
+                            <div>@Html.ActionLink("Add to your list", "AddToMyList", "LikeWatched", new {userId = User.Identity.GetUserId(),mediaId = Model.Id}, new {@class="add-to-my-list"})</div>
                             <span>@Model.AmountOfLikes</span>
                             <span><a href="@Url.Action("Like", "LikeWatched",  new {id = @Model.Id})"><i style="color: white;" class="fas fa-thumbs-up"></i></a></span>
                             <span style="margin-left: 20px;">IMDb Rating: @Model.RatingIMDb</span>

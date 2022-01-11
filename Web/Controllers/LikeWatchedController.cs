@@ -32,5 +32,12 @@ namespace Web.Controllers
             _repository.AddMyList(userId, mediaId);
             return RedirectToAction("Details", "Media", new { id = mediaId });
         }
+
+        [Authorize]
+        public ActionResult DeleteFromMyList(string userId, int mediaId)
+        {
+            _repository.DeleteFromMyList(userId, mediaId);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
