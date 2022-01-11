@@ -24,6 +24,7 @@ namespace MoviesService.Search
         }
 
         public List<Media> MediaList() => _listMedia.OrderByDescending(m => m.RatingIMDb).ToList();
+        public List<UsersToMedia> UsersToMedia() => _context.UsersToMediaTable.ToList();
         
         public LinkedList<Genres> GenreList()
         {

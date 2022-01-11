@@ -1,4 +1,11 @@
-﻿<div class="container">
+﻿@model Web.ViewModels.HomePageViewModel
+@foreach (var myList in @Model.AllMedia.Where(x => @Model.MyList.Contains(x.Id)))
+{
+    <div>@myList.Name</div>
+}
+
+
+<div class="container">
     <div class="row">
         <div class="col-xs-1 col-sm-4 col-md-12">
 

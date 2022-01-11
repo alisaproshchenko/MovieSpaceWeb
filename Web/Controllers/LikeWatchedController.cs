@@ -25,5 +25,12 @@ namespace Web.Controllers
             mediaDto = _repository.Like(mediaDto.Id, userAmount, User.Identity.GetUserId());
             return RedirectToAction("Details", "Media", new {id = mediaDto.Id});
         }
+
+        [Authorize]
+        public ActionResult AddToMyList(string userId, int mediaId)
+        {
+            _repository.AddMyList(userId, mediaId);
+            return RedirectToAction("Details", "Media", new { id = mediaId });
+        }
     }
 }
