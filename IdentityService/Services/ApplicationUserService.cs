@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using IdentityService.Dto;
 using IdentityService.Models;
@@ -38,7 +37,7 @@ namespace IdentityService.Services
             return Mapper.Map<ApplicationUserDto>(user);
         }
 
-        public void AddUser(ApplicationUserDto applicationUserDto) //with a "User" role
+        public void AddUser(ApplicationUserDto applicationUserDto)
         {
             var applicationUser = Mapper.Map<ApplicationUser>(applicationUserDto);
             _uow.UserRepository.Create(applicationUser, applicationUserDto.Password);

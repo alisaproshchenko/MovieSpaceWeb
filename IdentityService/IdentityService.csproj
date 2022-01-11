@@ -251,6 +251,7 @@
     <Compile Include="Services\IAboutUsService.cs" />
     <Compile Include="Services\IPasswordValidator.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="UOW\IUnitOfWork.cs" />
     <Compile Include="UOW\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "Identity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{FE92A34D-0C14-422B-9595-2607CCB284EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Tests", "IdentityService.Tests\IdentityService.Tests.csproj", "{AFB62321-B70A-404B-9CAD-051A3532AD48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,12 +29,16 @@ Global
 		{FE92A34D-0C14-422B-9595-2607CCB284EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE92A34D-0C14-422B-9595-2607CCB284EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE92A34D-0C14-422B-9595-2607CCB284EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB62321-B70A-404B-9CAD-051A3532AD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB62321-B70A-404B-9CAD-051A3532AD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB62321-B70A-404B-9CAD-051A3532AD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB62321-B70A-404B-9CAD-051A3532AD48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 		SolutionGuid = {75E87294-BFC5-4896-A4F6-117DB9971E31}
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

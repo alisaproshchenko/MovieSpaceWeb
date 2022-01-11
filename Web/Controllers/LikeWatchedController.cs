@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using MoviesService.Dto;
 using MoviesService.Models;
 using MoviesService.Repositories.Repository;
 using MoviesService.Services.Service;

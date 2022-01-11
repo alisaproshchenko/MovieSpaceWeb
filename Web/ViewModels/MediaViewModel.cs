@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoviesService.Dto;
 using MoviesService.Models;
 using Web.Services;
 
