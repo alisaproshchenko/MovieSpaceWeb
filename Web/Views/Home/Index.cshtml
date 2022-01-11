@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @model Web.ViewModels.HomePageViewModel
-<div class="background-cover">
+<div class="background-cover" style="margin-top: 20px;">
     @if (@Model.AllMedia.Count(x => @Model.MyList.Contains(x.Id)) != 0)
     {
         <div style="font-size: 25px;">MyList</div>

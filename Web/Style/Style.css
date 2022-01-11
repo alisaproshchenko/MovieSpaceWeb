@@ -29,6 +29,7 @@ textarea {
 
 .basic-header {
     background-image: url(/Style/header.jpg);
+    height: 30px;
     width: 100%;
 }
 
@@ -54,6 +55,12 @@ textarea {
     font-size: 15px;
 }
 
+.color-black {
+    color: black !important;
+    font-weight: bold;
+    font-size: 15px;
+}
+
 .admin-panel:hover {
     color: #a52a2a !important;
 }
@@ -69,7 +76,7 @@ textarea {
 
 .search {
     top: 7px;
-    margin-right: 300px;
+    margin-right: 50px;
 }
 
 .search-input {
