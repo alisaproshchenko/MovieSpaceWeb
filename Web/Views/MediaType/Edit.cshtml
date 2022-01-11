@@ -1,16 +1,17 @@
 ﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.TypesDto>
 
-<h2>Edit genre</h2>
+<div class="background-cover">
 
-@using (Html.BeginForm("Update", "MediaType", FormMethod.Post))
-{
-    <fieldset>
-        @Html.HiddenFor(m => m.Entity.Id)
-        <p>
-            @Html.LabelFor(m => m.Entity.Name, "Name")
-            <br />
-            @Html.EditorFor(m => m.Entity.Name)
-        </p>
-        <p><input type="submit" value="Send" /></p>
-    </fieldset>
-}
+    @using (Html.BeginForm("Update", "MediaType", FormMethod.Post))
+    {
+<fieldset>
+    @Html.HiddenFor(m => m.Entity.Id)
+    <p>
+        @Html.LabelFor(m => m.Entity.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Entity.Name)
+    </p>
+    <p><input type="submit" value="Send" /></p>
+</fieldset>}
+</div>
+<h2>Edit genre</h2>

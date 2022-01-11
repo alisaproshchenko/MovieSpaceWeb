@@ -1,14 +1,15 @@
 ﻿@using System.Web.Mvc.Html
 @model Web.ViewModels.GenreViewModel
-<div>@Html.ActionLink("Add", "Add", "Genre",null,null)</div>
+<div class="background-cover">
+    <div>@Html.ActionLink("Add", "Add", "Genre", null, null)</div>
 
-@foreach (var entity in Model.Genres)
-{
-<div style="border: 1px solid red; width: 100px; height: 100px;">
+    @foreach (var entity in Model.Genres)
+    {
+<div style="border: 1px solid red; width: 100px; height: 100px; display: inline-grid;">
     <div>@entity.Name</div>
-    <div>@Html.ActionLink("Delete", "Delete", "Genre",new {id = entity.Id},null)</div>
-    <div>@Html.ActionLink("Edit", "Edit", "Genre",new {id = entity.Id},null)</div>
-</div>
-}
+    <div>@Html.ActionLink("Delete", "Delete", "Genre", new { id = entity.Id }, null)</div>
+    <div>@Html.ActionLink("Edit", "Edit", "Genre", new { id = entity.Id }, null)</div>
+</div>}
 
-@Html.Partial("Partials/PagePartial/GenrePagePartial")
+    @Html.Partial("Partials/PagePartial/GenrePagePartial")
+</div>

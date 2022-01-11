@@ -123,6 +123,26 @@
             //        a => new { a.IMDbMovieId }, model);
             //}
             //context.SaveChanges();
+            
+            //upload
+
+            //var apiLib = new ApiLib("5zfN3eE59H");
+            //var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
+            //var searchResults = dataApi.Items;
+
+            //for (var i = 130; i < 150; ++i)
+            //{
+            //    var id = i;
+            //    var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
+
+            //    var model = context.MediaTable.FirstOrDefault(x => x.Name == movieData.Title);
+            //    var trailer = Task.Run(() => apiLib.TrailerAsync(model.IMDbMovieId)).Result;
+            //    model.LinkEmbed = trailer.LinkEmbed;
+
+            //    context.MediaTable.AddOrUpdate(
+            //        a => new { a.IMDbMovieId }, model);
+            //}
+            //context.SaveChanges();
         }
     }
 }

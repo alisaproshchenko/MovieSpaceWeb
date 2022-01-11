@@ -4,37 +4,44 @@
     ViewBag.Title = "ASP.NET Identity";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        All users
-    </div>
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Roles</th>
-        </tr>
-        @if (!Model.Any()) {
+<div class="background-cover" style="height: 100%;">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            All users
+        </div>
+        <table class="table table-striped">
             <tr>
-                <td colspan="3" class="text-center">The database is empty</td>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Roles</th>
             </tr>
-        } else {
-            foreach (var user in Model)
+            @if (!Model.Any())
             {
-            <tr>
-                <td>@user.Name</td>
-                <td>@user.Surname</td>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
-                <td>@foreach (var role in user.Roles)
-                    {
-                        <p> @role, </p>
-                    }
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="3" class="text-center">The database is empty</td>
+                </tr>
             }
-        }
-    </table>
+            else
+            {
+                foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Name</td>
+                        <td>@user.Surname</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>
+                            @foreach (var role in user.Roles)
+                            {
+                                <p> @role </p>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
 </div>
+

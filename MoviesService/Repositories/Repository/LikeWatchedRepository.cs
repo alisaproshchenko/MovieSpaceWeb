@@ -10,19 +10,26 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
-        public Media Like(int mediaId)
+        public Media Like(int mediaId, int usersAmount, string userId)
         {
-            var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
+            var userToMedia = _context.UsersToMediaTable.Where((x) => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
             userToMedia.Liked = !userToMedia.Liked;
 
             if (userToMedia.Liked)
-                ++media.SiteUsersRatings;
+                ++media.AmountOfLikes;
             else
-                --media.SiteUsersRatings;
+                --media.AmountOfLikes;
 
-            _context.UsersToMediaTable.AddOrUpdate(userToMedia);
+            if (media.AmountOfLikes != 0)
+            {
+                media.SiteUsersRatings = 11 - (usersAmount / media.AmountOfLikes) < 0 ? 0 : 11 - (usersAmount / media.AmountOfLikes);
+            }
+            else
+            {
+                media.SiteUsersRatings = 0;
+            }
 
             _context.SaveChanges();
 
@@ -31,8 +38,8 @@ namespace MoviesService.Repositories.Repository
 
         public void Watch(string userId, int mediaId)
         {
-            var check = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
-            
+            var check = _context.UsersToMediaTable.Where(x => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+
             if (check != null)
             {
                 check.Date = DateTime.Now; 
@@ -42,7 +49,7 @@ namespace MoviesService.Repositories.Repository
 
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
-            media.SiteUsersRatings ??= 0;
+            media.AmountOfLikes ??= 0;
 
             var userToMedia = new UsersToMedia
             {
@@ -51,8 +58,9 @@ namespace MoviesService.Repositories.Repository
                 Watched = true,
                 AddToWatch = false,
                 Date = DateTime.Now,
-                Media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId)
+                MediaId = mediaId
             };
+
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
 
             _context.SaveChanges();

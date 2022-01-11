@@ -1,48 +1,67 @@
 ﻿@model Web.ViewModels.Identity.RegistrationViewModel
-@{
-    ViewBag.Title = "Register";
-}
 
-<h2>Register</h2>
+<div class="background-cover login">
+    <div style="text-align: center;">
+        <h2>Welcome!</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+        <button style="margin-bottom: 10px; width: 150px; background-color: #a49777; color: black; border: none;" onclick="document.getElementById('id01').style.display = 'block'" style="width: auto;">Register</button>
 
-<div>
-    <h4>User registration</h4>
-    <hr />
-    @Html.ValidationSummary(false)
-
-    <div>
-        Name
-        <div>@Html.EditorFor(model => model.Name)</div>
+        <p>
+            You have an account?
+            You should @Html.ActionLink("Login", "Login", "Account") then!
+        </p>
     </div>
 
-    <div>
-        Surname
-        <div>@Html.EditorFor(model => model.Surname)</div>
-    </div>
-    <div>
-        Username
-        <div>@Html.EditorFor(model => model.Username)</div>
-    </div>
-    <div>
-        Email
-        <div>@Html.EditorFor(model => model.Email)</div>
-    </div>
-    <div>
-        Password
-        <div>@Html.EditorFor(model => model.Password)</div>
-    </div>
+    <div id="id01" class="modal">
+        <div style="background-color: rgba(0, 0, 0, 0.6); height: 100%;">
+            <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">×</span>
 
-    <div>
-        Confirm password
-        <div>@Html.EditorFor(model => model.PasswordConfirm)</div>
-    </div>
+            <div class="container">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-    <div>
-        <div><input type="submit" value="Submit" /></div>
+                    <div>
+                        @Html.ValidationSummary()
+                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                        <p>
+                            <label>Name</label><br/>
+                            @Html.EditorFor(x => x.Name, new {htmlAttributes = new {@class = "inputArea"}})
+                        </p>
+                        <p>
+                            <label>Surname</label><br/>
+                            @Html.EditorFor(x => x.Surname, new {htmlAttributes = new {@class = "inputArea"}})
+                        </p>
+                        <p>
+                            <label>Username</label><br/>
+                            @Html.EditorFor(x => x.Username, new {htmlAttributes = new {@class = "inputArea"}})
+                        </p>
+                        <p>
+                            <label>Email</label><br/>
+                            @Html.EditorFor(x => x.Email, new {htmlAttributes = new {@class = "inputArea"}})
+                        </p>
+                        <p>
+                            <label>Password</label><br/>
+                            @Html.EditorFor(x => x.Password, new {htmlAttributes = new {@class = "inputArea"}})
+                        </p>
+                        <p>
+                            <label>Confirm password</label><br/>
+                            @Html.EditorFor(x => x.PasswordConfirm, new {htmlAttributes = new {@class = "inputArea"}})
+                        </p>
+                        <p><button class="button" type="submit">Submit</button></p>
+                    </div>}
+            </div>
+
+            <div class="container">
+                <button class="button-red" type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
+            </div>
+        </div>
     </div>
 </div>
-}
+<script>var modal = document.getElementById('id01');
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }</script> 

@@ -1,4 +1,5 @@
 using MoviesService.IMDbApi;
+using Web.ViewModels;
 using System.Web.Mvc;
 using MoviesService.Search;
 using Web.ViewModels;
@@ -52,20 +53,6 @@ namespace Web.Controllers
             }
 
             return View("SearchResult", model);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

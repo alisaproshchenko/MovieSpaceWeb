@@ -1,52 +1,44 @@
 ﻿@model Web.ViewModels.FilterViewModel
 
+<div class="background-cover">
+    <form method="get">
+        <div class="form-inline">
+            <label class="control-label">Genre: </label>
+            @Html.DropDownList("genre", Model.Genre as SelectList,
+                               htmlAttributes: new { @class = "form-control" })
 
-<form method="get">
-    <div class="form-inline">
-        <label class="control-label">Genre: </label>
-        @Html.DropDownList("genre", Model.Genre as SelectList,
-                 htmlAttributes: new { @class = "form-control" })
+            <label class="control-label">Year: </label>
+            @Html.DropDownList("year", Model.Year as SelectList,
+                               htmlAttributes: new { @class = "form-control" })
 
-        <label class="control-label">Year: </label>
-        @Html.DropDownList("year", Model.Year as SelectList,
-                 htmlAttributes: new { @class = "form-control" })
+            <label class="control-label">Type: </label>
+            @Html.DropDownList("type", Model.Type as SelectList,
+                               htmlAttributes: new { @class = "form-control" })
 
-        <label class="control-label">Type: </label>
-        @Html.DropDownList("type", Model.Type as SelectList,
-                 htmlAttributes: new { @class = "form-control" })
+            <input type="submit" value="Фильтр" class="btn btn-default" />
+        </div>
+    </form>
 
-        <input type="submit" value="Фильтр" class="btn btn-default" />
-    </div>
-</form>
-
-@if (Model != null)
-{
-<div>
-    <h3>Search results:</h3>
-</div> foreach (var rezult in Model.Media)
-                {
-<a href="@Url.Action("Details", "Media", rezult)">
-    <div class="test-div-c">
-        <img src="@rezult.Poster" height="300" width="200" />
-        <p>@rezult.Name </p>
-        <p>Year: @rezult.Year </p>
-        <p>IMDb rating: @rezult.RatingIMDb </p>
-    </div>
-</a> }
-            }
-            else
-            {
-<div>
-    <h3>Sorry but we don't find any, try to search by another name</h3>
+    @if (User.IsInRole("Administrator"))
+    {
+<div class="add-button">
+    @Html.ActionLink("Add media", "Add", "Media", null, new { @class = "add-button-link" })
 </div>}
 
-<style>
-    .test-div-c {
-        background: red;
-        display: inline-grid;
-        white-space: normal;
-        width: min-content;
-    }
-</style>
+    @foreach (var entity in Model.Media)
+    {
+<div class="basic-block">
+    <a href="@Url.Action("Details", "Media", new {id = entity.Id})">
+        <img class="img" src="@entity.Poster" height="300" width="200" alt="" />
+        <p class="text">@entity.Name</p>
+    </a>
+    @if (User.IsInRole("Administrator"))
+    {
+<div class="admin-button">
+    <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
+    <div class="admin-button-position">@Html.ActionLink("Edit", "Edit", "Media", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
+</div>}
+</div>}
 
-@Html.Partial("Partials/PagePartial/FilterPagePartial") 
+    @Html.Partial("Partials/PagePartial/FilterPagePartial")
+</div>
