@@ -19,21 +19,33 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <h3>@Model.Year</h3>
+
                         <h3>
                             @foreach (var genre in Model.GenresCollection)
                             {
                                 <span>@genre.Name </span>}
                         </h3>
+
                         <h3>
                             @foreach (var country in Model.CountryCollection)
                             {
-                                <span>@country.Name</span>}
+                                <span>@country.Name</span>
+                            }
                         </h3>
-                        <h3 style="width: 50%; word-break: break-all;">@Model.Cast</h3>
-                        <h3>@Model.Budget</h3>
-                        <h3>@Model.BoxOffice</h3>
-                    </div>
 
+                        <h3 style="width: 50%; word-break: break-all;">@Model.Cast</h3>
+
+                        <h3>@Model.Budget</h3>
+
+                        <h3>@Model.BoxOffice</h3>
+
+                        <div class="like">               
+                            <span>@Model.AmountOfLikes</span>
+                            <span><a href="@Url.Action("Like", "LikeWatched",  @Model)"><i style="color: white;" class="fas fa-thumbs-up"></i></a></span>
+                            <span style="margin-left: 20px;">IMDb Rating: @Model.RatingIMDb</span>
+                            <span style="margin-left: 20px;">Site Rating: @Model.SiteUsersRatings</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,18 +58,14 @@
                    @if (Model.LinkEmbed != null)
                     {
                         <div class="embed-container">
-                            <iframe width="100%" height="355" src="@Model.LinkEmbed"  frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="100%" height="355" src="@Model.LinkEmbed"  frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     }
         </div>
     </div>
 </div>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <span style="font-size: 30px;">@Model.SiteUsersRatings</span>
-    <span><a href="@Url.Action("Like", "LikeWatched",  @Model)">Like</a></span>
-}
+
 
 
 @if (User.IsInRole("Administrator"))

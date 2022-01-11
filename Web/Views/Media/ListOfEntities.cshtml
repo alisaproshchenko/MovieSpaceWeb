@@ -13,7 +13,7 @@
     {
         <div class="basic-block">
             <a href="@Url.Action("Details", "Media", entity)">
-                <img class="img" src="@entity.Poster" height="300" width="200" alt=""/>
+                <img src="@entity.Poster" height="300" width="200" alt=""/>
                 <p class="text">@entity.Name</p>
             </a>
             @if (User.IsInRole("Administrator"))

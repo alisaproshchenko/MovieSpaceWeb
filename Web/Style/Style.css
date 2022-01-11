@@ -203,6 +203,12 @@ textarea {
     word-break: break-all;
 }
 
+.like {
+    position: relative;
+    top: 152px;
+    font-size: 30px;
+}
+
 /*Pagination*/
 
 .Active {
@@ -214,6 +220,8 @@ textarea {
     height: 30px;
     margin: 20px auto;
 }
+
+/*Login-Register*/
 
 .inputArea {
     width: 100%;
@@ -325,6 +333,8 @@ textarea {
     margin-top: -20px;
     height: 100%;
 }
+
+/*Authors links*/
 
 #mySidenav a {
     position: fixed;

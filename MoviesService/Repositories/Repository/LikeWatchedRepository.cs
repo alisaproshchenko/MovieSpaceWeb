@@ -2,7 +2,6 @@
 using System.Data.Entity.Migrations;
 using System.Linq;
 using MoviesService.Context;
-using MoviesService.Dto;
 using MoviesService.Models;
 
 namespace MoviesService.Repositories.Repository
@@ -11,7 +10,7 @@ namespace MoviesService.Repositories.Repository
     {
         private readonly MediaDbContext _context;
         public LikeWatchedRepository(MediaDbContext context) => _context = context;
-        public Media Like(int mediaId)
+        public Media Like(int mediaId, int usersAmount)
         {
             var userToMedia = _context.UsersToMediaTable.FirstOrDefault(x => x.Media.Id == mediaId);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
@@ -19,9 +18,18 @@ namespace MoviesService.Repositories.Repository
             userToMedia.Liked = !userToMedia.Liked;
 
             if (userToMedia.Liked)
-                ++media.SiteUsersRatings;
+                ++media.AmountOfLikes;
             else
-                --media.SiteUsersRatings;
+                --media.AmountOfLikes;
+
+            if (media.AmountOfLikes != 0)
+            {
+                media.SiteUsersRatings = 11 - (usersAmount / media.AmountOfLikes);
+            }
+            else
+            {
+                media.SiteUsersRatings = 0;
+            }
 
             _context.UsersToMediaTable.AddOrUpdate(userToMedia);
 
@@ -43,7 +51,7 @@ namespace MoviesService.Repositories.Repository
 
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
-            media.SiteUsersRatings ??= 0;
+            media.AmountOfLikes ??= 0;
 
             var userToMedia = new UsersToMedia
             {

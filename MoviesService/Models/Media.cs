@@ -21,7 +21,8 @@ namespace MoviesService.Models
         public string Budget { get; set; }
         public string BoxOffice { get; set; }
         public double? RatingIMDb { get; set; }
-        public int? SiteUsersRatings { get; set; } = 0;
+        public int? AmountOfLikes { get; set; } = 0;
+        public double? SiteUsersRatings { get; set; } = 0;
         public string LinkEmbed { get; set; }
         public int SeasonCount { get; set; } = 0;
         [Required]

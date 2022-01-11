@@ -15,7 +15,8 @@ namespace MoviesService.Dto
         public string Budget { get; set; }
         public string BoxOffice { get; set; }
         public double? RatingIMDb { get; set; }
-        public int? SiteUsersRatings { get; set; }
+        public int? AmountOfLikes { get; set; }
+        public double? SiteUsersRatings { get; set; }
         public string LinkEmbed { get; set; }
         public int TypesId { get; set; }
         public Types Types { get; set; } 

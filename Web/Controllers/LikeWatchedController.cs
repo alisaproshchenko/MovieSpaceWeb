@@ -1,26 +1,27 @@
-﻿using System.Web.Mvc;
-using MoviesService.Dto;
+﻿using System.Linq;
+using System.Web.Mvc;
+using IdentityService.Dto;
+using IdentityService.Services;
 using MoviesService.Models;
 using MoviesService.Repositories.Repository;
-using MoviesService.Services.Service;
 
 namespace Web.Controllers
 {
     public class LikeWatchedController : Controller
     {
         private readonly LikeWatchedRepository _repository;
-        private readonly MediaService _service;
+        private readonly IService<ApplicationUserDto> _userService;
 
-        public LikeWatchedController(LikeWatchedRepository repository, MediaService service)
+        public LikeWatchedController(LikeWatchedRepository repository, IService<ApplicationUserDto> userService)
         {
             _repository = repository;
-            _service = service;
+            _userService = userService;
         }
-
-        // GET: LikeWatched
+        [Authorize]
         public ActionResult Like(Media mediaDto)
         {
-            mediaDto = _repository.Like(mediaDto.Id);
+            var userAmount = _userService.GetAll().Count();
+            mediaDto = _repository.Like(mediaDto.Id, userAmount);
             return RedirectToAction("Details", "Media", mediaDto);
         }
     }
