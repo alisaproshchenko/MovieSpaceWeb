@@ -48,8 +48,5 @@ namespace IdentityService.Tests
 
             Assert.AreEqual(2, users.Count());
         }
-
-        [Test]
-        public void 
     }
 }
