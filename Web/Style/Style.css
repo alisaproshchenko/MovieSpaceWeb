@@ -139,7 +139,7 @@ textarea {
 
 .admin-button {
     position: relative;
-    top: -328px;
+    top: -267px;
 }
 
 .admin-button-position {
@@ -163,7 +163,7 @@ textarea {
 }
 
 .add-button {
-    margin: 12px 0 12px 20px;
+    margin: 231px 0 12px -7px;
 }
 
 .add-button-link {
@@ -172,7 +172,7 @@ textarea {
     color: white;
     outline: none;
     cursor: pointer;
-    width: 200px;
+    width: 170px;
     padding: 10px 67px;
 }
 
