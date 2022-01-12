@@ -1,22 +1,32 @@
 ﻿@using Web.Services
 @model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.SeasonsDto>
 
-<div class="background-cover">
-    <div style="border: 1px solid red; width: 100px; height: 300px;" />
+<div class="background-cover" style="display: inline-grid;">
     <div>@Model.Entity.Name</div>
     <div>@Model.Entity.Year</div>
-    <div>@Model.Entity.Id</div>
     <div>
         @foreach (var e in Model.Entity.EpisodesList)
         {
-<div>
-    @Html.ActionLink(e.Name, "GetEpisode", "Series", new { episodeId = e.Id, seasonId = Model.Entity.Id }, null)
-</div> if (Service.ReturnIdForDelete(e.Name) == Model.Entity.EpisodeCount)
+            <div>
+
+                @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id, seasonId = Model.Entity.Id}, null)
+                @if (User.IsInRole("Administrator"))
                 {
-<span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new { episodeId = e.Id }, null)</span>}
-            }
-    </div>
-    <div>@Html.ActionLink("Add episode", "AddEpisode", "Series", new { id = Model.Entity.Id }, null)</div>
+                    if (Service.ReturnIdForDelete(e.Name) == Model.Entity.EpisodeCount)
+                    {
+
+                        <span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new { episodeId = e.Id }, null)</span>
+                    }
+                }
+            </div>
+        }
+    </div> 
+    @if (User.IsInRole("Administrator"))
+    {
+        <div>
+            @Html.ActionLink("Add episode", "AddEpisode", "Series", new {id = Model.Entity.Id}, null)
+        </div>
+    }
 </div>
 
 
