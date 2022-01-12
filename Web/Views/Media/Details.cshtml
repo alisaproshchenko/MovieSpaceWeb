@@ -2,7 +2,7 @@
 @using Web.Services
 @model MoviesService.Models.Media
 
-<div class="background-cover">
+<div class="background-cover" style="margin-top: -20px;">
     <div class="container">
     <div class="row">
 
@@ -70,9 +70,6 @@
 
     @if (Model.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))
     {
-        <div>
-            @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, null)
-        </div>
         foreach (var e in Model.SeasonsList)
         {
             <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
@@ -85,5 +82,9 @@
             }
         }
     }
+    
+    <div>
+        @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, null)
+    </div>
 
 </div>
