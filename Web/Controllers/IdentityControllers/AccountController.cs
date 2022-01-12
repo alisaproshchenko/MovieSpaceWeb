@@ -69,9 +69,9 @@ namespace Web.Controllers.IdentityControllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
-            ApplicationUser user = await _userService.UnitOfWork.UserManager.FindAsync(model.UserName, model.Password);
             if (ModelState.IsValid)
             {
+                var user = await _userService.UnitOfWork.UserManager.FindAsync(model.UserName, model.Password);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "Incorrect login or password");
@@ -93,7 +93,7 @@ namespace Web.Controllers.IdentityControllers
                         ExpiresUtc = DateTimeOffset.Now.AddMinutes(30)
                     }, claim);
                     if (string.IsNullOrEmpty(returnUrl))
-                        return RedirectToAction("Index", _userService.IsAdministrator(user.Id) ? "Admin" : "Home");
+                        return RedirectToAction("Index", "Home");
                     return Redirect(returnUrl);
                 }
             }
