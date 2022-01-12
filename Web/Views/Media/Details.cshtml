@@ -68,11 +68,7 @@
 </div>
 
 
-
-
-@if (User.IsInRole("Administrator"))
-{
-    if (Model.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))
+    @if (Model.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))
     {
         <div>
             @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, null)
@@ -80,11 +76,14 @@
         foreach (var e in Model.SeasonsList)
         {
             <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
-            if (Service.ReturnIdForDelete(e.Name) == Model.SeasonCount)
+            if (User.IsInRole("Administrator"))
             {
-                <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new { seasonId = e.Id }, null)</span>
+                if (Service.ReturnIdForDelete(e.Name) == Model.SeasonCount)
+                {
+                    <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new { seasonId = e.Id }, null)</span>
+                }
             }
         }
     }
-} 
+
 </div>
