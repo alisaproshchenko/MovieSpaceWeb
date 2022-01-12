@@ -57,5 +57,28 @@ namespace MoviesService.IMDbApi
 
             return listMedia;
         }
+
+        public Media SearchTitle(string id)
+        {
+            var movieData = Task.Run(() => _apiLib.TitleAsync(id)).Result;
+            var trailerUrl = Task.Run(() => _apiLib.TrailerAsync(id)).Result;
+            var model = new Media
+            {
+                IMDbMovieId = movieData.Id,
+                Name = movieData.Title,
+                Poster = movieData.Image,
+                Year = _convertor.StrToInt(movieData.Year),
+                Cast = _convertor.Actors(movieData.ActorList),
+                Plot = movieData.Plot,
+                Budget = movieData.BoxOffice.Budget,
+                BoxOffice = movieData.BoxOffice.CumulativeWorldwideGross,
+                Types = new Types { Name = movieData.Type },
+                RatingIMDb = _convertor.StrToDouble(movieData.IMDbRating),
+                CountryCollection = _convertor.Countries(movieData.Countries),
+                GenresCollection = _convertor.Genres(movieData.GenreList),
+                LinkEmbed = trailerUrl.LinkEmbed
+            };
+            return model;
+        }
     }
 }

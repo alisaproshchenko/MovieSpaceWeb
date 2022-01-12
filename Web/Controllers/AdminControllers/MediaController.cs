@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using MoviesService.Dto;
+using MoviesService.IMDbApi;
 using MoviesService.Repositories.Repository;
 using MoviesService.Search;
 using MoviesService.Services.IService;
@@ -36,7 +37,15 @@ namespace Web.Controllers.AdminControllers
             {
                 _likeWatchedRepository.Watch(User.Identity.GetUserId(), id);
             }
-            return View(model);
+            return View("Details", model);
+        }
+
+        public ActionResult DetailsApi(string id)
+        {
+            var search = new SearchMovieInIMDbApi();
+            var model = search.SearchTitle(id);
+
+            return View("DetailsApi", model);
         }
 
         public ActionResult ListOfEntities(int currentPage = 1)

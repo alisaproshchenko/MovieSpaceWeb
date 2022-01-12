@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNet.Identity
+@using Web.Services
+@model MoviesService.Models.Media
+
+<div class="background-cover">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 class="title-media">@Model.Name</h2>
+            </div>
+
+            <div class="col-xs-1 col-sm-4 col-md-12 col-lg-6">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xs-1 col-sm-4 col-md-12 col-lg-6">
+                            <img src="@Model.Poster" height="500" width="300" alt="" />
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <h3>@Model.Year</h3>
+
+                            <h3>
+                                @foreach (var genre in Model.GenresCollection)
+                                {
+                                    <span>@genre.Name </span>}
+                            </h3>
+
+                            <h3>
+                                @foreach (var country in Model.CountryCollection)
+                                {
+                                    <span>@country.Name</span>
+                                }
+                            </h3>
+
+                            <h3 style="width: 50%; word-break: break-all;">@Service.ReturnSomeStars(@Model.Cast)</h3>
+
+                            <h3>@Model.Budget</h3>
+
+                            <h3>@Model.BoxOffice</h3>
+
+                            <div class="like">
+                                <span style="margin-left: 20px;">IMDb Rating: @Model.RatingIMDb</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="plot">@Model.Plot</div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 30px;">
+                @if (Model.LinkEmbed != null)
+                {
+                    <div class="embed-container">
+                        <iframe width="100%" height="355" src="@Model.LinkEmbed" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
