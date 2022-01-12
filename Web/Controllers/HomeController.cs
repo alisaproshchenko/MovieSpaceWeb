@@ -84,10 +84,11 @@ namespace Web.Controllers
         {
             var model = _search.SearchByName(searchData);
 
-            if (model == null)
+            if (model == null || model.Count == 0)
             {
-                var searchApi = new SearchMovieInIMDbApi("k_ag12ki7h");
+                var searchApi = new SearchMovieInIMDbApi("k_zx5739ek");
                 model = searchApi.SearchMedia(searchData);
+                return View("SearchResultApi", model);
             }
 
             return View("SearchResult", model);
