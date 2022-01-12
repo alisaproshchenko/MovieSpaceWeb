@@ -42,6 +42,12 @@ textarea {
 
 /*Layout*/
 
+.icon {
+    height: 100%;
+    width: 100px;
+    background-image: url(/Style/icon.png);
+}
+
 .footer {
     width: 78.5%;
     height: 40px;
@@ -374,25 +380,25 @@ textarea {
 }
 
 #alisa {
-    margin-top: 40px;
+    margin-top: 60px;
     top: 20px;
     background-color: #800000;
 }
 
 #misha {
-    margin-top: 40px;
+    margin-top: 60px;
     top: 80px;
     background-color: #8b4513;
 }
 
 #pasha {
-    margin-top: 40px;
+    margin-top: 60px;
     top: 140px;
     background-color: #2f4f4f;
 }
 
 #vlad {
-    margin-top: 40px;
+    margin-top: 60px;
     top: 200px;
     background-color: #b8860b
 }
@@ -412,7 +418,10 @@ textarea {
 }
 
 /*About us*/
-
+.delete-edit {
+    position: relative;
+    bottom: 80px;
+}
 
 .mySlides1 {
     display: none
@@ -420,9 +429,11 @@ textarea {
 
 
 .slideshow-container {
-    max-width: 1000px;
+    max-width: 800px;
     position: relative;
-    margin: auto;
+    top: 200px;
+    margin: 0 auto;
+    margin-bottom: 50px;
 }
 
 .prev, .next {
@@ -451,4 +462,25 @@ textarea {
 }
 
 
+.column {
+    float: left;
+    width: 24%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    height: 200px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 650px) {
+    .column {
+        width: 100%;
+        display: block;
+    }
+}
+
+.card {
+    margin-left: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+}
 
