@@ -13,7 +13,7 @@ namespace MoviesService.IMDbApi
 
         public SearchMovieInIMDbApi()
         {
-            _apiLib = new ApiLib("k_sq5f8w2a");
+            _apiLib = new ApiLib("k_wxbph9cx");
             _convertor = new ConvertorApiData();
         }
 

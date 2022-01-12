@@ -86,7 +86,7 @@ namespace Web.Controllers
 
             if (model == null || model.Count == 0)
             {
-                var searchApi = new SearchMovieInIMDbApi("k_zx5739ek");
+                var searchApi = new SearchMovieInIMDbApi("k_wxbph9cx");
                 model = searchApi.SearchMedia(searchData);
                 return View("SearchResultApi", model);
             }
