@@ -4,7 +4,7 @@
     @if (@Model.AllMedia.Count(x => @Model.MyList.Contains(x.Id)) != 0)
     {
         <div style="font-size: 25px;">MyList</div>
-        foreach (var myList in @Model.AllMedia.Where(x => @Model.MyList.Contains(x.Id)).Take(8))
+        foreach (var myList in @Model.AllMedia.Where(x => @Model.MyList.Contains(x.Id)).Take(12))
         {
             <div style="display: inline-grid;">
                 <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
@@ -16,7 +16,7 @@
     }
 
     <div style="font-size: 25px;">Horror</div>
-    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Horror")).Take(7))
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Horror")).Take(12))
     {
         <div style="display: inline-grid;">
             <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
@@ -26,7 +26,7 @@
     }
     
     <div style="font-size: 25px;">Action</div>
-    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Action")).Take(7))
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Action")).Take(12))
     {
         <div style="display: inline-grid;">
             <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
@@ -36,7 +36,7 @@
     }
     
     <div style="font-size: 25px;">Drama</div>
-    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Drama")).Take(7))
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Drama")).Take(12))
     {
         <div style="display: inline-grid;">
             <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
@@ -46,7 +46,7 @@
     }
     
 <div style="font-size: 25px;">Comedy</div>
-    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Comedy")).Take(7))
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Comedy")).Take(12))
     {
         <div style="display: inline-grid;">
             <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
@@ -56,7 +56,7 @@
     }
     
 <div style="font-size: 25px;">Adventure</div>
-    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Adventure")).Take(7))
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Adventure")).Take(12))
     {
         <div style="display: inline-grid;">
             <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">
@@ -66,7 +66,7 @@
     }
     
 <div style="font-size: 25px;">Western</div>
-    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Western")).Take(7))
+    @foreach (var myList in @Model.AllMedia.Where(x => x.GenresCollection.Any(y => y.Name == "Western")).Take(12))
     {
         <div style="display: inline-grid;">
             <a href="@Url.Action("Details", "Media", new {id = @myList.Id})">

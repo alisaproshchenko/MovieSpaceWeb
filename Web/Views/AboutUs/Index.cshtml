@@ -1,29 +1,90 @@
 ﻿@using System.Web.Mvc.Html
 @model IEnumerable<IdentityService.Dto.AboutUsDto>
 
-<div class="background-cover">
-    <div style="margin-top: -8px;">
-        @if (User.IsInRole("Administrator"))
-        {
-            <div class="add-button">
-                @Html.ActionLink("Add", "Create", "AboutUs", null, new {@class = "add-button-link"})
-            </div>
-        }
+<div class="background-cover" style="height: 120%;">
+    <div style="margin-top: -20px;">
+        <div style="position: absolute; top: 100px; left: 10px;">
+            @if (User.IsInRole("Administrator"))
+            {
+                <div class="add-button">
+                    @Html.ActionLink("Add", "Create", "AboutUs", null, new {@class = "add-button-link"})
+                </div>
 
+            }
+        </div>
+
+        <div class="row" style="margin-top: 40px;">
         @foreach (var entity in Model)
         {
-    <div class="basic-block">
+            <div class="column">
+                <div class="card">
+                    <img src="~/Style/@entity.PhotoLink" alt="Jane" style="width: 60%; margin: 0 70px;">
+                    <div class="container">
+                        <h1>@entity.Name</h1>
+                        <p>@entity.ProjectRole</p>
+                    </div>
+                </div>
+                <div class="delete-edit">
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <div class="admin-button">
 
-        <img src="@entity.PhotoLink" height="300" width="200" alt="" />
-        <p class="text" style="color: bisque">@entity.Name</p>
+                            <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
 
-        @if (User.IsInRole("Administrator"))
-        {
-    <div class="admin-button">
-        <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "AboutUs", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
-        <div class="admin-button-position">@Html.ActionLink("Update", "Update", "AboutUs", new { id = entity.Id }, new { @class = "admin-button-style" })</div>
-    </div>      }
-    </div>
+                            <div class="admin-button-position">@Html.ActionLink("Update", "Update", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
+                        </div>
+                    }
+                </div>
+            </div>
         }
     </div>
+    </div>
+    @foreach (var entity in Model)
+    {
+        <div class="slideshow-container">
+            <div class="mySlides1">
+                <div>
+                    <img src="~/Style/vlad2.JPG" style="width: 100%;">
+                </div>
+            </div>
+
+            <div class="mySlides1">
+                <img src="~/Style/misha2.JPG" style="width: 100%">
+            </div>
+
+            <div class="mySlides1">
+                <img src="~/Style/pasha2.JPG" style="width: 100%">
+            </div>
+
+            <div class="mySlides1">
+                <img src="~/Style/alisa2.JPG" style="width: 100%">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1, 0)">❮</a>
+            <a class="next" onclick="plusSlides(1, 0)">❯</a>
+        </div>
+    }
 </div>
+
+<script>
+    var slideIndex = [1, 1];
+    var slideId = ["mySlides1", "mySlides2"]
+    showSlides(1, 0);
+    showSlides(1, 1);
+
+    function plusSlides(n, no) {
+        showSlides(slideIndex[no] += n, no);
+    }
+
+    function showSlides(n, no) {
+        var i;
+        var x = document.getElementsByClassName(slideId[no]);
+        if (n > x.length) { slideIndex[no] = 1 }
+        if (n < 1) { slideIndex[no] = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex[no] - 1].style.display = "block";
+    }
+</script>
+

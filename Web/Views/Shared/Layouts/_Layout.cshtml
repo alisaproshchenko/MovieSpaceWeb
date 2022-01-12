@@ -6,6 +6,9 @@
 
 <body class="backgoround">
 <div class="navbar navbar-inverse navbar-fixed-top">
+    <div style="position: absolute; top: -14px; left: 280px;">
+        <img src="~/Style/icon.png" style="width: 100px; height: 50%;">
+    </div>
     <div class="container">
         <div>
             <div class="navbar-header">
@@ -21,13 +24,14 @@
         <div class="navbar-collapse collapse basic-header">
             <div>
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Top 250 IMDb", "Top250IMDb", "Home")</li>
-                    <li>@Html.ActionLink("Top liked", "MostLikedResult", "Home")</li>
-                    <li>@Html.ActionLink("Top Watched", "MostWatchedResult", "Home")</li>
+                    <li>@Html.ActionLink("Top 250 IMDb", "Top250IMDb", "Home", null, new {@class = "color-black"})</li>
+                    <li>@Html.ActionLink("Top liked", "MostLikedResult", "Home", null, new {@class = "color-black"}))</li>
+                    <li>@Html.ActionLink("Top Watched", "MostWatchedResult", "Home", null, new {@class = "color-black"}))</li>
+                    <li>@Html.ActionLink("Filters", "Filters", "Home", null, new {@class = "color-black"}))</li>
 
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin", null, new { @class = "admin-panel" })</li>
+                        <li>@Html.ActionLink("Admin panel", "AdminPanel", "Admin", null, new {@class = "admin-panel"})</li>
                     }
                 </ul>
             </div>
@@ -58,9 +62,9 @@
     </div>
 </div>
 <div id="mySidenav"> 
-    <a href="#" id="alisa">Alisa</a> 
-    <a href="#" id="misha">Misha</a> 
-    <a href="#" id="pasha">Pasha</a> 
+    <a href="https://www.instagram.com/janglaide/" id="alisa">Alisa</a> 
+    <a href="https://www.instagram.com/m_chudik" id="misha">Misha</a> 
+    <a href="https://www.instagram.com/samael_sher/" id="pasha">Pasha</a> 
     <a href="https://www.instagram.com/l.e.v.v.e.l/" id="vlad">Vlad</a> 
 </div>
 <div class="container main-sector">

@@ -1,34 +1,33 @@
 ﻿@model IdentityService.Dto.AboutUsDto
-@{
-    ViewBag.Title = "Create";
-}
 
-<h2>Create</h2>
+<div class="background-cover">
+    <h2>Create</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div>
-        <h4>AboutUsCreation</h4>
-        <hr/>
-        @Html.ValidationSummary(false)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
         <div>
-            Name
-            <div>@Html.EditorFor(model => model.Name)</div>
-        </div>
+            <h4>AboutUsCreation</h4>
+            <hr/>
+            @Html.ValidationSummary(false)
 
-        <div>
-            PhotoLink
-            <div>@Html.EditorFor(model => model.PhotoLink)</div>
+            <div>
+                Name
+                <div>@Html.EditorFor(model => model.Name)</div>
+            </div>
+
+            <div>
+                PhotoLink
+                <div>@Html.EditorFor(model => model.PhotoLink)</div>
+            </div>
+            <div>
+                ProjectRole
+                <div>@Html.EditorFor(model => model.ProjectRole)</div>
+            </div>
+            <div>
+                <div><input type="submit" value="Submit" /></div>
+            </div>
         </div>
-        <div>
-            ProjectRole
-            <div>@Html.EditorFor(model => model.ProjectRole)</div>
-        </div>
-        <div>
-            <div><input type="submit" value="Submit" /></div>
-        </div>
-    </div>
-}
+    }
+</div>

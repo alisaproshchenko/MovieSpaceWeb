@@ -300,9 +300,18 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Style\alisa.JPG" />
+    <Content Include="Style\alisa2.JPG" />
     <Content Include="Style\background.jpg" />
+    <Content Include="Style\icon.png" />
+    <Content Include="Style\misha.JPG" />
+    <Content Include="Style\misha2.JPG" />
+    <Content Include="Style\pasha.JPG" />
     <Content Include="Style\header.jpg" />
+    <Content Include="Style\pasha2.JPG" />
     <Content Include="Style\Style.css" />
+    <Content Include="Style\vlad.JPG" />
+    <Content Include="Style\vlad2.JPG" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
