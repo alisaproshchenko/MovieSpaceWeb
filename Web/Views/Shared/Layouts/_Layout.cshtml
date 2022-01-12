@@ -6,7 +6,7 @@
 
 <body class="backgoround">
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div style="position: absolute; top: -14px; left: 280px;">
+    <div style="position: absolute; top: -14px; left: 90px;">
         <img src="~/Style/icon.png" style="width: 100px; height: 50%;">
     </div>
     <div class="container">
@@ -70,6 +70,7 @@
 <div class="container main-sector">
     @RenderBody()
     <footer class="footer">
+        <div style="text-align: center;">@Html.ActionLink("About us", "Index", "AboutUs", null, new { @class = "color-black" })</div>
         <p>&copy; @DateTime.Now.Year - Movie space</p>
     </footer>
 </div>

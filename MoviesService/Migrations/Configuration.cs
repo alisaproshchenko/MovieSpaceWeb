@@ -1,4 +1,8 @@
-﻿namespace MoviesService.Migrations
+﻿using System.Linq;
+using System.Threading.Tasks;
+using IMDbApiLib;
+
+namespace MoviesService.Migrations
 {
     using System.Data.Entity.Migrations;
 
@@ -123,14 +127,14 @@
             //        a => new { a.IMDbMovieId }, model);
             //}
             //context.SaveChanges();
-            
+
             //upload
 
-            //var apiLib = new ApiLib("5zfN3eE59H");
+            //var apiLib = new ApiLib("k_6gpshnul");
             //var dataApi = Task.Run(() => apiLib.Top250MoviesAsync()).Result;
             //var searchResults = dataApi.Items;
 
-            //for (var i = 130; i < 150; ++i)
+            //for (var i = 155; i < 165; ++i)
             //{
             //    var id = i;
             //    var movieData = Task.Run(() => apiLib.TitleAsync(searchResults[id].Id)).Result;
