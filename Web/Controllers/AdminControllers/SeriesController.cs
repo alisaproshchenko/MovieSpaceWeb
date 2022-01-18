@@ -65,5 +65,29 @@ namespace Web.Controllers.AdminControllers
             _episodeService.Delete(episode);
             return RedirectToAction("GetSeason", "Series", new { seasonId = episode.SeasonsId });
         }
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditSeason(int id)
+        {
+            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.Entities.FirstOrDefault(x => x.Id == id)));
+        }
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public ActionResult UpdateSeason(int id)
+        {
+            _service.Edit(_service.GetEntity(id));
+            return RedirectToAction("GetSeason", "Series", new {seasonId = id});
+        }
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditEpisode(EpisodeDto entity)
+        {
+            return View(new GenericEntitiesViewModel<EpisodeDto>(entity));
+        }
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public ActionResult UpdateEpisode(EpisodeDto entity)
+        {
+            _episodeService.Edit(entity);
+            return RedirectToAction("GetEpisode", "Series", new { episodeId = entity.Id });
+        }
     }
 }

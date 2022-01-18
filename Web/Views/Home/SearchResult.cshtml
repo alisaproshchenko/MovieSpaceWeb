@@ -11,8 +11,10 @@
             @if (User.IsInRole("Administrator"))
             {
                 <div class="admin-button">
-                    <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "Media", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
-                    <div class="admin-button-position">@Html.ActionLink("Edit", "Edit", "Media", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
+                    <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, new {@class = "admin-button-style"})</div>
+                    <div class="admin-button-position">
+                        @Html.ActionLink("Edit", "Edit", "Media", new {entity.Id, entity.Name, entity.Year,entity.Plot, entity.LinkEmbed}, new {@class = "admin-button-style"})
+                    </div>
                 </div>
             }
         </div>

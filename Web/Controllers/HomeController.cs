@@ -1,4 +1,3 @@
-using System.Linq;
 using MoviesService.IMDbApi;
 using Web.ViewModels;
 using System.Web.Mvc;

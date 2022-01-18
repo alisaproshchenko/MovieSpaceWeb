@@ -66,7 +66,9 @@
         </div>
     </div>
 </div>
-
+        <div>
+        @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, null)
+    </div>
 
     @if (Model.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))
     {
@@ -82,9 +84,5 @@
             }
         }
     }
-    
-    <div>
-        @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, null)
-    </div>
 
 </div>

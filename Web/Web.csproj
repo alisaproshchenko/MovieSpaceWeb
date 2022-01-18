@@ -368,6 +368,8 @@
     <Content Include="Views\Home\MostWatched.cshtml" />
     <Content Include="Views\Home\SearchResultApi.cshtml" />
     <Content Include="Views\Media\DetailsApi.cshtml" />
+    <Content Include="Views\Series\EditSeason.cshtml" />
+    <Content Include="Views\Series\EditEpisode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

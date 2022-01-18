@@ -1,8 +1,11 @@
 ﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.EpisodeDto>
 <div class="background-cover">
+    <div>
+        @Html.ActionLink("Edit", "EditEpisode", "Series", new {Model.Entity.Id, Model.Entity.Name, Model.Entity.Year, Model.Entity.Plot}, null)
+    </div>
     <div>@Model.Entity.Name</div>
     <div>@Model.Entity.Plot</div>
-    <img width="200" height="200" src="@Model.Entity.Image" />
+    <img width="200" height="200" src="@Model.Entity.Image"/>
 </div>
 
 

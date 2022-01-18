@@ -7,8 +7,8 @@
     {
 <div style="border: 1px solid red; width: 100px; height: 100px; display: inline-grid;">
     <div>@entity.Name</div>
-    <div>@Html.ActionLink("Delete", "Delete", "Genre", new { id = entity.Id }, null)</div>
-    <div>@Html.ActionLink("Edit", "Edit", "Genre", new { id = entity.Id }, null)</div>
+    <div>@Html.ActionLink("Delete", "Delete", "Genre", new { entity.Id, entity.Name }, null)</div>
+    <div>@Html.ActionLink("Edit", "Edit", "Genre", new {entity.Id,entity.Name}, null)</div>
 </div>}
 
     @Html.Partial("Partials/PagePartial/GenrePagePartial")
