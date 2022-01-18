@@ -73,28 +73,28 @@ namespace Web.Controllers.AdminControllers
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(MediaDto entity)
+        public ActionResult Edit(int id)
         {
-            return View(new GenericEntitiesViewModel<MediaDto>(entity));
+            return View(new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult Update(MediaDto entity)
+        public ActionResult Update(int id)
         {
-            _service.Edit(entity);
+            _service.Edit(_service.GetEntity(id));
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public ActionResult Delete(MediaDto entity)
+        public ActionResult Delete(int id)
         {
-            return View(new GenericEntitiesViewModel<MediaDto>(entity));
+            return View(new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(MediaDto entity)
+        public ActionResult DeleteConfirmed(int id)
         {
-            _service.Delete(entity);
+            _service.Delete(_service.GetEntity(id));
             return RedirectToAction("ListOfEntities");
         }
     }

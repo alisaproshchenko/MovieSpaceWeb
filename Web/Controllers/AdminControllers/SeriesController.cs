@@ -39,9 +39,9 @@ namespace Web.Controllers.AdminControllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public ActionResult DeleteSeason(SeasonsDto entity)
+        public ActionResult DeleteSeason(int id)
         {
-            return View(new GenericEntitiesViewModel<SeasonsDto>(entity));
+            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("DeleteSeason")]
@@ -53,9 +53,9 @@ namespace Web.Controllers.AdminControllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public ActionResult DeleteEpisode(EpisodeDto entity)
+        public ActionResult DeleteEpisode(int id)
         {
-            return View(new GenericEntitiesViewModel<EpisodeDto>(entity));
+            return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("DeleteEpisode")]
@@ -78,16 +78,16 @@ namespace Web.Controllers.AdminControllers
             return RedirectToAction("GetSeason", "Series", new {seasonId = id});
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult EditEpisode(EpisodeDto entity)
+        public ActionResult EditEpisode(int id)
         {
-            return View(new GenericEntitiesViewModel<EpisodeDto>(entity));
+            return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult UpdateEpisode(EpisodeDto entity)
+        public ActionResult UpdateEpisode(int id)
         {
-            _episodeService.Edit(entity);
-            return RedirectToAction("GetEpisode", "Series", new { episodeId = entity.Id });
+            _episodeService.Edit(_episodeService.GetEntity(id));
+            return RedirectToAction("GetEpisode", "Series", new { episodeId = id });
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.EpisodeDto>
 <div class="background-cover">
     <div>
-        @Html.ActionLink("Edit", "EditEpisode", "Series", new {Model.Entity.Id, Model.Entity.Name, Model.Entity.Year, Model.Entity.Plot}, null)
+        @Html.ActionLink("Edit", "EditEpisode", "Series", new {id = Model.Entity.Id}, null)
     </div>
     <div>@Model.Entity.Name</div>
     <div>@Model.Entity.Plot</div>
