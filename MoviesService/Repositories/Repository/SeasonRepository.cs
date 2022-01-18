@@ -1,4 +1,5 @@
-﻿using MoviesService.Models;
+﻿using System;
+using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -23,9 +24,9 @@ namespace MoviesService.Repositories.Repository
             var season = _context.SeasonsTable.FirstOrDefault(t => t.Id == id);
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == season.MediaId);
             --media.SeasonCount;
-            foreach (var episode in season.EpisodesList)
+            for (var i = 0; i < season?.EpisodeCount; ++i)
             {
-                _context.EpisodeTable.Remove(episode);
+                _context.EpisodeTable.Remove(season.EpisodesList.ElementAt(0));
             }
             _context.SeasonsTable.Remove(season);
             _context.SaveChanges();

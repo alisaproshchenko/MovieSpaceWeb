@@ -29,13 +29,16 @@ namespace MoviesService.Repositories.Repository
             var media = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == id);
             if (media.SeasonsList != null)
             {
-                foreach (var season in media.SeasonsList )
+                for (var seasonIndex = 0; seasonIndex < media.SeasonCount; ++seasonIndex )
                 {
+                    var seasonId = media.SeasonsList.ElementAt(index:0).Id;
+                    var season =
+                        _context.SeasonsTable.Include("EpisodesList").FirstOrDefault(x => x.Id == seasonId);
                     if (season.EpisodesList != null)
                     {
-                        foreach (var episode in season.EpisodesList)
+                        for (var episodeIndex = 0; episodeIndex < season?.EpisodeCount; ++episodeIndex)
                         {
-                            _context.EpisodeTable.Remove(episode);
+                            _context.EpisodeTable.Remove(season.EpisodesList.ElementAt(index:0));
                         }
                     }
 

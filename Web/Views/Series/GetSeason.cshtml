@@ -24,7 +24,7 @@
                     if (Service.ReturnIdForDelete(e.Name) == Model.Entity.EpisodeCount)
                     {
 
-                        <span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new {e.Id, e.Name}, null)</span>
+                        <span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new {episdeId = e.Id}, null)</span>
                     }
                 }
             </div>
