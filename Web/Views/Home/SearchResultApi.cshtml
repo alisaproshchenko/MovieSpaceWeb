@@ -1,12 +1,6 @@
 ﻿@model List<MoviesService.Models.Media>
 
 <div class="background-cover">
-    @if (User.IsInRole("Administrator"))
-    {
-        <div class="add-button">
-            @Html.ActionLink("Add media", "Add", "Media", null, new { @class = "add-button-link" })
-        </div>}
-
     @foreach (var entity in Model)
     {
         <div class="basic-block">

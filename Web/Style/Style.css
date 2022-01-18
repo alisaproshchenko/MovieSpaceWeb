@@ -37,7 +37,6 @@ textarea {
     width: 100%;
     background: rgba(0, 0, 0, 0.7);
     color: #a49777;
-    margin-top: 20px;
 }
 
 /*Layout*/
@@ -139,7 +138,7 @@ textarea {
 
 .admin-button {
     position: relative;
-    top: -267px;
+    top: -362px;
 }
 
 .admin-button-position {
@@ -163,7 +162,9 @@ textarea {
 }
 
 .add-button {
-    margin: 231px 0 12px -7px;
+    position: absolute;
+    top: 340px;
+    left: 12px;
 }
 
 .add-button-link {
@@ -172,7 +173,7 @@ textarea {
     color: white;
     outline: none;
     cursor: pointer;
-    width: 170px;
+    width: 200px;
     padding: 10px 67px;
 }
 

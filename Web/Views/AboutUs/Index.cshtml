@@ -1,69 +1,71 @@
 ﻿@using System.Web.Mvc.Html
 @model IEnumerable<IdentityService.Dto.AboutUsDto>
 
-<div class="background-cover" style="height: 160%;">
+<div class="background-cover" style="height: 110%;">
     <div style="margin-top: -40px;">
         <div style="position: absolute; top: 100px; left: 10px;">
             @if (User.IsInRole("Administrator"))
             {
-                <div class="add-button">
-                    @Html.ActionLink("Add", "Create", "AboutUs", null, new {@class = "add-button-link"})
+                <div style="margin-top: 300px; margin-left: -9px;">
+                    @Html.ActionLink("Add developer", "Create", "AboutUs", null, new {@class = "add-button-link"})
                 </div>
 
             }
         </div>
 
         <div class="row" style="margin-top: 40px;">
-        @foreach (var entity in Model)
-        {
-            <div class="column">
-                <div class="card">
-                    <img src="~/Style/@entity.PhotoLink" alt="Jane" style="width: 60%; margin: 0 70px;">
-                    <div class="container">
-                        <h1>@entity.Name</h1>
-                        <p>@entity.ProjectRole</p>
+            @foreach (var entity in Model)
+            {
+                <div class="column">
+                    <div class="card">
+                        <img src="~/Style/@entity.PhotoLink" alt="Jane" style="width: 60%; margin: 0 70px;">
+                        <div class="container">
+                            <h1>@entity.Name</h1>
+                            <p>@entity.ProjectRole</p>
+                        </div>
+                    </div>
+                    <div class="delete-edit">
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <div class="admin-button">
+
+                                <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
+
+                                <div class="admin-button-position">@Html.ActionLink("Update", "Update", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
+                            </div>
+                        }
                     </div>
                 </div>
-                <div class="delete-edit">
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <div class="admin-button">
-
-                            <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
-
-                            <div class="admin-button-position">@Html.ActionLink("Update", "Update", "AboutUs", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-    </div>
-    </div>
-    @foreach (var entity in Model)
-    {
-        <div class="slideshow-container">
-            <div class="mySlides1">
-                <div>
-                    <img src="~/Style/vlad2.JPG" style="width: 100%;">
-                </div>
-            </div>
-
-            <div class="mySlides1">
-                <img src="~/Style/misha2.JPG" style="width: 100%">
-            </div>
-
-            <div class="mySlides1">
-                <img src="~/Style/pasha2.JPG" style="width: 100%">
-            </div>
-
-            <div class="mySlides1">
-                <img src="~/Style/alisa2.JPG" style="width: 100%">
-            </div>
-
-            <a class="prev" onclick="plusSlides(-1, 0)">❮</a>
-            <a class="next" onclick="plusSlides(1, 0)">❯</a>
+            }
         </div>
-    }
+    </div>
+    <div style="margin-top: 30px;">  
+        @foreach (var entity in Model)
+           {
+               <div class="slideshow-container">
+                   <div class="mySlides1">
+                       <div>
+                           <img src="~/Style/vlad2.JPG" style="width: 100%;">
+                       </div>
+                   </div>
+
+                   <div class="mySlides1">
+                       <img src="~/Style/misha2.JPG" style="width: 100%">
+                   </div>
+
+                   <div class="mySlides1">
+                       <img src="~/Style/pasha2.JPG" style="width: 100%">
+                   </div>
+
+                   <div class="mySlides1">
+                       <img src="~/Style/alisa2.JPG" style="width: 100%">
+                   </div>
+
+                   <a class="prev" onclick="plusSlides(-1, 0)">❮</a>
+                   <a class="next" onclick="plusSlides(1, 0)">❯</a>
+               </div>
+           }
+    </div>
 </div>
 
 <script>
