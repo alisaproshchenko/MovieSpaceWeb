@@ -3,11 +3,11 @@
     @using (Html.BeginForm("Update", "Media", FormMethod.Post))
     {
 <fieldset>
-    @Html.HiddenFor(m => m.Entity.Id)
     <p>
         @Html.LabelFor(m => m.Entity.Name, "Name")
         <br />
         @Html.EditorFor(m => m.Entity.Name)
+        @Html.ValidationMessageFor(m => m.Entity.Name)
     </p>
     <p>
         @Html.LabelFor(m => m.Entity.Year, "Year")
@@ -18,11 +18,18 @@
         @Html.LabelFor(m => m.Entity.Plot, "Plot")
         <br />
         @Html.EditorFor(m => m.Entity.Plot)
+        @Html.ValidationMessageFor(m => m.Entity.Plot)
+
     </p>
     <p>
         @Html.LabelFor(m => m.Entity.LinkEmbed, "Trailer link")
         <br />
         @Html.EditorFor(m => m.Entity.LinkEmbed)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Entity.Poster, "Poster")
+        <br />
+        @Html.EditorFor(m => m.Entity.Poster)
     </p>
     <div><b>Genres</b></div>
     @foreach (var c in ViewBag.Genres)
@@ -49,7 +56,8 @@
         </div>
     }
     <p><input type="submit" value="Send" /></p>
-</fieldset>}
+</fieldset>
+    }
 
 </div>
 
