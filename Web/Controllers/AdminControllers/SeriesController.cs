@@ -66,9 +66,9 @@ namespace Web.Controllers.AdminControllers
             return RedirectToAction("GetSeason", "Series", new { seasonId = episode.SeasonsId });
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult EditSeason(int id)
+        public ActionResult EditSeason(int seasonId)
         {
-            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.Entities.FirstOrDefault(x => x.Id == id)));
+            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.Entities.FirstOrDefault(x => x.Id == seasonId)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
@@ -78,9 +78,9 @@ namespace Web.Controllers.AdminControllers
             return RedirectToAction("GetSeason", "Series", new {seasonId = seasonsDto.Id});
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult EditEpisode(int id)
+        public ActionResult EditEpisode(int episodeId)
         {
-            return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.GetEntity(id)));
+            return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.GetEntity(episodeId)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
