@@ -8,7 +8,7 @@
             @Html.ActionLink("Add episode", "AddEpisode", "Series", new {id = Model.Entity.Id}, null)
         </div>
         <div>
-            @Html.ActionLink("Edit", "EditSeason", "Series", new {Model.Entity.Id}, null)
+            @Html.ActionLink("Edit", "EditSeason", "Series", new { seasonId = Model.Entity.Id}, null)
         </div>
     }
     <div>@Model.Entity.Name</div>
@@ -18,7 +18,7 @@
         {
             <div>
 
-                @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id, seasonId = Model.Entity.Id}, null)
+                @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id}, null)
                 @if (User.IsInRole("Administrator"))
                 {
                     if (Service.ReturnIdForDelete(e.Name) == Model.Entity.EpisodeCount)
