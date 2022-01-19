@@ -30,9 +30,9 @@ namespace Web.Controllers.AdminControllers
             return View(new GenericEntitiesViewModel<TypesDto>(_service.GetEntity(id)));
         }
         [HttpPost]
-        public ActionResult Update(int id)
+        public ActionResult Update(TypesDto entity)
         {
-            _service.Edit(_service.GetEntity(id));
+            _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
         [HttpGet]
@@ -41,9 +41,9 @@ namespace Web.Controllers.AdminControllers
             return View(new GenericEntitiesViewModel<TypesDto>(_service.GetEntity(id)));
         }
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(TypesDto entity)
         {
-            _service.Delete(_service.GetEntity(id));
+            _service.Delete(entity);
             return RedirectToAction("ListOfEntities");
         }
     }

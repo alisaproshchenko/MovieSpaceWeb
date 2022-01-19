@@ -95,9 +95,9 @@ namespace Web.Controllers.AdminControllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(MediaDto entity)
         {
-            _service.Delete(_service.GetEntity(id));
+            _service.Delete(entity);
             return RedirectToAction("ListOfEntities");
         }
     }

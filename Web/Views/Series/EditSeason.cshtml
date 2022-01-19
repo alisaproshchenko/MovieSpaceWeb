@@ -7,11 +7,13 @@
         @Html.HiddenFor(m => m.Entity.Id)
         <p>
             @Html.LabelFor(m => m.Entity.Name, "Name")
-            <br />
+            <br/>
             @Html.EditorFor(m => m.Entity.Name)
-        </p>     <p>
+            @Html.ValidationMessageFor(m => m.Entity.Name)
+        </p>
+        <p>
             @Html.LabelFor(m => m.Entity.Year, "Year")
-            <br />
+            <br/>
             @Html.EditorFor(m => m.Entity.Year)
         </p>
         <p><input type="submit" value="Send" /></p>
