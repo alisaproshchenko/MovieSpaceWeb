@@ -14,7 +14,7 @@ namespace MoviesService.Repositories.Repository
         public IEnumerable<Media> Entities => _context.MediaTable.Include("SeasonsList");
         public Media GetEntity(int id)
         {
-            var media =  _context.MediaTable.FirstOrDefault(i => i.Id == id);
+            var media =  _context.MediaTable.Include("Types").Include("GenresCollection").Include("SeasonsList").Include("CountryCollection").FirstOrDefault(i => i.Id == id);
             return media;
         }
 
@@ -78,6 +78,7 @@ namespace MoviesService.Repositories.Repository
             m.Year = media.Year;
             m.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
             m.GenresCollection.Clear();
+            m.CountryCollection.Clear();
             foreach (var id in selectedGenresIds)
             {
                 m.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));

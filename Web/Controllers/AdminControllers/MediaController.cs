@@ -82,9 +82,9 @@ namespace Web.Controllers.AdminControllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult Update(int id, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        public ActionResult Update(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
-            _service.EditMedia(_service.GetEntity(id), selectedType,selectedGenresIds,selectedCountriesIds);
+            _service.EditMedia(entity, selectedType,selectedGenresIds,selectedCountriesIds);
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]
