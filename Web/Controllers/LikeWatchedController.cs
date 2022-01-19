@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using IdentityService.Dto;
-using IdentityService.Services;
 using Microsoft.AspNet.Identity;
 using MoviesService.Models;
 using MoviesService.Repositories.Repository;
@@ -11,13 +9,11 @@ namespace Web.Controllers
     public class LikeWatchedController : Controller
     {
         private readonly LikeWatchedRepository _repository;
-        private readonly IService<ApplicationUserDto> _userService;
         private readonly LikeWatchedRepository _userToMedia;
 
-        public LikeWatchedController(LikeWatchedRepository repository, IService<ApplicationUserDto> userService, LikeWatchedRepository userToMedia)
+        public LikeWatchedController(LikeWatchedRepository repository, LikeWatchedRepository userToMedia)
         {
             _repository = repository;
-            _userService = userService;
             _userToMedia = userToMedia;
         }
         [Authorize]
