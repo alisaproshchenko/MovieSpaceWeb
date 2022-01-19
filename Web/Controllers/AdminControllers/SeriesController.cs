@@ -68,26 +68,25 @@ namespace Web.Controllers.AdminControllers
         [Authorize(Roles = "Administrator")]
         public ActionResult EditSeason(int seasonId)
         {
-            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.Entities.FirstOrDefault(x => x.Id == seasonId)));
+            return View(new GenericEntitiesViewModel<SeasonsDto>(_service.GetEntity(seasonId)));
         }
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult UpdateSeason(SeasonsDto seasonsDto)
+        public ActionResult UpdateSeason(SeasonsDto entity)
         {
-            _service.Edit(seasonsDto);
-            return RedirectToAction("GetSeason", "Series", new {seasonId = seasonsDto.Id});
+            _service.Edit(entity);
+            return RedirectToAction("GetSeason", "Series", new { seasonId = entity.Id });
         }
+
         [Authorize(Roles = "Administrator")]
         public ActionResult EditEpisode(int episodeId)
         {
             return View(new GenericEntitiesViewModel<EpisodeDto>(_episodeService.GetEntity(episodeId)));
         }
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult UpdateEpisode(EpisodeDto episodeDto)
+        public ActionResult UpdateEpisode(EpisodeDto entity)
         {
-            _episodeService.Edit(episodeDto);
-            return RedirectToAction("GetEpisode", "Series", new { episodeId = episodeDto.Id });
+            _episodeService.Edit(entity);
+            return RedirectToAction("GetEpisode", "Series", new { episodeId = entity.Id });
         }
     }
 }
