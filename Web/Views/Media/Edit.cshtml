@@ -24,6 +24,30 @@
         <br />
         @Html.EditorFor(m => m.Entity.LinkEmbed)
     </p>
+    <div><b>Genres</b></div>
+    @foreach (var c in ViewBag.Genres)
+    {
+        <div class="filterDiv" style="display: inline-grid;">
+            <input type="checkbox" name="selectedGenres" value="@c.Id"
+                   @(Model.Entity.GenresCollection.FirstOrDefault(x => x.Id == c.Id) != null ? "checked=\"checked\"" : "")/>@c.Name
+        </div>
+    }
+    <div><b>Countries</b></div>
+    @foreach (var c in ViewBag.Countries)
+    {
+        <div class="filterDiv" style="display: inline-grid;">
+            <input type="checkbox" name="selectedCountries" value="@c.Id"
+                   @(Model.Entity.CountryCollection.FirstOrDefault(x => x.Id == c.Id) != null ? "checked=\"checked\"" : "")/>@c.Name
+        </div>
+    }
+    <div><b>Types</b></div>
+    @foreach (var c in ViewBag.Types)
+    {
+        <div class="filterDiv" style="display: inline-grid;">
+            <input type="radio" name="selectedType" value="@c.Id"
+                   @(Model.Entity.Types.Id != c.Id ? "checked=\"checked\"" : "")/>@c.Name
+        </div>
+    }
     <p><input type="submit" value="Send" /></p>
 </fieldset>}
 

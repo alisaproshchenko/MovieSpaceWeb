@@ -7,7 +7,7 @@ using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class MediaRepository : IMediaRepository<Media>, IMediaAddRepository<Media>
+    public class MediaRepository : IMediaRepository<Media>, IMediaAddRepository<Media>, IMediaEditRepository
     {
         private readonly MediaDbContext _context;
         public MediaRepository(MediaDbContext context) => _context = context;
@@ -49,16 +49,6 @@ namespace MoviesService.Repositories.Repository
             _context.SaveChanges();
         }
 
-        public void Edit(Media media)
-        {
-            var m = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == media.Id);
-            m.Name = media.Name;
-            m.Plot = media.Plot;
-            m.Year = media.Year;
-            _context.MediaTable.AddOrUpdate(m);
-            _context.SaveChanges();
-        }
-
         public void AddMedia(Media entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
             entity.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
@@ -78,6 +68,26 @@ namespace MoviesService.Repositories.Repository
         {
             var model = _context.MediaTable.Include("Types").Include("GenresCollection").Include("CountryCollection").Include("SeasonsList").FirstOrDefault(x => x.Name == searchData);
             return model;
+        }
+
+        public void EditMedia(Media media, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        {
+            var m = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == media.Id);
+            m.Name = media.Name;
+            m.Plot = media.Plot;
+            m.Year = media.Year;
+            m.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
+            m.GenresCollection.Clear();
+            foreach (var id in selectedGenresIds)
+            {
+                m.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));
+            }
+            foreach (var id in selectedCountriesIds)
+            {
+                m.CountryCollection.Add(_context.CountriesTable.FirstOrDefault(x => x.Id == id));
+            }
+            _context.MediaTable.AddOrUpdate(m);
+            _context.SaveChanges();
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Web.Controllers.AdminControllers
         public ActionResult Add()
         {
             ViewBag.Genres = _genreServices.Entities;
-            ViewBag.Country = _countryServices.Entities.Take(20);
+            ViewBag.Country = _countryServices.Entities;
             ViewBag.Types = _typesServices.Entities;
             return View();
         }
@@ -75,13 +75,16 @@ namespace Web.Controllers.AdminControllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
+            ViewBag.Genres = _genreServices.Entities;
+            ViewBag.Countries = _countryServices.Entities;
+            ViewBag.Types = _typesServices.Entities;
             return View(new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult Update(int id)
+        public ActionResult Update(int id, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
-            _service.Edit(_service.GetEntity(id));
+            _service.EditMedia(_service.GetEntity(id), selectedType,selectedGenresIds,selectedCountriesIds);
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]

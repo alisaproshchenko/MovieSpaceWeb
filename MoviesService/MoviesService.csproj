@@ -220,9 +220,11 @@
     <Compile Include="Models\UsersToMedia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository\IAddSingleRepository.cs" />
+    <Compile Include="Repositories\IRepository\IEditSingleRepository.cs" />
     <Compile Include="Repositories\IRepository\IManageEpisodes.cs" />
     <Compile Include="Repositories\IRepository\IManageSeasons.cs" />
     <Compile Include="Repositories\IRepository\IMediaAddRepository.cs" />
+    <Compile Include="Repositories\IRepository\IMediaEditRepository.cs" />
     <Compile Include="Repositories\IRepository\IMediaRepository.cs" />
     <Compile Include="Repositories\Repository\CountryRepository.cs" />
     <Compile Include="Repositories\Repository\EpisodeRepository.cs" />
@@ -233,9 +235,11 @@
     <Compile Include="Repositories\Repository\TypeRepository.cs" />
     <Compile Include="Search\SearchInDataBase.cs" />
     <Compile Include="Services\IService\IAddSingleService.cs" />
+    <Compile Include="Services\IService\IEditSingleService.cs" />
     <Compile Include="Services\IService\IManageEpisodeService.cs" />
     <Compile Include="Services\IService\IMediaAddService.cs" />
     <Compile Include="Services\IService\IManageSeasonService.cs" />
+    <Compile Include="Services\IService\IMediaEditService.cs" />
     <Compile Include="Services\IService\IServices.cs" />
     <Compile Include="Services\Service\CountryService.cs" />
     <Compile Include="Services\Service\EpisodeService.cs" />
