@@ -12,16 +12,18 @@ namespace Web.Controllers
     {
         private readonly LikeWatchedRepository _repository;
         private readonly IService<ApplicationUserDto> _userService;
+        private readonly LikeWatchedRepository _userToMedia;
 
-        public LikeWatchedController(LikeWatchedRepository repository, IService<ApplicationUserDto> userService)
+        public LikeWatchedController(LikeWatchedRepository repository, IService<ApplicationUserDto> userService, LikeWatchedRepository userToMedia)
         {
             _repository = repository;
             _userService = userService;
+            _userToMedia = userToMedia;
         }
         [Authorize]
         public ActionResult Like(Media mediaDto)
         {
-            var userAmount = _userService.GetAll().Count();
+            var userAmount = _userToMedia.Entities.Count(movie => movie.MediaId == mediaDto.Id);
             mediaDto = _repository.Like(mediaDto.Id, userAmount, User.Identity.GetUserId());
             return RedirectToAction("Details", "Media", new {id = mediaDto.Id});
         }
