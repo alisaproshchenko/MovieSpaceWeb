@@ -2,30 +2,63 @@
 <div class="background-cover">
     @using (Html.BeginForm("Update", "Media", FormMethod.Post))
     {
-<fieldset>
-    @Html.HiddenFor(m => m.Entity.Id)
-    <p>
-        @Html.LabelFor(m => m.Entity.Name, "Name")
-        <br />
-        @Html.EditorFor(m => m.Entity.Name)
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Entity.Year, "Year")
-        <br />
-        @Html.EditorFor(m => m.Entity.Year)
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Entity.Plot, "Plot")
-        <br />
-        @Html.EditorFor(m => m.Entity.Plot)
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Entity.LinkEmbed, "Trailer link")
-        <br />
-        @Html.EditorFor(m => m.Entity.LinkEmbed)
-    </p>
-    <p><input type="submit" value="Send" /></p>
-</fieldset>}
+        <fieldset>
+            @Html.HiddenFor(m => m.Entity.Id)
+            <p>
+                @Html.LabelFor(m => m.Entity.Name, "Name")
+                <br/>
+                @Html.EditorFor(m => m.Entity.Name)
+                @Html.ValidationMessageFor(m => m.Entity.Name)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Entity.Year, "Year")
+                <br/>
+                @Html.EditorFor(m => m.Entity.Year)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Entity.Plot, "Plot")
+                <br/>
+                @Html.EditorFor(m => m.Entity.Plot)
+                @Html.ValidationMessageFor(m => m.Entity.Plot)
+
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Entity.LinkEmbed, "Trailer link")
+                <br/>
+                @Html.EditorFor(m => m.Entity.LinkEmbed)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Entity.Poster, "Poster")
+                <br/>
+                @Html.EditorFor(m => m.Entity.Poster)
+            </p>
+            <div><b>Genres</b></div>
+            @foreach (var c in ViewBag.Genres)
+            {
+                <div class="filterDiv" style="display: inline-grid;">
+                    <input type="checkbox" name="selectedGenresIds" value="@c.Id"
+                           @(Model.Entity.GenresCollection.FirstOrDefault(x => x.Id == c.Id) != null ? "checked=\"checked\"" : "")/>@c.Name
+                </div>
+            }
+            <div><b>Countries</b></div>
+            @foreach (var c in ViewBag.Countries)
+            {
+                <div class="filterDiv" style="display: inline-grid;">
+                    <input type="checkbox" name="selectedCountriesIds" value="@c.Id"
+                           @(Model.Entity.CountryCollection.FirstOrDefault(x => x.Id == c.Id) != null ? "checked=\"checked\"" : "")/>@c.Name
+                </div>
+            }
+            <div><b>Types</b></div>
+            @foreach (var c in ViewBag.Types)
+            {
+                <div class="filterDiv" style="display: inline-grid;">
+                    <input type="radio" name="selectedType" value="@c.Id"
+                           @(Model.Entity.Types.Id == c.Id ? "checked=\"checked\"" : "")/>@c.Name
+                </div>
+            }
+            <p><input type="submit" value="Send"/></p>
+        </fieldset>
+    }
 
 </div>
 

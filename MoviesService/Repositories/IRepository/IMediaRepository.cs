@@ -7,6 +7,5 @@ namespace MoviesService.Repositories.IRepository
          IEnumerable<T> Entities { get; }
          T GetEntity(int id);
          void Delete(int id);
-         void Edit(T entity);
      }
 }

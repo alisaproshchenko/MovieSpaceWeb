@@ -406,7 +406,7 @@ textarea {
 }
 
 .filterDiv {
-    background-color: #2196F3;
+    background-color: rgba(0,0,0,0.7);
     color: #ffffff;
     width: 100px;
     height: 100px;

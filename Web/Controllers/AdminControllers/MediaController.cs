@@ -58,7 +58,7 @@ namespace Web.Controllers.AdminControllers
         public ActionResult Add()
         {
             ViewBag.Genres = _genreServices.Entities;
-            ViewBag.Country = _countryServices.Entities.Take(20);
+            ViewBag.Country = _countryServices.Entities;
             ViewBag.Types = _typesServices.Entities;
             return View();
         }
@@ -73,28 +73,31 @@ namespace Web.Controllers.AdminControllers
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(MediaDto entity)
+        public ActionResult Edit(int id)
         {
-            return View(new GenericEntitiesViewModel<MediaDto>(entity));
+            ViewBag.Genres = _genreServices.Entities;
+            ViewBag.Countries = _countryServices.Entities;
+            ViewBag.Types = _typesServices.Entities;
+            return View(new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult Update(MediaDto entity)
+        public ActionResult Update(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
-            _service.Edit(entity);
+            _service.EditMedia(entity, selectedType,selectedGenresIds,selectedCountriesIds);
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public ActionResult Delete(MediaDto entity)
+        public ActionResult Delete(int id)
         {
-            return View(new GenericEntitiesViewModel<MediaDto>(entity));
+            return View(new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(MediaDto entity)
+        public ActionResult DeleteConfirmed(int id)
         {
-            _service.Delete(entity);
+            _service.Delete(_service.GetEntity(id));
             return RedirectToAction("ListOfEntities");
         }
     }

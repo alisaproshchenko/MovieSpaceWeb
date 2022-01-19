@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class MediaService : IServices<MediaDto>, IMediaAddService<MediaDto>
+    public class MediaService : IServices<MediaDto>, IMediaAddService<MediaDto>, IMediaEditService
     {
         protected readonly MediaRepository repository;
         public MediaService(MediaRepository repository) => this.repository = repository;
@@ -18,19 +18,6 @@ namespace MoviesService.Services.Service
             var media = repository.GetEntity(id);
             return Mapper.Map<Media, MediaDto>(media);
         }
-
-        public void Add(MediaDto entity)
-        {
-            var media = Mapper.Map<MediaDto, Media>(entity);
-            repository.Add(media);
-        }
-
-        public void Edit(MediaDto entity)
-        {
-            var media = Mapper.Map<MediaDto, Media>(entity);
-            repository.Edit(media);
-        }
-
         public void Delete(MediaDto entity)
         {
             var media = Mapper.Map<MediaDto, Media>(entity);
@@ -41,6 +28,12 @@ namespace MoviesService.Services.Service
         {
             var media = Mapper.Map<MediaDto, Media>(entity);
             repository.AddMedia(media, selectedType, selectedGenresIds, selectedCountriesIds);
+        }
+
+        public void EditMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        {
+            var media = Mapper.Map<MediaDto, Media>(entity);
+            repository.EditMedia(media,selectedType,selectedGenresIds,selectedCountriesIds);
         }
     }
 }

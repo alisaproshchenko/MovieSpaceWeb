@@ -7,7 +7,7 @@ using MoviesService.Repositories.IRepository;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class EpisodeRepository : IMediaRepository<Episode>, IManageEpisodes
+    public class EpisodeRepository : IMediaRepository<Episode>, IManageEpisodes, IEditSingleRepository<Episode>
     {
         private readonly MediaDbContext _context;
         public EpisodeRepository(MediaDbContext context) => _context = context;

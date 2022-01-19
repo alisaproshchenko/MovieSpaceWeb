@@ -1,7 +1,6 @@
 ﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.EpisodeDto>
 
 <div class="background-cover">
-
     @using (Html.BeginForm("UpdateEpisode", "Series", FormMethod.Post))
     {
         <fieldset>
@@ -20,6 +19,11 @@
                 @Html.LabelFor(m => m.Entity.Plot, "Plot")
                 <br />
                 @Html.EditorFor(m => m.Entity.Plot)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Entity.Image, "Image")
+                <br />
+                @Html.EditorFor(m => m.Entity.Image)
             </p>
             <p><input type="submit" value="Send" /></p>
         </fieldset>

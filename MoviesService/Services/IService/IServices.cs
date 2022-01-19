@@ -6,7 +6,6 @@ namespace MoviesService.Services.IService
     {
         T GetEntity(int id);
         IEnumerable<T> Entities { get; }
-        void Edit(T entity);
         void Delete(T entity);
     }
 }
