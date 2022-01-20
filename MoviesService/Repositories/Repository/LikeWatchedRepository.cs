@@ -15,6 +15,14 @@ namespace MoviesService.Repositories.Repository
         public Media Like(int mediaId, int usersAmount, string userId)
         {
             var userToMedia = _context.UsersToMediaTable.Where((x) => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+
+            if (userToMedia is null && userId != null)
+            {
+                Watch(userId,mediaId);
+                ++usersAmount;
+                userToMedia = _context.UsersToMediaTable.Where((x) => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+            }
+
             var media = _context.MediaTable.FirstOrDefault(x => x.Id == mediaId);
 
             userToMedia.Liked = !userToMedia.Liked;
@@ -71,6 +79,12 @@ namespace MoviesService.Repositories.Repository
         public void AddMyList(string userId, int mediaId)
         {
             var userToMedia = _context.UsersToMediaTable.Where(x => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+
+            if (userToMedia is null && userId != null)
+            {
+                Watch(userId, mediaId);
+                userToMedia = _context.UsersToMediaTable.Where((x) => x.MediaId == mediaId).FirstOrDefault(x => x.ApplicationUserId == userId);
+            }
 
             if (userToMedia.AddToWatch)
                 return;
