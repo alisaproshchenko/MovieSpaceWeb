@@ -19,10 +19,10 @@ namespace MoviesService.Services.Service
             return Mapper.Map<Seasons, SeasonsDto>(season);
         }
 
-        public void Edit(SeasonsDto entity)
+        public void Edit(SeasonsDto entity, int[] episodes)
         {
             var season = Mapper.Map<SeasonsDto, Seasons>(entity);
-            Repository.Edit(season);
+            Repository.Edit(season, episodes);
         }
 
         public void Delete(SeasonsDto entity)

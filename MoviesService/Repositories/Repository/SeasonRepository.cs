@@ -16,7 +16,7 @@ namespace MoviesService.Repositories.Repository
 
         public Seasons GetEntity(int id)
         {
-            var season =  _context.SeasonsTable.FirstOrDefault(i => i.Id == id);
+            var season =  _context.SeasonsTable.Include("EpisodesList").FirstOrDefault(i => i.Id == id);
             return season;
         }
         public void Delete(int id)
@@ -31,8 +31,12 @@ namespace MoviesService.Repositories.Repository
             _context.SeasonsTable.Remove(season);
             _context.SaveChanges();
         }
-        public void Edit(Seasons season)
+        public void Edit(Seasons season, int[] episodes)
         {
+            foreach (var id in episodes)
+            {
+                season.EpisodesList.Add(_context.EpisodeTable.FirstOrDefault(x => x.Id == id));
+            }
             _context.SeasonsTable.AddOrUpdate(season);
             _context.SaveChanges();
         }

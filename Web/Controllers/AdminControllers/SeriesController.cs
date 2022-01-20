@@ -71,9 +71,9 @@ namespace Web.Controllers.AdminControllers
             return View(new GenericEntitiesViewModel<SeasonsDto>(_service.GetEntity(seasonId)));
         }
         [HttpPost]
-        public ActionResult UpdateSeason(SeasonsDto entity)
+        public ActionResult UpdateSeason(SeasonsDto entity, int[] episodes)
         {
-            _service.Edit(entity);
+            _service.Edit(entity, episodes);
             return RedirectToAction("GetSeason", "Series", new { seasonId = entity.Id });
         }
 

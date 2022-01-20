@@ -4,6 +4,14 @@
     {
         <fieldset>
             @Html.HiddenFor(m => m.Entity.Id)
+            @Html.HiddenFor(m => m.Entity.MediaId)
+            @Html.HiddenFor(m => m.Entity.EpisodeCount)
+            @Html.HiddenFor(m => m.Entity.RatingIMDb)
+            @Html.HiddenFor(m => m.Entity.UserIMDb)
+            @foreach (var e in Model.Entity.EpisodesList)
+            {
+                <input type="hidden" name="episodes" value="@e.Id"/>
+            }
             <p>
                 @Html.LabelFor(m => m.Entity.Name, "Name")
                 <br />
