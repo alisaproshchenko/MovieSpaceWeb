@@ -7,7 +7,7 @@ using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class MediaRepository : IMediaRepository<Media>, IMediaAddRepository<Media>, IMediaEditRepository
+    public class MediaRepository : IMediaManageRepository, IGetEntityAndEntitiesRepository<Media>
     {
         private readonly MediaDbContext _context;
         public MediaRepository(MediaDbContext context) => _context = context;
@@ -16,12 +16,6 @@ namespace MoviesService.Repositories.Repository
         {
             var media =  _context.MediaTable.Include("Types").Include("GenresCollection").Include("SeasonsList").Include("CountryCollection").FirstOrDefault(i => i.Id == id);
             return media;
-        }
-
-        public void Add(Media media)
-        {
-            _context.MediaTable.AddOrUpdate(media);
-            _context.SaveChanges();
         }
 
         public void Delete(int id)

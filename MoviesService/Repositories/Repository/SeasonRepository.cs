@@ -8,7 +8,7 @@ using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class SeasonRepository : IMediaRepository<Seasons>, IManageSeasons, IEditSingleRepository<Seasons>
+    public class SeasonRepository : IManageSeasons, IGetEntityAndEntitiesRepository<Seasons>
     {
         private readonly MediaDbContext _context;
         public SeasonRepository(MediaDbContext context) => _context = context;
