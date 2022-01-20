@@ -14,13 +14,13 @@ namespace Web.Controllers.AdminControllers
     public class MediaController : Controller
     {
         private readonly MediaService _service;
-        private readonly IServices<GenresDto> _genreServices;
-        private readonly IServices<CountryDto> _countryServices;
-        private readonly IServices<TypesDto> _typesServices;
+        private readonly IGetEntityAndEntitiesService<GenresDto> _genreServices;
+        private readonly IGetEntityAndEntitiesService<CountryDto> _countryServices;
+        private readonly IGetEntityAndEntitiesService<TypesDto> _typesServices;
         private readonly LikeWatchedRepository _likeWatchedRepository;
 
-        public MediaController(MediaService service, IServices<GenresDto> genreServices,
-            IServices<CountryDto> countryServices, IServices<TypesDto> typesServices, LikeWatchedRepository likeWatchedRepository)
+        public MediaController(MediaService service,IGetEntityAndEntitiesService<GenresDto> genreServices,
+           IGetEntityAndEntitiesService<CountryDto> countryServices, IGetEntityAndEntitiesService<TypesDto> typesServices, LikeWatchedRepository likeWatchedRepository)
         {
             this._service = service;
             this._genreServices = genreServices;
@@ -95,9 +95,9 @@ namespace Web.Controllers.AdminControllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(MediaDto entity)
+        public ActionResult DeleteConfirmed(MediaDto entity, string userId)
         {
-            _service.Delete(entity);
+            _service.Delete(entity,userId);
             return RedirectToAction("ListOfEntities");
         }
     }

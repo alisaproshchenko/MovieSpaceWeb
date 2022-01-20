@@ -18,10 +18,10 @@ namespace MoviesService.Services.Service
             var media = repository.GetEntity(id);
             return Mapper.Map<Media, MediaDto>(media);
         }
-        public void Delete(MediaDto entity)
+        public void Delete(MediaDto entity, string userId)
         {
             var media = Mapper.Map<MediaDto, Media>(entity);
-            repository.Delete(media.Id);
+            repository.Delete(media.Id, userId);
         }
 
         public void AddMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)

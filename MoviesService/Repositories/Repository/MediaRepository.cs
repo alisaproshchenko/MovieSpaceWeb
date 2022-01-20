@@ -18,7 +18,7 @@ namespace MoviesService.Repositories.Repository
             return media;
         }
 
-        public void Delete(int id)
+        public void Delete(int id, string userId)
         {
             var media = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == id);
             if (media.SeasonsList != null)
@@ -39,6 +39,10 @@ namespace MoviesService.Repositories.Repository
                     _context.SeasonsTable.Remove(season);
                 }
             }
+
+            var userToMedia = _context.UsersToMediaTable.Where(x => x.ApplicationUserId == userId)
+                .FirstOrDefault(x => x.MediaId == media.Id);
+            if (userToMedia != null) _context.UsersToMediaTable.Remove(userToMedia);
             if (media != null) _context.MediaTable.Remove(media);
             _context.SaveChanges();
         }

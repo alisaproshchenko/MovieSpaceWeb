@@ -7,6 +7,6 @@ namespace MoviesService.Services.IService
     {
         void AddMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds);
         public void EditMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds);
-        void Delete(MediaDto entity);
+        void Delete(MediaDto entity, string userId);
     }
 }
