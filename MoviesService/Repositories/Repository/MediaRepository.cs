@@ -68,15 +68,16 @@ namespace MoviesService.Repositories.Repository
             return model;
         }
 
-        public void EditMedia(Media media, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        public void EditMedia(Media media, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
         {
             var m = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == media.Id);
-            m.Name = media.Name;
-            m.Plot = media.Plot;
-            m.Year = media.Year;
+            m = media;
             m.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
-            m.GenresCollection.Clear();
-            m.CountryCollection.Clear();
+            m.TypesId = m.Types.Id;
+            foreach (var id in seasons)
+            {
+                m.SeasonsList.Add(_context.SeasonsTable.FirstOrDefault(x => x.Id == id));
+            }
             foreach (var id in selectedGenresIds)
             {
                 m.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));

@@ -4,6 +4,13 @@
     {
         <fieldset>
             @Html.HiddenFor(m => m.Entity.Id)
+            @Html.HiddenFor(m => m.Entity.BoxOffice)
+            @Html.HiddenFor(m => m.Entity.AmountOfLikes)
+            @Html.HiddenFor(m => m.Entity.SiteUsersRatings)
+            @Html.HiddenFor(m => m.Entity.Budget)
+            @Html.HiddenFor(m => m.Entity.Cast)
+            @Html.HiddenFor(m => m.Entity.IMDbMovieId)
+            @Html.HiddenFor(m => m.Entity.SeasonCount)
             <p>
                 @Html.LabelFor(m => m.Entity.Name, "Name")
                 <br/>
@@ -32,6 +39,10 @@
                 <br/>
                 @Html.EditorFor(m => m.Entity.Poster)
             </p>
+            @foreach (var s in Model.Entity.SeasonsList)
+            {
+                <input type="hidden" name="seasons" value="@s.Id"/>
+            }
             <div><b>Genres</b></div>
             @foreach (var c in ViewBag.Genres)
             {
