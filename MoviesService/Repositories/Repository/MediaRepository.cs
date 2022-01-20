@@ -40,8 +40,8 @@ namespace MoviesService.Repositories.Repository
                 }
             }
 
-            var userToMedia = _context.UsersToMediaTable.Where(x => x.ApplicationUserId == userId)
-                .FirstOrDefault(x => x.MediaId == media.Id);
+            var userToMedia = _context.UsersToMediaTable.FirstOrDefault(userToMedia => userToMedia.MediaId == media.Id && userToMedia.ApplicationUserId == userId);
+
             if (userToMedia != null) _context.UsersToMediaTable.Remove(userToMedia);
             if (media != null) _context.MediaTable.Remove(media);
             _context.SaveChanges();
