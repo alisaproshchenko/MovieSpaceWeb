@@ -1,0 +1,31 @@
+﻿@model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.EpisodeDto>
+
+<div class="background-cover">
+    @using (Html.BeginForm("UpdateEpisode", "Series", FormMethod.Post))
+    {
+        <fieldset>
+            @Html.HiddenFor(m => m.Entity.Id)
+            <p>
+                @Html.LabelFor(m => m.Entity.Name, "Name")
+                <br />
+                @Html.EditorFor(m => m.Entity.Name)
+            </p>     
+            <p>
+                @Html.LabelFor(m => m.Entity.Year, "Year")
+                <br />
+                @Html.EditorFor(m => m.Entity.Year)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Entity.Plot, "Plot")
+                <br />
+                @Html.EditorFor(m => m.Entity.Plot)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.Entity.Image, "Image")
+                <br />
+                @Html.EditorFor(m => m.Entity.Image)
+            </p>
+            <p><input type="submit" value="Send" /></p>
+        </fieldset>
+    }
+</div>

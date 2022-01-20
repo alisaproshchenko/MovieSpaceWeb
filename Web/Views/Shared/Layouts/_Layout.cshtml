@@ -68,6 +68,12 @@
     <a href="https://www.instagram.com/l.e.v.v.e.l/" id="vlad">Vlad</a> 
 </div>
 <div class="container main-sector">
+    @if (User.IsInRole("Administrator"))
+    {
+        <div class="add-button">
+            @Html.ActionLink("Add media", "Add", "Media", null, new { @class = "add-button-link" })
+        </div>
+    }
     @RenderBody()
     <footer class="footer">
         <div style="text-align: center;">@Html.ActionLink("About us", "Index", "AboutUs", null, new {@class = "log-logout-button"})</div>

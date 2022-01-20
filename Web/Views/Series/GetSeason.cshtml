@@ -2,6 +2,15 @@
 @model Web.ViewModels.GenericEntitiesViewModel<MoviesService.Dto.SeasonsDto>
 
 <div class="background-cover" style="display: inline-grid;">
+    @if (User.IsInRole("Administrator"))
+    {
+        <div>
+            @Html.ActionLink("Add episode", "AddEpisode", "Series", new {id = Model.Entity.Id}, null)
+        </div>
+        <div>
+            @Html.ActionLink("Edit", "EditSeason", "Series", new { seasonId = Model.Entity.Id}, null)
+        </div>
+    }
     <div>@Model.Entity.Name</div>
     <div>@Model.Entity.Year</div>
     <div>
@@ -9,24 +18,18 @@
         {
             <div>
 
-                @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id, seasonId = Model.Entity.Id}, null)
+                @Html.ActionLink(e.Name, "GetEpisode", "Series", new {episodeId = e.Id}, null)
                 @if (User.IsInRole("Administrator"))
                 {
                     if (Service.ReturnIdForDelete(e.Name) == Model.Entity.EpisodeCount)
                     {
 
-                        <span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new { episodeId = e.Id }, null)</span>
+                        <span>@Html.ActionLink("Delete", "DeleteEpisode", "Series", new { episodeId = e.Id}, null)</span>
                     }
                 }
             </div>
         }
-    </div> 
-    @if (User.IsInRole("Administrator"))
-    {
-        <div>
-            @Html.ActionLink("Add episode", "AddEpisode", "Series", new {id = Model.Entity.Id}, null)
-        </div>
-    }
+    </div>
 </div>
 
 

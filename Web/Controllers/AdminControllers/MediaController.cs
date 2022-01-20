@@ -14,13 +14,13 @@ namespace Web.Controllers.AdminControllers
     public class MediaController : Controller
     {
         private readonly MediaService _service;
-        private readonly IServices<GenresDto> _genreServices;
-        private readonly IServices<CountryDto> _countryServices;
-        private readonly IServices<TypesDto> _typesServices;
+        private readonly IGetEntityAndEntitiesService<GenresDto> _genreServices;
+        private readonly IGetEntityAndEntitiesService<CountryDto> _countryServices;
+        private readonly IGetEntityAndEntitiesService<TypesDto> _typesServices;
         private readonly LikeWatchedRepository _likeWatchedRepository;
 
-        public MediaController(MediaService service, IServices<GenresDto> genreServices,
-            IServices<CountryDto> countryServices, IServices<TypesDto> typesServices, LikeWatchedRepository likeWatchedRepository)
+        public MediaController(MediaService service,IGetEntityAndEntitiesService<GenresDto> genreServices,
+           IGetEntityAndEntitiesService<CountryDto> countryServices, IGetEntityAndEntitiesService<TypesDto> typesServices, LikeWatchedRepository likeWatchedRepository)
         {
             this._service = service;
             this._genreServices = genreServices;
@@ -58,7 +58,7 @@ namespace Web.Controllers.AdminControllers
         public ActionResult Add()
         {
             ViewBag.Genres = _genreServices.Entities;
-            ViewBag.Country = _countryServices.Entities.Take(20);
+            ViewBag.Country = _countryServices.Entities;
             ViewBag.Types = _typesServices.Entities;
             return View();
         }
@@ -73,28 +73,31 @@ namespace Web.Controllers.AdminControllers
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(MediaDto entity)
+        public ActionResult Edit(int id)
         {
-            return View(new GenericEntitiesViewModel<MediaDto>(entity));
+            ViewBag.Genres = _genreServices.Entities;
+            ViewBag.Countries = _countryServices.Entities;
+            ViewBag.Types = _typesServices.Entities;
+            return View(new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult Update(MediaDto entity)
+        public ActionResult Update(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
         {
-            _service.Edit(entity);
+            _service.EditMedia(entity, selectedType,selectedGenresIds,selectedCountriesIds, seasons);
             return RedirectToAction("ListOfEntities");
         }
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public ActionResult Delete(MediaDto entity)
+        public ActionResult Delete(int id)
         {
-            return View(new GenericEntitiesViewModel<MediaDto>(entity));
+            return View(new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(id)));
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(MediaDto entity)
+        public ActionResult DeleteConfirmed(MediaDto entity, string userId)
         {
-            _service.Delete(entity);
+            _service.Delete(entity,userId);
             return RedirectToAction("ListOfEntities");
         }
     }

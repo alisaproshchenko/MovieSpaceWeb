@@ -27,10 +27,10 @@ namespace Web
         {
             var container = new UnityContainer();
 
-            container.RegisterType<IServices<GenresDto>, GenreService>();
-            container.RegisterType<IServices<TypesDto>, TypeService>();
-            container.RegisterType<IServices<CountryDto>, CountryService>();
-            container.RegisterType<IServices<MediaDto>, MediaService>();
+            container.RegisterType<IGetEntityAndEntitiesService<GenresDto>, GenreService>();
+            container.RegisterType<IGetEntityAndEntitiesService<TypesDto>, TypeService>();
+            container.RegisterType<IGetEntityAndEntitiesService<CountryDto>, CountryService>();
+            container.RegisterType<IMediaManageService, MediaService>();
             container.RegisterType<IController, GenreController>();
             container.RegisterType<IController, MediaTypeController>();
             container.RegisterType<IController, CountryController>();

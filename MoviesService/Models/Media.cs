@@ -7,11 +7,9 @@ namespace MoviesService.Models
     {
         [Key]
         public int Id { get; set; }
-        //[Required]
         public string IMDbMovieId { get; set; }
         [Required]
         public string Name { get; set; }
-        //[Required]
         public string Poster { get; set; }
         [Required]
         public int Year { get; set; }

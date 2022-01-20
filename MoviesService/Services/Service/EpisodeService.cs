@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class EpisodeService : IServices<EpisodeDto>, IManageEpisodeService
+    public class EpisodeService : IManageEpisodeService, IGetEntityAndEntitiesService<EpisodeDto>
     {
         protected readonly EpisodeRepository Repository;
         public EpisodeService(EpisodeRepository repository) => this.Repository = repository;

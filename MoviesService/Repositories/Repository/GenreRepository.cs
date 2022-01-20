@@ -7,7 +7,7 @@ using MoviesService.Context;
 
 namespace MoviesService.Repositories.Repository
 {
-    public class GenreRepository : IMediaRepository<Genres>, IAddSingleRepository<Genres>
+    public class GenreRepository : IConnectedDataRepository<Genres>, IGetEntityAndEntitiesRepository<Genres>
     {
         private readonly MediaDbContext _context;
         public GenreRepository(MediaDbContext context) => _context = context;

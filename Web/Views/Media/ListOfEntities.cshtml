@@ -2,15 +2,7 @@
 @model Web.ViewModels.MediaViewModel
 
 <div class="background-cover">
-    <div style="margin-top: -8px;">
-        @if (User.IsInRole("Administrator"))
-        {
-            <div class="add-button">
-                @Html.ActionLink("Add media", "Add", "Media", null, new {@class = "add-button-link"})
-            </div>
-        }
-
-        @foreach (var entity in Model.Media)
+    @foreach (var entity in Model.Media)
         {
             <div class="basic-block">
                 <a href="@Url.Action("Details", "Media", new {id = entity.Id})">
@@ -20,8 +12,12 @@
                 @if (User.IsInRole("Administrator"))
                 {
                     <div class="admin-button">
-                        <div class="admin-button-position">@Html.ActionLink("Delete", "Delete", "Media", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
-                        <div class="admin-button-position">@Html.ActionLink("Edit", "Edit", "Media", new {id = entity.Id}, new {@class = "admin-button-style"})</div>
+                        <div class="admin-button-position">
+                            @Html.ActionLink("Delete", "Delete", "Media", new { id = entity.Id }, new {@class = "admin-button-style"})
+                        </div>
+                        <div class="admin-button-position">
+                            @Html.ActionLink("Edit", "Edit", "Media", new {id = entity.Id}, new {@class = "admin-button-style"})
+                        </div>
                     </div>
                 }
             </div>
@@ -29,5 +25,4 @@
         <div class="pagination-pos">
             @Html.Partial("Partials/PagePartial/MoviePagePartial")
         </div>
-    </div>
 </div>

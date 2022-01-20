@@ -25,9 +25,9 @@ namespace Web.Controllers.AdminControllers
             _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
-        public ActionResult Edit(TypesDto entity)
+        public ActionResult Edit(int id)
         {
-            return View(new GenericEntitiesViewModel<TypesDto>(entity));
+            return View(new GenericEntitiesViewModel<TypesDto>(_service.GetEntity(id)));
         }
         [HttpPost]
         public ActionResult Update(TypesDto entity)
@@ -36,9 +36,9 @@ namespace Web.Controllers.AdminControllers
             return RedirectToAction("ListOfEntities");
         }
         [HttpGet]
-        public ActionResult Delete(TypesDto entity)
+        public ActionResult Delete(int id)
         {
-            return View(new GenericEntitiesViewModel<TypesDto>(entity));
+            return View(new GenericEntitiesViewModel<TypesDto>(_service.GetEntity(id)));
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(TypesDto entity)
