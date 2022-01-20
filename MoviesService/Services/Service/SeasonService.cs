@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class SeasonService : IServices<SeasonsDto>, IManageSeasonService, IEditSingleService<SeasonsDto>
+    public class SeasonService : IManageSeasonService, IGetEntityAndEntitiesService<SeasonsDto>
     {
         protected readonly SeasonRepository Repository;
         public SeasonService(SeasonRepository repository) => this.Repository = repository;

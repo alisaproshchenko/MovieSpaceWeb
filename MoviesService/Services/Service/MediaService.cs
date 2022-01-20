@@ -7,7 +7,7 @@ using MoviesService.Services.IService;
 
 namespace MoviesService.Services.Service
 {
-    public class MediaService : IServices<MediaDto>, IMediaAddService<MediaDto>, IMediaEditService
+    public class MediaService : IMediaManageService, IGetEntityAndEntitiesService<MediaDto>
     {
         protected readonly MediaRepository repository;
         public MediaService(MediaRepository repository) => this.repository = repository;
