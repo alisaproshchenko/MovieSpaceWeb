@@ -25,6 +25,8 @@ namespace Web.Controllers
         [Authorize]
         public ActionResult AddToMyList(string userId, int mediaId)
         {
+            if (userId is null)
+                userId = User.Identity.GetUserId();
             _repository.AddMyList(userId, mediaId);
             return RedirectToAction("Details", "Media", new { id = mediaId });
         }

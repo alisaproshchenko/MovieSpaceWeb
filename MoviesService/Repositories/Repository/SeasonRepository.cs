@@ -1,5 +1,4 @@
-﻿using System;
-using MoviesService.Models;
+﻿using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -33,9 +32,12 @@ namespace MoviesService.Repositories.Repository
         }
         public void Edit(Seasons season, int[] episodes)
         {
-            foreach (var id in episodes)
+            if (episodes != null)
             {
-                season.EpisodesList.Add(_context.EpisodeTable.FirstOrDefault(x => x.Id == id));
+                foreach (var id in episodes)
+                {
+                    season.EpisodesList.Add(_context.EpisodeTable.FirstOrDefault(x => x.Id == id));
+                }
             }
             _context.SeasonsTable.AddOrUpdate(season);
             _context.SaveChanges();

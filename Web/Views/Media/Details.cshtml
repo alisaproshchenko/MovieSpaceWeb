@@ -16,6 +16,17 @@
 
                     <div class="col-xs-1 col-sm-4 col-md-12 col-lg-6">
                         <img src="@Model.Poster" height="500" width="300" alt=""/>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <div class="admin-button2">
+                                <div class="admin-button-position">
+                                    @Html.ActionLink("Delete", "Delete", "Media", new { id = Model.Id }, new {@class = "admin-button-style"})
+                                </div>
+                                <div class="admin-button-position">
+                                    @Html.ActionLink("Edit", "Edit", "Media", new {id = Model.Id}, new {@class = "admin-button-style"})
+                                </div>
+                            </div>
+                        }
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
@@ -24,7 +35,8 @@
                         <h3>
                             @foreach (var genre in Model.GenresCollection)
                             {
-                                <span>@genre.Name </span>}
+                                <span>@genre.Name </span>
+                            }
                         </h3>
 
                         <h3>
@@ -66,23 +78,26 @@
         </div>
     </div>
 </div>
-        <div>
-        @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, null)
-    </div>
+    @if (User.IsInRole("Administrator"))
+    {
+        <div style="margin-bottom: 5px;">
+            @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, new { @class = "admin-button-position2" })
+        </div>
+    }
 
     @if (Model.TypesId == Convert.ToInt32(Enums.TypeEnum.Serial))
     {
+        <br/>
         foreach (var e in Model.SeasonsList)
         {
-            <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, null)</span>
+            <span>@Html.ActionLink(e.Name, "GetSeason", "Series", new { seasonId = e.Id }, new {@class="admin-button-position2"})</span>
             if (User.IsInRole("Administrator"))
             {
                 if (Service.ReturnIdForDelete(e.Name) == Model.SeasonCount)
                 {
-                    <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new { seasonId = e.Id }, null)</span>
+                    <span>@Html.ActionLink("Delete", "DeleteSeason", "Series", new { seasonId = e.Id }, new {@class="admin-button-position2"})</span>
                 }
             }
         }
     }
-
 </div>
