@@ -2,23 +2,58 @@
 
 <div class="background-cover">
     <form method="get">
-        <div class="form-inline">
-            <label class="control-label">Genre: </label>
-            @Html.DropDownList("genre", Model.Genre as SelectList,
-                               htmlAttributes: new { @class = "form-control" })
+        <div class="form-inline dropdown">
+            <button class="dropbtn">FILTERS</button>
+            <div class="dropdown-content">
+                <div class="dropdown-list-part">
+                    <label class="control-label">Year: </label>
+                    @Html.DropDownList("year", Model.Year as SelectList,
+                        htmlAttributes: new { @class = "form-control" })
 
-            <label class="control-label">Year: </label>
-            @Html.DropDownList("year", Model.Year as SelectList,
-                               htmlAttributes: new { @class = "form-control" })
+                    <label class="control-label">Type: </label>
+                    @Html.DropDownList("type", Model.Type as SelectList,
+                        htmlAttributes: new { @class = "form-control" })
 
-            <label class="control-label">Type: </label>
-            @Html.DropDownList("type", Model.Type as SelectList,
-                               htmlAttributes: new { @class = "form-control" })
-            
-            <label class="control-label">Country: </label>
-            @Html.DropDownList("country", Model.Country as SelectList,
-                htmlAttributes: new { @class = "form-control" })
-            <input type="submit" value="Фильтр" class="btn btn-default" />
+                    <label class="control-label">Country: </label>
+                    @Html.DropDownList("country", Model.Country as SelectList,
+                        htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="checkbox" style="display: flex; flex-direction: row;
+                                             flex-wrap: wrap;
+                                             align-content: center;
+                                             align-items: center;
+                                             justify-content: space-between;">
+                    @foreach (var genre in Model.Genre)
+                    {
+                        <div class="dropdown-content-a ">
+                            @if (Model.SelectedGenres.Count == 0)
+                            {
+                                <input type="checkbox" class="checkbox" name="selectedGenres" value="@genre.Value" id="@genre.Value" />
+                            }
+                            else
+                            {
+                                var k = false;
+                                foreach (var selectedGenre in Model.SelectedGenres)
+                                {
+                                    if (selectedGenre.Contains(genre.Value))
+                                    {
+                                        <input type="checkbox" class="checkbox" name="selectedGenres" value="@genre.Value" id="@genre.Value" checked />
+                                        k = true;
+                                        break;
+                                    }
+                                }
+                                if (!k)
+                                {
+                                    <input type="checkbox" class="checkbox" name="selectedGenres" value="@genre.Value" id="@genre.Value" />
+                                }
+                            }
+                            <label for="@genre.Value">@genre.Text</label>
+                        </div>
+                    }
+                </div>
+
+                <input type="submit" value="Filters" class="btn btn-default" />
+            </div>
         </div>
     </form>
 
@@ -43,3 +78,68 @@
 
     @Html.Partial("Partials/PagePartial/FilterPagePartial")
 </div>
+
+<style>
+
+    .checkbox-custom {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .dropdown-list-part {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .dropbtn {
+        background-color: #f5deb3;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+    }
+
+    .dropdown {
+        position: relative;
+        display: grid;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f5deb3;
+        min-width: 500px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content-a {
+        background-color: #f5deb3;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        color: black;
+        width: 24%;
+        text-decoration: none;
+        display: inline-flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>

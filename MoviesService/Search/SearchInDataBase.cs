@@ -54,14 +54,35 @@ namespace MoviesService.Search
             return mostW;
         }
 
-        public LinkedList<Genres> GenreList()
+        public List<Media> FiltersConditions(string[] selectedGenres, string country, string year, string type)
         {
-            var genresList = new LinkedList<Genres>(); 
-            genresList.AddFirst(new Genres { Id = 0, Name = "All" });
+            var model = MediaList();
+
+            if (country != null && _convertor.StrToInt(country) != 0)
+                model = SearchByCountry(country, model);
+
+            if (selectedGenres != null && selectedGenres.Length != 0)
+                foreach (var g in selectedGenres)
+                {
+                    model = SearchByGenre(g, model);
+                }
+
+            if ((year != null || _convertor.StrToInt(year) != 0) && year != "All")
+                model = SearchByYear(year, model);
+
+            if ((type != null || _convertor.StrToInt(type) != 0) && type != "All")
+                model = SearchByType(type, model);
+
+            return model;
+        }
+
+        public List<Genres> GenreList()
+        {
+            var genresList = new List<Genres>();
 
             foreach (var genre in _context.GenresTable)
             {
-                genresList.AddLast(genre);
+                genresList.Add(genre);
             }
 
             return genresList;
