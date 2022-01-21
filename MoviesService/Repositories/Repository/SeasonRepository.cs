@@ -1,5 +1,4 @@
-﻿using System;
-using MoviesService.Models;
+﻿using MoviesService.Models;
 using MoviesService.Repositories.IRepository;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;

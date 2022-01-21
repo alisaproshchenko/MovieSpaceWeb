@@ -80,7 +80,7 @@
 </div>
     @if (User.IsInRole("Administrator"))
     {
-        <div style="float: left; margin-right: 10px;">
+        <div style="margin-bottom: 5px;">
             @Html.ActionLink("Add season", "AddSeason", "Series", new {mediaId = Model.Id}, new { @class = "admin-button-position2" })
         </div>
     }
