@@ -141,11 +141,27 @@ textarea {
     top: -328px;
 }
 
+.admin-button2 {
+    width: 300px;
+    position: relative;
+    top: -500px;
+}
+
 .admin-button-position {
     float: left;
     width: 50%;
     text-align: center;
     background-color: black;
+}
+
+.admin-button-position2 {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 5px 20px;
 }
 
 .admin-button-style {

@@ -74,9 +74,12 @@ namespace MoviesService.Repositories.Repository
             m = media;
             m.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
             m.TypesId = m.Types.Id;
-            foreach (var id in seasons)
+            if (seasons != null)
             {
-                m.SeasonsList.Add(_context.SeasonsTable.FirstOrDefault(x => x.Id == id));
+                foreach (var id in seasons)
+                {
+                    m.SeasonsList.Add(_context.SeasonsTable.FirstOrDefault(x => x.Id == id));
+                }
             }
             foreach (var id in selectedGenresIds)
             {
