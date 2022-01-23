@@ -8,5 +8,7 @@ Web/bin/
 Web/obj/
 IdentityService.Tests/bin/
 IdentityService.Tests/obj/
+MoviesService.Tests/bin/
+MoviesService.Tests/obj/
 *.orig
 .htm
