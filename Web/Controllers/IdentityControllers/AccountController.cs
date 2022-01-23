@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using IdentityService.Dto;
-using IdentityService.Models;
 using IdentityService.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;

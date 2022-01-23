@@ -1,5 +1,4 @@
 ﻿using MoviesService.Dto;
-using MoviesService.Models;
 
 namespace MoviesService.Services.IService
 {
