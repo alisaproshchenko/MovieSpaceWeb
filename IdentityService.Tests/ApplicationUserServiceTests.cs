@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IdentityService.Models;
+using IdentityService.Repository;
 using IdentityService.Services;
 using IdentityService.UOW;
 using Moq;
@@ -11,6 +12,28 @@ namespace IdentityService.Tests
     [TestFixture]
     class ApplicationUserServiceTests
     {
+        [Test]
+        public void DeleteUser_WhenCalled_Success()
+        {
+            var repository = new Mock<IRepository<ApplicationUser>>();
+            string id = "1";
+
+            repository.Object.Delete(id);
+
+            repository.Verify(r => r.Delete(id), Times.Once);
+        }
+
+        [Test]
+        public void ChangeUserData_WhenCalled_Success()
+        {
+            var repository = new Mock<IRepository<ApplicationUser>>();
+            var applicationUser = new ApplicationUser();
+
+            repository.Object.Update(applicationUser);
+
+            repository.Verify(r => r.Update(applicationUser), Times.Once);
+        }
+
         [Test]
         [TestCase("11111", "The minimum length of password is 6 characters")]
         [TestCase("aaaaaa", "At least one digit is needed in password")]

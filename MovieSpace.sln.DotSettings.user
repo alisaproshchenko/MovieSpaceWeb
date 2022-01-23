@@ -2,6 +2,10 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5bc92636_002D7976_002D4988_002Dadb1_002Df8e1ffc320a1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ApplicationUserServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::AFB62321-B70A-404B-9CAD-051A3532AD48::.NETFramework,Version=v4.7.2::IdentityService.Tests.ApplicationUserServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::BC7F4AE6-38EE-443D-8660-CCD78EDEC77F::.NETFramework,Version=v4.7.2::MoviesService.Tests.SearchInDataBaseTests.SearchByYear_WhenCalled_CountIsCorrect&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::AFB62321-B70A-404B-9CAD-051A3532AD48::.NETFramework,Version=v4.7.2::IdentityService.Tests.AboutUsServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::BC7F4AE6-38EE-443D-8660-CCD78EDEC77F::.NETFramework,Version=v4.7.2::MoviesService.Tests.SearchInDataBaseTests.SearchByType_WhenCalled_CountIsCorrect&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::BC7F4AE6-38EE-443D-8660-CCD78EDEC77F::.NETFramework,Version=v4.7.2::MoviesService.Tests.SearchInDataBaseTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=sqlservr_002Eexe/@EntryIndexedValue">KillOrphaned</s:String></wpf:ResourceDictionary>

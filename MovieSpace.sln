@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "Identity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{FE92A34D-0C14-422B-9595-2607CCB284EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Tests", "IdentityService.Tests\IdentityService.Tests.csproj", "{AFB62321-B70A-404B-9CAD-051A3532AD48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService.Tests", "IdentityService.Tests\IdentityService.Tests.csproj", "{AFB62321-B70A-404B-9CAD-051A3532AD48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesService.Tests", "MoviesService.Tests\MoviesService.Tests.csproj", "{BC7F4AE6-38EE-443D-8660-CCD78EDEC77F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,12 +35,16 @@ Global
 		{AFB62321-B70A-404B-9CAD-051A3532AD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFB62321-B70A-404B-9CAD-051A3532AD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFB62321-B70A-404B-9CAD-051A3532AD48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC7F4AE6-38EE-443D-8660-CCD78EDEC77F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7F4AE6-38EE-443D-8660-CCD78EDEC77F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7F4AE6-38EE-443D-8660-CCD78EDEC77F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7F4AE6-38EE-443D-8660-CCD78EDEC77F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {75E87294-BFC5-4896-A4F6-117DB9971E31}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		SolutionGuid = {75E87294-BFC5-4896-A4F6-117DB9971E31}
 	EndGlobalSection
 EndGlobal

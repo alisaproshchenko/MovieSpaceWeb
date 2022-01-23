@@ -20,7 +20,6 @@ namespace Web
             Mapper.CreateMap<Episode, EpisodeDto>().ReverseMap();
 
             Mapper.CreateMap<AboutUs, AboutUsDto>().ReverseMap();
-            //Mapper.CreateMap<AboutUsViewModel, AboutUsDto>().ReverseMap();
 
             Mapper.CreateMap<ApplicationUser, ApplicationUserDto>().ReverseMap();
             Mapper.CreateMap<UserViewModel, ApplicationUserDto>().ReverseMap();
