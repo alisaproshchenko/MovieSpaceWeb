@@ -289,6 +289,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="bundleconfig.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -302,6 +303,8 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Style\alisa.JPG" />
     <Content Include="Style\alisa2.JPG" />
+    <Content Include="Style\background-filter-back.jpg" />
+    <Content Include="Style\background-filter.jpg" />
     <Content Include="Style\background.jpg" />
     <Content Include="Style\icon.png" />
     <Content Include="Style\misha.JPG" />
@@ -310,6 +313,9 @@
     <Content Include="Style\header.jpg" />
     <Content Include="Style\pasha2.JPG" />
     <Content Include="Style\Style.css" />
+    <Content Include="Style\Style.min.css">
+      <DependentUpon>Style.css</DependentUpon>
+    </Content>
     <Content Include="Style\vlad.JPG" />
     <Content Include="Style\vlad2.JPG" />
     <Content Include="Web.config" />
