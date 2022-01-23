@@ -210,6 +210,22 @@
     <Compile Include="Migrations\202201111634465_change4323.designer.cs">
       <DependentUpon>202201111634465_change4323.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201231813352_change-required.cs" />
+    <Compile Include="Migrations\202201231813352_change-required.designer.cs">
+      <DependentUpon>202201231813352_change-required.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201231814546_change-required2.cs" />
+    <Compile Include="Migrations\202201231814546_change-required2.designer.cs">
+      <DependentUpon>202201231814546_change-required2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201231816482_change-required3.cs" />
+    <Compile Include="Migrations\202201231816482_change-required3.designer.cs">
+      <DependentUpon>202201231816482_change-required3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201231914240_change-required4.cs" />
+    <Compile Include="Migrations\202201231914240_change-required4.designer.cs">
+      <DependentUpon>202201231914240_change-required4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Episode.cs" />
@@ -278,6 +294,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201111634465_change4323.resx">
       <DependentUpon>202201111634465_change4323.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201231813352_change-required.resx">
+      <DependentUpon>202201231813352_change-required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201231814546_change-required2.resx">
+      <DependentUpon>202201231814546_change-required2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201231816482_change-required3.resx">
+      <DependentUpon>202201231816482_change-required3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201231914240_change-required4.resx">
+      <DependentUpon>202201231914240_change-required4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

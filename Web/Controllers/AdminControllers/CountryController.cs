@@ -23,6 +23,10 @@ namespace Web.Controllers.AdminControllers
         [HttpPost]
         public ActionResult Add(CountryDto entity)
         {
+            if (!ModelState.IsValid || entity.Name is null)
+            {
+                return View("Add");
+            }
             _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
@@ -33,6 +37,10 @@ namespace Web.Controllers.AdminControllers
         [HttpPost]
         public ActionResult Update(CountryDto entity)
         {
+            if (!ModelState.IsValid || entity.Name is null)
+            {
+                return View("Edit", new GenericEntitiesViewModel<CountryDto>(_service.GetEntity(entity.Id)));
+            }
             _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }

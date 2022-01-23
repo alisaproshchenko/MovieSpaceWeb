@@ -4,33 +4,32 @@
     @using (Html.BeginForm())
     {
         <div>
-            @Html.LabelFor(model => model.Entity.Name, htmlAttributes: new { @class = "authorization-label" })
-            @Html.EditorFor(model => model.Entity.Name, new { htmlAttributes = new { @class = "authorization-login" } })
-            @Html.ValidationMessageFor(m => m.Entity.Name)
+            @Html.LabelFor(model => model.Entity.Name, htmlAttributes: null)
+            @Html.EditorFor(model => model.Entity.Name, null)
+            @Html.ValidationMessageFor(m => m.Entity.Name, null, new { @class = "validation-field-error" })
         </div>
 
         <div>
-            @Html.LabelFor(model => model.Entity.Year, htmlAttributes: new {@class = "authorization-label"})
-            @Html.EditorFor(model => model.Entity.Year, new {htmlAttributes = new {@class = "authorization-login"}})
-            @Html.ValidationMessageFor(m => m.Entity.Year)
+            @Html.LabelFor(model => model.Entity.Year, htmlAttributes: null)
+            @Html.EditorFor(model => model.Entity.Year, null)
+            @Html.ValidationMessageFor(m => m.Entity.Year, null, new { @class = "validation-field-error" })
         </div>
         <div>
-            @Html.LabelFor(model => model.Entity.Plot, htmlAttributes: new {@class = "authorization-label"})
-            @Html.EditorFor(model => model.Entity.Plot, new {htmlAttributes = new {@class = "authorization-login"}})
+            @Html.LabelFor(model => model.Entity.Plot, htmlAttributes: null)
+            @Html.EditorFor(model => model.Entity.Plot, null)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Entity.Plot, htmlAttributes: null)
+            @Html.EditorFor(model => model.Entity.Plot, null)
             @Html.ValidationMessageFor(m => m.Entity.Plot)
         </div>
         <div>
-            @Html.LabelFor(model => model.Entity.Plot, htmlAttributes: new {@class = "authorization-label"})
-            @Html.EditorFor(model => model.Entity.Plot, new {htmlAttributes = new {@class = "authorization-login"}})
-            @Html.ValidationMessageFor(m => m.Entity.Plot)
+            @Html.LabelFor(model => model.Entity.LinkEmbed, htmlAttributes: null)
+            @Html.EditorFor(model => model.Entity.LinkEmbed, null)
         </div>
         <div>
-            @Html.LabelFor(model => model.Entity.LinkEmbed, htmlAttributes: new {@class = "authorization-label"})
-            @Html.EditorFor(model => model.Entity.LinkEmbed, new {htmlAttributes = new {@class = "authorization-login"}})
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Entity.Poster, htmlAttributes: new {@class = "authorization-label"})
-            @Html.EditorFor(model => model.Entity.Poster, new {htmlAttributes = new {@class = "authorization-login"}})
+            @Html.LabelFor(model => model.Entity.Poster, htmlAttributes: null)
+            @Html.EditorFor(model => model.Entity.Poster, null)
         </div>
         <div>
             <h3>Genres</h3>
@@ -54,7 +53,7 @@
         </div>
         
         <div>
-            <h3>Types</h3>
+            <h3>  @Html.LabelFor(model => model.Entity.Types, htmlAttributes: null)</h3>
             @foreach (var c in ViewBag.Types)
             {
                 <div class="filterDiv" style="display: inline-grid;">
@@ -62,6 +61,7 @@
                     <input type="radio" name="selectedType" value="@c.Id" />
                 </div>
             }
+            @Html.ValidationMessageFor(m => m.Entity.Types)
         </div>
         <input type="submit" value="Add"/>}
 </div>
