@@ -24,13 +24,13 @@ namespace MoviesService.Services.Service
             repository.Delete(media.Id, userId);
         }
 
-        public void AddMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        public void AddMedia(MediaDto entity, int? selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
             var media = Mapper.Map<MediaDto, Media>(entity);
             repository.AddMedia(media, selectedType, selectedGenresIds, selectedCountriesIds);
         }
 
-        public void EditMedia(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
+        public void EditMedia(MediaDto entity, int? selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
         {
             var media = Mapper.Map<MediaDto, Media>(entity);
             repository.EditMedia(media,selectedType,selectedGenresIds,selectedCountriesIds, seasons);

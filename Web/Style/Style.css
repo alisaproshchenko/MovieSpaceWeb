@@ -616,3 +616,7 @@ textarea {
     background: rgba(0, 0, 0, 0.4);
     color: white;
 }
+
+.validation-field-error {
+    color: red;
+}

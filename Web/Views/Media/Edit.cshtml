@@ -15,12 +15,12 @@
                 @Html.LabelFor(m => m.Entity.Name, "Name")
                 <br/>
                 @Html.EditorFor(m => m.Entity.Name)
-                @Html.ValidationMessageFor(m => m.Entity.Name)
             </p>
             <p>
                 @Html.LabelFor(m => m.Entity.Year, "Year")
                 <br/>
                 @Html.EditorFor(m => m.Entity.Year)
+                @Html.ValidationMessageFor(m => m.Entity.Year, null, new { @class = "validation-field-error" })
             </p>
             <p>
                 @Html.LabelFor(m => m.Entity.Plot, "Plot")
@@ -39,9 +39,12 @@
                 <br/>
                 @Html.EditorFor(m => m.Entity.Poster)
             </p>
-            @foreach (var s in Model.Entity.SeasonsList)
+            @if (Model.Entity.SeasonsList != null)
             {
-                <input type="hidden" name="seasons" value="@s.Id"/>
+                foreach (var s in Model.Entity.SeasonsList)
+                {
+                    <input type="hidden" name="seasons" value="@s.Id"/>
+                }
             }
             <div><b>Genres</b></div>
             @foreach (var c in ViewBag.Genres)

@@ -64,14 +64,24 @@ namespace Web.Controllers.AdminControllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult Add(MediaDto entity, int selectedType, int [] selectedGenres, int[] selectedCountries)
+        public ActionResult Add(MediaDto entity, int? selectedType, int [] selectedGenres, int[] selectedCountries)
         {
+            if (!ModelState.IsValid || !selectedType.HasValue || entity.Name is null)
+            {
+                ViewBag.Genres = _genreServices.Entities;
+                ViewBag.Country = _countryServices.Entities;
+                ViewBag.Types = _typesServices.Entities;
+                return View("Add");
+            }
             var search = new SearchInDataBase();
+
             if (search.CheckByName(entity.Name))
                 return View("ErrorAdd");
+
             _service.AddMedia(entity, selectedType, selectedGenres, selectedCountries);
+
             return RedirectToAction("ListOfEntities");
-        }
+         }
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
@@ -82,8 +92,16 @@ namespace Web.Controllers.AdminControllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public ActionResult Update(MediaDto entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
+        public ActionResult Update(MediaDto entity, int? selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
         {
+            if (!ModelState.IsValid || !selectedType.HasValue || entity.Name is null)
+            {
+                ViewBag.Genres = _genreServices.Entities;
+                ViewBag.Countries = _countryServices.Entities;
+                ViewBag.Types = _typesServices.Entities;
+                return View("Edit", new GenericEntitiesViewModel<MediaDto>(_service.GetEntity(entity.Id)));
+            }
+
             _service.EditMedia(entity, selectedType,selectedGenresIds,selectedCountriesIds, seasons);
             return RedirectToAction("ListOfEntities");
         }

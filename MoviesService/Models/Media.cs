@@ -12,9 +12,9 @@ namespace MoviesService.Models
         public string Name { get; set; }
         public string Poster { get; set; }
         [Required]
+        [Range(1900,2022)]
         public int Year { get; set; }
         public string Cast { get; set; }
-        [Required]
         public string Plot { get; set; }
         public string Budget { get; set; }
         public string BoxOffice { get; set; }

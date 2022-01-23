@@ -47,16 +47,27 @@ namespace MoviesService.Repositories.Repository
             _context.SaveChanges();
         }
 
-        public void AddMedia(Media entity, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
+        public void AddMedia(Media entity, int? selectedType, int[] selectedGenresIds, int[] selectedCountriesIds)
         {
-            entity.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
-            foreach (var id in selectedGenresIds)
+            if (selectedType.HasValue)
             {
-                entity.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));
+                entity.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
+
             }
-            foreach (var id in selectedCountriesIds)
+            if (selectedGenresIds != null)
             {
-                entity.CountryCollection.Add(_context.CountriesTable.FirstOrDefault(x => x.Id == id));
+                foreach (var id in selectedGenresIds)
+                {
+                    entity.GenresCollection.Add(_context.GenresTable.FirstOrDefault(x => x.Id == id));
+                }
+            }
+
+            if (selectedCountriesIds != null)
+            {
+                foreach (var id in selectedCountriesIds)
+                {
+                    entity.CountryCollection.Add(_context.CountriesTable.FirstOrDefault(x => x.Id == id));
+                }
             }
             _context.MediaTable.AddOrUpdate(entity);
             _context.SaveChanges();
@@ -68,12 +79,15 @@ namespace MoviesService.Repositories.Repository
             return model;
         }
 
-        public void EditMedia(Media media, int selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
+        public void EditMedia(Media media, int? selectedType, int[] selectedGenresIds, int[] selectedCountriesIds, int[] seasons)
         {
             var m = _context.MediaTable.Include("SeasonsList").FirstOrDefault(t => t.Id == media.Id);
             m = media;
-            m.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
-            m.TypesId = m.Types.Id;
+            if (selectedType.HasValue)
+            {
+                m.Types = _context.TypesTable.FirstOrDefault(x => x.Id == selectedType);
+                m.TypesId = m.Types.Id;
+            }
             if (seasons != null)
             {
                 foreach (var id in seasons)

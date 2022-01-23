@@ -22,6 +22,10 @@ namespace Web.Controllers.AdminControllers
         [HttpPost]
         public ActionResult Add(TypesDto entity)
         {
+            if (!ModelState.IsValid || entity.Name is null)
+            {
+                return View("Add");
+            }
             _service.Add(entity);
             return RedirectToAction("ListOfEntities");
         }
@@ -32,6 +36,10 @@ namespace Web.Controllers.AdminControllers
         [HttpPost]
         public ActionResult Update(TypesDto entity)
         {
+            if (!ModelState.IsValid || entity.Name is null)
+            {
+                return View("Edit", new GenericEntitiesViewModel<TypesDto>(_service.GetEntity(entity.Id)));
+            }
             _service.Edit(entity);
             return RedirectToAction("ListOfEntities");
         }
