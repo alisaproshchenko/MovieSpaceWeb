@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using IdentityService.Models;
+﻿using IdentityService.Models;
 using IdentityService.Repository;
-using IdentityService.Services;
-using IdentityService.UOW;
 using Moq;
 using NUnit.Framework;
 

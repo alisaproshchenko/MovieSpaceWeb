@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using IdentityService.Repository;
-using Moq;
 using MoviesService.Models;
 using MoviesService.Search;
 using NUnit.Framework;
