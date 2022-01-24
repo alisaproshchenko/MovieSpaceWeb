@@ -34,7 +34,7 @@ namespace MoviesService.Repositories.Repository
 
             if (media.AmountOfLikes != 0)
             {
-                media.SiteUsersRatings = 10.0 - (Convert.ToDouble(usersAmount) / Convert.ToDouble(media.AmountOfLikes)) < 0 ? 0 : Math.Round(10.0 - (Convert.ToDouble(usersAmount) / Convert.ToDouble(media.AmountOfLikes)),1);
+                media.SiteUsersRatings = 10.0 - (Convert.ToDouble(usersAmount) / Convert.ToDouble(media.AmountOfLikes)) < 0 ? 0 : Math.Round(10.0 - ((Convert.ToDouble(usersAmount) / Convert.ToDouble(media.AmountOfLikes) == 1 ? 0 : Convert.ToDouble(usersAmount) / Convert.ToDouble(media.AmountOfLikes))),1);
             }
             else
             {
